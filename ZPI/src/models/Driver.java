@@ -31,6 +31,7 @@ public class Driver {
 		return id;
 	}
 
+	/**id musi byæ unikalne**/
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -71,6 +72,7 @@ public class Driver {
 		return licenseNumber;
 	}
 
+	/**licenseNumber musi byæ unikalny**/
 	public void setLicenseNumber(String licenseNumber) {
 		this.licenseNumber = licenseNumber;
 	}
@@ -79,14 +81,17 @@ public class Driver {
 		return pesel;
 	}
 
+	/**PESEL musi byæ unikalny**/
 	public void setPesel(int pesel) {
 		this.pesel = pesel;
 	}
-
+	
+	/** 1-wolny, 2-kurs, 3-niedostepny, 4-przerwa, 5-zablokowany**/
 	public int getStatus() {
 		return status;
 	}
 
+	/** 1-wolny, 2-kurs, 3-niedostepny, 4-przerwa, 5-zablokowany**/
 	public void setStatus(int status) {
 		this.status = status;
 	}
