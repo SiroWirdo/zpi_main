@@ -1,41 +1,34 @@
 package model;
 
-public class Dispatcher {
-	private int id;
-	private String name;
-	private String surname;
-	
-	public Dispatcher(int id, String name, String surname) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-	}
-	
-	/**id musi byæ unikalne**/
-	public int getId() {
-		return id;
-	}
+import org.parse4j.ParseClassName;
+import org.parse4j.ParseObject;
+import org.parse4j.ParseQuery;
 
-	public void setId(int id) {
-		this.id = id;
+@ParseClassName("Dispatcher")
+public class Dispatcher extends ParseObject {
+
+	public String getId(){
+		return getString("objectId");
 	}
 
 	public String getName() {
-		return name;
+		return getString("name");
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String value) {
+		put("name", value);
 	}
 
 	public String getSurname() {
-		return surname;
+		return getString("surname");
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setSurname(String value) {
+		put("surname", value);
 	}
-	
-	
+
+
+	public static ParseQuery<Dispatcher> getQuery() {
+		return ParseQuery.getQuery(Dispatcher.class);
+	}
 }

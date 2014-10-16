@@ -1,106 +1,75 @@
 package model;
 
-public class Driver {
-	private String id;
-	private String name;
-	private String surname;
-	//Dajemy usera, czy parseUser?
-	private User userId;
-	private int phoneNumber;
-	private String licenseNumber;
-	private int pesel;
-	private int status;
-	private Car carId;
+import org.parse4j.ParseClassName;
+import org.parse4j.ParseObject;
+import org.parse4j.ParseQuery;
+import org.parse4j.ParseUser;
 
-	public Driver(String id, String name, String surname, User userId,
-			int phoneNumber, String licenseNumber, int pesel, int status,
-			Car carId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.userId = userId;
-		this.phoneNumber = phoneNumber;
-		this.licenseNumber = licenseNumber;
-		this.pesel = pesel;
-		this.status = status;
-		this.carId = carId;
-	}
-	
-	public String getId() {
-		return id;
-	}
+@ParseClassName("Driver")
+public class Driver extends ParseObject {
 
-	/**id musi byæ unikalne**/
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public String getId(){
+		return getString("objectId");
 	}
 
 	public String getSurname() {
-		return surname;
+		return getString("surname");
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public User getUserId() {
-		return userId;
-	}
-
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public void setSurname(String value) {
+		put("surname", value);
 	}
 
 	public int getPhoneNumber() {
-		return phoneNumber;
+		return getInt("phoneNumber");
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumber(int value) {
+		put("phoneNumber", value);
 	}
 
 	public String getLicenseNumber() {
-		return licenseNumber;
+		return getString("licenseNumber");
 	}
 
-	/**licenseNumber musi byæ unikalny**/
-	public void setLicenseNumber(String licenseNumber) {
-		this.licenseNumber = licenseNumber;
+	public void setLicenseNumber(String value) {
+		put("licenseNumber", value);
 	}
 
-	public int getPesel() {
-		return pesel;
+
+	public int getPESEL() {
+		return getInt("PESEL");
 	}
 
-	/**PESEL musi byæ unikalny**/
-	public void setPesel(int pesel) {
-		this.pesel = pesel;
+	public void setPESEL(int value) {
+		put("PESEL", value);
 	}
-	
-	/** 1-wolny, 2-kurs, 3-niedostepny, 4-przerwa, 5-zablokowany**/
+
 	public int getStatus() {
-		return status;
+		return getInt("status");
 	}
 
-	/** 1-wolny, 2-kurs, 3-niedostepny, 4-przerwa, 5-zablokowany**/
-	public void setStatus(int status) {
-		this.status = status;
+	public void setStatus(int value) {
+		put("status", value);
 	}
 
-	public Car getCarId() {
-		return carId;
+	public ParseUser getUser() {
+		return (ParseUser)getParseObject("userId");
 	}
 
-	public void setCarId(Car carId) {
-		this.carId = carId;
+	public void setUser(ParseUser value) {
+		put("Id", value);
+	}
+
+	public ParseObject getCar() {
+		return getParseObject("carId");
+	}
+
+	public void setCar(ParseObject value) {
+		put("carId", value);
+	}
+
+	public static ParseQuery<Driver> getQuery() {
+		return ParseQuery.getQuery(Driver.class);
 	}
 }

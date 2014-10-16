@@ -1,42 +1,36 @@
 package model;
 
-public class Customer {
-	private String id;
-	private int phoneNumber;
-	private String surname;
-	
-	public Customer(String id, int phoneNumber, String surname) {
-		super();
-		this.id = id;
-		this.phoneNumber = phoneNumber;
-		this.surname = surname;
-	}
+import org.parse4j.ParseClassName;
+import org.parse4j.ParseObject;
+import org.parse4j.ParseQuery;
 
-	/**id musi byæ unikalne**/
-	public String getId() {
-		return id;
-	}
+@ParseClassName("Customer")
+public class Customer extends ParseObject {
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public int getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public String getId(){
+		return getString("objectId");
 	}
 
 	public String getSurname() {
-		return surname;
+		return getString("surname");
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setSurname(String value) {
+		put("surname", value);
 	}
-	
-	
 
+
+
+	public int getPhoneNumber() {
+		return getInt("phoneNumber");
+	}
+
+	public void setPhoneNumber(int value) {
+		put("phoneNumber", value);
+	}
+
+
+	public static ParseQuery<Customer> getQuery() {
+		return ParseQuery.getQuery(Customer.class);
+	}
 }

@@ -1,66 +1,50 @@
 package model;
 
+import org.parse4j.ParseClassName;
 import org.parse4j.ParseGeoPoint;
+import org.parse4j.ParseObject;
+import org.parse4j.ParseQuery;
 
-public class Car {
-	private String id;
-	private String registrationNumber;
-	private int sideNumber;
-	private int carCapacity;
-	private ParseGeoPoint currentPosition;
-	
-	public Car(String id, String registrationNumber, int sideNumber,
-			int carCapacity, ParseGeoPoint currentPosition) {
-		super();
-		this.id = id;
-		this.registrationNumber = registrationNumber;
-		this.sideNumber = sideNumber;
-		this.carCapacity = carCapacity;
-		this.currentPosition = currentPosition;
-	}
+@ParseClassName("Car")
+public class Car extends ParseObject{
 
-	public String getId() {
-		return id;
-	}
-
-	/**id musi byæ unikalne**/
-	public void setId(String id) {
-		this.id = id;
+	public String getId(){
+		return getString("objectId");
 	}
 
 	public String getRegistrationNumber() {
-		return registrationNumber;
+		return getString("registrationNumber");
 	}
 
-	/**registrationNumber musi byæ unikalny**/
-	public void setRegistrationNumber(String registrationNumber) {
-		this.registrationNumber = registrationNumber;
+	public void setRegistrationNumber(String value) {
+		put("registrationNumber", value);
 	}
 
 	public int getSideNumber() {
-		return sideNumber;
+		return getInt("sideNumber");
 	}
 
-	/**sideNumber musi byæ unikalny**/
-	public void setSideNumber(int sideNumber) {
-		this.sideNumber = sideNumber;
+	public void setSideNumber(int value) {
+		put("sideNumber", value);
 	}
 
-	public int getCarCapacity() {
-		return carCapacity;
+	public int getCarCapacity () {
+		return getInt("carCapacity");
 	}
 
-	
-	public void setCarCapacity(int carCapacity) {
-		this.carCapacity = carCapacity;
+	public void setCarCapacity(int value) {
+		put("carCapacity", value);
 	}
 
 	public ParseGeoPoint getCurrentPosition() {
-		return currentPosition;
+		return getParseGeoPoint("location");
 	}
 
-	public void setCurrentPosition(ParseGeoPoint currentPosition) {
-		this.currentPosition = currentPosition;
+	public void setCurrentPosition(ParseGeoPoint value) {
+		put("location", value);
 	}
-	
+
+	public static ParseQuery<Car> getQuery() {
+		return ParseQuery.getQuery(Car.class);
+	}
 }
