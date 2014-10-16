@@ -1,4 +1,4 @@
-package models;
+package model;
 
 import org.parse4j.ParseGeoPoint;
 
