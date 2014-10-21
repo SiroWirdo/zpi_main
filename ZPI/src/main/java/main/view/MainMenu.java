@@ -4,12 +4,20 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
 import javax.swing.ScrollPaneConstants;
+
+import model.Order;
+import order.controller.OrderController;
+import order.view.AddOrderJPanel;
 
 public class MainMenu extends JFrame{
 
@@ -54,9 +62,9 @@ public class MainMenu extends JFrame{
 //		panel.setBounds(10, 10, 862, 691);
 //		mapPanel.add(panel);
 
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_1, null);
-
+		//AddOrderJPanel addOrderPanel = new AddOrderJPanel();
+		//tabbedPane.addTab("Dodaj zlecenie", null, addOrderPanel, null);
+		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_2, null);
 		
@@ -79,5 +87,9 @@ public class MainMenu extends JFrame{
 //		mapPanel.add(scrollPane);
 	//	JPanel panel
 	//	mapPanel.add(map);
+	}
+	
+	public void add(){
+		
 	}
 }
