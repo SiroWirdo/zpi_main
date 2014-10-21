@@ -8,18 +8,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
 import javax.swing.JTextField;
-
 import java.awt.Font;
-
 import javax.swing.JPasswordField;
-
-import main.view.MainMenu;
 
 public class Login extends JDialog {
 	private JTextField textField;
@@ -33,11 +27,6 @@ public class Login extends JDialog {
 			Login dialog = new Login();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			/* TESTOWANIE SAMEJ MAPY BEZ EKRANU LOGOWANIA
-			 * MainMenu frame = new MainMenu();
-			frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			frame.setVisible(true);*/
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
