@@ -1,25 +1,30 @@
 package org.parse4j.callback;
 
-import org.parse4j.ParseUser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import main.controller.MainMenuController;
+import main.model.MainMenuModel;
+
 import org.parse4j.ParseException;
-import org.parse4j.callback.LoginCallback;
+import org.parse4j.ParseUser;
 
 import other.DataBaseConnection;
 
 public class UserModel extends ParseUser {
 
 	public void log(String username, String password) {
-		System.out.println(password);
-		ParseUser.loginInBackground(username, password, new LoginCallback() {
-			public void done(ParseUser user, ParseException e) {
-				System.out.println("tuuuuuuuuu");
-				if (user != null) {
-					System.out.println("Hooray! The user is logged in.");
-				} else {
-					System.out.println("Signup failed. Look at the ParseException to see what happened.");
-				}
-			}
-		});
+		try {
+			ParseUser.login(username, password);
+			
+			MainMenuModel menuModel = new MainMenuModel();
+			MainMenuController menuController = new MainMenuController(menuModel);
+			
+		} catch (ParseException e) {		
+			JFrame frame = new JFrame();
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			JOptionPane.showMessageDialog(frame, "Z³y login lub has³o");
+		}
 	}
 	
 	public void initialize(){
