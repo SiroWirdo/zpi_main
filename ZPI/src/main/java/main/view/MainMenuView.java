@@ -19,6 +19,7 @@ import order.view.AddOrderJPanel;
 public class MainMenuView extends JFrame{
 	MainMenuModel menuModel;
 	MainMenuController menuController;
+	JTabbedPane tabbedPane;
 	
 	/**
 	 * Launch the application.
@@ -52,13 +53,11 @@ public class MainMenuView extends JFrame{
 	public void initialize() {
 		this.setBounds(100, 100, 1280, 800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
-
-		JPanel mapPanel = new JPanel();
-		tabbedPane.addTab("Mapa", null, mapPanel, null);
-		mapPanel.setLayout(null);
+		
+		addTabbedPane();
+		addMapPanel();
+		addOrderPanel();
+		addDriverPanel();
 //
 //		JPanel panel = new JPanel();
 //		panel.setBounds(10, 10, 862, 691);
@@ -67,9 +66,17 @@ public class MainMenuView extends JFrame{
 		//AddOrderJPanel addOrderPanel = new AddOrderJPanel();
 		//tabbedPane.addTab("Dodaj zlecenie", null, addOrderPanel, null);
 		
-		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_2, null);
-		
+	}
+	
+	public void addTabbedPane(){
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+	}
+	
+	public void addMapPanel(){
+		JPanel mapPanel = new JPanel();
+		tabbedPane.addTab("Mapa", null, mapPanel, null);
+		mapPanel.setLayout(null);
 		MapPanel map = new MapPanel();
 		GridBagLayout gridBagLayout = (GridBagLayout) map.getMainMap().getLayout();
 		gridBagLayout.rowWeights = new double[]{1.0};
@@ -89,10 +96,16 @@ public class MainMenuView extends JFrame{
 //		mapPanel.add(scrollPane);
 	//	JPanel panel
 	//	mapPanel.add(map);
-		this.setVisible(true);
 	}
 	
-	public void add(){
-		
+	public void addOrderPanel(){
+		//model addorder
+		//controller order
+	}
+	
+	public void addDriverPanel(){
+		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("Kierowcy", null, panel_2, null);
+		this.setVisible(true);
 	}
 }
