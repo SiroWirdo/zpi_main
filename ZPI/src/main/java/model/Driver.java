@@ -11,6 +11,14 @@ public class Driver extends ParseObject {
 	public String getId(){
 		return getString("objectId");
 	}
+	
+	public String getName() {
+		return getString("name");
+	}
+
+	public void setName(String value) {
+		put("name", value);
+	}
 
 	public String getSurname() {
 		return getString("surname");
@@ -20,11 +28,11 @@ public class Driver extends ParseObject {
 		put("surname", value);
 	}
 
-	public int getPhoneNumber() {
-		return getInt("phoneNumber");
+	public long getPhoneNumber() {
+		return getLong("phoneNumber");
 	}
 
-	public void setPhoneNumber(int value) {
+	public void setPhoneNumber(long value) {
 		put("phoneNumber", value);
 	}
 
@@ -37,18 +45,20 @@ public class Driver extends ParseObject {
 	}
 
 
-	public int getPESEL() {
-		return getInt("PESEL");
+	public long getPESEL() {
+		return getLong("PESEL");
 	}
 
-	public void setPESEL(int value) {
+	public void setPESEL(long value) {
 		put("PESEL", value);
 	}
-
+	
+	/** 0 - wolny, 1 - kurs, 2 - przerwa, 3 - zablokowany, 4 - niedostêpny**/
 	public int getStatus() {
 		return getInt("status");
 	}
 
+	/** 0 - wolny, 1 - kurs, 2 - przerwa, 3 - zablokowany, 4 - niedostêpny**/
 	public void setStatus(int value) {
 		put("status", value);
 	}

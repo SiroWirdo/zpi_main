@@ -33,7 +33,7 @@ public class DriversView extends JPanel {
 		JScrollPane scrollPane = new JScrollPane(table);
 		this.add(scrollPane);
 		
-		tableModel.addRow(new Object[]{"test", "test", "test", "test", "test", "test"});
+	//	tableModel.addRow(new Object[]{"test", "test", "test", "test", "test", "test"});
 	}
 	
 	public void addRow(Object[] row){
