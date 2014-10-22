@@ -14,7 +14,6 @@ import org.parse4j.ParseObject;
 
 import order.controller.OrderController;
 import model.Order;
-import model.OrderModel;
 
 public class AddOrderJPanel extends JPanel implements ActionListener{
 	Order orderModel;

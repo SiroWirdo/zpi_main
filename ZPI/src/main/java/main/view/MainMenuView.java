@@ -1,15 +1,23 @@
 package main.view;
 
 import java.awt.EventQueue;
+
+import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
 import javax.swing.ScrollPaneConstants;
+
 import org.parse4j.callback.UserModel;
+
 import main.controller.MainMenuController;
 import main.model.MainMenuModel;
 import model.Order;
@@ -20,22 +28,6 @@ public class MainMenuView extends JFrame{
 	MainMenuModel menuModel;
 	MainMenuController menuController;
 	JTabbedPane tabbedPane;
-	
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainMenu window = new MainMenu();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the application.
@@ -44,7 +36,7 @@ public class MainMenuView extends JFrame{
 		this.menuController = menuController;
 		this.menuModel = menuModel;
 		
-		//initialize();
+		initialize();
 	}
 
 	/**
@@ -65,7 +57,7 @@ public class MainMenuView extends JFrame{
 
 		//AddOrderJPanel addOrderPanel = new AddOrderJPanel();
 		//tabbedPane.addTab("Dodaj zlecenie", null, addOrderPanel, null);
-		
+		this.setVisible(true);
 	}
 	
 	public void addTabbedPane(){
@@ -99,13 +91,21 @@ public class MainMenuView extends JFrame{
 	}
 	
 	public void addOrderPanel(){
-		//model addorder
-		//controller order
+		Order orderModel = new Order();
+		OrderController orderController = new OrderController(orderModel);
+		
 	}
 	
 	public void addDriverPanel(){
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Kierowcy", null, panel_2, null);
 		this.setVisible(true);
+	}
+	
+	public void addTab(String label, Icon icon, JPanel panelTab, String tip){
+		tabbedPane.addTab(label, icon, panelTab, tip);
+//		Order orderModel = new Order();
+//		OrderController orderController = new OrderController(orderModel);
+		
 	}
 }
