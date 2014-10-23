@@ -16,7 +16,7 @@ public class DriversTest {
 		DriversModel driversModel = new DriversModel();
 		DriversController driversController = new DriversController(driversModel);
 		
-		driversModel.addObserver(driversController);
+		
 		
 		
 		JFrame frame = new JFrame();

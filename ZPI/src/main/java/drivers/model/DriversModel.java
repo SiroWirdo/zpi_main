@@ -24,6 +24,8 @@ public class DriversModel extends Observable implements Runnable {
 	}
 
 	public void initialize(){
+		final DriversModel model = this;
+
 		DataBaseConnection.initialize();
 
 		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
@@ -34,6 +36,8 @@ public class DriversModel extends Observable implements Runnable {
 				if (e == null) {
 					if(scoreList != null && scoreList.size() > 0){
 						driverChanges = new DriverChanges(scoreList, 0);
+						model.setChanged();
+						model.notifyObservers();
 						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
 					}else{
 						System.out.println("Pusta baza");

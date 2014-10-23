@@ -21,11 +21,11 @@ public class Customer extends ParseObject {
 
 
 
-	public int getPhoneNumber() {
-		return getInt("phoneNumber");
+	public long getPhoneNumber() {
+		return getLong("phoneNumber");
 	}
 
-	public void setPhoneNumber(int value) {
+	public void setPhoneNumber(long value) {
 		put("phoneNumber", value);
 	}
 
