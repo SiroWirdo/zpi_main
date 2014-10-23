@@ -15,6 +15,8 @@ import org.parse4j.ParseObject;
 import order.controller.OrderController;
 import order.model.OrderModel;
 import model.Order;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class AddOrderJPanel extends JPanel implements ActionListener{
 	OrderModel orderModel;
@@ -33,7 +35,7 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		setLayout(null);
 		this.orderModel = orderModel;
 		this.orderController = orderController;
-	//	initialize();
+		initialize();
 
 	}
 	
@@ -83,13 +85,21 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		add(customerRemarksTextArea);
 		
 		addOrderBtn = new JButton("Dodaj");
+		addOrderBtn.addActionListener(this);
 		addOrderBtn.setBounds(362, 340, 120, 23);
 		add(addOrderBtn);
+		this.setVisible(true);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == addOrderBtn){
-			orderController.addOrder(pickUpAddressTextField.getText(), customerRemarksTextArea.getText(), Integer.parseInt(passangerCountTextField.getText()));	
+		//if(e.getSource() == addOrderBtn){
+		if(e.getActionCommand().equals("Dodaj")){
+			System.out.println("Klikniêcie buttonu");
+			String ad = pickUpAddressTextField.getText();
+			String re = customerRemarksTextArea.getText();
+			System.out.println("addres: " + ad + "remarks" + re);
+			Integer pc = new Integer(passangerCountTextField.getText());
+			orderController.addOrder( ad, re, pc);	
 		}
 		
 	}

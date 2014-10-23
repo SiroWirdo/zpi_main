@@ -93,11 +93,11 @@ public class Order extends ParseObject {
 		put("driverRemarks", value);
 	}
 
-	public int getPassengerCount() {
+	public Number getPassengerCount() {
 		return getInt("passengerCount");
 	}
 
-	public void setPassengerCount(int value) {
+	public void setPassengerCount(Number value) {
 		put("passengerCount", value);
 	}
 

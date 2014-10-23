@@ -12,14 +12,13 @@ public class OrderModel {
 	private Order order;
 	private ParseObject orderParse;
 	public OrderModel(){
-		//jiji
 	}
 	
 	public void initialize(){
 		DataBaseConnection.initialize();
 	}
 	
-	public void addOrder(String pickUpAddress, String customerRemarks, int passangerCount){
+	public void addOrder(String pickUpAddress, String customerRemarks, Number passangerCount){
 		
 		order = (Order)new ParseObject("Order");
 		//order.setDispatcher(value); <- pobranie aktualnie zalogowanego Dispatchera
@@ -31,10 +30,10 @@ public class OrderModel {
 	//	order.setCustomer(value); <- osobna metoda
 	//	setDriverId();
 		order.saveInBackground();
-		initialize();
-		orderParse = new ParseObject("Order");
-		orderParse.put("pickupAddress", pickUpAddress);
-		orderParse.saveInBackground();
+		
+//		orderParse = new ParseObject("Order");
+//		orderParse.put("pickupAddress", pickUpAddress);
+//		orderParse.saveInBackground();
 	}
 	
 	public void setDriverID(){

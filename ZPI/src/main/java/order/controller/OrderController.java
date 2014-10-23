@@ -22,7 +22,7 @@ public class OrderController {
 		return addOrderView;
 	}
 
-	public void addOrder(String pickUpAddress, String customerRemarks, int passangerCount){
+	public void addOrder(String pickUpAddress, String customerRemarks, Number passangerCount){
 		orderModel.addOrder(pickUpAddress, customerRemarks, passangerCount);
 	}
 }
