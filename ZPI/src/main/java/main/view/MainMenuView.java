@@ -27,6 +27,7 @@ import main.model.MainMenuModel;
 import model.Driver;
 import model.Order;
 import order.controller.OrderController;
+import order.model.OrderModel;
 import order.view.AddOrderJPanel;
 
 public class MainMenuView extends JFrame{
@@ -90,14 +91,13 @@ public class MainMenuView extends JFrame{
 	}
 	
 	public void addOrderPanel(){
-		Order orderModel = new Order();
+		OrderModel orderModel = new OrderModel();
 		OrderController orderController = new OrderController(orderModel);
 		tabbedPane.addTab("Dodaj zlecenie", null, orderController.getAddOrderView(), null);
 		this.setVisible(true);
 	}
 	
 	public void addDriverPanel(){
-		ParseRegistry.registerSubclass(Driver.class);	
 		DriversModel driversModel = new DriversModel();
 		DriversController driversController = new DriversController(driversModel);
 		

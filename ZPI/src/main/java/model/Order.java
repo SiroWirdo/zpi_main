@@ -10,7 +10,7 @@ import org.parse4j.ParseQuery;
 
 @ParseClassName("Order")
 public class Order extends ParseObject {
-
+	
 	public String getId(){
 		return getString("objectId");
 	}
@@ -113,17 +113,6 @@ public class Order extends ParseObject {
 	
 	public static ParseQuery<Order> getQuery() {
 		return ParseQuery.getQuery(Order.class);
-	}
-	
-	public void initialize(){
-		Parse.initialize("Ljocg29Z4B0Nihu6UgGFPDzyMWsd2bGEGvlWjG3U", "Oh8pFyCHvyGfypVSOw3gk9JIBuq3HkmQceN6wVtr");
-	}
-	
-	public void addOrder(String customerRemarks){
-		//this.setCustomer(customer);
-		this.setStatus(0);
-		this.setCustomerRemarks(customerRemarks);
-		//TO DO dokonczyc
 	}
 }
 

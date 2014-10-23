@@ -13,35 +13,30 @@ import javax.swing.JButton;
 import org.parse4j.ParseObject;
 
 import order.controller.OrderController;
+import order.model.OrderModel;
 import model.Order;
 
 public class AddOrderJPanel extends JPanel implements ActionListener{
-	Order orderModel;
+	OrderModel orderModel;
 	OrderController orderController;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField pickUpAddressTextField;
+	private JTextField passangerCountTextField;
 	private JButton addOrderBtn;
 	private JTextArea customerRemarksTextArea;
 
 	/**
 	 * Create the panel.
 	 */
-	public AddOrderJPanel(Order orderModel, OrderController orderController) {
+	public AddOrderJPanel(OrderController orderController, OrderModel orderModel) {
 		setLayout(null);
 		this.orderModel = orderModel;
 		this.orderController = orderController;
-//		initialize();
+	//	initialize();
 
 	}
-	/*public AddOrderJPanel() {
-		setLayout(null);
-//		this.orderModel = orderModel;
-//		this.orderController = orderController;
-		initialize();
-
-	}*/
+	
 	public void initialize(){
 		JLabel lblNazwisko = new JLabel("Nazwisko:");
 		lblNazwisko.setBounds(31, 45, 66, 14);
@@ -73,15 +68,15 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		add(textField_1);
 		textField_1.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(187, 126, 120, 20);
-		add(textField_2);
-		textField_2.setColumns(10);
+		pickUpAddressTextField = new JTextField();
+		pickUpAddressTextField.setBounds(187, 126, 120, 20);
+		add(pickUpAddressTextField);
+		pickUpAddressTextField.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(187, 169, 120, 20);
-		add(textField_3);
-		textField_3.setColumns(10);
+		passangerCountTextField = new JTextField();
+		passangerCountTextField.setBounds(187, 169, 120, 20);
+		add(passangerCountTextField);
+		passangerCountTextField.setColumns(10);
 		
 		customerRemarksTextArea = new JTextArea();
 		customerRemarksTextArea.setBounds(190, 210, 117, 54);
@@ -94,7 +89,7 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == addOrderBtn){
-			orderController.addOrder(customerRemarksTextArea.getText());	
+			orderController.addOrder(pickUpAddressTextField.getText(), customerRemarksTextArea.getText(), Integer.parseInt(passangerCountTextField.getText()));	
 		}
 		
 	}
