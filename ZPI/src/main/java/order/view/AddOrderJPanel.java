@@ -32,9 +32,16 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		setLayout(null);
 		this.orderModel = orderModel;
 		this.orderController = orderController;
-		//initialize();
+//		initialize();
 
 	}
+	/*public AddOrderJPanel() {
+		setLayout(null);
+//		this.orderModel = orderModel;
+//		this.orderController = orderController;
+		initialize();
+
+	}*/
 	public void initialize(){
 		JLabel lblNazwisko = new JLabel("Nazwisko:");
 		lblNazwisko.setBounds(31, 45, 66, 14);
