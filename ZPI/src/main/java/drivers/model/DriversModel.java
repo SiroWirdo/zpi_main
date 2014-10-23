@@ -29,7 +29,7 @@ public class DriversModel extends Observable implements Runnable {
 		DataBaseConnection.initialize();
 
 		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
-		query.whereNotEqualTo("status", 5);
+		//query.whereNotEqualTo("status", 5);
 		query.orderByDescending("updatedAt");
 		query.findInBackground(new FindCallback<Driver>() {
 			public void done(List<Driver> scoreList, ParseException e) {
@@ -39,6 +39,7 @@ public class DriversModel extends Observable implements Runnable {
 						model.setChanged();
 						model.notifyObservers();
 						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
+						model.start();
 					}else{
 						System.out.println("Pusta baza");
 					}
@@ -78,8 +79,39 @@ public class DriversModel extends Observable implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while(!stop){
+		DataBaseConnection.initialize();
 
+		while(!stop){
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			final DriversModel model = this;
+
+			ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
+			query.whereGreaterThan("updatedAt", lastUpdated);
+			//query.orderByDescending("updatedAt");
+			query.findInBackground(new FindCallback<Driver>() {
+				public void done(List<Driver> scoreList, ParseException e) {
+					if (e == null) {
+						if(scoreList != null && scoreList.size() > 0){
+							//Date updateDate = scoreList.get(0).getUpdatedAt();
+							//if(updateDate.after(lastUpdated)){
+							driverChanges = new DriverChanges(scoreList, 1);
+							model.setChanged();
+							model.notifyObservers();
+							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");
+							//}
+						}else{
+							System.out.println("Pusta baza");
+						}
+					} else {
+
+					}
+				}
+			});
 		}
 	}
 }

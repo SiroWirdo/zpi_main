@@ -28,6 +28,8 @@ public class DriversController implements Observer {
 		this.driversView.initialize();
 		this.driversModel.initialize();
 
+	//	driversModel.start();
+
 /*Stara wersja pobierania zmian*/
 		/*driverChanges = null;
 		final DriversModel driverMod = driversModel;
@@ -50,7 +52,7 @@ public class DriversController implements Observer {
 				driverMod.start();
 			}
 		});*/
-		driversModel.start();
+
 	}
 
 	/*private void setDriverChanges(DriverChanges driverChanges){
@@ -67,11 +69,18 @@ public class DriversController implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		if(arg0 == driversModel){
-
+			if(driversModel.getChanges().getFlag() == 0){
 			List<Driver> drivers = driversModel.getChanges().getDrivers();
 			for(Driver driver : drivers){
 
 				addRow(driver);
+			}
+			}else{
+				List<Driver> drivers = driversModel.getChanges().getDrivers();
+				for(Driver driver : drivers){
+
+					updateRow(driver);
+				}
 			}
 		}
 	}
@@ -80,5 +89,14 @@ public class DriversController implements Observer {
 		String status = Settings.driverStatus[driver.getStatus()];
 		driversView.addRow(new Object[]{driver.getName(), driver.getSurname(), driver.getPhoneNumber(), driver.getLicenseNumber(), driver.getPESEL(), status});
 		driversView.repaint();
+	}
+
+	public void updateRow(Driver driver){
+		String status = Settings.driverStatus[driver.getStatus()];
+		Object[] values = new Object[]{driver.getName(), driver.getSurname(), driver.getPhoneNumber(), driver.getLicenseNumber(), driver.getPESEL(), status};
+		int row = driversView.getRowByPESEL(driver.getPESEL());
+		driversView.updateRow(row, values);
+		driversView.repaint();
+
 	}
 }
