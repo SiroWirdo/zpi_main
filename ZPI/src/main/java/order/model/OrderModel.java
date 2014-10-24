@@ -1,16 +1,12 @@
 package order.model;
 
-import model.Order;
-
-import org.parse4j.Parse;
 import org.parse4j.ParseObject;
-
 import other.DataBaseConnection;
-import settings.Settings;
 
 public class OrderModel {
-	private Order order;
-	private ParseObject orderParse;
+	private ParseObject order;
+	private ParseObject customer;
+	
 	public OrderModel(){
 	}
 	
@@ -18,22 +14,29 @@ public class OrderModel {
 		DataBaseConnection.initialize();
 	}
 	
-	public void addOrder(String pickUpAddress, String customerRemarks, Number passangerCount){
+	public void addOrder(String customerID, String pickUpAddress, String customerRemarks, Number passangerCount){
 		
-		order = (Order)new ParseObject("Order");
-		//order.setDispatcher(value); <- pobranie aktualnie zalogowanego Dispatchera
-		order.setPickupAddress(pickUpAddress);
-		//order.setPickupAddressGeo(value); <- wyliczenie adresu Geo przez system
-		order.setCustomerRemarks(customerRemarks);
-		order.setPassengerCount(passangerCount);
-		order.setStatus(0); //"oczekuj¹ce"
-	//	order.setCustomer(value); <- osobna metoda
-	//	setDriverId();
+
+		order = new ParseObject("Order");
+		order.put("customerId", customerID);
+		order.put("pickupAddress", pickUpAddress);
+		order.put("customerRemarks", customerRemarks);
+		order.put("passangerCount", passangerCount);
+		order.put("status", 0); //"oczekuj¹ce"
+//		order.setPickupAddressGeo(value); <- wyliczenie adresu Geo przez system
+//		setDriverId(); <--- algorytm
 		order.saveInBackground();
-		
-//		orderParse = new ParseObject("Order");
-//		orderParse.put("pickupAddress", pickUpAddress);
-//		orderParse.saveInBackground();
+	}
+	
+	public void addCustomer(String surname, Number phoneNumber){
+		customer = new ParseObject("Customer");
+		customer.put("surname", surname);
+		customer.put("phoneNumber", phoneNumber);
+		customer.saveInBackground();
+	}
+	
+	public String getCustomerId(){
+		return customer.getString("objectId");
 	}
 	
 	public void setDriverID(){

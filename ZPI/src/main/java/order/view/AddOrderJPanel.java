@@ -21,8 +21,8 @@ import javax.swing.Action;
 public class AddOrderJPanel extends JPanel implements ActionListener{
 	OrderModel orderModel;
 	OrderController orderController;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField surnameTextField;
+	private JTextField phoneNumberTextField;
 	private JTextField pickUpAddressTextField;
 	private JTextField passangerCountTextField;
 	private JButton addOrderBtn;
@@ -35,7 +35,7 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		setLayout(null);
 		this.orderModel = orderModel;
 		this.orderController = orderController;
-		initialize();
+		//initialize();
 
 	}
 	
@@ -60,25 +60,21 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		lblUwagi.setBounds(31, 210, 46, 14);
 		add(lblUwagi);
 		
-		textField = new JTextField();
-		textField.setBounds(187, 42, 120, 20);
-		add(textField);
-		textField.setColumns(10);
+		this.surnameTextField = new JTextField();
+		this.surnameTextField.setBounds(187, 42, 120, 20);
+		add(this.surnameTextField);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(188, 84, 119, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
+		phoneNumberTextField = new JTextField();
+		phoneNumberTextField.setBounds(188, 84, 119, 20);
+		add(phoneNumberTextField);
 		
 		pickUpAddressTextField = new JTextField();
 		pickUpAddressTextField.setBounds(187, 126, 120, 20);
 		add(pickUpAddressTextField);
-		pickUpAddressTextField.setColumns(10);
 		
 		passangerCountTextField = new JTextField();
 		passangerCountTextField.setBounds(187, 169, 120, 20);
 		add(passangerCountTextField);
-		passangerCountTextField.setColumns(10);
 		
 		customerRemarksTextArea = new JTextArea();
 		customerRemarksTextArea.setBounds(190, 210, 117, 54);
@@ -94,12 +90,11 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//if(e.getSource() == addOrderBtn){
 		if(e.getActionCommand().equals("Dodaj")){
-			System.out.println("Klikniêcie buttonu");
-			String ad = pickUpAddressTextField.getText();
-			String re = customerRemarksTextArea.getText();
-			System.out.println("addres: " + ad + "remarks" + re);
-			Integer pc = new Integer(passangerCountTextField.getText());
-			orderController.addOrder( ad, re, pc);	
+			orderController.addOrder(surnameTextField.getText(),
+					new Integer(phoneNumberTextField.getText()),
+					pickUpAddressTextField.getText(),
+					customerRemarksTextArea.getText(),
+					new Integer(passangerCountTextField.getText()));	
 		}
 		
 	}

@@ -42,7 +42,7 @@ public class MainMenuView extends JFrame{
 		this.menuController = menuController;
 		this.menuModel = menuModel;
 		
-		//initialize();
+//		initialize();
 	}
 
 	/**
@@ -73,21 +73,20 @@ public class MainMenuView extends JFrame{
 		GridBagLayout gridBagLayout = (GridBagLayout) map.getMainMap().getLayout();
 		gridBagLayout.rowWeights = new double[]{1.0};
 		gridBagLayout.columnWeights = new double[]{1.0};
-		map.setBounds(0, 0, 1000, 700);
-		mapPanel.add(map);
-		/*map.setBounds(0, 0, 5000, 3500);
+		map.setBounds(0, 0, 2000, 2000);
+		//mapPanel.add(map);
+		//map.setBounds(0, 0, 5000, 3500);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(map);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(10, 10, 1000, 700);
-
+		scrollPane.setBounds(10, 10, 1000, 700);	
 		scrollPane.setVisible(true);
-		scrollPane.add(map);
 		
 		mapPanel.add(scrollPane);
-		JPanel panel
-		mapPanel.add(map);*/
+	//	JPanel panel
+	//	mapPanel.add(map);*/
+		
 	}
 	
 	public void addOrderPanel(){

@@ -10,13 +10,14 @@ import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
 
 import other.DataBaseConnection;
+import settings.Settings;
 
 public class UserModel extends ParseUser {
 
 	public void log(String username, String password) {
 		try {
 			ParseUser.login(username, password);
-			
+			//ParseUser dispatcher = ParseUser.getCurrentUser();
 			MainMenuModel menuModel = new MainMenuModel();
 			MainMenuController menuController = new MainMenuController(menuModel);
 			
@@ -29,6 +30,10 @@ public class UserModel extends ParseUser {
 	
 	public void initialize(){
 		DataBaseConnection.initialize();
+	}
+	
+	public void getUserID(){
+		
 	}
 
 }

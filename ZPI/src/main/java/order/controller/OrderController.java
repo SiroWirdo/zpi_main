@@ -22,7 +22,9 @@ public class OrderController {
 		return addOrderView;
 	}
 
-	public void addOrder(String pickUpAddress, String customerRemarks, Number passangerCount){
-		orderModel.addOrder(pickUpAddress, customerRemarks, passangerCount);
+	public void addOrder(String surname, Number phoneNumber, String pickUpAddress, String customerRemarks, Number passangerCount){
+		orderModel.addCustomer(surname, phoneNumber);
+		orderModel.addOrder(orderModel.getCustomerId(),
+				pickUpAddress, customerRemarks, passangerCount);
 	}
 }
