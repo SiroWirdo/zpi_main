@@ -18,6 +18,7 @@ public class DriversModel extends Observable implements Runnable {
 	boolean stop;
 	Thread t;
 	Date lastUpdated;
+	List<Driver> actualDrivers;
 
 	public DriversModel(){
 
@@ -29,7 +30,6 @@ public class DriversModel extends Observable implements Runnable {
 		DataBaseConnection.initialize();
 
 		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
-		//query.whereNotEqualTo("status", 5);
 		query.orderByDescending("updatedAt");
 		query.findInBackground(new FindCallback<Driver>() {
 			public void done(List<Driver> scoreList, ParseException e) {
@@ -91,19 +91,15 @@ public class DriversModel extends Observable implements Runnable {
 			final DriversModel model = this;
 
 			ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
-			query.whereGreaterThan("updatedAt", lastUpdated);
-			//query.orderByDescending("updatedAt");
+			query.whereGreaterThan("updatedAt", lastUpdated);			
 			query.findInBackground(new FindCallback<Driver>() {
 				public void done(List<Driver> scoreList, ParseException e) {
 					if (e == null) {
-						if(scoreList != null && scoreList.size() > 0){
-							//Date updateDate = scoreList.get(0).getUpdatedAt();
-							//if(updateDate.after(lastUpdated)){
+						if(scoreList != null && scoreList.size() > 0){							
 							driverChanges = new DriverChanges(scoreList, 1);
 							model.setChanged();
 							model.notifyObservers();
-							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");
-							//}
+							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");							
 						}else{
 							System.out.println("Pusta baza");
 						}
@@ -113,5 +109,21 @@ public class DriversModel extends Observable implements Runnable {
 				}
 			});
 		}
+	}
+	
+	public List<Driver> getActualData(){
+		actualDrivers = null;		
+		DataBaseConnection.initialize();
+		
+		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);		
+		query.orderByDescending("updatedAt");
+		try {
+			actualDrivers = query.find();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		return actualDrivers;
 	}
 }
