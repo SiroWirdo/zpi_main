@@ -39,7 +39,7 @@ public class DriversModel extends Observable implements Runnable {
 						model.setChanged();
 						model.notifyObservers();
 						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
-						model.start();
+						
 					}else{
 						System.out.println("Pusta baza");
 					}
@@ -48,8 +48,8 @@ public class DriversModel extends Observable implements Runnable {
 				}
 			}
 		});
-
-
+		
+		model.start();
 	}
 
 	public void start(){

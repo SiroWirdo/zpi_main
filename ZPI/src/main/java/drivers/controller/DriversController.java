@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+
 import model.Driver;
 import settings.Settings;
 import drivers.model.DriversModel;
@@ -15,7 +18,6 @@ import drivers.view.DriversView;
 public class DriversController implements Observer {
 	private DriversModel driversModel;
 	private DriversView driversView;
-	//private DriverChanges driverChanges;
 
 	public DriversController(DriversModel driversModel){
 		this.driversModel = driversModel;
@@ -23,40 +25,9 @@ public class DriversController implements Observer {
 		driversModel.addObserver(this);
 
 		this.driversView.initialize();
-		this.driversModel.initialize();
-
-		//	driversModel.start();
-
-		/*Stara wersja pobierania zmian*/
-		/*driverChanges = null;
-		final DriversModel driverMod = driversModel;
-		//while(driverChanges == null){
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
-				while(driverMod.getChanges() == null){
-					driverMod.
-				}
-
-				setDriverChanges(driverMod.getChanges());
-				System.out.println("Przeszlo");
-				//}
-				List<Driver> drivers = driverChanges.getDrivers();
-				for(Driver driver : drivers){
-
-					addRow(driver);
-				}
-
-				driverMod.start();
-			}
-		});*/
+		this.driversModel.initialize();	
 
 	}
-
-	/*private void setDriverChanges(DriverChanges driverChanges){
-		this.driverChanges = driverChanges;
-	}*/
-
-
 
 	public DriversView getDriversView(){
 		return driversView;
@@ -100,7 +71,7 @@ public class DriversController implements Observer {
 		}
 
 	}
-
+/*
 	public List<Driver> filtr(List<Driver> drivers){
 		List<Driver> newDrivers = new ArrayList<Driver>();
 		for(Driver driver : drivers){
@@ -116,7 +87,7 @@ public class DriversController implements Observer {
 
 		return newDrivers;
 	}
-
+*/
 
 	public FiltrListener getFiltrListener(){
 		return new FiltrListener();
@@ -127,7 +98,48 @@ public class DriversController implements Observer {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			driversView.clearTable();
+			
+			ArrayList<RowFilter<DefaultTableModel, Object>> statusFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
+			ArrayList<RowFilter<DefaultTableModel, Object>> nameFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
+			
+			RowFilter<DefaultTableModel, Object> statusFilter;
+			RowFilter<DefaultTableModel, Object> nameFilter;
+			RowFilter<DefaultTableModel, Object> mainFilter;
+			
+			for(String status : Settings.driverStatus){
+				if(driversView.isChecked(status)){
+					RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(status);
+					statusFilters.add(filter);
+				}				
+			}
+			
+			statusFilter = RowFilter.orFilter(statusFilters);
+			
+			if(driversView.getName() != ""){
+				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(driversView.getName());
+				nameFilters.add(filter);
+			}
+			
+			if(driversView.getSurname() != ""){
+				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(driversView.getSurname());
+				nameFilters.add(filter);
+			}
+			
+			if(nameFilters.size() > 0){
+				nameFilter = RowFilter.andFilter(nameFilters);
+				ArrayList<RowFilter<DefaultTableModel, Object>> combineFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
+				combineFilters.add(statusFilter);
+				combineFilters.add(nameFilter);
+				mainFilter = RowFilter.andFilter(combineFilters);
+			}else{
+				mainFilter = statusFilter;
+			}
+			
+			driversView.setFilters(mainFilter);
+			driversView.repaint();
+			
+			
+			/*driversView.clearTable();
 			List<Driver> actualDrivers = driversModel.getActualData();
 			
 			if(actualDrivers == null){
@@ -144,7 +156,7 @@ public class DriversController implements Observer {
 				addRow(driver);
 			}
 			
-			driversView.repaint();
+			driversView.repaint();*/
 		}
 
 	}

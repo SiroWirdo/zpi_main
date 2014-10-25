@@ -7,7 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import drivers.controller.DriverNotFoundException;
 import drivers.controller.DriversController;
@@ -31,6 +33,7 @@ public class DriversView extends JPanel {
 	private JLabel jlStatus;
 	private JTextField tfName;
 	private JTextField tfSurname;
+	private TableRowSorter sorter;
 
 	public DriversView(DriversController driversController, DriversModel driversModel){
 		this.driversController = driversController;
@@ -47,6 +50,8 @@ public class DriversView extends JPanel {
 		tableModel.setColumnIdentifiers(columns);
 		table = new JTable();
 		//table.setBounds(0, 0, 1100, 700);
+		
+		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 100, 1100, 600);
@@ -188,5 +193,10 @@ public class DriversView extends JPanel {
 	
 	public void clearTable(){
 		tableModel.setRowCount(0);
+	}
+	
+	public void setFilters(RowFilter<DefaultTableModel, Object> filter){
+		sorter.setRowFilter(filter);
+		table.setRowSorter(sorter);
 	}
 }
