@@ -9,7 +9,7 @@ import org.parse4j.ParseQuery;
 public class Car extends ParseObject{
 
 	public String getId(){
-		return getString("objectId");
+		return getObjectId();
 	}
 
 	public String getRegistrationNumber() {

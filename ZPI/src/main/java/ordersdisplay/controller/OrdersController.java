@@ -54,14 +54,14 @@ public class OrdersController implements Observer  {
 	}
 	
 	public void addRow(Order order){
-		String status = Settings.driverStatus[order.getStatus()];
-		ordersView.addRow(new Object[]{order.getPickupAddress(), order.getDestinationAddress(), order.getCost(), order.getPassengerCount(), status});
+		String status = Settings.orderStatus[order.getStatus()];
+		ordersView.addRow(new Object[]{order.getId(), order.getPickupAddress(), order.getDestinationAddress(), order.getCost(), order.getCustomerRemarks(), order.getPassengerCount(), status});
 		ordersView.repaint();
 	}
 
 	public void updateRow(Order order){
 		String status = Settings.orderStatus[order.getStatus()];
-		Object[] values = new Object[]{order.getId(), order.getPickupAddress(), order.getDestinationAddress(), order.getCost(), order.getPassengerCount(), status};
+		Object[] values = new Object[]{order.getId(), order.getPickupAddress(), order.getDestinationAddress(), order.getCost(), order.getCustomerRemarks(), order.getPassengerCount(), status};
 		try{
 			int row = ordersView.getRowById(order.getId());
 			ordersView.updateRow(row, values);
@@ -89,7 +89,7 @@ public class OrdersController implements Observer  {
 		//	RowFilter<DefaultTableModel, Object> nameFilter;
 			RowFilter<DefaultTableModel, Object> mainFilter;
 			
-			for(String status : Settings.driverStatus){
+			for(String status : Settings.orderStatus){
 				if(ordersView.isChecked(status)){
 					RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(status);
 					statusFilters.add(filter);

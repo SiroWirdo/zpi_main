@@ -8,7 +8,7 @@ import org.parse4j.ParseQuery;
 public class Customer extends ParseObject {
 
 	public String getId(){
-		return getString("objectId");
+		return getObjectId();
 	}
 
 	public String getSurname() {

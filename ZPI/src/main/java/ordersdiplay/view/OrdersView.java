@@ -13,6 +13,7 @@ import javax.swing.table.TableRowSorter;
 import ordersdisplay.controller.OrderNotFoundException;
 import ordersdisplay.controller.OrdersController;
 import ordersdisplay.model.OrdersModel;
+import settings.Settings;
 
 
 public class OrdersView extends JPanel {
@@ -76,22 +77,22 @@ public class OrdersView extends JPanel {
 		jlStatus.setBounds(200, 5, 100, 20);
 		add(jlStatus);
 		
-		waiting = new JCheckBox("oczekuj¹cy");
+		waiting = new JCheckBox(Settings.orderStatus[0]);
 		waiting.setBounds(200, 30, 100, 30);
 		waiting.setSelected(true);
 		add(waiting);
 		
-		realizing = new JCheckBox("realizowany");
+		realizing = new JCheckBox(Settings.orderStatus[1]);
 		realizing.setBounds(200, 60, 100, 30);
 		realizing.setSelected(true);
 		add(realizing);
 		
-		realized = new JCheckBox("zrealizowany");
+		realized = new JCheckBox(Settings.orderStatus[2]);
 		realized.setBounds(320, 30, 100, 30);
 		realized.setSelected(true);
 		add(realized);
 		
-		cancelled = new JCheckBox("anulowany");
+		cancelled = new JCheckBox(Settings.orderStatus[3]);
 		cancelled.setBounds(320, 60, 100, 30);
 		cancelled.setSelected(true);
 		add(cancelled);
@@ -148,19 +149,19 @@ public class OrdersView extends JPanel {
 	}
 	
 	public boolean isChecked(String status){
-		if(status.equals("oczekuj¹cy")){
+		if(status.equals(Settings.orderStatus[0])){
 			return waiting.isSelected();
 		}
 		
-		if(status.equals("w trakcie realizacji")){
+		if(status.equals(Settings.orderStatus[1])){
 			return realizing.isSelected();
 		}
 		
-		if(status.equals("zrealizowany")){
+		if(status.equals(Settings.orderStatus[2])){
 			return realized.isSelected();
 		}
 		
-		if(status.equals("anulowany")){
+		if(status.equals(Settings.orderStatus[3])){
 			return cancelled.isSelected();
 		}
 		

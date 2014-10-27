@@ -12,7 +12,7 @@ import org.parse4j.ParseQuery;
 public class Order extends ParseObject {
 	
 	public String getId(){
-		return getString("objectId");
+		return getObjectId();
 	}
 
 	public ParseObject getDispatcher() {

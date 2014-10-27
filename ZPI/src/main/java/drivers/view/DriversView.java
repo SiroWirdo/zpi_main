@@ -11,6 +11,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import settings.Settings;
 import drivers.controller.DriverNotFoundException;
 import drivers.controller.DriversController;
 import drivers.model.DriversModel;
@@ -81,27 +82,27 @@ public class DriversView extends JPanel {
 		jlStatus.setBounds(200, 5, 100, 20);
 		add(jlStatus);
 		
-		free = new JCheckBox("wolny");
+		free = new JCheckBox(Settings.driverStatus[0]);
 		free.setBounds(200, 30, 100, 30);
 		free.setSelected(true);
 		add(free);
 		
-		course = new JCheckBox("kurs");
+		course = new JCheckBox(Settings.driverStatus[1]);
 		course.setBounds(200, 60, 100, 30);
 		course.setSelected(true);
 		add(course);
 		
-		pause = new JCheckBox("przerwa");
+		pause = new JCheckBox(Settings.driverStatus[2]);
 		pause.setBounds(320, 30, 100, 30);
 		pause.setSelected(true);
 		add(pause);
 		
-		blocked = new JCheckBox("zablokowany");
+		blocked = new JCheckBox(Settings.driverStatus[3]);
 		blocked.setBounds(320, 60, 100, 30);
 		blocked.setSelected(true);
 		add(blocked);
 		
-		unavailable = new JCheckBox("niedostêpny");
+		unavailable = new JCheckBox(Settings.driverStatus[4]);
 		unavailable.setBounds(440, 30, 100, 30);
 		unavailable.setSelected(true);
 		add(unavailable);
@@ -158,23 +159,23 @@ public class DriversView extends JPanel {
 	}
 	
 	public boolean isChecked(String status){
-		if(status.equals("wolny")){
+		if(status.equals(Settings.driverStatus[0])){
 			return free.isSelected();
 		}
 		
-		if(status.equals("kurs")){
+		if(status.equals(Settings.driverStatus[1])){
 			return course.isSelected();
 		}
 		
-		if(status.equals("przerwa")){
+		if(status.equals(Settings.driverStatus[2])){
 			return pause.isSelected();
 		}
 		
-		if(status.equals("zablokowany")){
+		if(status.equals(Settings.driverStatus[3])){
 			return blocked.isSelected();
 		}
 		
-		if(status.equals("niedostêpny")){
+		if(status.equals(Settings.driverStatus[4])){
 			return unavailable.isSelected();
 		}
 		
