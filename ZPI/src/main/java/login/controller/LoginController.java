@@ -37,6 +37,7 @@ public class LoginController {
 			// TODO Auto-generated method stub
 				char[] password = loginView.getPassword();
 				log(loginView.getLogin(), String.valueOf(password));
+				loginView.dispose();
 
 			}
 		}

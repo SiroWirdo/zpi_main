@@ -1,5 +1,9 @@
 package admin.model;
 
-public class AdminModel {
+import other.DataBaseConnection;
 
+public class AdminModel {
+	public void initialize(){
+		DataBaseConnection.initialize();
+	}
 }

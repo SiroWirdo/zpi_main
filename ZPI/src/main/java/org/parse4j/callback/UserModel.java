@@ -15,7 +15,7 @@ import admin.model.AdminModel;
 
 public class UserModel extends ParseUser {
 
-	public void log(String username, String password) {
+	public boolean log(String username, String password) {
 		try {
 			ParseUser user = ParseUser.login(username, password);
 			//ParseUser dispatcher = ParseUser.getCurrentUser();
@@ -23,15 +23,18 @@ public class UserModel extends ParseUser {
 			if(user.getBoolean("admin")){
 				AdminModel adminModel = new AdminModel();
 				AdminController adminController = new AdminController(adminModel);
+				return true;
 			}else{
 				MainMenuModel menuModel = new MainMenuModel();
 				MainMenuController menuController = new MainMenuController(menuModel);
+				return true;
 			}
 
 		} catch (ParseException e) {
 			JFrame frame = new JFrame();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			JOptionPane.showMessageDialog(frame, "Z³y login lub has³o");
+			return false;
 		}
 	}
 
