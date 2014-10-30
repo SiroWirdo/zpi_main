@@ -88,7 +88,7 @@ public class DriversView extends JPanel {
 		add(pause);
 
 		blocked = new JCheckBox(Settings.driverStatus[3]);
-		blocked.setBounds(1300, 60, 100, 30);
+		blocked.setBounds(130, 60, 100, 30);
 		blocked.setSelected(true);
 		add(blocked);
 
