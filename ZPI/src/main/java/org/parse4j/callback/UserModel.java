@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import main.controller.MainMenuController;
+import main.model.MainMenuModel;
 import main.model.MapModel;
 
 import org.parse4j.ParseException;
@@ -25,8 +26,8 @@ public class UserModel extends ParseUser {
 				AdminController adminController = new AdminController(adminModel);
 				return true;
 			}else{
-				MainMenuModel menuModel = new MainMenuModel();
-				MainMenuController menuController = new MainMenuController(menuModel);
+				MapModel mapModel = new MapModel();
+				MainMenuController menuController = new MainMenuController(mapModel);
 				return true;
 			}
 
