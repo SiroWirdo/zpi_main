@@ -1,6 +1,7 @@
 package main.view;
 
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -25,7 +26,8 @@ public class MapComponent extends JLabel{
 	     this.driver = driver;
 	     this.order = order;
 	     this.waypoint = waypoint;
-	     this.setIcon(new ImageIcon("C:\\\\Users\\\\Ewelina\\\\Documents\\\\Semestr 7\\\\ZPI\\\\zpi_taxi_main\\\\ZPI\\\\src\\\\main\\\\resources\\\\waypoint_white.png"));
+	     
+	     this.setIcon(new ImageIcon("src/main/resources/waypoint_white.png"));
 	}
 	
 	public MapComponent(double latitude, double longitude, final Driver driver, Order order) {

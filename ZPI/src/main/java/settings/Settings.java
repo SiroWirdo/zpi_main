@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 public class Settings {
 	public static String USER_ID;
 	public static String[] driverStatus = {"wolny", "kurs", "przerwa", "zablokowany", "niedostêpny"};
-	public static String[] orderStatus = {"oczekuj¹ce", "w trakcie realizacji", "zrealizowane", "anulowane"};
+	public static String[] orderStatus = {"oczekuj¹ce", "w trakcie realizacji", "zrealizowane", "anulowane", "zaakceptowane"};
 
 	private Settings(){
 

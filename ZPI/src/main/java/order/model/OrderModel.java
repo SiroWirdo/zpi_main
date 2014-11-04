@@ -8,6 +8,7 @@ import org.parse4j.ParseObject;
 import org.parse4j.ParseRelation;
 
 import other.DataBaseConnection;
+import settings.Settings;
 
 public class OrderModel {
 	private ParseObject order;
@@ -38,6 +39,7 @@ public class OrderModel {
 			e1.printStackTrace();
 		}
 		order.put("customerId", customer);
+		//order.put("dispatcherId", Settings.USER_ID); <---get 
 		order.put("pickupAddress", pickUpAddress);
 		order.put("customerRemarks", customerRemarks);
 		order.put("passangerCount", passangerCount);
