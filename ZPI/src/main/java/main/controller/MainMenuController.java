@@ -1,13 +1,13 @@
 package main.controller;
 
-import main.model.MainMenuModel;
+import main.model.MapModel;
 import main.view.MainMenuView;
 
 public class MainMenuController {
-	MainMenuModel menuModel;
+	MapModel menuModel;
 	MainMenuView menuView;
 	
-	public MainMenuController(MainMenuModel menuModel) {
+	public MainMenuController(MapModel menuModel) {
 		this.menuModel = menuModel;
 		menuView = new MainMenuView(this, menuModel);
 		menuView.initialize();

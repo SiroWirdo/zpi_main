@@ -15,6 +15,7 @@ import org.parse4j.ParseObject;
 import order.controller.OrderController;
 import order.model.OrderModel;
 import model.Order;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
@@ -90,11 +91,11 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//if(e.getSource() == addOrderBtn){
 		if(e.getActionCommand().equals("Dodaj")){
-			orderController.addOrder(surnameTextField.getText(),
-					new Integer(phoneNumberTextField.getText()),
-					pickUpAddressTextField.getText(),
-					customerRemarksTextArea.getText(),
-					new Integer(passangerCountTextField.getText()));	
+				orderController.addOrder(surnameTextField.getText(),
+						new Integer(phoneNumberTextField.getText()),
+						pickUpAddressTextField.getText(),
+						customerRemarksTextArea.getText(),
+						new Integer(passangerCountTextField.getText()));
 		}
 		
 	}

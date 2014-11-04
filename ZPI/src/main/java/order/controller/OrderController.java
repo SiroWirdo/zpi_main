@@ -9,6 +9,8 @@ import model.Order;
 public class OrderController {
 	private OrderModel orderModel;
 	private AddOrderJPanel addOrderView;
+	Thread customerThread;
+	Thread orderThread;
 	
 	public OrderController(OrderModel orderModel) {
 		this.orderModel = orderModel;
@@ -22,9 +24,9 @@ public class OrderController {
 		return addOrderView;
 	}
 
-	public void addOrder(String surname, Number phoneNumber, String pickUpAddress, String customerRemarks, Number passangerCount){
-		orderModel.addCustomer(surname, phoneNumber);
-		orderModel.addOrder(orderModel.getCustomerId(),
-				pickUpAddress, customerRemarks, passangerCount);
+	public void addOrder(String surname, Number phoneNumber, String pickUpAddress,
+			String customerRemarks, Number passangerCount){
+	//	String customerId = orderModel.addCustomer(surname, phoneNumber);
+		orderModel.addOrder(surname, phoneNumber, pickUpAddress, customerRemarks, passangerCount);
 	}
 }

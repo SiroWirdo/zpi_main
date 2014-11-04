@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import main.controller.MainMenuController;
-import main.model.MainMenuModel;
+import main.model.MapModel;
 
 import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
@@ -18,7 +18,7 @@ public class UserModel extends ParseUser {
 		try {
 			ParseUser.login(username, password);
 			//ParseUser dispatcher = ParseUser.getCurrentUser();
-			MainMenuModel menuModel = new MainMenuModel();
+			MapModel menuModel = new MapModel();
 			MainMenuController menuController = new MainMenuController(menuModel);
 			
 		} catch (ParseException e) {		

@@ -1,15 +1,18 @@
 package model;
 
+import org.jdesktop.swingx.mapviewer.Waypoint;
 import org.parse4j.ParseClassName;
 import org.parse4j.ParseGeoPoint;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 
+import other.ConverterGeoPosition;
+
 @ParseClassName("Car")
 public class Car extends ParseObject{
 
 	public String getId(){
-		return getString("objectId");
+		return getObjectId();
 	}
 
 	public String getRegistrationNumber() {
@@ -37,11 +40,15 @@ public class Car extends ParseObject{
 	}
 
 	public ParseGeoPoint getCurrentPosition() {
-		return getParseGeoPoint("location");
+		return getParseGeoPoint("currentPosition");
+	}
+	
+	public Waypoint getCurrentPositionWayPoint(){
+		return ConverterGeoPosition.geoPointToWaypoint(this.getCurrentPosition());
 	}
 
 	public void setCurrentPosition(ParseGeoPoint value) {
-		put("location", value);
+		put("currentPosition", value);
 	}
 
 	public static ParseQuery<Car> getQuery() {

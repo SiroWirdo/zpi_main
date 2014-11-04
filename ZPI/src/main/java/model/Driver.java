@@ -71,11 +71,11 @@ public class Driver extends ParseObject {
 		put("Id", value);
 	}
 
-	public ParseObject getCar() {
-		return getParseObject("carId");
+	public String getCar() {
+		return getString("carId");
 	}
 
-	public void setCar(ParseObject value) {
+	public void setCar(String value) {
 		put("carId", value);
 	}
 

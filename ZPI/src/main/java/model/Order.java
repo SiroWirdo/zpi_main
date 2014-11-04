@@ -2,11 +2,14 @@ package model;
 
 import java.util.Date;
 
+import org.jdesktop.swingx.mapviewer.Waypoint;
 import org.parse4j.Parse;
 import org.parse4j.ParseClassName;
 import org.parse4j.ParseGeoPoint;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
+
+import other.ConverterGeoPosition;
 
 @ParseClassName("Order")
 public class Order extends ParseObject {
@@ -34,6 +37,10 @@ public class Order extends ParseObject {
 
 	public ParseGeoPoint getPickupAddressGeo() {
 		return getParseGeoPoint("pickupAddressGeo");
+	}
+	
+	public Waypoint getCurrentPositionWaypoint() {
+		return ConverterGeoPosition.geoPointToWaypoint(getParseGeoPoint("pickupAddressGeo"));
 	}
 
 	public void setPickupAddressGeo(ParseGeoPoint value) {

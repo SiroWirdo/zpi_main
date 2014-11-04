@@ -1,10 +1,10 @@
 import main.controller.MainMenuController;
-import main.model.MainMenuModel;
+import main.model.MapModel;
 
 
 public class MainMenuTest {
 	public static void main(String[] args) {
-		MainMenuModel menuModel = new MainMenuModel();
+		MapModel menuModel = new MapModel();
 		MainMenuController menuController = new MainMenuController(menuModel);
 	}
 }
