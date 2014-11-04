@@ -13,9 +13,10 @@ public class AddUserController {
 	AddUserModel addUserModel;
 	AddUserView addUserView;
 
-	public AddUserController(AddUserModel addUserModel){
+	public AddUserController(AddUserModel addUserModel, AddUserView addUserView){
 		this.addUserModel = addUserModel;
-		this.addUserView = new AddUserView(this, addUserModel);
+		this.addUserView = addUserView;
+		this.addUserView.setUserController(this);
 
 		this.addUserModel.initialize();
 		this.addUserView.initialize();
@@ -62,7 +63,7 @@ public class AddUserController {
 				JFrame frame = new JFrame();
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				JOptionPane.showMessageDialog(frame, "Wprowadü wszystkie dane");
-			}			
+			}
 
 		}
 
@@ -73,7 +74,7 @@ public class AddUserController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			addUserView.dispose();
+	//		addUserView.dispose();
 		}
 
 	}

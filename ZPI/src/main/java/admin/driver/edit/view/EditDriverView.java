@@ -49,7 +49,7 @@ public class EditDriverView extends JFrame{
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
-		this.add(mainPanel);
+		getContentPane().add(mainPanel);
 
 
 		String[] columns = {"Imiê", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
