@@ -8,7 +8,7 @@ import org.parse4j.util.ParseRegistry;
 
 
 public class OrdersDisplayTest {
-	public static void mani(String[] args){
+	public static void main(String[] args){
 		ParseRegistry.registerSubclass(Order.class);	
 		OrdersModel ordersModel = new OrdersModel();
 		OrdersController ordersController = new OrdersController(ordersModel);

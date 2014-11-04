@@ -99,7 +99,7 @@ public class MapPanel extends JXMapKit {
 	}
 
 
-	public void drawWaypointsComponent(final Set<MapWaypoint> allWaypoints) {
+	public void drawWaypointsComponent(final Set<MapComponent> allWaypoints) {
 //		final Set<SwingWaypoint> waypoints = new HashSet<SwingWaypoint>();
 //		JLabel test2 = new JLabel("TESTTTTTTTTTTT");
 //		test2.setBackground(Color.RED);
@@ -112,20 +112,20 @@ public class MapPanel extends JXMapKit {
 //				new GeoPosition(-7.502778, 110.5)));
 
 		JXMapViewer map = getMainMap();
-		for (MapWaypoint wp : allWaypoints)
-			map.add(wp.getJLabel());
+		for (MapComponent wp : allWaypoints)
+			map.add(wp);
 
 		WaypointPainter painter = new WaypointPainter() {
 			@Override
 			protected void doPaint(Graphics2D g, JXMapViewer map, int width,
 					int height) {
-				for (MapWaypoint wp : allWaypoints) {
+				for (MapComponent wp : allWaypoints) {
 					Point2D gp_pt = map.getTileFactory().geoToPixel(
-							wp.getPosition(), map.getZoom());
+							wp.getWaypoint().getPosition(), map.getZoom());
 					Rectangle rect = map.getViewportBounds();
 					Point pt = new Point((int) gp_pt.getX() - rect.x,
 							(int) gp_pt.getY() - rect.y);
-					JLabel component = wp.getJLabel();
+					JLabel component = wp;
 					component.addMouseListener(new WaypointMouseListener());
 					component.setLocation(pt);
 				}
