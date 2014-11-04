@@ -16,14 +16,14 @@ import org.parse4j.callback.UserModel;
 
 import login.controller.LoginController;
 
-public class LoginView extends JDialog implements ActionListener {
+public class LoginView extends JDialog {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	UserModel userModel;
 	LoginController loginController;
-	
+
 	private JTextField loginTextField;
 	private JPasswordField passwordField;
 	JButton okButton;
@@ -38,7 +38,7 @@ public class LoginView extends JDialog implements ActionListener {
 			 MainMenu frame = new MainMenu();
 			frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			frame.setVisible(true);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,7 +52,7 @@ public class LoginView extends JDialog implements ActionListener {
 		this.userModel = userModel;
 		//initialize();
 	}
-	
+
 	public void initialize(){
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setBounds(100, 100, 351, 228);
@@ -61,48 +61,46 @@ public class LoginView extends JDialog implements ActionListener {
 		panel.setBounds(0, 0, 335, 191);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-			
+
 		JLabel lblNewLabel = new JLabel("login:");
 		lblNewLabel.setBounds(23, 48, 41, 20);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			
+
 		JLabel lblNewLabel_1 = new JLabel("has³o:");
 		lblNewLabel_1.setBounds(21, 90, 43, 20);
 		panel.add(lblNewLabel_1);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			
+
 		loginTextField = new JTextField();
 		loginTextField.setBounds(112, 50, 194, 20);
 		panel.add(loginTextField);
 		//loginTextField.setColumns(10);
-			
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(112, 92, 194, 20);
 		panel.add(passwordField);
-		
+
 		okButton = new JButton("OK");
 		okButton.setBounds(112, 137, 80, 23);
-		okButton.addActionListener(this);
+		okButton.addActionListener(loginController.getLoginListener());
 		panel.add(okButton);
 		getRootPane().setDefaultButton(okButton);
-			
+
 		cancelButton = new JButton("Cancel");
 		cancelButton.setBounds(226, 137, 80, 23);
-		cancelButton.addActionListener(this);
+		cancelButton.addActionListener(loginController.getCancelListener());
 		panel.add(cancelButton);
 		this.setVisible(true);
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == okButton){
-			char[] password = passwordField.getPassword();
-			loginController.log(loginTextField.getText(), String.valueOf(password));	
-		}
-		else if(e.getSource() == cancelButton){
-			LoginView.this.dispose();
-		}
+	public char[] getPassword(){
+		return passwordField.getPassword();
 	}
+
+	public String getLogin(){
+		return loginTextField.getText();
+	}
+
 }

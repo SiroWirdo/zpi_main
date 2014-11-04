@@ -8,7 +8,7 @@ import org.parse4j.ParseQuery;
 public class Dispatcher extends ParseObject {
 
 	public String getId(){
-		return getString("objectId");
+		return getObjectId();
 	}
 
 	public String getName() {

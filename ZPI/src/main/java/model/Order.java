@@ -15,7 +15,7 @@ import other.ConverterGeoPosition;
 public class Order extends ParseObject {
 	
 	public String getId(){
-		return getString("objectId");
+		return getObjectId();
 	}
 
 	public ParseObject getDispatcher() {

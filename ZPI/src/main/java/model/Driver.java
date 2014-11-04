@@ -9,7 +9,7 @@ import org.parse4j.ParseUser;
 public class Driver extends ParseObject {
 
 	public String getId(){
-		return getString("objectId");
+		return getObjectId();
 	}
 	
 	public String getName() {
