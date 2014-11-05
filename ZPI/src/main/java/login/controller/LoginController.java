@@ -17,8 +17,8 @@ public class LoginController {
 		loginView.initialize();
 	}
 
-	public void log(String username, String password){
-		userModel.log(username, password);
+	public boolean log(String username, String password){
+		return userModel.log(username, password);
 	}
 
 	public LoginListener getLoginListener(){
@@ -34,12 +34,16 @@ public class LoginController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-				char[] password = loginView.getPassword();
-				log(loginView.getLogin(), String.valueOf(password));
+			char[] password = loginView.getPassword();
+			boolean success = log(loginView.getLogin(), String.valueOf(password));
+			if(success){
 				loginView.dispose();
-
+			}else{
+				loginView.clearPassword();
+				loginView.repaint();
 			}
 		}
+	}
 
 
 
@@ -49,7 +53,7 @@ public class LoginController {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 
-				loginView.dispose();
+			loginView.dispose();
 		}
 
 	}

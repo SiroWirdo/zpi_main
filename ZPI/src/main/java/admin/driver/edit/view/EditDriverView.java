@@ -199,7 +199,7 @@ public class EditDriverView extends JFrame{
 
 	public long getPeselFromSelectedRow(){
 		int row = table.getSelectedRow();
-		long pesel = new Long((String)table.getValueAt(row, 4));
+		long pesel = (Long)table.getValueAt(row, 4);
 		return pesel;
 	}
 

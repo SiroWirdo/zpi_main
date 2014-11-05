@@ -94,6 +94,10 @@ public class LoginView extends JDialog {
 
 	}
 
+	public void clearPassword(){
+		passwordField.setText("");
+	}
+	
 	public char[] getPassword(){
 		return passwordField.getPassword();
 	}
