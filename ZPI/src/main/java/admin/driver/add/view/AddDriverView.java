@@ -27,13 +27,13 @@ public class AddDriverView extends JFrame{
 	private JLabel pesel;
 	private JLabel phone;
 	private JLabel license;
-	private JLabel userId;
+//	private JLabel userId;
 	private JTextField nameTF;
 	private JTextField surnameTF;
 	private JTextField peselTF;
 	private JTextField phoneTF;
 	private JTextField licenseTF;
-	private JTextField userIdTF;
+//	private JTextField userIdTF;
 	private JButton addDriver;
 	private JButton cancel;
 	private JLabel driverLB;
@@ -70,7 +70,7 @@ public class AddDriverView extends JFrame{
 		name.setBounds(x, y = y + 30, 60, 20);
 		mainPanel.add(name);
 
-		nameTF = new JTextField();
+		nameTF = new JTextField("kowal");
 		nameTF.setBounds(x+80, y, 100, 20);
 		mainPanel.add(nameTF);
 
@@ -78,7 +78,7 @@ public class AddDriverView extends JFrame{
 		surname.setBounds(x, y = y + 30, 70, 20);
 		mainPanel.add(surname);
 
-		surnameTF = new JTextField();
+		surnameTF = new JTextField("iui");
 		surnameTF.setBounds(x + 80, y, 100, 20);
 		mainPanel.add(surnameTF);
 
@@ -86,7 +86,7 @@ public class AddDriverView extends JFrame{
 		pesel.setBounds(x, y = y + 30, 60, 20);
 		mainPanel.add(pesel);
 
-		peselTF = new JTextField();
+		peselTF = new JTextField("3939292");
 		peselTF.setBounds(x+80, y, 100, 20);
 		mainPanel.add(peselTF);
 
@@ -94,7 +94,7 @@ public class AddDriverView extends JFrame{
 		phone.setBounds(x = x + 280, y = 40, 60, 20);
 		mainPanel.add(phone);
 
-		phoneTF = new JTextField();
+		phoneTF = new JTextField("920329320");
 		phoneTF.setBounds(x + 80, y, 100, 20);
 		mainPanel.add(phoneTF);
 
@@ -102,10 +102,10 @@ public class AddDriverView extends JFrame{
 		license.setBounds(x, y = y+30, 60, 20);
 		mainPanel.add(license);
 
-		licenseTF = new JTextField();
+		licenseTF = new JTextField("339d3");
 		licenseTF.setBounds(x + 80, y, 100, 20);
 		mainPanel.add(licenseTF);
-
+/*
 		userId = new JLabel("U¿ytkownik: ");
 		userId.setBounds(x, y=y+30, 80, 20);
 		mainPanel.add(userId);
@@ -113,7 +113,7 @@ public class AddDriverView extends JFrame{
 		userIdTF = new JTextField();
 		userIdTF.setBounds(x+80, y, 100, 20);
 		mainPanel.add(userIdTF);
-
+*/
 		addDriver = new JButton("Dodaj");
 		addDriver.setBounds(370, 10, 100, 30);
 		addDriver.addActionListener(addDriverController.getAddButtonListener());
@@ -130,7 +130,7 @@ public class AddDriverView extends JFrame{
 	}
 
 	public String[] getValues(){
-		String[] values = {nameTF.getText(), surnameTF.getText(), peselTF.getText(), phoneTF.getText(),	licenseTF.getText(), userIdTF.getText()};
+		String[] values = {nameTF.getText(), surnameTF.getText(), peselTF.getText(), phoneTF.getText(),	licenseTF.getText()};
 		return values;
 	}
 
@@ -140,6 +140,6 @@ public class AddDriverView extends JFrame{
 		peselTF.setText("");
 		phoneTF.setText("");
 		licenseTF.setText("");
-		userIdTF.setText("");
+		//userIdTF.setText("");
 	}
 }

@@ -13,7 +13,7 @@ public class AddDriverModel {
 		DataBaseConnection.initialize();
 	}
 
-	public void addDriver(String name, String surname, long pesel, long phone, String license, String userId, ParseUser user){
+	public void addDriver(String name, String surname, long pesel, long phone, String license, ParseUser user){
 		Driver driver = new Driver();
 		driver.setName(name);
 		driver.setSurname(surname);
@@ -21,7 +21,7 @@ public class AddDriverModel {
 		driver.setPhoneNumber(phone);
 		driver.setLicenseNumber(license);
 		driver.setStatus(4);
-		driver.put("userId", user.getObjectId());
+		driver.put("userId", user);
 		try {
 			driver.save();
 		} catch (ParseException e) {

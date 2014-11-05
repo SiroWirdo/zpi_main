@@ -73,10 +73,21 @@ public class AddDriverController {
 
 			if(valid){
 				if(password){
+					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 					boolean admin = addUserView.isAdminSelected();
 					ParseUser user = addUserModel.addUser(userValues[0], userValues[1], userValues[3], admin);
-
-					addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], values[5], user);
+					/*JSONObject pointer = new JSONObject();
+					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST22222222222222222");
+				      if (user.getObjectId() != null) {
+				    	  pointer.put("__type", "Pointer");
+				    	  pointer.put("className", user.getClassName());
+				    	  pointer.put("objectId", user.getObjectId());
+				      }
+				      
+				      System.out.println(pointer);
+				      */
+				      
+					addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], user);
 
 					addDriverView.clearTextFields();
 					addUserView.clearTextFields();

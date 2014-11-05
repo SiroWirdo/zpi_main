@@ -3,9 +3,8 @@ package login.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import login.model.UserModel;
 import login.view.LoginView;
-
-import org.parse4j.callback.UserModel;
 
 public class LoginController {
 	UserModel userModel;
