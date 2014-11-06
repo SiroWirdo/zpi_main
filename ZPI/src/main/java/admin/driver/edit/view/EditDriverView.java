@@ -49,7 +49,7 @@ public class EditDriverView extends JFrame{
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
-		this.add(mainPanel);
+		getContentPane().add(mainPanel);
 
 
 		String[] columns = {"Imiê", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
@@ -199,7 +199,7 @@ public class EditDriverView extends JFrame{
 
 	public long getPeselFromSelectedRow(){
 		int row = table.getSelectedRow();
-		long pesel = new Long((String)table.getValueAt(row, 4));
+		long pesel = (Long)table.getValueAt(row, 4);
 		return pesel;
 	}
 

@@ -12,7 +12,7 @@ public class Driver extends ParseObject {
 	public String getId(){
 		return getObjectId();
 	}
-	
+
 	public String getName() {
 		return getString("name");
 	}
@@ -53,7 +53,7 @@ public class Driver extends ParseObject {
 	public void setPESEL(long value) {
 		put("PESEL", value);
 	}
-	
+
 	/** 0 - wolny, 1 - kurs, 2 - przerwa, 3 - zablokowany, 4 - niedostêpny**/
 	public int getStatus() {
 		return getInt("status");
@@ -69,7 +69,7 @@ public class Driver extends ParseObject {
 	}
 
 	public void setUser(ParseUser value) {
-		put("Id", value);
+		put("userId", value);
 	}
 
 	public Car getCar() {

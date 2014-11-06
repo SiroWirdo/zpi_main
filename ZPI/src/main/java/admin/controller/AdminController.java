@@ -32,9 +32,9 @@ public class AdminController {
 		return new EditDriverListener();
 	}
 
-	public AddUserListener getAddUserListener(){
+	/*public AddUserListener getAddUserListener(){
 		return new AddUserListener();
-	}
+	}*/
 
 	public CloseButtonListener getCloseButtonListener(){
 		return new CloseButtonListener();
@@ -65,7 +65,7 @@ public class AdminController {
 
 	}
 
-	private class AddUserListener implements ActionListener{
+/*	private class AddUserListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -75,7 +75,7 @@ public class AdminController {
 
 		}
 
-	}
+	}*/
 
 	private class CloseButtonListener implements ActionListener{
 

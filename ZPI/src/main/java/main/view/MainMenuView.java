@@ -15,7 +15,6 @@ import java.awt.event.MouseListener;
 import javax.swing.ScrollPaneConstants;
 
 import org.jdesktop.swingx.JXMapViewer;
-import org.parse4j.callback.UserModel;
 import org.parse4j.util.ParseRegistry;
 
 import ch.qos.logback.core.Layout;
@@ -25,11 +24,13 @@ import com.sun.org.apache.xalan.internal.xsltc.dom.AbsoluteIterator;
 import drivers.controller.DriversController;
 import drivers.model.DriversModel;
 import drivers.view.DriversView;
+import login.model.UserModel;
 import main.controller.MainMenuController;
 import main.controller.MapController;
 import main.model.MapModel;
 import model.Driver;
 import model.Order;
+
 import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
 

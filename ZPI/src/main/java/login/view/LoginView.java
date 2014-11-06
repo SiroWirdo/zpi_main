@@ -12,9 +12,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPasswordField;
 
-import org.parse4j.callback.UserModel;
-
 import login.controller.LoginController;
+import login.model.UserModel;
 
 public class LoginView extends JDialog {
 	/**
@@ -95,6 +94,10 @@ public class LoginView extends JDialog {
 
 	}
 
+	public void clearPassword(){
+		passwordField.setText("");
+	}
+	
 	public char[] getPassword(){
 		return passwordField.getPassword();
 	}
