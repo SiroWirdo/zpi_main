@@ -13,12 +13,16 @@ import javax.swing.table.DefaultTableModel;
 import model.Driver;
 import settings.Settings;
 import drivers.model.DriversModel;
+import drivers.view.DriverDetailsView;
 import drivers.view.DriversView;
 
 public class DriversController implements Observer {
 	private DriversModel driversModel;
 	private DriversView driversView;
 
+	private Driver driverDetailsModel;
+	private DriverDetailsView driverDetailsView;
+	
 	public DriversController(DriversModel driversModel){
 		this.driversModel = driversModel;
 		this.driversView = new DriversView(this, driversModel);
@@ -29,6 +33,14 @@ public class DriversController implements Observer {
 
 	}
 
+	public DriversController(Driver driverDetailsModel){
+		this.driverDetailsModel = driverDetailsModel;
+		this.driverDetailsView = new DriverDetailsView(this, driverDetailsModel);
+		
+		this.driverDetailsView.initialize();
+
+	}
+	
 	public DriversView getDriversView(){
 		return driversView;
 	}
@@ -159,5 +171,9 @@ public class DriversController implements Observer {
 			driversView.repaint();*/
 		}
 
+	}
+	
+	public void setDriverDetails(){
+		driverDetailsView.setAllDataInLabel();
 	}
 }

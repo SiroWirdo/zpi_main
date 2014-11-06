@@ -6,6 +6,7 @@ import model.Order;
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseRelation;
+import org.parse4j.ParseUser;
 
 import other.DataBaseConnection;
 import settings.Settings;
@@ -39,7 +40,8 @@ public class OrderModel {
 			e1.printStackTrace();
 		}
 		order.put("customerId", customer);
-		//order.put("dispatcherId", Settings.USER_ID); <---get 
+//		ParseUser dispatherObj = Settings.USER_OBJECT;
+		//order.put("dispatcher", Settings.USER_OBJECT);
 		order.put("pickupAddress", pickUpAddress);
 		order.put("customerRemarks", customerRemarks);
 		order.put("passangerCount", passangerCount);

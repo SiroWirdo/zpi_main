@@ -4,6 +4,7 @@ import org.parse4j.ParseObject;
 
 import order.model.OrderModel;
 import order.view.AddOrderJPanel;
+import order.view.OrderDetailsView;
 import model.Order;
 
 public class OrderController {
@@ -12,12 +13,20 @@ public class OrderController {
 	Thread customerThread;
 	Thread orderThread;
 	
+	private Order orderDetailsModel;
+	private OrderDetailsView orderView;
+	
 	public OrderController(OrderModel orderModel) {
 		this.orderModel = orderModel;
 		orderModel.initialize();
 		addOrderView = new AddOrderJPanel(this, orderModel);
 		addOrderView.initialize();
 			
+	}
+
+	public OrderController(Order orderDetailsModel){
+		this.orderDetailsModel = orderDetailsModel;
+		orderView = new OrderDetailsView(this, orderDetailsModel);
 	}
 	
 	public AddOrderJPanel getAddOrderView() {
@@ -29,4 +38,9 @@ public class OrderController {
 	//	String customerId = orderModel.addCustomer(surname, phoneNumber);
 		orderModel.addOrder(surname, phoneNumber, pickUpAddress, customerRemarks, passangerCount);
 	}
+	
+	public void setOrderDetails(){
+		orderView.setAllDetailsInLabel();
+	}
+	
 }

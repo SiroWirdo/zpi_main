@@ -1,6 +1,7 @@
 package model;
 
 import org.parse4j.ParseClassName;
+import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 import org.parse4j.ParseUser;
@@ -71,8 +72,19 @@ public class Driver extends ParseObject {
 		put("Id", value);
 	}
 
-	public String getCar() {
-		return getString("carId");
+	public Car getCar() {
+		Car c = null;
+		ParseObject car = getParseObject("carId");
+		if(car != null){
+			String carId = car.getObjectId();
+			ParseQuery<Car> query = ParseQuery.getQuery("Car");
+			try {
+				c = query.get(carId);
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return c;
 	}
 
 	public void setCar(String value) {

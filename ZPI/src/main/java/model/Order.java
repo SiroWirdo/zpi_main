@@ -5,6 +5,7 @@ import java.util.Date;
 import org.jdesktop.swingx.mapviewer.Waypoint;
 import org.parse4j.Parse;
 import org.parse4j.ParseClassName;
+import org.parse4j.ParseException;
 import org.parse4j.ParseGeoPoint;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
@@ -18,8 +19,19 @@ public class Order extends ParseObject {
 		return getObjectId();
 	}
 
-	public ParseObject getDispatcher() {
-		return getParseObject("dispatcherId");
+	public Dispatcher getDispatcher() {
+		Dispatcher dispatcher = null;
+		ParseObject d = getParseObject("dispatcher");
+		if(d != null){
+			String dispatcherId = d.getObjectId();
+			ParseQuery<Dispatcher> query = ParseQuery.getQuery("Dispatcher");
+			try {
+				dispatcher = query.get(dispatcherId);
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return dispatcher;
 	}
 
 	public void setDispatcher(ParseObject value) {
@@ -63,8 +75,19 @@ public class Order extends ParseObject {
 	public void setDestinationAddressGeo(ParseGeoPoint value) {
 		put("destinationAddressGeo", value);
 	}
-	public ParseObject getCustomer() {
-		return getParseObject("customerId");
+	public Customer getCustomer() {
+		Customer c = null;
+		ParseObject customer = getParseObject("customerId");
+		if(customer != null){
+			String customerId = customer.getObjectId();
+			ParseQuery<Customer> query = ParseQuery.getQuery("Customer");
+			try {
+				c = query.get(customerId);
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return c;
 	}
 
 	public void setCustomer(ParseObject value) {
@@ -108,12 +131,12 @@ public class Order extends ParseObject {
 		put("passengerCount", value);
 	}
 
-	/** 0 - oczekuj¹ce, 1 - w trakcie realizacji, 2 - zrealizowane, 3 - anulowane **/
+	/** 0 - oczekuj¹ce, 1 - w trakcie realizacji, 2 - zrealizowane, 3 - anulowane, 4-zaakceptowane**/
 	public int getStatus() {
 		return getInt("status");
 	}
 
-	/** 0 - oczekuj¹ce, 1 - w trakcie realizacji, 2 - zrealizowane, 3 - anulowane **/
+	/** 0 - oczekuj¹ce, 1 - w trakcie realizacji, 2 - zrealizowane, 3 - anulowane, 4-zaakceptowane **/
 	public void setStatus(int value) {
 		put("status", value);
 	}

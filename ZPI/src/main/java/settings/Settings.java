@@ -2,8 +2,12 @@ package settings;
 
 import java.io.UnsupportedEncodingException;
 
+import model.Dispatcher;
+
+import org.parse4j.ParseUser;
+
 public class Settings {
-	public static String USER_ID;
+	public static Dispatcher USER_OBJECT;
 	public static String[] driverStatus = {"wolny", "kurs", "przerwa", "zablokowany", "niedostêpny"};
 	public static String[] orderStatus = {"oczekuj¹ce", "w trakcie realizacji", "zrealizowane", "anulowane", "zaakceptowane"};
 

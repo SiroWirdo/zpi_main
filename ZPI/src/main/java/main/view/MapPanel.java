@@ -31,21 +31,29 @@ import main.model.MapModel;
 import org.jdesktop.swingx.JXMapKit;
 import org.jdesktop.swingx.JXMapViewer;
 import org.jdesktop.swingx.decorator.BorderHighlighter;
+import org.jdesktop.swingx.mapviewer.DefaultTileFactory;
 import org.jdesktop.swingx.mapviewer.GeoPosition;
+import org.jdesktop.swingx.mapviewer.TileFactory;
+import org.jdesktop.swingx.mapviewer.TileFactoryInfo;
 import org.jdesktop.swingx.mapviewer.Waypoint;
 import org.jdesktop.swingx.mapviewer.WaypointPainter;
 import org.jdesktop.swingx.mapviewer.WaypointRenderer;
 
 import java.awt.GridBagConstraints;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 import java.awt.GridBagLayout;
 
 public class MapPanel extends JXMapKit {
 
-	MapModel mapModel;
-	MapController controller;
-	WaypointPainter painter;
+	private MapModel mapModel;
+	private MapController controller;
+
+	/*
+	 * Default localization: Wroc³aw
+	 */
 	private static final double DEFAULT_LATITUDE = 51.107885200000000000;
 	private static final double DEFAULT_LONGITUDE = 17.038537600000040000;
 	private static final int DEFAULT_ZOOM = 3;
@@ -62,22 +70,25 @@ public class MapPanel extends JXMapKit {
 		GridBagConstraints gbc_contLabel = new GridBagConstraints();
 		gbc_contLabel.anchor = GridBagConstraints.SOUTHEAST;
 		getMainMap().add(contLabel, gbc_contLabel);
-		initialize();
+		//initialize();
 	}
 
 	public void initialize() {
 		this.setCenterPosition(new GeoPosition(DEFAULT_LATITUDE,
 				DEFAULT_LONGITUDE));
-		// TileFactoryInfo tile = new TileFactoryInfo(0, 4, 4, 256, true, true,
-		// "http://tile.openstreetmap.org",
-		// "x","y","z"){
-		// public String getTileUrl(int x, int y, int zoom) {
-		// zoom = 4-zoom;
-		// return this.baseURL +"/"+zoom+"/"+x+"/"+y+".png";
-		// }
-		// };
-		// TileFactory tf = new DefaultTileFactory(tile);
-		// this.setTileFactory(tf);
+		/*final int max = 17;
+        TileFactoryInfo info = new TileFactoryInfo(0, max, max,
+                256, true, true,
+                "http://tile.openstreetmap.org",
+                "x","y","z") {
+            public String getTileUrl(int x, int y, int zoom) {
+                zoom = zoom;
+                return this.baseURL +"/"+zoom+"/"+x+"/"+y+".png";
+            }
+        };
+        info.setDefaultZoomLevel(DEFAULT_ZOOM);
+        TileFactory tf = new DefaultTileFactory(info);
+		this.setTileFactory(tf);*/
 		this.setZoomButtonsVisible(false);
 		this.setZoomSliderVisible(false);
 		this.setMiniMapVisible(false);
@@ -85,9 +96,13 @@ public class MapPanel extends JXMapKit {
 		this.setAddressLocation(new GeoPosition(DEFAULT_LATITUDE,
 				DEFAULT_LONGITUDE));
 		this.setZoom(DEFAULT_ZOOM);
-		this.setMaximumSize(new Dimension(100, 200));
-		this.setMinimumSize(new Dimension(50, 20));
-
+		//getMainMap().setSize(10, 10);
+		//this.setMaximumSize(new Dimension(100, 200));
+		//this.setMinimumSize(new Dimension(50, 20));
+		//getMainMap().setMaximumSize(new Dimension(10, 10));
+		getMainMap().setRestrictOutsidePanning(true);
+		getMainMap().setHorizontalWrapped(false);
+		//getMainMap().setLoadingImage(loadingImage);
 		// WaypointPainter<JXMapViewer> painter = new
 		// WaypointPainter<JXMapViewer>();
 		// painter.setWaypoints(waypoints);
@@ -98,23 +113,11 @@ public class MapPanel extends JXMapKit {
 
 	}
 
-
 	public void drawWaypointsComponent(final Set<MapComponent> allWaypoints) {
-//		final Set<SwingWaypoint> waypoints = new HashSet<SwingWaypoint>();
-//		JLabel test2 = new JLabel("TESTTTTTTTTTTT");
-//		test2.setBackground(Color.RED);
-//		test2.addMouseListener(new WaypointMouseListener());
-//		waypoints.add(new SwingWaypoint(test2, new GeoPosition(51.089858,
-//				17.020802)));
-//		waypoints.add(new SwingWaypoint(test2, new GeoPosition(51.088213,
-//				17.064165)));
-//		waypoints.add(new SwingWaypoint(test2,
-//				new GeoPosition(-7.502778, 110.5)));
-
 		JXMapViewer map = getMainMap();
-		for (MapComponent wp : allWaypoints)
+		for (MapComponent wp : allWaypoints){
 			map.add(wp);
-
+		}
 		WaypointPainter painter = new WaypointPainter() {
 			@Override
 			protected void doPaint(Graphics2D g, JXMapViewer map, int width,
@@ -122,11 +125,11 @@ public class MapPanel extends JXMapKit {
 				for (MapComponent wp : allWaypoints) {
 					Point2D gp_pt = map.getTileFactory().geoToPixel(
 							wp.getWaypoint().getPosition(), map.getZoom());
+					
 					Rectangle rect = map.getViewportBounds();
 					Point pt = new Point((int) gp_pt.getX() - rect.x,
-							(int) gp_pt.getY() - rect.y);
+										(int) gp_pt.getY() - rect.y);
 					JLabel component = wp;
-					component.addMouseListener(new WaypointMouseListener());
 					component.setLocation(pt);
 				}
 			}
@@ -134,63 +137,30 @@ public class MapPanel extends JXMapKit {
 		painter.setWaypoints(allWaypoints);
 		map.setOverlayPainter(painter);
 	}
-
-	private class WaypointMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			System.out.println("Klikniêto waypoint!");
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
 }
-//	public void addWaypoint() {
-//		// create a Set of waypoints
-//		Set<Waypoint> waypoints = new HashSet<Waypoint>();
-//		waypoints.add(new Waypoint(51.2, 17.1));
-//		waypoints.add(new Waypoint(51.1, 17.03));
-//
-//		// crate a WaypointPainter to draw the points
-//		painter.setRenderer(new WaypointRenderer() {
-//			public boolean paintWaypoint(Graphics2D g, JXMapViewer map,
-//					Waypoint wp) {
-//				Image img1 = Toolkit
-//						.getDefaultToolkit()
-//						.getImage(
-//								"C:\\Users\\Ewelina\\Documents\\Semestr 7\\ZPI\\zpi_taxi_main\\ZPI\\src\\main\\resources\\waypoint_white.png");
-//				g.drawImage(img1, -5, -5, +5, +5, null);
-//				// g.setColor(Color.RED);
-//				// g.drawLine(-5,-5,+5,+5);
-//				// g.drawLine(-5,+5,+5,-5);
-//				return true;
-//			}
-//		});
-//		painter.setWaypoints(waypoints);
-//		this.getMainMap().setOverlayPainter(painter);
-//
-//	}
+/*	public void addWaypoint() {
+		// create a Set of waypoints
+		Set<Waypoint> waypoints = new HashSet<Waypoint>();
+		waypoints.add(new Waypoint(51.2, 17.1));
+		waypoints.add(new Waypoint(51.1, 17.03));
+
+		// crate a WaypointPainter to draw the points
+		painter.setRenderer(new WaypointRenderer() {
+			public boolean paintWaypoint(Graphics2D g, JXMapViewer map,
+					Waypoint wp) {
+				Image img1 = Toolkit
+						.getDefaultToolkit()
+						.getImage(
+								"C:\\Users\\Ewelina\\Documents\\Semestr 7\\ZPI\\zpi_taxi_main\\ZPI\\src\\main\\resources\\waypoint_white.png");
+				g.drawImage(img1, -5, -5, +5, +5, null);
+				// g.setColor(Color.RED);
+				// g.drawLine(-5,-5,+5,+5);
+				// g.drawLine(-5,+5,+5,-5);
+				return true;
+			}
+		});
+		painter.setWaypoints(waypoints);
+		this.getMainMap().setOverlayPainter(painter);
+
+	}*/
 

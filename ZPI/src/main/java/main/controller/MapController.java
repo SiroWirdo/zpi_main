@@ -42,8 +42,8 @@ public class MapController{
 	}
 	
 	public void drawAllWaypoints(){
-		addCarWaypoints();
 		addCustomersWaypoints();
+		addCarWaypoints();
 		final Set<MapComponent> allWaypoints = mapModel.getAllWaypoints();
 		mapView.drawWaypointsComponent(allWaypoints);
 	}

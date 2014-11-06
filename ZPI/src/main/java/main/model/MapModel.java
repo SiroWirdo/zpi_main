@@ -56,7 +56,8 @@ public class MapModel{
 	public List<Driver> getAvalaibleDrivers(){
 		avalaibleDrivers = null;
 		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
-		query.whereLessThanOrEqualTo("status", 2);
+		//warunek do zmiany potem?
+		query.whereLessThanOrEqualTo("status", 4);
 		try {
 			avalaibleDrivers = query.find();
 		} catch (ParseException e) {
@@ -67,26 +68,17 @@ public class MapModel{
 	
 	public Set<MapComponent> getCarsPositions(List<Driver> avalaibleDrivers){
 		if(avalaibleDrivers != null){
-			
-		for(final Driver d: avalaibleDrivers){
-			ParseObject car = (ParseObject) d.get("carId");
-			String carId = car.getObjectId();
-			ParseQuery<Car> query = ParseQuery.getQuery("Car");
-			query.getInBackground(carId, new GetCallback<Car>() {
-			  public void done(Car object, ParseException e) {
-			    if (e == null) {
-			    	MapComponent locationWaypoint = new MapComponent(object.getCurrentPositionWayPoint(), d, null);
-			    	driversWaypoints.add(locationWaypoint);
-			    	System.out.println("DODANIE NOWEJ POZYCJI DO ZBIORU");
-			    } else {
-			    	
-			    }
-			  }
-			});
+			for(final Driver d: avalaibleDrivers){
+				Car car = d.getCar();
+				if(car != null && car.getCurrentPosition() != null){
+					MapComponent locationWaypoint = new MapComponent(car.getCurrentPositionWayPoint(), d);
+					driversWaypoints.add(locationWaypoint);
+					System.out.println("DODANIE NOWEGO AUTA DO ZBIORU");
+				}				
+			}
 		}
-		}
-		else{System.out.println("Nie ma dostêpnych kierowców.");}
-		System.out.println("znaleziono: " + driversWaypoints.size());
+		System.out.println("Znaleziono kierowców: " + driversWaypoints.size());
+		
 		return driversWaypoints;
 	}
 	
@@ -94,22 +86,29 @@ public class MapModel{
 		synchronized (waitingOrders) {
 		if(waitingOrders != null){
 			for(Order o: waitingOrders){
-				Waypoint locationWaypoint = o.getCurrentPositionWaypoint();
-				customersWaypoints.add(new MapComponent(locationWaypoint, null, o));
+				if(o.getPickupAddressGeo() != null){
+					Waypoint locationWaypoint = o.getCurrentPositionWaypoint();
+					customersWaypoints.add(new MapComponent(locationWaypoint, o));
 				}
 			}
-			else{System.out.println("Nie ma oczekuj¹cych klientów.");}
+		}
+		else{
+			System.out.println("Nie ma oczekuj¹cych klientów.");
+		}
+		
 		for(MapComponent w: customersWaypoints){
-			System.out.println("dl: " + w.getWaypoint().getPosition().getLatitude() + " szr: " + w.getWaypoint().getPosition().getLatitude());
+			System.out.println("dl: " + w.getWaypoint().getPosition().getLatitude()
+					+ " szr: " + w.getWaypoint().getPosition().getLatitude());
+			}
 		}
-		}
+		
 		return customersWaypoints;
 	}
 	
 	public List<Order> getWaitingOrders(){
 		waitingOrders = new ArrayList<Order>();
 		ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
-		query.whereEqualTo("status", 0);
+		//query.whereLessThanOrEqualTo("status", 1);
 		try {
 			waitingOrders = query.find();
 		} catch (ParseException e) {

@@ -89,7 +89,6 @@ public class MainMenuView extends JFrame{
 		MapModel mapModel = new MapModel();
 		MapController mapController = new MapController(mapModel);
 		
-		//MapPanel map = new MapPanel();
 		MapPanel view = mapController.getMapView();
 		GridBagLayout gridBagLayout = (GridBagLayout) view.getMainMap().getLayout();
 		gridBagLayout.rowWeights = new double[]{1.0};
@@ -110,20 +109,6 @@ public class MainMenuView extends JFrame{
 		JPanel panel = new JPanel();
 		panel.setBounds(1058, 11, 167, 136);
 		mapPanel.add(panel);
-		
-		
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setIcon(new ImageIcon("C:\\\\Users\\\\Ewelina\\\\Documents\\\\Semestr 7\\\\ZPI\\\\zpi_taxi_main\\\\ZPI\\\\src\\\\main\\\\resources\\\\waypoint_white.png"));
-		lblNewLabel.setOpaque(false); 
-		panel.add(lblNewLabel);
-		
-		JButton btnBtn = new JButton();
-		btnBtn.setIcon(new ImageIcon("C:\\Users\\Ewelina\\Documents\\Semestr 7\\ZPI\\zpi_taxi_main\\ZPI\\src\\main\\resources\\waypoint_white.png"));
-		panel.add(btnBtn);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		panel.add(lblNewLabel_1);
-
 	}
 
 	public void addOrderPanel(){
