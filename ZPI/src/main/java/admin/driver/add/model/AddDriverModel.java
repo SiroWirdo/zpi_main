@@ -21,7 +21,7 @@ public class AddDriverModel {
 		driver.setPhoneNumber(phone);
 		driver.setLicenseNumber(license);
 		driver.setStatus(4);
-		driver.setUser(user);
+		driver.put("userId", user.getObjectId());
 		try {
 			driver.save();
 		} catch (ParseException e) {

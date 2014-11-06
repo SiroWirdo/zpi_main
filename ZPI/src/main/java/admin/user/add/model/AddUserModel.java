@@ -19,10 +19,7 @@ public class AddUserModel {
 		user.put("admin", admin);
 		try {
 			user.signUp();
-			int x = 0;
-			while(x < 1000000000){
-				x++;
-			}
+
 			//user.save();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
