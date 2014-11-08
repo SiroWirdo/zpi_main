@@ -1,8 +1,13 @@
 package main.controller;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
+
+import javax.swing.Timer;
 
 import org.jdesktop.swingx.mapviewer.Waypoint;
 
@@ -17,12 +22,15 @@ public class MapController{
 	private MapModel mapModel;
 	private MapPanel mapView;
 	
+	ActionListener taskPerformer;
+	
 	public MapController(MapModel mapModel) {
 		this.mapModel = mapModel;
 		mapView = new MapPanel(this, mapModel);
 		mapModel.initialize();
-		//mapModel.start();
 		mapView.initialize();
+	
+		refreshMap();
 	}
 	
 	public MapPanel getMapView(){
@@ -30,15 +38,25 @@ public class MapController{
 	}
 	
 	public void addCarWaypoints(){
+		Set<MapComponent> positions = getCarWaypoints();
+		mapModel.addCarsWaypoints(positions);
+	}
+	
+	public Set<MapComponent> getCarWaypoints(){
 		List<Driver> drivers = mapModel.getAvalaibleDrivers();
 		Set<MapComponent> positions = mapModel.getCarsPositions(drivers);
-		mapModel.addCarsWaypoints(positions);
+		return positions;
 	}	
 	
 	public void addCustomersWaypoints(){
+		Set<MapComponent> positions = getCustomerWaypoints();
+		mapModel.addCustomersWaypoints(positions);
+	}
+	
+	public Set<MapComponent> getCustomerWaypoints(){
 		List<Order> orders = mapModel.getWaitingOrders();
 		Set<MapComponent> positions = mapModel.getWaitingCustomersPosition(orders);
-		mapModel.addCustomersWaypoints(positions);
+		return positions;
 	}
 	
 	public void drawAllWaypoints(){
@@ -46,5 +64,22 @@ public class MapController{
 		addCarWaypoints();
 		final Set<MapComponent> allWaypoints = mapModel.getAllWaypoints();
 		mapView.drawWaypointsComponent(allWaypoints);
+	}
+	
+	public void refreshMap(){
+		int delay = 10000; //milliseconds
+		  taskPerformer = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Set<MapComponent> updateWaypoints = new HashSet<MapComponent>();
+				updateWaypoints.addAll(getCustomerWaypoints());
+				updateWaypoints.addAll(getCarWaypoints());
+				mapModel.setAllWaypoints(updateWaypoints);
+				mapView.cleanMap();
+				mapView.drawWaypointsComponent(mapModel.getAllWaypoints());
+				
+			}
+		  };
+		  new Timer(delay, taskPerformer).start();
 	}
 }

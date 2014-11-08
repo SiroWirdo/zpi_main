@@ -50,6 +50,8 @@ public class MapPanel extends JXMapKit {
 
 	private MapModel mapModel;
 	private MapController controller;
+	
+	private JXMapViewer map;
 
 	/*
 	 * Default localization: Wroc³aw
@@ -63,6 +65,13 @@ public class MapPanel extends JXMapKit {
 		gridBagLayout.rowWeights = new double[]{0.0};
 		this.controller = controller;
 		this.mapModel = mapModel;
+		map = getMainMap();
+		
+		drawContributorsLabel();
+		//initialize();
+	}
+
+	public void drawContributorsLabel(){
 		JLabel contLabel = new JLabel("Open StreetMap contributors");
 		contLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		contLabel.setBounds(0, 300, 10, 20);
@@ -70,9 +79,8 @@ public class MapPanel extends JXMapKit {
 		GridBagConstraints gbc_contLabel = new GridBagConstraints();
 		gbc_contLabel.anchor = GridBagConstraints.SOUTHEAST;
 		getMainMap().add(contLabel, gbc_contLabel);
-		//initialize();
 	}
-
+	
 	public void initialize() {
 		this.setCenterPosition(new GeoPosition(DEFAULT_LATITUDE,
 				DEFAULT_LONGITUDE));
@@ -114,10 +122,14 @@ public class MapPanel extends JXMapKit {
 	}
 
 	public void drawWaypointsComponent(final Set<MapComponent> allWaypoints) {
-		JXMapViewer map = getMainMap();
 		for (MapComponent wp : allWaypoints){
 			map.add(wp);
 		}
+		WaypointPainter painter = createWaypointPainter(allWaypoints);
+		map.setOverlayPainter(painter);
+	}
+	
+	public WaypointPainter createWaypointPainter(final Set<MapComponent> allWaypoints){
 		WaypointPainter painter = new WaypointPainter() {
 			@Override
 			protected void doPaint(Graphics2D g, JXMapViewer map, int width,
@@ -135,7 +147,17 @@ public class MapPanel extends JXMapKit {
 			}
 		};
 		painter.setWaypoints(allWaypoints);
+		return painter;
+	}
+	
+	
+	public void setPainterMap(WaypointPainter painter){
 		map.setOverlayPainter(painter);
+	}
+	
+	public void cleanMap(){
+		map.removeAll();
+		map.setOverlayPainter(null);
 	}
 }
 /*	public void addWaypoint() {

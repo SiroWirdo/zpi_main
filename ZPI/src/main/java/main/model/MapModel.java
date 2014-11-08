@@ -26,27 +26,19 @@ import org.parse4j.callback.GetCallback;
 import other.DataBaseConnection;
 
 public class MapModel{
-	Set<MapComponent> customersWaypoints;
-	Set<MapComponent> driversWaypoints;
+	
+
 	List<Driver> avalaibleDrivers;
 	List<Order> waitingOrders;
-	ActionListener taskPerformer;
 	private Set<MapComponent> allWaypoints;
-	
-	public MapModel() {
-		customersWaypoints = new HashSet<MapComponent>();
-		driversWaypoints = new HashSet<MapComponent>();
+
+	public MapModel() {		
 		setAllWaypoints(new HashSet<MapComponent>());
 		waitingOrders = new ArrayList<Order>();
 	}
 
 	public void initialize(){
 		DataBaseConnection.initialize();
-	}
-	public void getCustomersPositionSet(){
-		/*ParseQuery<Driver> availableDrivers = ParseQuery.getQuery(Driver.class);
-
-		availableDrivers.whereMatchesQuery("status", )*/
 	}
 	
 	public void getDriversPositionSet(){
@@ -67,6 +59,7 @@ public class MapModel{
 	}
 	
 	public Set<MapComponent> getCarsPositions(List<Driver> avalaibleDrivers){
+		Set<MapComponent> driversWaypoints = driversWaypoints = new HashSet<MapComponent>();
 		if(avalaibleDrivers != null){
 			for(final Driver d: avalaibleDrivers){
 				Car car = d.getCar();
@@ -83,6 +76,7 @@ public class MapModel{
 	}
 	
 	public Set<MapComponent> getWaitingCustomersPosition(List<Order> waitingOrders){
+		Set<MapComponent> customersWaypoints = customersWaypoints = new HashSet<MapComponent>();
 		synchronized (waitingOrders) {
 		if(waitingOrders != null){
 			for(Order o: waitingOrders){
@@ -117,29 +111,12 @@ public class MapModel{
 		return waitingOrders;
 	}
 	
-	public void refreshMap(){
-		int delay = 1000; //milliseconds
-		  taskPerformer = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		  };
-		  new Timer(delay, taskPerformer).start();
-	}
-	
 	public void addCarsWaypoints(Set<MapComponent> carWaypoints) {
-		for(MapComponent mapWaypoint: carWaypoints){
-			allWaypoints.add(mapWaypoint);
-		}
-		
+			allWaypoints.addAll(carWaypoints);
 	}
 	
 	public void addCustomersWaypoints(Set<MapComponent> customersWaypoints) {
-		for(MapComponent mapWaypoint: customersWaypoints){
-			allWaypoints.add(mapWaypoint);
-		}
-		
+			allWaypoints.addAll(customersWaypoints);
 	}
 
 	public Set<MapComponent> getAllWaypoints() {
