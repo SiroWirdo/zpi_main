@@ -3,7 +3,6 @@ package main.view;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -15,7 +14,6 @@ import order.controller.OrderController;
 import org.jdesktop.swingx.mapviewer.Waypoint;
 
 import drivers.controller.DriversController;
-import sun.org.mozilla.javascript.internal.ast.ThrowStatement;
 
 public class MapComponent extends JLabel{
 

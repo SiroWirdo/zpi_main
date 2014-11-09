@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import org.parse4j.ParseException;
+import org.parse4j.ParsePointer;
 import org.parse4j.ParseUser;
 
 import admin.driver.add.model.AddDriverModel;
@@ -77,7 +77,20 @@ public class AddDriverController {
 					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 					boolean admin = addUserView.isAdminSelected();
 					ParseUser user = addUserModel.addUser(userValues[0], userValues[1], userValues[3], admin);
-
+					ParsePointer pointer = new ParsePointer("_User", user.getObjectId());
+					/*String id = user.getObjectId();
+					user.setDirty();
+					
+					ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
+					query.whereEqualTo("objectId", id);
+					ParseUser us = null;
+					try {
+						us = query.find().get(0);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					/*JSONObject pointer = new JSONObject();
 					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST22222222222222222");
 				      if (user.getObjectId() != null) {
@@ -89,7 +102,7 @@ public class AddDriverController {
 				      System.out.println(pointer);
 				      */
 
-					addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], user);
+					addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], pointer);
 
 					addDriverView.clearTextFields();
 					addUserView.clearTextFields();
