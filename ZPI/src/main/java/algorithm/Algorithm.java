@@ -18,7 +18,7 @@ public class Algorithm implements Runnable {
 	List<Driver> drivers;
 	Order order;
 	
-	public boolean chooseDriver(){
+	public boolean chooseDriver(Order order){
 		// TODO  tutaj stworzenie listy wszystkich dostêpnych kierowców. Wywo³anie metod sortuj¹cych i rozpoczêcie powiadamiania kierowców.
 		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
 		query.whereEqualTo("status", 0);
@@ -29,12 +29,14 @@ public class Algorithm implements Runnable {
 			e.printStackTrace();
 		}
 		
+		this.order = order;
+		
 		this.run();
 		
 		return true;
 	}	
 
-	public double countDistanceInStraightLine(Car car, Order order){
+	public double countDistanceInStraightLine(Car car){
 		ParseGeoPoint driverPosition = car.getCurrentPosition();
 		ParseGeoPoint clientPosition = order.getPickupAddressGeo();
 		
@@ -42,7 +44,7 @@ public class Algorithm implements Runnable {
 		return distance;
 	}
 	
-	public void notifyDriver(Driver driver, Order order){
+	public void notifyDriver(Driver driver){
 		ParsePush push = new ParsePush();
 		//ArrayList<String> channels = new ArrayList<String>();
 		//sprawdziæ jakie potrzebne s¹ do listy rzeczy czy: ["",id] czy [id] czy inaczej
@@ -64,8 +66,8 @@ public class Algorithm implements Runnable {
 		
 		boolean assigned = false;
 		int i = 0;
-		while(!assigned){
-			notifyDriver(drivers.get(i), order);
+		while(!assigned && i < drivers.size()){
+			notifyDriver(drivers.get(i));
 			
 			try {
 				Thread.sleep(5000);
@@ -82,6 +84,10 @@ public class Algorithm implements Runnable {
 			}else{
 				i++;
 			}
+		}
+		
+		if(!assigned){
+			// co jeœli nikt nie odpowie
 		}
 	}
 	
