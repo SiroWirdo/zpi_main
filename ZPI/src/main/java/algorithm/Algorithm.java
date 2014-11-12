@@ -2,6 +2,9 @@ package algorithm;
 
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import model.Car;
@@ -27,6 +30,24 @@ public class Algorithm implements Runnable {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		//Mo¿na zrobiæ coœ bardziej wydajnego ni¿ to chyba
+		Collections.sort(drivers, new Comparator<Driver>(){
+			
+			@Override
+			public int compare(Driver arg0, Driver arg1) {
+				//nie jestem pewien czy to zadzia³a ale chyba tak 
+				return Double.compare(countDistanceInStraightLine(arg0.getCar()), countDistanceInStraightLine(arg1.getCar()));
+			}
+			
+		});
+		
+		// TODO tutaj wybieramy kilka pierwszych z listy i ich sortujemy wed³ug drogi rzeczywistej
+		
+		ArrayList<Driver> sortedDrivers = new ArrayList<Driver>();
+		for(int i = 0; i < 6; i++){
+			sortedDrivers.add(drivers.get(i));
 		}
 		
 		this.order = order;
