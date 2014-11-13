@@ -123,7 +123,7 @@ public class EditDriverModel extends Observable implements Runnable {
 
 	public Driver getDriverByPesel(long pesel){
 		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
-		query.whereEqualTo("pesel", pesel);
+		query.whereEqualTo("PESEL", pesel);
 		List<Driver> drivers;
 		Driver driver = null;
 		try {

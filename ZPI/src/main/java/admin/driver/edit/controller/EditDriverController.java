@@ -66,6 +66,7 @@ public class EditDriverController implements Observer{
 		}
 
 	}
+	
 
 	public FiltrListener getFiltrListener(){
 		return new FiltrListener();

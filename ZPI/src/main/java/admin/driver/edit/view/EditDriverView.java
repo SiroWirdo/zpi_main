@@ -1,5 +1,8 @@
 package admin.driver.edit.view;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -12,10 +15,10 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import drivers.controller.DriverNotFoundException;
 import settings.Settings;
 import admin.driver.edit.controller.EditDriverController;
 import admin.driver.edit.model.EditDriverModel;
+import drivers.controller.DriverNotFoundException;
 
 public class EditDriverView extends JFrame{
 	private EditDriverController editDriverController;
@@ -45,6 +48,7 @@ public class EditDriverView extends JFrame{
 
 	public void initialize(){
 		this.setBounds(100, 100, 1280, 800);
+		//przy EXIT_ON_CLOSE zabija wszystkie procesy, przy DISPOSE nie....
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		mainPanel = new JPanel();
@@ -127,6 +131,14 @@ public class EditDriverView extends JFrame{
 		edit.addActionListener(editDriverController.getEditButtonListener());
 		mainPanel.add(edit);
 
+		this.addWindowListener(new WindowAdapter()
+		{
+		    public void windowClosing(WindowEvent e)
+		    {
+		        editDriverModel.stop();
+		    }
+		});
+
 
 		this.setVisible(true);
 	}
@@ -207,4 +219,6 @@ public class EditDriverView extends JFrame{
 		sorter.setRowFilter(filter);
 		table.setRowSorter(sorter);
 	}
+
+
 }
