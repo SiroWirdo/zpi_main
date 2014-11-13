@@ -18,6 +18,6 @@
 	<classpathentry kind="lib" path="lib/Parse/4.3.2/httpclient-4.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/Parse/logback-classic/0.9.28/logback-classic-0.9.28.jar"/>
 	<classpathentry kind="lib" path="lib/Parse/logback-core/0.9.28/logback-core-0.9.28.jar"/>
-	<classpathentry kind="lib" path="lib/Parse/parse4j-1.3.3.jar"/>
+	<classpathentry kind="lib" path="lib/Parse/parse4j-1.3.3.jar" sourcepath="lib/Parse/parse4j-1.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
