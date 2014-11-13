@@ -56,9 +56,9 @@ public class MapPanel extends JXMapKit {
 	/*
 	 * Default localization: Wroc³aw
 	 */
-	private static final double DEFAULT_LATITUDE = 51.107885200000000000;
-	private static final double DEFAULT_LONGITUDE = 17.038537600000040000;
-	private static final int DEFAULT_ZOOM = 3;
+	private final double DEFAULT_LATITUDE = 51.107885200000000000;
+	private final double DEFAULT_LONGITUDE = 17.038537600000040000;
+	private final int DEFAULT_ZOOM = 3;
 
 	public MapPanel(MapController controller, MapModel mapModel) {
 		GridBagLayout gridBagLayout = (GridBagLayout) getMainMap().getLayout();
@@ -84,19 +84,19 @@ public class MapPanel extends JXMapKit {
 	public void initialize() {
 		this.setCenterPosition(new GeoPosition(DEFAULT_LATITUDE,
 				DEFAULT_LONGITUDE));
-		/*final int max = 17;
-        TileFactoryInfo info = new TileFactoryInfo(0, max, max,
+		/*final int max = 5;
+        TileFactoryInfo info = new TileFactoryInfo(2, 5, max,
                 256, true, true,
                 "http://tile.openstreetmap.org",
                 "x","y","z") {
             public String getTileUrl(int x, int y, int zoom) {
-                zoom = zoom;
+                zoom = max - zoom;
                 return this.baseURL +"/"+zoom+"/"+x+"/"+y+".png";
             }
         };
         info.setDefaultZoomLevel(DEFAULT_ZOOM);
         TileFactory tf = new DefaultTileFactory(info);
-		this.setTileFactory(tf);*/
+		map.setTileFactory(tf);*/
 		this.setZoomButtonsVisible(false);
 		this.setZoomSliderVisible(false);
 		this.setMiniMapVisible(false);
@@ -127,6 +127,7 @@ public class MapPanel extends JXMapKit {
 		}
 		WaypointPainter painter = createWaypointPainter(allWaypoints);
 		map.setOverlayPainter(painter);
+		this.repaint();
 	}
 	
 	public WaypointPainter createWaypointPainter(final Set<MapComponent> allWaypoints){
@@ -142,7 +143,12 @@ public class MapPanel extends JXMapKit {
 					Point pt = new Point((int) gp_pt.getX() - rect.x,
 										(int) gp_pt.getY() - rect.y);
 					JLabel component = wp;
-					component.setLocation(pt);
+					int widthComponent = 30;
+					int heightComponent = 40;
+					component.setBounds(pt.x - widthComponent/2,
+							pt.y - heightComponent,
+							widthComponent,
+							heightComponent);
 				}
 			}
 		};
