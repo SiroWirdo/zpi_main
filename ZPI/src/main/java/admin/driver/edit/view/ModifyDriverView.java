@@ -106,8 +106,15 @@ public class ModifyDriverView extends JFrame{
 		tfCarId = new JTextField();
 		tfCarId.setBounds(x+130, y, 100, 20);
 		mainPanel.add(tfCarId);
-
-
+		
+		jlUserId = new JLabel("Id u¿ytkownika: ");
+		jlUserId.setBounds(x, y=y+30, 120, 20);
+		mainPanel.add(jlUserId);
+		
+		tfUserId = new JTextField();
+		tfUserId.setBounds(x+130, y, 100, 20);
+		mainPanel.add(tfUserId);
+		
 
 		this.setVisible(true);
 	}
