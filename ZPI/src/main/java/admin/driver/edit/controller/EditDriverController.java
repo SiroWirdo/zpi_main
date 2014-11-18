@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JFrame;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
 import model.Driver;
 import settings.Settings;
 import admin.driver.edit.model.EditDriverModel;
+import admin.driver.edit.model.ModifyDriverModel;
 import admin.driver.edit.view.EditDriverView;
 import drivers.controller.DriverNotFoundException;
 
@@ -66,7 +66,7 @@ public class EditDriverController implements Observer{
 		}
 
 	}
-	
+
 
 	public FiltrListener getFiltrListener(){
 		return new FiltrListener();
@@ -133,7 +133,9 @@ public class EditDriverController implements Observer{
 			long pesel = editDriverView.getPeselFromSelectedRow();
 			Driver driver = editDriverModel.getDriverByPesel(pesel);
 			if(driver != null){
-
+				ModifyDriverModel modifyDriverModel = new ModifyDriverModel();
+				ModifyDriverController modifyDriverController = new ModifyDriverController(modifyDriverModel, driver);
+				
 			}else{
 
 			}

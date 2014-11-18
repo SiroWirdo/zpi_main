@@ -3,6 +3,7 @@ package model;
 import org.parse4j.ParseClassName;
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
+import org.parse4j.ParsePointer;
 import org.parse4j.ParseQuery;
 import org.parse4j.ParseUser;
 
@@ -64,12 +65,15 @@ public class Driver extends ParseObject {
 		put("status", value);
 	}
 
-	public ParseUser getUser() {
-		return (ParseUser)getParseObject("userId");
+	public ParseObject getUser() {
+
+		ParseObject user = getParseObject("userId");
+		return user;
 	}
 
-	public void setUser(ParseUser value) {
-		put("userId", value);
+	public void setUser(String id) {
+		ParsePointer pointer = new ParsePointer("_User", id);
+		put("userId", pointer);
 	}
 
 	public Car getCar() {
@@ -87,8 +91,15 @@ public class Driver extends ParseObject {
 		return c;
 	}
 
-	public void setCar(String value) {
-		put("carId", value);
+	public void setCar(String id) {
+		Car car = null;
+		ParseQuery<Car> query = ParseQuery.getQuery("Car");
+		try {
+			car = query.get(id);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		put("carId", car);
 	}
 
 	public static ParseQuery<Driver> getQuery() {
