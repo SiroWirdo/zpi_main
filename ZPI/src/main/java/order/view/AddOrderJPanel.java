@@ -65,7 +65,7 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		this.surnameTextField.setBounds(187, 42, 177, 20);
 		add(this.surnameTextField);
 		
-		phoneNumberTextField = new JTextField();
+		phoneNumberTextField = new JTextField("987");
 		phoneNumberTextField.setBounds(188, 84, 176, 20);
 		add(phoneNumberTextField);
 		
@@ -73,7 +73,7 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		pickUpAddressTextField.setBounds(187, 126, 177, 20);
 		add(pickUpAddressTextField);
 		
-		passangerCountTextField = new JTextField();
+		passangerCountTextField = new JTextField("2");
 		passangerCountTextField.setBounds(187, 169, 177, 20);
 		add(passangerCountTextField);
 		
@@ -92,7 +92,7 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 		//if(e.getSource() == addOrderBtn){
 		if(e.getActionCommand().equals("Dodaj")){
 				orderController.addOrder(surnameTextField.getText(),
-						new Integer(phoneNumberTextField.getText()),
+						new Long(phoneNumberTextField.getText()),
 						pickUpAddressTextField.getText(),
 						customerRemarksTextArea.getText(),
 						new Integer(passangerCountTextField.getText()));

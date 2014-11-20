@@ -7,50 +7,30 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.ScrollPaneConstants;
-
-import org.jdesktop.swingx.JXMapViewer;
-import org.parse4j.util.ParseRegistry;
-
-import ch.qos.logback.core.Layout;
-
-import com.sun.org.apache.xalan.internal.xsltc.dom.AbsoluteIterator;
-
 import drivers.controller.DriversController;
 import drivers.model.DriversModel;
-import drivers.view.DriversView;
-import login.model.UserModel;
+import main.controller.FilterMapController;
 import main.controller.MainMenuController;
 import main.controller.MapController;
+import main.controller.StatisticController;
+import main.model.FilterMapModel;
 import main.model.MapModel;
-import model.Driver;
-import model.Order;
+import main.model.StatisticModel;
 
 import javax.swing.JTabbedPane;
-import javax.swing.ScrollPaneConstants;
-
-import main.controller.MainMenuController;
 import order.controller.OrderController;
 import order.model.OrderModel;
 import ordersdisplay.controller.OrdersController;
 import ordersdisplay.model.OrdersModel;
-import drivers.controller.DriversController;
-import drivers.model.DriversModel;
 
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
 
 public class MainMenuView extends JFrame{
 	MapModel menuModel;
 	MainMenuController menuController;
 	JTabbedPane tabbedPane;
+
+	MapController mapController;
 
 	/**
 	 * Create the application.
@@ -58,7 +38,7 @@ public class MainMenuView extends JFrame{
 	public MainMenuView(MainMenuController menuController, MapModel menuModel) {
 		this.menuController = menuController;
 		this.menuModel = menuModel;
-//		initialize();
+		//initialize();
 
 	}
 
@@ -70,11 +50,11 @@ public class MainMenuView extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		addTabbedPane();
-		addMapPanel();
+//		addMainPagePanels();
 		addOrderPanel();
 		addDriverPanel();
 		addOrdersDisplayPanel();
-
+		//this.setDefaultLookAndFeelDecorated(false);
 		this.setVisible(true);
 	}
 
@@ -82,13 +62,30 @@ public class MainMenuView extends JFrame{
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 	}
+	
+	public void addMainPagePanels(){
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(null);
+		mainPanel.add(getMapPanel());
+		mainPanel.add(getStatisticPanel());
+		mainPanel.add(getFilterPanel());
+		mainPanel.setVisible(true);
+		
+		tabbedPane.addTab("Mapa", null, mainPanel, null); //TODO ustawic ikony?
+	}
 
-	public void addMapPanel(){
-		JPanel mapPanel = new JPanel();
-		tabbedPane.addTab("Mapa", null, mapPanel, null);
-		mapPanel.setLayout(null);
+	public JScrollPane getMapPanel(){
+		JScrollPane scrollPane = new JScrollPane(getMap());
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(10, 10, 1000, 700);
+		
+		return scrollPane;
+	}
+	
+	public JPanel getMap(){
 		MapModel mapModel = new MapModel();
-		MapController mapController = new MapController(mapModel);
+		mapController = new MapController(mapModel);
 		
 		MapPanel view = mapController.getMapView();
 		GridBagLayout gridBagLayout = (GridBagLayout) view.getMainMap().getLayout();
@@ -98,18 +95,31 @@ public class MainMenuView extends JFrame{
 		mapController.drawAllWaypoints();
 		//mapPanel.add(map);
 		//map.setBounds(0, 0, 5000, 3500);
-
 		
-		JScrollPane scrollPane = new JScrollPane(view);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(10, 10, 1000, 700);
+		return view;
+	}
+	
+	public JPanel getStatisticPanel(){
+		StatisticModel statisticModel = new StatisticModel();
+		StatisticController statisticController = new StatisticController(statisticModel);
 		
-		mapPanel.add(scrollPane);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(1058, 11, 167, 136);
-		mapPanel.add(panel);
+		JPanel statisticPanel = statisticController.getView();
+		//statisticPanel.setBounds(0, 0, 220, 300);
+		statisticPanel.setBounds(1000, 0, 300, 300);
+		return statisticPanel;
+	}
+	
+	public JPanel getFilterPanel(){
+		FilterMapModel filterModel;
+		FilterMapController filterController;
+		JPanel filterPanel = null;
+		if(mapController != null){
+			filterModel = new FilterMapModel();
+			filterController = new FilterMapController(filterModel, mapController);
+			filterPanel = filterController.getView();
+			filterPanel.setBounds(1000, 350, 300, 300);
+		}
+		return filterPanel;
 	}
 
 	public void addOrderPanel(){

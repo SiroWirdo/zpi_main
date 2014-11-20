@@ -1,8 +1,7 @@
 package main.model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,35 +9,49 @@ import java.util.Set;
 import javax.swing.Timer;
 
 import main.view.MapComponent;
-import main.view.MapWaypoint;
 import model.Car;
 import model.Driver;
 import model.Order;
 
 import org.jdesktop.swingx.mapviewer.Waypoint;
 import org.parse4j.ParseException;
-import org.parse4j.ParseGeoPoint;
-import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
-import org.parse4j.callback.FindCallback;
-import org.parse4j.callback.GetCallback;
 
 import other.DataBaseConnection;
+import settings.Settings;
 
 public class MapModel{
 	
-
-	List<Driver> avalaibleDrivers;
-	List<Order> waitingOrders;
+	private List<Driver> avalaibleDrivers;
+	private List<Order> waitingOrders;
 	private Set<MapComponent> allWaypoints;
+	private ParseQuery<Driver> queryDriver;
+	private ParseQuery<Order> queryOrder;
+	private ArrayList<Integer> queryDriverStatusArray;
+	private ArrayList<Integer> queryOrderStatusArray;
 
 	public MapModel() {		
 		setAllWaypoints(new HashSet<MapComponent>());
 		waitingOrders = new ArrayList<Order>();
+		initializeStatusArrays();
+		queryDriver = ParseQuery.getQuery(Driver.class);
 	}
 
 	public void initialize(){
 		DataBaseConnection.initialize();
+	}
+	
+	public void initializeStatusArrays(){
+		queryDriverStatusArray = new ArrayList<Integer>(Settings.driverStatus.length);
+		queryDriverStatusArray.add(0);
+		queryDriverStatusArray.add(1);
+		queryDriverStatusArray.add(2);
+		queryDriverStatusArray.add(3);
+		queryDriverStatusArray.add(4);
+		/*
+		 * Tylko dwa statusy sa brane pod uwage: {0, 1}
+		 */
+		queryOrderStatusArray =  new ArrayList<Integer>(2);
 	}
 	
 	public void getDriversPositionSet(){
@@ -47,11 +60,10 @@ public class MapModel{
 	
 	public List<Driver> getAvalaibleDrivers(){
 		avalaibleDrivers = null;
-		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
-		//warunek do zmiany potem?
-		query.whereLessThanOrEqualTo("status", 4);
+		queryDriver = ParseQuery.getQuery(Driver.class);
+		queryDriver.whereContainedIn("status", queryDriverStatusArray);
 		try {
-			avalaibleDrivers = query.find();
+			avalaibleDrivers = queryDriver.find();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +71,7 @@ public class MapModel{
 	}
 	
 	public Set<MapComponent> getCarsPositions(List<Driver> avalaibleDrivers){
-		Set<MapComponent> driversWaypoints = driversWaypoints = new HashSet<MapComponent>();
+		Set<MapComponent> driversWaypoints = new HashSet<MapComponent>();
 		if(avalaibleDrivers != null){
 			for(final Driver d: avalaibleDrivers){
 				Car car = d.getCar();
@@ -76,7 +88,7 @@ public class MapModel{
 	}
 	
 	public Set<MapComponent> getWaitingCustomersPosition(List<Order> waitingOrders){
-		Set<MapComponent> customersWaypoints = customersWaypoints = new HashSet<MapComponent>();
+		Set<MapComponent> customersWaypoints = new HashSet<MapComponent>();
 		synchronized (waitingOrders) {
 		if(waitingOrders != null){
 			for(Order o: waitingOrders){
@@ -90,10 +102,10 @@ public class MapModel{
 			System.out.println("Nie ma oczekuj¹cych klientów.");
 		}
 		
-		for(MapComponent w: customersWaypoints){
+		/*for(MapComponent w: customersWaypoints){
 			System.out.println("dl: " + w.getWaypoint().getPosition().getLatitude()
 					+ " szr: " + w.getWaypoint().getPosition().getLatitude());
-			}
+			}*/
 		}
 		
 		return customersWaypoints;
@@ -101,10 +113,10 @@ public class MapModel{
 	
 	public List<Order> getWaitingOrders(){
 		waitingOrders = new ArrayList<Order>();
-		ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
-		//query.whereLessThanOrEqualTo("status", 1);
+		queryOrder = ParseQuery.getQuery(Order.class);
+		queryDriver.whereContainedIn("status", queryOrderStatusArray);
 		try {
-			waitingOrders = query.find();
+			waitingOrders = queryOrder.find();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -126,4 +138,13 @@ public class MapModel{
 	public void setAllWaypoints(Set<MapComponent> allWaypoints) {
 		this.allWaypoints = allWaypoints;
 	}
+
+	public void setQueryDriverStatusArray(ArrayList<Integer> queryDriverStatusArray) {
+		this.queryDriverStatusArray = queryDriverStatusArray;
+	}
+
+	public void setQueryOrderStatusArray(ArrayList<Integer> queryOrderStatusArray) {
+		this.queryOrderStatusArray = queryOrderStatusArray;
+	}
+
 }

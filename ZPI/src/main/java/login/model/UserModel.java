@@ -12,6 +12,8 @@ import main.model.MapModel;
 import model.Dispatcher;
 
 import org.parse4j.ParseException;
+import org.parse4j.ParseObject;
+import org.parse4j.ParsePointer;
 import org.parse4j.ParseQuery;
 import org.parse4j.ParseUser;
 
@@ -30,7 +32,7 @@ public class UserModel {
 				AdminController adminController = new AdminController(adminModel);
 				return true;
 			}else{
-			//	setUserObject(user);
+				setUserObject(user);
 				MapModel mapModel = new MapModel();
 				MainMenuController menuController = new MainMenuController(mapModel);
 				return true;
@@ -48,21 +50,30 @@ public class UserModel {
 		DataBaseConnection.initialize();
 	}
 
-	public void setUserObject(ParseUser user){
-		ParseQuery<Dispatcher> query = ParseQuery.getQuery(Dispatcher.class);
-		query.whereEqualTo("dispatcher", user);
+	public void setUserObject(ParseObject user){
+		
+//		ParseQuery<Dispatcher> query = ParseQuery.getQuery(Dispatcher.class);
+//		query.whereEqualTo("user", user);
+		
+		
+		ParseQuery<ParseUser> innerQuery = new ParseQuery<ParseUser>("_Users");
+		innerQuery.include(user.getObjectId());
+		
+		ParseQuery<Dispatcher> query = new ParseQuery<Dispatcher>(Dispatcher.class);
+		query.include(user.getObjectId());
+		
+		List<Dispatcher> list;
+		
 		try {
-			List<Dispatcher> list = new ArrayList<Dispatcher>();
+			list = query.find();
+			if(list.size() == 1){
+		       	  Settings.USER_OBJECT = list.get(0);
+			}
 			
-			list = new ArrayList<Dispatcher>((ArrayList<Dispatcher>)query.find());
-			 if(list.size() == 1){
-	        	  Settings.USER_OBJECT = list.get(0);
-			 }
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}	 
 	}
 
 }

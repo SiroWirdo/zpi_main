@@ -1,6 +1,7 @@
 package main.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
@@ -29,8 +30,8 @@ public class MapController{
 		mapView = new MapPanel(this, mapModel);
 		mapModel.initialize();
 		mapView.initialize();
-	
-		refreshMap();
+		
+		refreshMapWithDelay();
 	}
 	
 	public MapPanel getMapView(){
@@ -66,20 +67,33 @@ public class MapController{
 		mapView.drawWaypointsComponent(allWaypoints);
 	}
 	
-	public void refreshMap(){
+	public void refreshMapWithDelay(){
 		int delay = 10000; //milliseconds
 		  taskPerformer = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Set<MapComponent> updateWaypoints = new HashSet<MapComponent>();
-				updateWaypoints.addAll(getCustomerWaypoints());
-				updateWaypoints.addAll(getCarWaypoints());
-				mapModel.setAllWaypoints(updateWaypoints);
-				mapView.cleanMap();
-				mapView.drawWaypointsComponent(mapModel.getAllWaypoints());
-				
+				refreshMap();	
 			}
 		  };
 		  new Timer(delay, taskPerformer).start();
 	}
+	
+	public void refreshMap(){
+		Set<MapComponent> updateWaypoints = new HashSet<MapComponent>();
+		updateWaypoints.addAll(getCustomerWaypoints());
+		updateWaypoints.addAll(getCarWaypoints());
+		mapModel.setAllWaypoints(updateWaypoints);
+		mapView.cleanMap();
+		mapView.drawWaypointsComponent(mapModel.getAllWaypoints());
+	}
+	
+	public void setQueryDriverStatusArray(ArrayList<Integer> queryDriverStatusArray) {
+		mapModel.setQueryDriverStatusArray(queryDriverStatusArray);
+	}
+
+	public void setQueryOrderStatusArray(ArrayList<Integer> queryOrderStatusArray) {
+		mapModel.setQueryOrderStatusArray(queryOrderStatusArray);
+	}
+
+	
 }

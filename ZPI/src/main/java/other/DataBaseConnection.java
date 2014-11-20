@@ -7,6 +7,7 @@ import model.Driver;
 import model.Order;
 
 import org.parse4j.Parse;
+import org.parse4j.ParseUser;
 import org.parse4j.util.ParseRegistry;
 
 public class DataBaseConnection {
@@ -19,6 +20,7 @@ public class DataBaseConnection {
 		ParseRegistry.registerSubclass(Dispatcher.class);
 		ParseRegistry.registerSubclass(Driver.class);
 		ParseRegistry.registerSubclass(Customer.class);
+		ParseRegistry.registerSubclass(ParseUser.class);
 		Parse.initialize(APPLICATION_ID, REST_API_KEY);
 	}
 }

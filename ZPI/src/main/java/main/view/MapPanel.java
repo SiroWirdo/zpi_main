@@ -156,7 +156,6 @@ public class MapPanel extends JXMapKit {
 		return painter;
 	}
 	
-	
 	public void setPainterMap(WaypointPainter painter){
 		map.setOverlayPainter(painter);
 	}

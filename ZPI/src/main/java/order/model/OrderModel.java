@@ -5,6 +5,7 @@ import model.Order;
 
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
+import org.parse4j.ParsePointer;
 import org.parse4j.ParseRelation;
 import org.parse4j.ParseUser;
 
@@ -41,7 +42,8 @@ public class OrderModel {
 		}
 		order.put("customerId", customer);
 //		ParseUser dispatherObj = Settings.USER_OBJECT;
-		//order.put("dispatcher", Settings.USER_OBJECT);
+		
+		order.put("dispatcher", new ParsePointer("Dispatcher", Settings.USER_OBJECT.getObjectId()));
 		order.put("pickupAddress", pickUpAddress);
 		order.put("customerRemarks", customerRemarks);
 		order.put("passangerCount", passangerCount);
