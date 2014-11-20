@@ -19,7 +19,7 @@ public class LoginController {
 	Logger rootLogger;
 
 	public LoginController(UserModel userModel) {
-//		turnOfLogBackLogger();
+		turnOfLogBackLogger();
 //		turnOffSysoutLog();
 		this.userModel = userModel;
 		loginView = new LoginView(this, userModel);
@@ -71,16 +71,10 @@ public class LoginController {
 		}
 	}
 
-
-
 	private class CancelListener implements ActionListener{
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-
-			loginView.dispose();
+			System.exit(0);
 		}
-
 	}
 }
