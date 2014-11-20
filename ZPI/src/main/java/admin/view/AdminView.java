@@ -14,7 +14,9 @@ public class AdminView extends JFrame{
 	private AdminModel adminModel;
 	private JButton addDriver;
 	private JButton editDriver;
-	private JButton addUser;
+	//private JButton addUser;
+	private JButton addDispatcher;
+	private JButton editDispatcher;
 	private JButton exit;
 	private JPanel mainPanel;
 
@@ -30,7 +32,7 @@ public class AdminView extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new GridLayout(3,1));
+		mainPanel.setLayout(new GridLayout(5,1));
 		add(mainPanel);
 
 		addDriver = new JButton("Dodaj kierowcê");
@@ -44,6 +46,14 @@ public class AdminView extends JFrame{
 		/*addUser = new JButton("Dodaj u¿ytkownika");
 		addUser.addActionListener(adminController.getAddUserListener());
 		mainPanel.add(addUser);*/
+
+		addDispatcher = new JButton("Dodaj dyspozytora");
+		addDispatcher.addActionListener(adminController.getAddDispatcherListener());
+		mainPanel.add(addDispatcher);
+
+		editDispatcher = new JButton("Edytuj dyspozytora");
+		editDispatcher.addActionListener(adminController.getEditDispatcherListener());
+		mainPanel.add(editDispatcher);
 
 		exit = new JButton("WyjdŸ");
 		exit.addActionListener(adminController.getCloseButtonListener());

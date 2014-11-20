@@ -50,7 +50,7 @@ public class MainMenuView extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		addTabbedPane();
-//		addMainPagePanels();
+		addMainPagePanels();
 		addOrderPanel();
 		addDriverPanel();
 		addOrdersDisplayPanel();
@@ -86,7 +86,7 @@ public class MainMenuView extends JFrame{
 	public JPanel getMap(){
 		MapModel mapModel = new MapModel();
 		mapController = new MapController(mapModel);
-		
+
 		MapPanel view = mapController.getMapView();
 		GridBagLayout gridBagLayout = (GridBagLayout) view.getMainMap().getLayout();
 		gridBagLayout.rowWeights = new double[]{1.0};
@@ -95,14 +95,14 @@ public class MainMenuView extends JFrame{
 		mapController.drawAllWaypoints();
 		//mapPanel.add(map);
 		//map.setBounds(0, 0, 5000, 3500);
-		
+
 		return view;
 	}
 	
 	public JPanel getStatisticPanel(){
 		StatisticModel statisticModel = new StatisticModel();
 		StatisticController statisticController = new StatisticController(statisticModel);
-		
+
 		JPanel statisticPanel = statisticController.getView();
 		//statisticPanel.setBounds(0, 0, 220, 300);
 		statisticPanel.setBounds(1000, 0, 300, 300);

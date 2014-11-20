@@ -77,30 +77,6 @@ public class AddDispatcherView extends JFrame{
 		surnameTF = new JTextField("iui");
 		surnameTF.setBounds(x + 80, y, 100, 20);
 		mainPanel.add(surnameTF);
-
-		pesel = new JLabel("PESEL: ");
-		pesel.setBounds(x, y = y + 30, 60, 20);
-		mainPanel.add(pesel);
-
-		peselTF = new JTextField("3939292");
-		peselTF.setBounds(x+80, y, 100, 20);
-		mainPanel.add(peselTF);
-
-		phone = new JLabel("Telefon: ");
-		phone.setBounds(x = x + 280, y = 40, 60, 20);
-		mainPanel.add(phone);
-
-		phoneTF = new JTextField("920329320");
-		phoneTF.setBounds(x + 80, y, 100, 20);
-		mainPanel.add(phoneTF);
-
-		license = new JLabel("Licencja: ");
-		license.setBounds(x, y = y+30, 60, 20);
-		mainPanel.add(license);
-
-		licenseTF = new JTextField("339d3");
-		licenseTF.setBounds(x + 80, y, 100, 20);
-		mainPanel.add(licenseTF);
 /*
 		userId = new JLabel("U¿ytkownik: ");
 		userId.setBounds(x, y=y+30, 80, 20);
@@ -126,16 +102,13 @@ public class AddDispatcherView extends JFrame{
 	}
 
 	public String[] getValues(){
-		String[] values = {nameTF.getText(), surnameTF.getText(), peselTF.getText(), phoneTF.getText(),	licenseTF.getText()};
+		String[] values = {nameTF.getText(), surnameTF.getText()};
 		return values;
 	}
 
 	public void clearTextFields(){
 		nameTF.setText("");
 		surnameTF.setText("");
-		peselTF.setText("");
-		phoneTF.setText("");
-		licenseTF.setText("");
 		//userIdTF.setText("");
 	}
 }
