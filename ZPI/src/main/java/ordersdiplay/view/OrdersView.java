@@ -103,14 +103,13 @@ public class OrdersView extends JPanel {
 
 	public int getRowById(String id) throws OrderNotFoundException{
 		boolean found = false;
-		int row = 0;
-
+		Integer row = 0;
 		while(!found){
-			if(tableModel.getValueAt(row, 4).toString().equals(id)){
+			if(tableModel.getValueAt(row, 0).toString().equals(id)){
 				found = true;
 			}else{
 				row++;
-				if(row > tableModel.getRowCount()){
+				if(row >= tableModel.getRowCount()){
 					throw new OrderNotFoundException("Driver's not found in table");
 				}
 			}

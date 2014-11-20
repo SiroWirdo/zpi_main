@@ -1,5 +1,6 @@
 package admin.dispatcher.edit.view;
 
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -29,6 +31,8 @@ public class EditDispatcherView extends JFrame{
 	private JTextField tfSurname;
 	private TableRowSorter sorter;
 	private JButton edit;
+	private JButton filtr;
+	private JButton refresh;
 
 	public EditDispatcherView(EditDispatcherController editDispatcherController, EditDispatcherModel editDispatcherModel){
 		this.editDispatcherController = editDispatcherController;
@@ -67,33 +71,43 @@ public class EditDispatcherView extends JFrame{
 		mainPanel.add(scrollPane);
 
 		jlName = new JLabel("Imiê:");
-		jlName.setBounds(410, 30, 60, 30);
+		jlName.setBounds(10, 30, 60, 30);
 		mainPanel.add(jlName);
 
 		tfName = new JTextField();
-		tfName.setBounds(480, 35, 100, 20);
+		tfName.setBounds(80, 35, 100, 20);
 		mainPanel.add(tfName);
 
 		jlSurname = new JLabel("Nazwisko:");
-		jlSurname.setBounds(410, 60, 60, 30);
+		jlSurname.setBounds(10, 60, 60, 30);
 		mainPanel.add(jlSurname);
 
 		tfSurname = new JTextField();
-		tfSurname.setBounds(480, 65, 100, 20);
+		tfSurname.setBounds(80, 65, 100, 20);
 		mainPanel.add(tfSurname);
 
 		edit = new JButton("Edytuj");
-		edit.setBounds(600, 40, 100, 20);
+		edit.setBounds(200, 40, 100, 20);
 		edit.addActionListener(editDispatcherController.getEditButtonListener());
 		mainPanel.add(edit);
 
-		this.addWindowListener(new WindowAdapter()
+		filtr = new JButton("Filtruj");
+		filtr.setBounds(200, 65, 100, 20);
+		filtr.addActionListener(editDispatcherController.getFiltrListener());
+		mainPanel.add(filtr);
+
+		refresh = new JButton("Odœwie¿");
+		refresh.setBounds(320, 65, 100, 20);
+		refresh.addActionListener(editDispatcherController.getRefreshListener());
+		mainPanel.add(refresh);
+
+		/*this.addWindowListener(new WindowAdapter()
 		{
 		    public void windowClosing(WindowEvent e)
 		    {
 		        editDispatcherModel.stop();
 		    }
-		});
+		});*/
 
 
 		this.setVisible(true);
@@ -115,7 +129,7 @@ public class EditDispatcherView extends JFrame{
 		int row = 0;
 
 		while(!found){
-			if(new Long(tableModel.getValueAt(row, 4).toString()) == pesel){
+			if(new Long(tableModel.getValueAt(row, 2).toString()) == pesel){
 				found = true;
 			}else{
 				row++;
@@ -143,8 +157,13 @@ public class EditDispatcherView extends JFrame{
 
 	public long getPeselFromSelectedRow(){
 		int row = table.getSelectedRow();
-		long pesel = (Long)table.getValueAt(row, 4);
+		long pesel = (Long)table.getValueAt(row, 2);
 		return pesel;
+	}
+
+	public void setFilters(RowFilter<DefaultTableModel, Object> filter){
+		sorter.setRowFilter(filter);
+		table.setRowSorter(sorter);
 	}
 
 }

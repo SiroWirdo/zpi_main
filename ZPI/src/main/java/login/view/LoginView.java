@@ -1,21 +1,19 @@
 package login.view;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import login.controller.LoginController;
 import login.model.UserModel;
 
-public class LoginView extends JDialog {
+public class LoginView extends JFrame {
 	/**
 	 *
 	 */
@@ -53,7 +51,7 @@ public class LoginView extends JDialog {
 	}
 
 	public void initialize(){
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 351, 228);
 		getContentPane().setLayout(null);
 		JPanel panel = new JPanel();
@@ -92,12 +90,13 @@ public class LoginView extends JDialog {
 		panel.add(cancelButton);
 		this.setVisible(true);
 
+		System.out.println(okButton.getFont().getFontName());
 	}
 
 	public void clearPassword(){
 		passwordField.setText("");
 	}
-	
+
 	public char[] getPassword(){
 		return passwordField.getPassword();
 	}

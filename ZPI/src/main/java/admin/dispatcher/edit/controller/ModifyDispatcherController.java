@@ -45,7 +45,7 @@ public class ModifyDispatcherController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Dodac walidacje usera i samochodu(sprawdzac czy nie jest juz do kogos przypisany
+			// TODO Dodac walidacje usera
 			Dispatcher dispatcher = modifyDispatcherView.getDispatcher();
 			String[] values = modifyDispatcherView.getValues();
 

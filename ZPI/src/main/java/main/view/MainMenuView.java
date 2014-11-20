@@ -89,7 +89,7 @@ public class MainMenuView extends JFrame{
 		mapPanel.setLayout(null);
 		MapModel mapModel = new MapModel();
 		MapController mapController = new MapController(mapModel);
-		
+
 		MapPanel view = mapController.getMapView();
 		GridBagLayout gridBagLayout = (GridBagLayout) view.getMainMap().getLayout();
 		gridBagLayout.rowWeights = new double[]{1.0};
@@ -99,14 +99,14 @@ public class MainMenuView extends JFrame{
 		//mapPanel.add(map);
 		//map.setBounds(0, 0, 5000, 3500);
 
-		
+
 		JScrollPane scrollPane = new JScrollPane(view);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(10, 10, 1000, 700);
-		
+
 		mapPanel.add(scrollPane);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(1058, 11, 167, 136);
 		mapPanel.add(panel);

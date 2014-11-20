@@ -85,7 +85,7 @@ public class ModifyDispatcherView extends JFrame{
 		edit.setBounds(x+130, y, 100, 20);
 		edit.addActionListener(modifyDispatcherController.getEditButtonListener());
 		mainPanel.add(edit);
-		//TODO Dodac edycje hasla
+		//TODO Dodac edycje hasla. Zmiana u¿ytkownika po username a nie po id
 
 		this.setVisible(true);
 	}
@@ -95,7 +95,7 @@ public class ModifyDispatcherView extends JFrame{
 		tfName.setText(dispatcher.getName());
 		tfSurname.setText(dispatcher.getSurname());
 		tfPesel.setText(new Long(dispatcher.getPESEL()).toString());
-		
+
 		String userId = "";
 		if(dispatcher.getUser() != null){
 			userId = dispatcher.getUser().getObjectId();

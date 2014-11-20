@@ -27,15 +27,15 @@ public class Dispatcher extends ParseObject {
 	public void setSurname(String value) {
 		put("surname", value);
 	}
-	
+
 	public long getPESEL() {
 		return getLong("PESEL");
 	}
-	
+
 	public void setPESEL(long value) {
 		put("PESEL", value);
 	}
-	
+
 	public ParseObject getUser() {
 
 		ParseObject user = getParseObject("userId");

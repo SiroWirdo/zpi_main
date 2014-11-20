@@ -12,7 +12,7 @@ import org.parse4j.callback.FindCallback;
 
 import other.DataBaseConnection;
 
-public class EditDispatcherModel extends Observable implements Runnable {
+public class EditDispatcherModel extends Observable {
 	EditDispatcherChanges editDispatcherChanges;
 	boolean stop;
 	Thread t;
@@ -43,9 +43,9 @@ public class EditDispatcherModel extends Observable implements Runnable {
 			}
 		});
 
-		model.start();
+		//model.start();
 	}
-
+/*
 	public void start(){
 		stop = false;
 		if(t == null){
@@ -56,7 +56,7 @@ public class EditDispatcherModel extends Observable implements Runnable {
 
 	public void stop(){
 		stop = true;
-	}
+	}*/
 
 	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usuniêcie wiersza najlepiej szukaæ po PESELu) **/
 	public EditDispatcherChanges getChanges(){
@@ -70,7 +70,7 @@ public class EditDispatcherModel extends Observable implements Runnable {
 		return changes;
 	}
 
-	@Override
+	/*@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		DataBaseConnection.initialize();
@@ -103,7 +103,7 @@ public class EditDispatcherModel extends Observable implements Runnable {
 				}
 			});
 		}
-	}
+	}*/
 
 	public List<Dispatcher> getActualData(){
 		actualDispatcher = null;
@@ -134,6 +134,29 @@ public class EditDispatcherModel extends Observable implements Runnable {
 			e.printStackTrace();
 		}
 		return dispatcher;
+	}
+
+	public void refresh(){
+		final EditDispatcherModel model = this;
+
+		ParseQuery<Dispatcher> query = ParseQuery.getQuery(Dispatcher.class);
+		query.whereGreaterThan("updatedAt", lastUpdated);
+		query.findInBackground(new FindCallback<Dispatcher>() {
+			public void done(List<Dispatcher> scoreList, ParseException e) {
+				if (e == null) {
+					if(scoreList != null && scoreList.size() > 0){
+						editDispatcherChanges = new EditDispatcherChanges(scoreList, 1);
+						model.setChanged();
+						model.notifyObservers();
+						System.out.println("Zmieniono: " + scoreList.size() + " obiektów");
+					}else{
+						System.out.println("Pusta baza");
+					}
+				} else {
+
+				}
+			}
+		});
 	}
 
 }

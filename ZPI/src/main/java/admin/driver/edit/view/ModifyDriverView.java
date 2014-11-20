@@ -126,7 +126,7 @@ public class ModifyDriverView extends JFrame{
 		edit.setBounds(x+130, y, 100, 20);
 		edit.addActionListener(modifyDriverController.getEditButtonListener());
 		mainPanel.add(edit);
-		//TODO Dodac edycje hasla
+		//TODO Dodac edycje hasla. Zmiana u¿ytkownika po username a nie po id
 
 		this.setVisible(true);
 	}

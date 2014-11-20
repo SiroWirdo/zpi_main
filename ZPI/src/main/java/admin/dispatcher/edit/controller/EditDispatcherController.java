@@ -2,9 +2,13 @@ package admin.dispatcher.edit.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 
 import model.Dispatcher;
 import settings.Settings;
@@ -66,6 +70,13 @@ public class EditDispatcherController  implements Observer{
 		return new EditButtonListener();
 	}
 
+	public FiltrListener getFiltrListener(){
+		return new FiltrListener();
+	}
+
+	public RefreshListener getRefreshListener(){
+		return new RefreshListener();
+	}
 
 	private class EditButtonListener implements ActionListener {
 
@@ -77,10 +88,48 @@ public class EditDispatcherController  implements Observer{
 			if(dispatcher != null){
 				ModifyDispatcherModel modifyDispatcherModel = new ModifyDispatcherModel();
 				ModifyDispatcherController modifyDispatcherController = new ModifyDispatcherController(modifyDispatcherModel, dispatcher);
-				
+
 			}else{
 
 			}
+		}
+
+	}
+
+	private class FiltrListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+
+			ArrayList<RowFilter<DefaultTableModel, Object>> nameFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
+			RowFilter<DefaultTableModel, Object> nameFilter;
+
+			if(editDispatcherView.getName() != ""){
+				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(editDispatcherView.getName());
+				nameFilters.add(filter);
+			}
+
+			if(editDispatcherView.getSurname() != ""){
+				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(editDispatcherView.getSurname());
+				nameFilters.add(filter);
+			}
+
+			nameFilter = RowFilter.andFilter(nameFilters);
+
+			editDispatcherView.setFilters(nameFilter);
+			editDispatcherView.repaint();
+
+		}
+
+	}
+
+	private class RefreshListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			editDispatcherModel.refresh();
 		}
 
 	}
