@@ -41,6 +41,7 @@ public class AddOrderJPanel extends JPanel implements ActionListener{
 	}
 	
 	public void initialize(){
+		this.setVisible(true);
 		JLabel lblNazwisko = new JLabel("Nazwisko:");
 		lblNazwisko.setBounds(31, 45, 135, 14);
 		add(lblNazwisko);

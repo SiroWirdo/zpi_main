@@ -6,8 +6,10 @@ import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import drivers.controller.DriversController;
 import drivers.model.DriversModel;
 import main.controller.FilterMapController;
@@ -19,6 +21,7 @@ import main.model.MapModel;
 import main.model.StatisticModel;
 
 import javax.swing.JTabbedPane;
+
 import order.controller.OrderController;
 import order.model.OrderModel;
 import ordersdisplay.controller.OrdersController;
@@ -52,9 +55,16 @@ public class MainMenuView extends JFrame{
 		addTabbedPane();
 		addMainPagePanels();
 		addOrderPanel();
-		addDriverPanel();
-		addOrdersDisplayPanel();
+//		addDriverPanel();
+//		addOrdersDisplayPanel();
 		//this.setDefaultLookAndFeelDecorated(false);
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.setVisible(true);
 	}
 
@@ -126,7 +136,6 @@ public class MainMenuView extends JFrame{
 		OrderModel orderModel = new OrderModel();
 		OrderController orderController = new OrderController(orderModel);
 		tabbedPane.addTab("Dodaj zlecenie", null, orderController.getAddOrderView(), null);
-		this.setVisible(true);
 	}
 
 	public void addDriverPanel(){
@@ -136,20 +145,12 @@ public class MainMenuView extends JFrame{
 		driversModel.addObserver(driversController);
 		tabbedPane.addTab("Kierowcy", null, driversController.getDriversView(), null);
 //		this.repaint();
-		this.setVisible(true);
 	}
 
 	public void addOrdersDisplayPanel(){
 		OrdersModel ordersModel = new OrdersModel();
 		OrdersController ordersController = new OrdersController(ordersModel);
 		tabbedPane.addTab("Wyœwietl zlecenia", null, ordersController.getOrdersView(), null);
-		this.setVisible(true);
 	}
 
-/*	public void addTab(String label, Icon icon, JPanel panelTab, String tip){
-		tabbedPane.addTab(label, icon, panelTab, tip);
-		Order orderModel = new Order();
-		OrderController orderController = new OrderController(orderModel);
-
-	}*/
 }

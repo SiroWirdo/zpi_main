@@ -23,4 +23,5 @@ public class DataBaseConnection {
 		ParseRegistry.registerSubclass(ParseUser.class);
 		Parse.initialize(APPLICATION_ID, REST_API_KEY);
 	}
+	
 }

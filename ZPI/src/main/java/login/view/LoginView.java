@@ -9,14 +9,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import login.controller.LoginController;
 import login.model.UserModel;
 
 public class LoginView extends JFrame {
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 	UserModel userModel;
 	LoginController loginController;
@@ -25,32 +25,24 @@ public class LoginView extends JFrame {
 	private JPasswordField passwordField;
 	JButton okButton;
 	JButton cancelButton;
-	/*** Launch the application.
-	public static void main(String[] args) {
-		try {
-			LoginView dialog = new LoginView();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-			/* TESTOWANIE SAMEJ MAPY BEZ EKRANU LOGOWANIA
-			 MainMenu frame = new MainMenu();
-			frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			frame.setVisible(true);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	} */
-
-	/**
-	 * Create the dialog.
-	 */
+	
 	public LoginView(LoginController loginController, UserModel userModel) {
 		this.loginController = loginController;
 		this.userModel = userModel;
-		//initialize();
+		initialize();
 	}
 
 	public void initialize(){
+		try {
+			 UIManager.setLookAndFeel(
+			            UIManager.getSystemLookAndFeelClassName());
+			 
+//				UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 351, 228);
 		getContentPane().setLayout(null);
@@ -70,12 +62,28 @@ public class LoginView extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		loginTextField = new JTextField();
-		loginTextField.setBounds(112, 50, 194, 20);
+		loginTextField.setText("login");
+		loginTextField.setBounds(100, 39, 206, 31);
+		loginTextField.setHorizontalAlignment(JTextField.CENTER);
 		panel.add(loginTextField);
-		//loginTextField.setColumns(10);
-
+		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(112, 92, 194, 20);
+		passwordField.setToolTipText("");
+		passwordField.setBounds(100, 81, 206, 31);
+		passwordField.setText("has³o");
+		passwordField.setEchoChar((char) 0);
+		passwordField.setHorizontalAlignment(JTextField.CENTER);
+		passwordField.addActionListener(loginController.getPasswordListener());
+		/*passwordFiels.addItemListener(new ItemListener() {
+		    public void itemStateChanged(ItemEvent e) {
+		        if (e.getStateChange() == ItemEvent.SELECTED) {
+		            httpProxyPassword.setEchoChar('*');
+		        } else {
+		             httpProxyPassword.setEchoChar((char) 0);
+		        }
+		    }
+		});
+		*/
 		panel.add(passwordField);
 
 		okButton = new JButton("OK");
