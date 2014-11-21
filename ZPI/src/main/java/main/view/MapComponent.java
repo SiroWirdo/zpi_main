@@ -13,6 +13,7 @@ import order.controller.OrderController;
 
 import org.jdesktop.swingx.mapviewer.Waypoint;
 
+import settings.Settings;
 import drivers.controller.DriversController;
 
 public class MapComponent extends JLabel{
@@ -64,6 +65,7 @@ public class MapComponent extends JLabel{
 	     this.waypoint = waypoint;
 	     
 	     this.setIcon(chooseCustomerIcon());
+	     this.setToolTipText(Settings.orderStatus[order.getStatus()]);
 	     this.addMouseListener(new WaypointMouseListener());
 		}
 		else{
@@ -79,6 +81,7 @@ public class MapComponent extends JLabel{
 	     this.waypoint = waypoint;
 	     
 	     this.setIcon(chooseCarIcon());
+	     this.setToolTipText(Settings.driverStatus[driver.getStatus()]);
 	     this.addMouseListener(new WaypointMouseListener());
 		}
 		else{
