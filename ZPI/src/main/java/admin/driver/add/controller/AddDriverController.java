@@ -128,7 +128,7 @@ public class AddDriverController {
 				}
 			}else{
 				if(!uniquePesel){
-						printError("Taki PESEL jest ju¿ przypisany do innego kierowcy");
+						printError("Taki PESEL jest ju¿ przypisany do innej osoby");
 					}
 				if(!uniqueLicense){
 					printError("Taka licencja jest ju¿ przypisana do innego kierowcy");

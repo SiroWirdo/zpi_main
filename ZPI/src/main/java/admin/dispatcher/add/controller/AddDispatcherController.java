@@ -132,7 +132,7 @@ public class AddDispatcherController {
 				}
 				
 				if(!uniquePesel){
-					printError("Taki PESEL jest ju¿ przypisany do innego kierowcy");
+					printError("Taki PESEL jest ju¿ przypisany do innej osoby");
 				}
 				
 				if(!valid){

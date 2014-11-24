@@ -3,6 +3,10 @@ package admin.dispatcher.edit.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import validation.DriverDispatcherValidation;
 import model.Dispatcher;
 import admin.dispatcher.edit.model.ModifyDispatcherModel;
 import admin.dispatcher.edit.view.ModifyDispatcherView;
@@ -46,13 +50,47 @@ public class ModifyDispatcherController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Dodac walidacje usera
+			// TODO poprawiæ sprawdzanie danych(jeœli nie zosta³y zmienione)
 			Dispatcher dispatcher = modifyDispatcherView.getDispatcher();
 			String[] values = modifyDispatcherView.getValues();
+			boolean valid = true;
+			for(String value : values){
+				if(value == ""){
+					valid = false;
+				}
+			}
 
-			modifyDispatcherModel.editDispatcher(dispatcher, values);
-			modifyDispatcherView.dispose();
+			boolean validPesel = true;
+			if(values[2].length() != 11){
+				validPesel = false;
+			}
+
+			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
+
+			if(valid && validPesel && uniquePesel){
+				modifyDispatcherModel.editDispatcher(dispatcher, values);
+				modifyDispatcherView.dispose();
+			}else{
+				if(!uniquePesel){
+					printError("Taki PESEL jest ju¿ przypisany do innego kierowcy");
+				}
+				if(!validPesel){
+					printError("PESEL powinien mieæ 11 znaków");
+				}
+
+				if(!valid){
+					printError("WprowadŸ wszystkie dane");
+
+				}
+			}
 		}
 
+	}
+	
+	public void printError(String text){
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JOptionPane.showMessageDialog(frame, text);
 	}
 
 }

@@ -20,6 +20,18 @@ public class DriverDispatcherValidation {
 			e.printStackTrace();
 		}
 		
+		query = ParseQuery.getQuery("Dispatcher");
+		query.whereEqualTo("PESEL", new Long(pesel));
+		try {
+			List<ParseObject> found = query.find();
+			if(found != null){
+				return false;
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return true;
 		
 	}
