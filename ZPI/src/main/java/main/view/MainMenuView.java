@@ -55,8 +55,8 @@ public class MainMenuView extends JFrame{
 		addTabbedPane();
 		addMainPagePanels();
 		addOrderPanel();
-//		addDriverPanel();
-//		addOrdersDisplayPanel();
+		addDriverPanel();
+		addOrdersDisplayPanel();
 		//this.setDefaultLookAndFeelDecorated(false);
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");

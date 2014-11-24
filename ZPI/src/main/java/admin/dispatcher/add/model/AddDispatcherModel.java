@@ -13,11 +13,12 @@ public class AddDispatcherModel {
 		DataBaseConnection.initialize();
 	}
 
-	public void addDispatcher(String name, String surname, ParsePointer user){
+	public void addDispatcher(String name, String surname, String pesel, ParsePointer user){
 		Dispatcher dispatcher = new Dispatcher();
 		dispatcher.setName(name);
 		dispatcher.setSurname(surname);
-		dispatcher.put("user", user);
+		dispatcher.setPESEL(new Long(pesel));
+		dispatcher.put("userId", user);
 		try {
 			dispatcher.save();
 		} catch (ParseException e) {

@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import org.parse4j.ParsePointer;
 import org.parse4j.ParseUser;
 
+import validation.DriverDispatcherValidation;
+import validation.UserValidation;
 import admin.dispatcher.add.model.AddDispatcherModel;
 import admin.dispatcher.add.view.AddDispatcherView;
 import admin.user.add.controller.AddUserController;
@@ -68,12 +70,20 @@ public class AddDispatcherController {
 					valid = false;
 				}
 			}
+			
+			boolean validPesel = true;
+			if(values[2].length() != 11){
+				validPesel = false;
+			}
 
 			if(userValues[1].equals(userValues[2])){
 				password = true;
 			}
+			
+			boolean uniqueUsername = UserValidation.isUserNameUnique(userValues[0]);
+			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
 
-			if(valid){
+			if(valid && uniqueUsername && validPesel && uniquePesel){
 				if(password){
 					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 					boolean admin = addUserView.isAdminSelected();
@@ -103,7 +113,7 @@ public class AddDispatcherController {
 				      System.out.println(pointer);
 				      */
 
-					addDispatcherModel.addDispatcher(values[0], values[1], pointer);
+					addDispatcherModel.addDispatcher(values[0], values[1], values[2], pointer);
 
 					addDispatcherView.clearTextFields();
 					addUserView.clearTextFields();
@@ -113,15 +123,33 @@ public class AddDispatcherController {
 					JOptionPane.showMessageDialog(frame, "Has³a nie zgadzaj¹ siê");
 				}
 			}else{
-				JFrame frame = new JFrame();
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				JOptionPane.showMessageDialog(frame, "WprowadŸ wszystkie dane");
+				if(!uniqueUsername){
+					printError("U¿ytkownik o takiej nazwie ju¿ istnieje");
+				}
+				
+				if(!validPesel){
+					printError("PESEL powinien zawieraæ 11 znaków");
+				}
+				
+				if(!uniquePesel){
+					printError("Taki PESEL jest ju¿ przypisany do innego kierowcy");
+				}
+				
+				if(!valid){
+					printError("WprowadŸ wszystkie dane");
+				}
 			}
 
 		}
 
 	}
-
+	
+	public void printError(String text){
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JOptionPane.showMessageDialog(frame, text);
+	}
+	
 	private class CancelButtonListener implements ActionListener{
 
 		@Override

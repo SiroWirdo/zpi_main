@@ -26,9 +26,11 @@ public class AddDispatcherView extends JFrame{
 	private JPanel optionPanel;
 	private JLabel name;
 	private JLabel surname;
+	private JLabel pesel;
 //	private JLabel userId;
 	private JTextField nameTF;
 	private JTextField surnameTF;
+	private JTextField peselTF;
 //	private JTextField userIdTF;
 	private JButton addDriver;
 	private JButton cancel;
@@ -77,6 +79,15 @@ public class AddDispatcherView extends JFrame{
 		surnameTF = new JTextField("iui");
 		surnameTF.setBounds(x + 80, y, 100, 20);
 		mainPanel.add(surnameTF);
+		
+		pesel = new JLabel("PESEL: ");
+		pesel.setBounds(x, y=y+30, 70, 20);
+		mainPanel.add(pesel);
+		
+		peselTF = new JTextField();
+		peselTF.setBounds(x+80, y, 100, 20);
+		mainPanel.add(peselTF);
+		
 /*
 		userId = new JLabel("U¿ytkownik: ");
 		userId.setBounds(x, y=y+30, 80, 20);
@@ -102,13 +113,14 @@ public class AddDispatcherView extends JFrame{
 	}
 
 	public String[] getValues(){
-		String[] values = {nameTF.getText(), surnameTF.getText()};
+		String[] values = {nameTF.getText(), surnameTF.getText(), peselTF.getText()};
 		return values;
 	}
 
 	public void clearTextFields(){
 		nameTF.setText("");
 		surnameTF.setText("");
+		peselTF.setText("");
 		//userIdTF.setText("");
 	}
 }

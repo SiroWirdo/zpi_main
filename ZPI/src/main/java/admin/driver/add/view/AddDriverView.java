@@ -124,7 +124,7 @@ public class AddDriverView extends JFrame{
 		cancel.addActionListener(addDriverController.getCancelButtonListener());
 		optionPanel.add(cancel);
 
-
+		// TODO dorobiæ dodawanie samochodu dla kierowcy
 		this.setVisible(true);
 
 	}
