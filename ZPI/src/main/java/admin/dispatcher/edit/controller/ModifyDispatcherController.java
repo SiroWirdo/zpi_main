@@ -14,6 +14,7 @@ import admin.dispatcher.edit.view.ModifyDispatcherView;
 public class ModifyDispatcherController {
 	ModifyDispatcherModel modifyDispatcherModel;
 	ModifyDispatcherView modifyDispatcherView;
+	Dispatcher dispatcherOld;
 
 	public ModifyDispatcherController(ModifyDispatcherModel modifyDispatcherModel, Dispatcher dispatcher){
 		this.modifyDispatcherModel = modifyDispatcherModel;
@@ -24,6 +25,7 @@ public class ModifyDispatcherController {
 		this.modifyDispatcherView.initialize();
 
 		this.modifyDispatcherView.setValues(dispatcher);
+		this.dispatcherOld = dispatcher;
 	}
 
 	public CancelButtonListener getCancelButtonListener(){
@@ -50,12 +52,11 @@ public class ModifyDispatcherController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Dodac walidacje usera
-			// TODO poprawiæ sprawdzanie danych(jeœli nie zosta³y zmienione)
 			Dispatcher dispatcher = modifyDispatcherView.getDispatcher();
 			String[] values = modifyDispatcherView.getValues();
 			boolean valid = true;
 			for(String value : values){
-				if(value == ""){
+				if(value.equals("")){
 					valid = false;
 				}
 			}
@@ -66,6 +67,10 @@ public class ModifyDispatcherController {
 			}
 
 			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
+
+			if(values[2].equals(new Long(dispatcherOld.getPESEL()).toString())){
+				uniquePesel = true;
+			}
 
 			if(valid && validPesel && uniquePesel){
 				modifyDispatcherModel.editDispatcher(dispatcher, values);
@@ -86,7 +91,7 @@ public class ModifyDispatcherController {
 		}
 
 	}
-	
+
 	public void printError(String text){
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

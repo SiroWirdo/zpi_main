@@ -1,13 +1,16 @@
-<button>
-	<width>100</width>
-	<height>20</height>
-	<background>Color.BLUE</background>
-	<font>Dialog.bold</font>
-</button>
-<frame>
-	<background>Color.YELLOW<background>
-</frame>
-<label>
-	<font> </font>
-	<background> </background>
-</label>
+<?xml version="1.0"?>
+<start>
+	<button>
+		<width>100</width>
+		<height>20</height>
+		<background>yellow</background>
+		<font>Dialog.bold</font>
+	</button>
+	<frame>
+		<background>yellow</background>
+	</frame>
+	<label>
+		<font> </font>
+		<background> </background>
+	</label>
+</start>
