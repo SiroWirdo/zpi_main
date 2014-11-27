@@ -35,6 +35,7 @@ public class MapModel{
 		waitingOrders = new ArrayList<Order>();
 		initializeStatusArrays();
 		queryDriver = ParseQuery.getQuery(Driver.class);
+		queryOrder = ParseQuery.getQuery(Order.class);
 	}
 
 	public void initialize(){
@@ -52,6 +53,8 @@ public class MapModel{
 		 * Tylko dwa statusy sa brane pod uwage: {0, 1}
 		 */
 		queryOrderStatusArray =  new ArrayList<Integer>(2);
+		queryOrderStatusArray.add(0);
+		queryOrderStatusArray.add(4);
 	}
 	
 	public void getDriversPositionSet(){
@@ -97,6 +100,7 @@ public class MapModel{
 					customersWaypoints.add(new MapComponent(locationWaypoint, o));
 				}
 			}
+			System.out.println("Znaleziono klientów: " + customersWaypoints.size());
 		}
 		else{
 			System.out.println("Nie ma oczekuj¹cych klientów.");
@@ -112,9 +116,9 @@ public class MapModel{
 	}
 	
 	public List<Order> getWaitingOrders(){
-		waitingOrders = new ArrayList<Order>();
+		waitingOrders = null;
 		queryOrder = ParseQuery.getQuery(Order.class);
-		queryDriver.whereContainedIn("status", queryOrderStatusArray);
+		queryOrder.whereContainedIn("status", queryOrderStatusArray);
 		try {
 			waitingOrders = queryOrder.find();
 		} catch (ParseException e) {

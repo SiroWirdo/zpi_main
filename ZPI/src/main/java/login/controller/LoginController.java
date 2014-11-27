@@ -30,7 +30,7 @@ public class LoginController {
 	private boolean isPasswordPrivate = false;
 
 	public LoginController(UserModel userModel) {
-//		turnOfLogBackLogger();
+//		turnOffLogBackLogger();
 //		turnOffSysoutLog();
 		this.userModel = userModel;
 		loginView = new LoginView(this, userModel);
@@ -38,7 +38,7 @@ public class LoginController {
 		loginView.initialize();
 	}
 
-	public void turnOfLogBackLogger(){
+	public static void turnOffLogBackLogger(){
 		Logger orgHibernateLogger = (Logger) LoggerFactory.getLogger("ROOT");
 		ch.qos.logback.classic.Level oldLogLevel = orgHibernateLogger.getLevel();
 		orgHibernateLogger.setLevel(Level.OFF);

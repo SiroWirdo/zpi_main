@@ -12,6 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import drivers.controller.DriversController;
 import drivers.model.DriversModel;
+import login.controller.LoginController;
 import main.controller.FilterMapController;
 import main.controller.MainMenuController;
 import main.controller.MapController;
@@ -42,6 +43,7 @@ public class MainMenuView extends JFrame{
 		this.menuController = menuController;
 		this.menuModel = menuModel;
 		//initialize();
+		LoginController.turnOffLogBackLogger();
 
 	}
 
@@ -55,16 +57,16 @@ public class MainMenuView extends JFrame{
 		addTabbedPane();
 		addMainPagePanels();
 		addOrderPanel();
-//		addDriverPanel();
-//		addOrdersDisplayPanel();
+		addDriverPanel();
+		addOrdersDisplayPanel();
 		//this.setDefaultLookAndFeelDecorated(false);
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException | UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+//		} catch (ClassNotFoundException | InstantiationException
+//				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		this.setVisible(true);
 	}
 
@@ -102,7 +104,7 @@ public class MainMenuView extends JFrame{
 		gridBagLayout.rowWeights = new double[]{1.0};
 		gridBagLayout.columnWeights = new double[]{1.0};
 		view.setBounds(0, 0, 2000, 2000);
-		mapController.drawAllWaypoints();
+//		mapController.drawAllWaypoints();
 		//mapPanel.add(map);
 		//map.setBounds(0, 0, 5000, 3500);
 
@@ -127,7 +129,7 @@ public class MainMenuView extends JFrame{
 			filterModel = new FilterMapModel();
 			filterController = new FilterMapController(filterModel, mapController);
 			filterPanel = filterController.getView();
-			filterPanel.setBounds(1000, 350, 300, 300);
+			filterPanel.setBounds(1000, 300, 400, 500);
 		}
 		return filterPanel;
 	}
