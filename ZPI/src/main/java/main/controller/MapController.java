@@ -31,7 +31,8 @@ public class MapController{
 		mapModel.initialize();
 		mapView.initialize();
 		
-		refreshMapWithDelay();
+		refreshMap();
+//		refreshMapWithDelay();
 	}
 	
 	public MapPanel getMapView(){
@@ -56,7 +57,10 @@ public class MapController{
 	
 	public Set<MapComponent> getCustomerWaypoints(){
 		List<Order> orders = mapModel.getWaitingOrders();
-		Set<MapComponent> positions = mapModel.getWaitingCustomersPosition(orders);
+		Set<MapComponent> positions = new HashSet<MapComponent>();
+		if(orders != null){
+			positions = mapModel.getWaitingCustomersPosition(orders);
+		}
 		return positions;
 	}
 	
@@ -85,6 +89,8 @@ public class MapController{
 		mapModel.setAllWaypoints(updateWaypoints);
 		mapView.cleanMap();
 		mapView.drawWaypointsComponent(mapModel.getAllWaypoints());
+		mapView.repaint();
+		
 	}
 	
 	public void setQueryDriverStatusArray(ArrayList<Integer> queryDriverStatusArray) {

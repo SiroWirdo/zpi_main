@@ -30,8 +30,13 @@ public class LoginController {
 	private boolean isPasswordPrivate = false;
 
 	public LoginController(UserModel userModel) {
+<<<<<<< HEAD
+		turnOfLogBackLogger();
+		turnOffSysoutLog();
+=======
 //		turnOffLogBackLogger();
 //		turnOffSysoutLog();
+>>>>>>> origin/master
 		this.userModel = userModel;
 		loginView = new LoginView(this, userModel);
 		userModel.initialize();

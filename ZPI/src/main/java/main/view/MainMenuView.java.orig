@@ -60,6 +60,7 @@ public class MainMenuView extends JFrame{
 		addDriverPanel();
 		addOrdersDisplayPanel();
 		//this.setDefaultLookAndFeelDecorated(false);
+<<<<<<< HEAD
 		/*try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException
@@ -69,6 +70,15 @@ public class MainMenuView extends JFrame{
 		}*/
 
 
+=======
+//		try {
+//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+//		} catch (ClassNotFoundException | InstantiationException
+//				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+>>>>>>> origin/master
 		this.setVisible(true);
 	}
 
