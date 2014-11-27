@@ -22,25 +22,25 @@ public class DriversController implements Observer {
 
 	private Driver driverDetailsModel;
 	private DriverDetailsView driverDetailsView;
-	
+
 	public DriversController(DriversModel driversModel){
 		this.driversModel = driversModel;
 		this.driversView = new DriversView(this, driversModel);
 		driversModel.addObserver(this);
 
 		this.driversView.initialize();
-		this.driversModel.initialize();	
+		this.driversModel.initialize();
 
 	}
 
 	public DriversController(Driver driverDetailsModel){
 		this.driverDetailsModel = driverDetailsModel;
 		this.driverDetailsView = new DriverDetailsView(this, driverDetailsModel);
-		
+
 		this.driverDetailsView.initialize();
 
 	}
-	
+
 	public DriversView getDriversView(){
 		return driversView;
 	}
@@ -91,7 +91,7 @@ public class DriversController implements Observer {
 			String driverSurname = driver.getSurname();
 			String driverStatus = Settings.driverStatus[driver.getStatus()];
 			if((driverName.equals(driversView.getName()) || driversView.getName().equals(""))
-					&& (driverSurname.equals(driversView.getSurname()) || driversView.getSurname().equals("")) 
+					&& (driverSurname.equals(driversView.getSurname()) || driversView.getSurname().equals(""))
 					&& driversView.isChecked(driverStatus)){
 				newDrivers.add(driver);
 			}
@@ -110,33 +110,33 @@ public class DriversController implements Observer {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 			ArrayList<RowFilter<DefaultTableModel, Object>> statusFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
 			ArrayList<RowFilter<DefaultTableModel, Object>> nameFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
-			
+
 			RowFilter<DefaultTableModel, Object> statusFilter;
 			RowFilter<DefaultTableModel, Object> nameFilter;
 			RowFilter<DefaultTableModel, Object> mainFilter;
-			
+
 			for(String status : Settings.driverStatus){
 				if(driversView.isChecked(status)){
 					RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(status);
 					statusFilters.add(filter);
-				}				
+				}
 			}
-			
+
 			statusFilter = RowFilter.orFilter(statusFilters);
-			
-			if(driversView.getName() != ""){
+
+			if(driversView.getDriverName() != ""){
 				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(driversView.getName());
 				nameFilters.add(filter);
 			}
-			
+
 			if(driversView.getSurname() != ""){
 				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(driversView.getSurname());
 				nameFilters.add(filter);
 			}
-			
+
 			if(nameFilters.size() > 0){
 				nameFilter = RowFilter.andFilter(nameFilters);
 				ArrayList<RowFilter<DefaultTableModel, Object>> combineFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
@@ -146,14 +146,14 @@ public class DriversController implements Observer {
 			}else{
 				mainFilter = statusFilter;
 			}
-			
+
 			driversView.setFilters(mainFilter);
 			driversView.repaint();
-			
-			
+
+
 			/*driversView.clearTable();
 			List<Driver> actualDrivers = driversModel.getActualData();
-			
+
 			if(actualDrivers == null){
 				try {
 					throw new DriverNotFoundException("Brak aktualnych kierowców");
@@ -162,17 +162,17 @@ public class DriversController implements Observer {
 					e.printStackTrace();
 				}
 			}
-			
+
 			actualDrivers = filtr(actualDrivers);
 			for(Driver driver : actualDrivers){
 				addRow(driver);
 			}
-			
+
 			driversView.repaint();*/
 		}
 
 	}
-	
+
 	public void setDriverDetails(){
 		driverDetailsView.setAllDataInLabel();
 	}

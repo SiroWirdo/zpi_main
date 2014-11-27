@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import settings.Settings;
 import admin.driver.add.controller.AddDriverController;
 import admin.driver.add.model.AddDriverModel;
 import admin.user.add.controller.AddUserController;
@@ -71,7 +72,7 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(name);
 
 		nameTF = new JTextField("kowal");
-		nameTF.setBounds(x+80, y, 100, 20);
+		nameTF.setBounds(x+80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(nameTF);
 
 		surname = new JLabel("Nazwisko: ");
@@ -79,7 +80,7 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(surname);
 
 		surnameTF = new JTextField("iui");
-		surnameTF.setBounds(x + 80, y, 100, 20);
+		surnameTF.setBounds(x + 80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(surnameTF);
 
 		pesel = new JLabel("PESEL: ");
@@ -87,7 +88,7 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(pesel);
 
 		peselTF = new JTextField("3939292");
-		peselTF.setBounds(x+80, y, 100, 20);
+		peselTF.setBounds(x+80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(peselTF);
 
 		phone = new JLabel("Telefon: ");
@@ -95,7 +96,7 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(phone);
 
 		phoneTF = new JTextField("920329320");
-		phoneTF.setBounds(x + 80, y, 100, 20);
+		phoneTF.setBounds(x + 80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(phoneTF);
 
 		license = new JLabel("Licencja: ");
@@ -103,7 +104,7 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(license);
 
 		licenseTF = new JTextField("339d3");
-		licenseTF.setBounds(x + 80, y, 100, 20);
+		licenseTF.setBounds(x + 80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(licenseTF);
 /*
 		userId = new JLabel("U¿ytkownik: ");
@@ -115,12 +116,12 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(userIdTF);
 */
 		addDriver = new JButton("Dodaj");
-		addDriver.setBounds(370, 10, 100, 30);
+		addDriver.setBounds(370, 10, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		addDriver.addActionListener(addDriverController.getAddButtonListener());
 		optionPanel.add(addDriver);
 
 		cancel = new JButton("Anuluj");
-		cancel.setBounds(10, 10, 100, 30);
+		cancel.setBounds(10, 10, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		cancel.addActionListener(addDriverController.getCancelButtonListener());
 		optionPanel.add(cancel);
 

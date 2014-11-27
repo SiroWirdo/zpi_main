@@ -12,8 +12,8 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
 import model.Order;
-import ordersdiplay.view.OrdersView;
 import ordersdisplay.model.OrdersModel;
+import ordersdisplay.view.OrdersView;
 import settings.Settings;
 
 public class OrdersController implements Observer  {

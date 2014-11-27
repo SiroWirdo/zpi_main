@@ -15,6 +15,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import settings.Settings;
 import admin.dispatcher.edit.controller.EditDispatcherController;
 import admin.dispatcher.edit.model.EditDispatcherModel;
 import drivers.controller.DriverNotFoundException;
@@ -75,7 +76,7 @@ public class EditDispatcherView extends JFrame{
 		mainPanel.add(jlName);
 
 		tfName = new JTextField();
-		tfName.setBounds(80, 35, 100, 20);
+		tfName.setBounds(80, 35, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfName);
 
 		jlSurname = new JLabel("Nazwisko:");
@@ -83,21 +84,21 @@ public class EditDispatcherView extends JFrame{
 		mainPanel.add(jlSurname);
 
 		tfSurname = new JTextField();
-		tfSurname.setBounds(80, 65, 100, 20);
+		tfSurname.setBounds(80, 65, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfSurname);
 
 		edit = new JButton("Edytuj");
-		edit.setBounds(200, 40, 100, 20);
+		edit.setBounds(200, 40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		edit.addActionListener(editDispatcherController.getEditButtonListener());
 		mainPanel.add(edit);
 
 		filtr = new JButton("Filtruj");
-		filtr.setBounds(200, 65, 100, 20);
+		filtr.setBounds(200, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(editDispatcherController.getFiltrListener());
 		mainPanel.add(filtr);
 
 		refresh = new JButton("Odœwie¿");
-		refresh.setBounds(320, 65, 100, 20);
+		refresh.setBounds(320, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		refresh.addActionListener(editDispatcherController.getRefreshListener());
 		mainPanel.add(refresh);
 

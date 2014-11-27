@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import settings.Settings;
 import model.Dispatcher;
 import admin.dispatcher.edit.controller.ModifyDispatcherController;
 import admin.dispatcher.edit.model.ModifyDispatcherModel;
@@ -49,7 +50,7 @@ public class ModifyDispatcherView extends JFrame{
 		mainPanel.add(jlName);
 
 		tfName = new JTextField();
-		tfName.setBounds(x + 130, y, 100, 20);
+		tfName.setBounds(x + 130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfName);
 
 		jlSurname = new JLabel("Nazwisko: ");
@@ -57,7 +58,7 @@ public class ModifyDispatcherView extends JFrame{
 		mainPanel.add(jlSurname);
 
 		tfSurname = new JTextField();
-		tfSurname.setBounds(x + 130, y, 100, 20);
+		tfSurname.setBounds(x + 130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfSurname);
 
 		jlPesel = new JLabel("PESEL: ");
@@ -65,7 +66,7 @@ public class ModifyDispatcherView extends JFrame{
 		mainPanel.add(jlPesel);
 
 		tfPesel = new JTextField();
-		tfPesel.setBounds(x+130, y, 100, 20);
+		tfPesel.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfPesel);
 
 		jlUserId = new JLabel("Id u¿ytkownika: ");
@@ -73,16 +74,16 @@ public class ModifyDispatcherView extends JFrame{
 		mainPanel.add(jlUserId);
 
 		tfUserId = new JTextField();
-		tfUserId.setBounds(x+130, y, 100, 20);
+		tfUserId.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfUserId);
 
 		cancel = new JButton("Anuluj");
-		cancel.setBounds(x, y=y+40, 100, 20);
+		cancel.setBounds(x, y=y+40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		cancel.addActionListener(modifyDispatcherController.getCancelButtonListener());
 		mainPanel.add(cancel);
 
 		edit = new JButton("Edytuj");
-		edit.setBounds(x+130, y, 100, 20);
+		edit.setBounds(x+130, y, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		edit.addActionListener(modifyDispatcherController.getEditButtonListener());
 		mainPanel.add(edit);
 		//TODO Dodac edycje hasla. Zmiana u¿ytkownika po username a nie po id

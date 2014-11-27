@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import settings.Settings;
 import admin.user.add.controller.AddUserController;
 import admin.user.add.model.AddUserModel;
 
@@ -48,7 +49,7 @@ public class AddUserView extends JPanel{
 		add(userName);
 
 		userNameTF = new JTextField();
-		userNameTF.setBounds(x+130, y, 150, 20);
+		userNameTF.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(userNameTF);
 
 		password = new JLabel("Has≥o: ");
@@ -56,7 +57,7 @@ public class AddUserView extends JPanel{
 		add(password);
 
 		passwordTF = new JPasswordField();
-		passwordTF.setBounds(x+130, y, 150, 20);
+		passwordTF.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(passwordTF);
 
 		confirmPassword = new JLabel("Potwierdü has≥o: ");
@@ -64,7 +65,7 @@ public class AddUserView extends JPanel{
 		add(confirmPassword);
 
 		confirmPasswordTF = new JPasswordField();
-		confirmPasswordTF.setBounds(x+130, y, 150, 20);
+		confirmPasswordTF.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(confirmPasswordTF);
 
 		email = new JLabel("E-mail: ");
@@ -72,7 +73,7 @@ public class AddUserView extends JPanel{
 		add(email);
 
 		emailTF = new JTextField();
-		emailTF.setBounds(x + 130, y, 150, 20);
+		emailTF.setBounds(x + 130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(emailTF);
 
 		admin = new JCheckBox("Admin");

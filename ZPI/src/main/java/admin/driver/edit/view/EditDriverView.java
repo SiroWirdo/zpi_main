@@ -110,7 +110,7 @@ public class EditDriverView extends JFrame{
 		mainPanel.add(jlName);
 
 		tfName = new JTextField();
-		tfName.setBounds(480, 35, 100, 20);
+		tfName.setBounds(480, 35, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfName);
 
 		jlSurname = new JLabel("Nazwisko:");
@@ -118,16 +118,16 @@ public class EditDriverView extends JFrame{
 		mainPanel.add(jlSurname);
 
 		tfSurname = new JTextField();
-		tfSurname.setBounds(480, 65, 100, 20);
+		tfSurname.setBounds(480, 65, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfSurname);
 
 		filtr = new JButton("Filtruj");
-		filtr.setBounds(600, 65, 100, 20);
+		filtr.setBounds(600, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(editDriverController.getFiltrListener());
 		mainPanel.add(filtr);
 
 		edit = new JButton("Edytuj");
-		edit.setBounds(600, 40, 100, 20);
+		edit.setBounds(600, 40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		edit.addActionListener(editDriverController.getEditButtonListener());
 		mainPanel.add(edit);
 
