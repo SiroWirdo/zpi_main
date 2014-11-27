@@ -1,5 +1,7 @@
 package drivers.view;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -12,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import settings.Settings;
+import xml.reader.XMLReader;
 import drivers.controller.DriverNotFoundException;
 import drivers.controller.DriversController;
 import drivers.model.DriversModel;
@@ -33,7 +36,6 @@ public class DriversView extends JPanel {
 	private JTextField tfName;
 	private JTextField tfSurname;
 	private TableRowSorter sorter;
-
 	public DriversView(DriversController driversController, DriversModel driversModel){
 		this.driversController = driversController;
 		this.driversModel = driversModel;
@@ -43,6 +45,8 @@ public class DriversView extends JPanel {
 	public void initialize(){
 		setLayout(null);
 
+		Color backgroundColor = Settings.getColor("frame", "background");
+		this.setBackground(backgroundColor);
 
 		String[] columns = {"Imiê", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
 		tableModel = new DefaultTableModel(0, 0);
@@ -66,7 +70,7 @@ public class DriversView extends JPanel {
 		table.setFillsViewportHeight(true);
 		table.setVisible(true);
 
-		this.add(scrollPane);		
+		this.add(scrollPane);
 
 		jlStatus = new JLabel("Status:");
 		jlStatus.setBounds(10, 5, 100, 20);
@@ -75,26 +79,31 @@ public class DriversView extends JPanel {
 		free = new JCheckBox(Settings.driverStatus[0]);
 		free.setBounds(10, 30, 100, 30);
 		free.setSelected(true);
+		free.setBackground(backgroundColor);
 		add(free);
 
 		course = new JCheckBox(Settings.driverStatus[1]);
 		course.setBounds(10, 60, 100, 30);
 		course.setSelected(true);
+		course.setBackground(backgroundColor);
 		add(course);
 
 		pause = new JCheckBox(Settings.driverStatus[2]);
 		pause.setBounds(130, 30, 100, 30);
 		pause.setSelected(true);
+		pause.setBackground(backgroundColor);
 		add(pause);
 
 		blocked = new JCheckBox(Settings.driverStatus[3]);
 		blocked.setBounds(130, 60, 100, 30);
 		blocked.setSelected(true);
+		blocked.setBackground(backgroundColor);
 		add(blocked);
 
 		unavailable = new JCheckBox(Settings.driverStatus[4]);
 		unavailable.setBounds(250, 30, 100, 30);
 		unavailable.setSelected(true);
+		unavailable.setBackground(backgroundColor);
 		add(unavailable);
 
 		jlName = new JLabel("Imiê:");

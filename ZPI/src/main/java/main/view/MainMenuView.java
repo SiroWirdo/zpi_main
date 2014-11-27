@@ -55,7 +55,7 @@ public class MainMenuView extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		addTabbedPane();
-		addMainPagePanels();
+		//addMainPagePanels();
 		addOrderPanel();
 		addDriverPanel();
 		addOrdersDisplayPanel();
@@ -74,7 +74,7 @@ public class MainMenuView extends JFrame{
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 	}
-	
+
 	public void addMainPagePanels(){
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(null);
@@ -82,7 +82,7 @@ public class MainMenuView extends JFrame{
 		mainPanel.add(getStatisticPanel());
 		mainPanel.add(getFilterPanel());
 		mainPanel.setVisible(true);
-		
+
 		tabbedPane.addTab("Mapa", null, mainPanel, null); //TODO ustawic ikony?
 	}
 
@@ -91,10 +91,10 @@ public class MainMenuView extends JFrame{
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(10, 10, 1000, 700);
-		
+
 		return scrollPane;
 	}
-	
+
 	public JPanel getMap(){
 		MapModel mapModel = new MapModel();
 		mapController = new MapController(mapModel);
@@ -110,7 +110,7 @@ public class MainMenuView extends JFrame{
 
 		return view;
 	}
-	
+
 	public JPanel getStatisticPanel(){
 		StatisticModel statisticModel = new StatisticModel();
 		StatisticController statisticController = new StatisticController(statisticModel);
@@ -120,7 +120,7 @@ public class MainMenuView extends JFrame{
 		statisticPanel.setBounds(1000, 0, 300, 300);
 		return statisticPanel;
 	}
-	
+
 	public JPanel getFilterPanel(){
 		FilterMapModel filterModel;
 		FilterMapController filterController;

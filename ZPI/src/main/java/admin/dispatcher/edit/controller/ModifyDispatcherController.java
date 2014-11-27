@@ -3,6 +3,10 @@ package admin.dispatcher.edit.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import validation.DriverDispatcherValidation;
 import model.Dispatcher;
 import admin.dispatcher.edit.model.ModifyDispatcherModel;
 import admin.dispatcher.edit.view.ModifyDispatcherView;
@@ -10,6 +14,7 @@ import admin.dispatcher.edit.view.ModifyDispatcherView;
 public class ModifyDispatcherController {
 	ModifyDispatcherModel modifyDispatcherModel;
 	ModifyDispatcherView modifyDispatcherView;
+	Dispatcher dispatcherOld;
 
 	public ModifyDispatcherController(ModifyDispatcherModel modifyDispatcherModel, Dispatcher dispatcher){
 		this.modifyDispatcherModel = modifyDispatcherModel;
@@ -20,6 +25,7 @@ public class ModifyDispatcherController {
 		this.modifyDispatcherView.initialize();
 
 		this.modifyDispatcherView.setValues(dispatcher);
+		this.dispatcherOld = dispatcher;
 	}
 
 	public CancelButtonListener getCancelButtonListener(){
@@ -48,11 +54,48 @@ public class ModifyDispatcherController {
 			// TODO Dodac walidacje usera
 			Dispatcher dispatcher = modifyDispatcherView.getDispatcher();
 			String[] values = modifyDispatcherView.getValues();
+			boolean valid = true;
+			for(String value : values){
+				if(value.equals("")){
+					valid = false;
+				}
+			}
 
-			modifyDispatcherModel.editDispatcher(dispatcher, values);
-			modifyDispatcherView.dispose();
+			boolean validPesel = true;
+			if(values[2].length() != 11){
+				validPesel = false;
+			}
+
+			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
+
+			if(values[2].equals(new Long(dispatcherOld.getPESEL()).toString())){
+				uniquePesel = true;
+			}
+
+			if(valid && validPesel && uniquePesel){
+				modifyDispatcherModel.editDispatcher(dispatcher, values);
+				modifyDispatcherView.dispose();
+			}else{
+				if(!uniquePesel){
+					printError("Taki PESEL jest ju¿ przypisany do innego kierowcy");
+				}
+				if(!validPesel){
+					printError("PESEL powinien mieæ 11 znaków");
+				}
+
+				if(!valid){
+					printError("WprowadŸ wszystkie dane");
+
+				}
+			}
 		}
 
+	}
+
+	public void printError(String text){
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JOptionPane.showMessageDialog(frame, text);
 	}
 
 }

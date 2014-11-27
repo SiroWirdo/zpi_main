@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import org.parse4j.ParsePointer;
 import org.parse4j.ParseUser;
 
+import validation.DriverDispatcherValidation;
+import validation.UserValidation;
 import admin.driver.add.model.AddDriverModel;
 import admin.driver.add.view.AddDriverView;
 import admin.user.add.controller.AddUserController;
@@ -68,11 +70,24 @@ public class AddDriverController {
 				}
 			}
 
+			boolean validPesel = true;
+			if(values[2].length() != 11){
+				validPesel = false;
+			}
+
 			if(userValues[1].equals(userValues[2])){
 				password = true;
 			}
 
-			if(valid){
+			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
+			boolean uniqueLicense = DriverDispatcherValidation.isLicenseUnique(values[4]);
+			boolean uniqueUsername = UserValidation.isUserNameUnique(userValues[0]);
+			// TODO walidacja smochodu
+			// TODO walidacja poprawnoœci wpisywanych danych
+			// TODO jeœli wywala ¿e nie jest unikalny to proces nie umiera...
+
+
+			if(valid && uniquePesel && uniqueLicense && uniqueUsername && validPesel){
 				if(password){
 					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 					boolean admin = addUserView.isAdminSelected();
@@ -80,7 +95,7 @@ public class AddDriverController {
 					ParsePointer pointer = new ParsePointer("_User", user.getObjectId());
 					/*String id = user.getObjectId();
 					user.setDirty();
-					
+
 					ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
 					query.whereEqualTo("objectId", id);
 					ParseUser us = null;
@@ -90,7 +105,7 @@ public class AddDriverController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 					/*JSONObject pointer = new JSONObject();
 					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST22222222222222222");
 				      if (user.getObjectId() != null) {
@@ -100,7 +115,7 @@ public class AddDriverController {
 				      }
 
 				      System.out.println(pointer);
-				      */
+					 */
 
 					addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], pointer);
 
@@ -112,13 +127,34 @@ public class AddDriverController {
 					JOptionPane.showMessageDialog(frame, "Has³a nie zgadzaj¹ siê");
 				}
 			}else{
-				JFrame frame = new JFrame();
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				JOptionPane.showMessageDialog(frame, "WprowadŸ wszystkie dane");
+				if(!uniquePesel){
+						printError("Taki PESEL jest ju¿ przypisany do innej osoby");
+					}
+				if(!uniqueLicense){
+					printError("Taka licencja jest ju¿ przypisana do innego kierowcy");
+				}
+				if(!uniqueUsername){
+					printError("Taki u¿ytkownik ju¿ istnieje");
+				}
+
+				if(!validPesel){
+					printError("PESEL powinien mieæ 11 znaków");
+				}
+
+				if(!valid){
+					printError("WprowadŸ wszystkie dane");
+
+				}
+
 			}
 
 		}
+	}
 
+	public void printError(String text){
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JOptionPane.showMessageDialog(frame, text);
 	}
 
 	private class CancelButtonListener implements ActionListener{
@@ -131,4 +167,5 @@ public class AddDriverController {
 		}
 
 	}
+
 }
