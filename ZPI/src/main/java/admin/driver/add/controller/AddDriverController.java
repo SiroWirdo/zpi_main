@@ -11,6 +11,9 @@ import org.parse4j.ParseUser;
 
 import validation.DriverDispatcherValidation;
 import validation.UserValidation;
+import admin.car.add.controller.AddCarController;
+import admin.car.add.model.AddCarModel;
+import admin.car.add.view.AddCarView;
 import admin.driver.add.model.AddDriverModel;
 import admin.driver.add.view.AddDriverView;
 import admin.user.add.controller.AddUserController;
@@ -23,6 +26,9 @@ public class AddDriverController {
     private AddUserView addUserView;
     private AddUserModel addUserModel;
     private AddUserController addUserController;
+    private AddCarView addCarView;
+    private AddCarModel addCarModel;
+    private AddCarController addCarController;
 
     public AddDriverController(AddDriverModel addDriverModel){
         this.addDriverModel = addDriverModel;
@@ -39,6 +45,13 @@ public class AddDriverController {
         return addUserView;
 
     }
+    
+	public AddCarView getAddCarView(){
+		addCarModel = new AddCarModel();
+		addCarController = new AddCarController(addCarModel);
+		addCarView = addCarController.getAddCarView();
+		return this.addCarView;
+	}
 
     public AddButtonListener getAddButtonListener(){
         return new AddButtonListener();

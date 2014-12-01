@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import settings.Settings;
+import admin.car.add.view.AddCarView;
 import admin.driver.add.controller.AddDriverController;
 import admin.driver.add.model.AddDriverModel;
 import admin.user.add.controller.AddUserController;
@@ -22,6 +23,7 @@ public class AddDriverView extends JFrame{
 	private AddUserView addUserView;
 	private AddUserModel addUserModel;
 	private AddUserController addUserController;
+	private AddCarView addCarView;
 	private JPanel optionPanel;
 	private JLabel name;
 	private JLabel surname;
@@ -45,9 +47,9 @@ public class AddDriverView extends JFrame{
 	}
 
 	public void initialize(){
-		this.setBounds(300, 200, 520, 600);
+		this.setBounds(300, 200, 520, 700);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		this.setLayout(new GridLayout(3,1));
+		this.setLayout(new GridLayout(4,1));
 
 		int x = 10;
 		int y = 10;
@@ -58,6 +60,9 @@ public class AddDriverView extends JFrame{
 
 		addUserView = addDriverController.getUserView();
 		add(addUserView);
+		
+		addCarView = addDriverController.getAddCarView();
+		add(addCarView);
 
 		optionPanel = new JPanel();
 		optionPanel.setLayout(null);

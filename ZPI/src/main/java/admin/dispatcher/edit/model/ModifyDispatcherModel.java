@@ -18,7 +18,7 @@ public class ModifyDispatcherModel {
 			e.printStackTrace();
 		}
 		
-		if(dispatcher.getUser() != null){
+		/*if(dispatcher.getUser() != null){
 			String userId = dispatcher.getUser().getObjectId();
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("users");
 			query.whereEqualTo("objectId", userId);
@@ -30,7 +30,7 @@ public class ModifyDispatcherModel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}*/
 		
 		
 	}

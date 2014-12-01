@@ -2,14 +2,16 @@ package admin.driver.edit.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.CancellationException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import validation.DriverDispatcherValidation;
-import validation.UserValidation;
 import model.Driver;
+
+import org.parse4j.ParseException;
+import org.parse4j.ParseUser;
+
+import validation.DriverDispatcherValidation;
 import admin.driver.edit.model.ModifyDriverModel;
 import admin.driver.edit.view.ModifyDriverView;
 
@@ -29,6 +31,7 @@ public class ModifyDriverController {
 		this.modifyDriverView.setValues(driver);
 		this.driverOld = driver;
 	}
+	
 
 	public CancelButtonListener getCancelButtonListener(){
 		return new CancelButtonListener();
@@ -47,6 +50,27 @@ public class ModifyDriverController {
 			modifyDriverView.dispose();
 		}
 
+	}
+	
+	public RestartPasswordButtonListener getRestartPasswordButtonListener(){
+		return new RestartPasswordButtonListener();
+	}
+	
+	private class RestartPasswordButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			String[] values = modifyDriverView.getValues();
+			try {
+				ParseUser.requestPasswordReset(values[7]);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 	private class EditButtonListener implements ActionListener{

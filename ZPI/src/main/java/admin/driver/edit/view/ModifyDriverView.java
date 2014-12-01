@@ -22,7 +22,7 @@ public class ModifyDriverView extends JFrame{
 	private JLabel jlPesel;
 	private JLabel jlStatus;
 	private JLabel jlCarId;
-	private JLabel jlUserId;
+	private JLabel jlMail;
 	private JTextField tfName;
 	private JTextField tfSurname;
 	private JTextField tfPhoneNumber;
@@ -30,7 +30,8 @@ public class ModifyDriverView extends JFrame{
 	private JTextField tfPesel;
 	private JTextField tfStatus;
 	private JTextField tfCarId;
-	private JTextField tfUserId;
+	private JTextField tfMail;
+	private JButton resetPassword;
 	private JButton edit;
 	private JButton cancel;
 	private JPanel mainPanel;
@@ -109,14 +110,19 @@ public class ModifyDriverView extends JFrame{
 		tfCarId = new JTextField();
 		tfCarId.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfCarId);
-
-		jlUserId = new JLabel("Id u¿ytkownika: ");
-		jlUserId.setBounds(x, y=y+30, 120, 20);
-		mainPanel.add(jlUserId);
-
-		tfUserId = new JTextField();
-		tfUserId.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
-		mainPanel.add(tfUserId);
+		
+		jlMail = new JLabel("E-mail: ");
+		jlMail.setBounds(x, y=y+30, 60, 20);
+		mainPanel.add(jlMail);
+		
+		tfMail = new JTextField();
+		tfMail.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		mainPanel.add(tfMail);
+		
+		resetPassword = new JButton("Zresetuj has³o");
+		resetPassword.setBounds(x, y=y+30, 255, 25);
+		resetPassword.addActionListener(modifyDriverController.getRestartPasswordButtonListener());
+		mainPanel.add(resetPassword);
 
 		cancel = new JButton("Anuluj");
 		cancel.setBounds(x, y=y+40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
@@ -146,10 +152,13 @@ public class ModifyDriverView extends JFrame{
 		}
 		tfCarId.setText(carId);
 		String userId = "";
+		String email = "";
 		if(driver.getUser() != null){
 			userId = driver.getUser().getObjectId();
+			email = modifyDriverModel.getUserMail(userId);
+
 		}
-		tfUserId.setText(userId);
+		tfMail.setText(email);
 		this.repaint();
 	}
 
@@ -159,7 +168,7 @@ public class ModifyDriverView extends JFrame{
 
 	public String[] getValues(){
 		String[] values = {tfName.getText(), tfSurname.getText(), tfPhoneNumber.getText(), tfLicenseNumber.getText(),
-				tfPesel.getText(), tfStatus.getText(), tfCarId.getText(), tfUserId.getText()};
+				tfPesel.getText(), tfStatus.getText(), tfCarId.getText(), tfMail.getText()};
 		return values;
 	}
 

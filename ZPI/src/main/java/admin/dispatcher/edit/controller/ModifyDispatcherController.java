@@ -6,8 +6,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import validation.DriverDispatcherValidation;
 import model.Dispatcher;
+
+import org.parse4j.ParseException;
+import org.parse4j.ParseUser;
+
+import validation.DriverDispatcherValidation;
 import admin.dispatcher.edit.model.ModifyDispatcherModel;
 import admin.dispatcher.edit.view.ModifyDispatcherView;
 
@@ -45,6 +49,27 @@ public class ModifyDispatcherController {
 			modifyDispatcherView.dispose();
 		}
 
+	}
+	
+	public RestartPasswordButtonListener getRestartPasswordButtonListener(){
+		return new RestartPasswordButtonListener();
+	}
+	
+	private class RestartPasswordButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			String[] values = modifyDispatcherView.getValues();
+			try {
+				ParseUser.requestPasswordReset(values[3]);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 	private class EditButtonListener implements ActionListener{

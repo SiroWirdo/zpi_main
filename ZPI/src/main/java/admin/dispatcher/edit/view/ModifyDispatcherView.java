@@ -80,6 +80,7 @@ public class ModifyDispatcherView extends JFrame{
 
 		resetPassword = new JButton("Zresetuj has³o");
 		resetPassword.setBounds(x, y=y+30, 255, 25);
+		resetPassword.addActionListener(modifyDispatcherController.getRestartPasswordButtonListener());
 		mainPanel.add(resetPassword);
 		
 		cancel = new JButton("Anuluj");
