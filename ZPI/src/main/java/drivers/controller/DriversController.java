@@ -127,12 +127,12 @@ public class DriversController implements Observer {
 
 			statusFilter = RowFilter.orFilter(statusFilters);
 
-			if(driversView.getDriverName() != ""){
-				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(driversView.getName());
+			if(!driversView.getDriverName().equals("")){
+				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(driversView.getDriverName());
 				nameFilters.add(filter);
 			}
 
-			if(driversView.getSurname() != ""){
+			if(!driversView.getSurname().equals("")){
 				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(driversView.getSurname());
 				nameFilters.add(filter);
 			}

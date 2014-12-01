@@ -27,6 +27,8 @@ public class OrdersController implements Observer  {
 
 		this.ordersView.initialize();
 		this.ordersModel.initialize();
+		
+		//TODO dorobiæ edycjê zamówienia
 
 	}
 

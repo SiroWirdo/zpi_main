@@ -36,6 +36,7 @@ public class DriversView extends JPanel {
 	private JTextField tfName;
 	private JTextField tfSurname;
 	private TableRowSorter sorter;
+	
 	public DriversView(DriversController driversController, DriversModel driversModel){
 		this.driversController = driversController;
 		this.driversModel = driversModel;
@@ -49,7 +50,13 @@ public class DriversView extends JPanel {
 		this.setBackground(backgroundColor);*/
 
 		String[] columns = {"Imiê", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
-		tableModel = new DefaultTableModel(0, 0);
+		tableModel = new DefaultTableModel(0, 0){
+
+			   @Override
+			   public boolean isCellEditable(int row, int column) {
+			       return false;
+			   }
+			};
 		tableModel.setColumnIdentifiers(columns);
 		table = new JTable();
 		//table.setBounds(0, 0, 1100, 700);
@@ -64,10 +71,12 @@ public class DriversView extends JPanel {
 		//table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		table.setModel(tableModel);
 
-		table.setRowSelectionAllowed(false);
+		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setCellSelectionEnabled(false);
 		table.setFillsViewportHeight(true);
+		table.setCellSelectionEnabled(false);
+		
 		table.setVisible(true);
 
 		this.add(scrollPane);

@@ -16,6 +16,9 @@ public class LogViewTest {
 		UIManager.put("text", new Color(255,255,255));
 		UIManager.put("Table.alternateRowColor", new Color(0,68,102));
 		UIManager.put("TextField.font", new Font("Font", Font.BOLD, 12));
+		UIManager.put("TextField.textForeground", new Color(0,0,0));
+		UIManager.put("PasswordField.foreground", new Color(0,0,0));
+		UIManager.put("TextArea.foreground", new Color(0,0,0));
 
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

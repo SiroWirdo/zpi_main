@@ -78,6 +78,7 @@ public class LoginView extends JFrame {
 		okButton.addActionListener(loginController.getLoginListener());
 		panel.add(okButton);
 		getRootPane().setDefaultButton(okButton);
+		// TODO coœ nie tak z kolorem tego buttona
 		
 
 		cancelButton = new JButton("Anuluj");

@@ -17,11 +17,12 @@ public class ModifyDispatcherView extends JFrame{
 	private JLabel jlName;
 	private JLabel jlSurname;
 	private JLabel jlPesel;
-	private JLabel jlUserId;
+	private JLabel jlMail;
 	private JTextField tfName;
 	private JTextField tfSurname;
 	private JTextField tfPesel;
-	private JTextField tfUserId;
+	private JTextField tfMail;
+	private JButton resetPassword;
 	private JButton edit;
 	private JButton cancel;
 	private JPanel mainPanel;
@@ -68,15 +69,19 @@ public class ModifyDispatcherView extends JFrame{
 		tfPesel = new JTextField();
 		tfPesel.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfPesel);
+		
+		jlMail = new JLabel("E-mail: ");
+		jlMail.setBounds(x, y=y+30, 60, 20);
+		mainPanel.add(jlMail);
+		
+		tfMail = new JTextField();
+		tfMail.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		mainPanel.add(tfMail);
 
-		jlUserId = new JLabel("Id u¿ytkownika: ");
-		jlUserId.setBounds(x, y=y+30, 120, 20);
-		mainPanel.add(jlUserId);
-
-		tfUserId = new JTextField();
-		tfUserId.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
-		mainPanel.add(tfUserId);
-
+		resetPassword = new JButton("Zresetuj has³o");
+		resetPassword.setBounds(x, y=y+30, 255, 25);
+		mainPanel.add(resetPassword);
+		
 		cancel = new JButton("Anuluj");
 		cancel.setBounds(x, y=y+40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		cancel.addActionListener(modifyDispatcherController.getCancelButtonListener());
@@ -98,10 +103,12 @@ public class ModifyDispatcherView extends JFrame{
 		tfPesel.setText(new Long(dispatcher.getPESEL()).toString());
 
 		String userId = "";
+		String email = "";
 		if(dispatcher.getUser() != null){
 			userId = dispatcher.getUser().getObjectId();
+			email = modifyDispatcherModel.getUserMail(userId);
 		}
-		tfUserId.setText(userId);
+		tfMail.setText(email);
 		this.repaint();
 	}
 
@@ -110,7 +117,7 @@ public class ModifyDispatcherView extends JFrame{
 	}
 
 	public String[] getValues(){
-		String[] values = {tfName.getText(), tfSurname.getText(), tfPesel.getText(), tfUserId.getText()};
+		String[] values = {tfName.getText(), tfSurname.getText(), tfPesel.getText(), tfMail.getText()};
 		return values;
 	}
 }

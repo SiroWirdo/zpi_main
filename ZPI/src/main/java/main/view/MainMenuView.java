@@ -6,12 +6,9 @@ import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-import drivers.controller.DriversController;
-import drivers.model.DriversModel;
 import login.controller.LoginController;
 import main.controller.FilterMapController;
 import main.controller.MainMenuController;
@@ -20,13 +17,14 @@ import main.controller.StatisticController;
 import main.model.FilterMapModel;
 import main.model.MapModel;
 import main.model.StatisticModel;
-
-import javax.swing.JTabbedPane;
-
+import message.controller.MessageController;
+import message.model.MessageModel;
 import order.controller.OrderController;
 import order.model.OrderModel;
 import ordersdisplay.controller.OrdersController;
 import ordersdisplay.model.OrdersModel;
+import drivers.controller.DriversController;
+import drivers.model.DriversModel;
 
 
 public class MainMenuView extends JFrame{
@@ -59,6 +57,7 @@ public class MainMenuView extends JFrame{
 		addOrderPanel();
 		addDriverPanel();
 		addOrdersDisplayPanel();
+		addMessagePanel();
 		//this.setDefaultLookAndFeelDecorated(false);
 		/*try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
@@ -155,6 +154,12 @@ public class MainMenuView extends JFrame{
 		OrdersModel ordersModel = new OrdersModel();
 		OrdersController ordersController = new OrdersController(ordersModel);
 		tabbedPane.addTab("Wyœwietl zlecenia", null, ordersController.getOrdersView(), null);
+	}
+	
+	public void addMessagePanel(){
+		MessageModel messageModel = new MessageModel();
+		MessageController messageController = new MessageController(messageModel);
+		tabbedPane.addTab("Wyœlij wiadomoœæ", null, messageController.getMessageView(), null);
 	}
 
 }

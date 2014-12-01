@@ -57,7 +57,13 @@ public class EditDriverView extends JFrame{
 
 
 		String[] columns = {"Imiê", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
-		tableModel = new DefaultTableModel(0, 0);
+		tableModel = new DefaultTableModel(0, 0){
+
+			   @Override
+			   public boolean isCellEditable(int row, int column) {
+			       return false;
+			   }
+			};
 		tableModel.setColumnIdentifiers(columns);
 		table = new JTable();
 		//table.setBounds(0, 0, 1100, 700);
@@ -122,12 +128,12 @@ public class EditDriverView extends JFrame{
 		mainPanel.add(tfSurname);
 
 		filtr = new JButton("Filtruj");
-		filtr.setBounds(600, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		filtr.setBounds(610, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(editDriverController.getFiltrListener());
 		mainPanel.add(filtr);
 
 		edit = new JButton("Edytuj");
-		edit.setBounds(600, 40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		edit.setBounds(610, 40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		edit.addActionListener(editDriverController.getEditButtonListener());
 		mainPanel.add(edit);
 
