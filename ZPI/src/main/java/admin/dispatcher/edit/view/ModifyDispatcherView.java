@@ -69,20 +69,23 @@ public class ModifyDispatcherView extends JFrame{
 		tfPesel = new JTextField();
 		tfPesel.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfPesel);
-		
+
 		jlMail = new JLabel("E-mail: ");
-		jlMail.setBounds(x, y=y+30, 60, 20);
+		//jlMail.setBounds(x, y=y+30, 60, 20);
 		mainPanel.add(jlMail);
-		
+
 		tfMail = new JTextField();
-		tfMail.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		//tfMail.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfMail);
+
+		jlMail.setVisible(false);
+		tfMail.setVisible(false);
 
 		resetPassword = new JButton("Zresetuj has³o");
 		resetPassword.setBounds(x, y=y+30, 255, 25);
 		resetPassword.addActionListener(modifyDispatcherController.getRestartPasswordButtonListener());
 		mainPanel.add(resetPassword);
-		
+
 		cancel = new JButton("Anuluj");
 		cancel.setBounds(x, y=y+40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		cancel.addActionListener(modifyDispatcherController.getCancelButtonListener());

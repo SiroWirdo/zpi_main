@@ -38,22 +38,31 @@ public class AddCarView extends JPanel{
 		tfRegistrationNumber = new JTextField();
 		tfRegistrationNumber.setBounds(x + 160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(tfRegistrationNumber);
-		
+
 		jlSideNumber = new JLabel("Nr boczny: ");
 		jlSideNumber.setBounds(x, y=y+30, 150, 20);
 		add(jlSideNumber);
-		
+
 		tfSideNumber = new JTextField();
 		tfSideNumber.setBounds(x+160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(tfSideNumber);
-		
+
 		jlCarCapacity = new JLabel("Pojemnoœæ: ");
 		jlCarCapacity.setBounds(x, y=y+30, 150, 20);
 		add(jlCarCapacity);
-		
+
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 6, 1);
 		jsCarCapacity = new JSpinner(spinnerModel);
 		jsCarCapacity.setBounds(x+160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
-		add(jsCarCapacity);//COLOR SPINNER ZMIENIC
+		add(jsCarCapacity);
+	}
+
+	public void clearTextFields(){
+		tfRegistrationNumber.setText("");
+		tfSideNumber.setText("");
+	}
+
+	public String[] getValues(){
+		return new String[]{tfRegistrationNumber.getText(), tfSideNumber.getText(), jsCarCapacity.getValue().toString()};
 	}
 }

@@ -17,8 +17,8 @@ public class ModifyDispatcherModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		/*if(dispatcher.getUser() != null){
+
+	/*	if(dispatcher.getUser() != null){
 			String userId = dispatcher.getUser().getObjectId();
 			ParseQuery<ParseObject> query = ParseQuery.getQuery("users");
 			query.whereEqualTo("objectId", userId);
@@ -31,8 +31,8 @@ public class ModifyDispatcherModel {
 				e.printStackTrace();
 			}
 		}*/
-		
-		
+
+
 	}
 
 	public String getUserMail(String userId){
@@ -43,7 +43,7 @@ public class ModifyDispatcherModel {
 			query.whereEqualTo("objectId", userId);
 			try {
 				user = query.find().get(0);
-				
+
 				mail = (String)user.get("email");
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block

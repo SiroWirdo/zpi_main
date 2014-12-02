@@ -23,22 +23,29 @@ public class MessageModel {
 		//sprawdziæ jakie potrzebne s¹ do listy rzeczy czy: ["",id] czy [id] czy inaczej
 		ParseQuery<Driver> query = ParseQuery.getQuery("Driver");
 		List<Driver> drivers;
-		try {
+		/*try {
 			drivers = query.find();
-			ArrayList<String> channels = new ArrayList<String>();			
+			ArrayList<String> channels = new ArrayList<String>();
 			for(Driver driver : drivers){
 				ParseObject pointer = (ParseObject) driver.getParseObject("userId");
 				String userId = (String)pointer.getObjectId();
-				String channel = "user_" + userId;	
+				String channel = "user_" + userId;
 				push.setOrderMessage(message);
 		        push.setChannel(channel);
 				channels.add(channel);
 				push.sendInBackground(message, channels);
 			}
-			
+
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
+		ArrayList<String> channels = new ArrayList<String>();
+		//String channel = "";
+		push.setMessageToEveryone(message);
+        //push.setChannel(channel);
+		//channels.add(channel);
+		push.sendInBackground(message, channels);
+
 	}
 }

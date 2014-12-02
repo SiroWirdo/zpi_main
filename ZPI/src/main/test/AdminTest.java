@@ -21,6 +21,7 @@ public class AdminTest {
 		UIManager.put("TextField.textForeground", new Color(0,0,0));
 		UIManager.put("PasswordField.foreground", new Color(0,0,0));
 		UIManager.put("TextArea.foreground", new Color(0,0,0));
+		UIManager.put("FormattedTextField.foreground", new Color(0,0,0));
 
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

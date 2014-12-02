@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import model.Car;
+
 import org.parse4j.ParsePointer;
 import org.parse4j.ParseUser;
 
@@ -45,7 +47,7 @@ public class AddDriverController {
         return addUserView;
 
     }
-    
+
 	public AddCarView getAddCarView(){
 		addCarModel = new AddCarModel();
 		addCarController = new AddCarController(addCarModel);
@@ -68,6 +70,7 @@ public class AddDriverController {
             // TODO Auto-generated method stub
             String[] values = addDriverView.getValues();
             String[] userValues = addUserView.getValues();
+            String[] carValues = addCarView.getValues();
             boolean valid = true;
             boolean password = false;
 
@@ -106,6 +109,7 @@ public class AddDriverController {
                     boolean admin = addUserView.isAdminSelected();
                     ParseUser user = addUserModel.addUser(userValues[0], userValues[1], userValues[3], admin);
                     ParsePointer pointer = new ParsePointer("_User", user.getObjectId());
+                    Car car = addCarModel.addCar(carValues[0], new Integer(carValues[1]), new Integer(carValues[2]));
                     /*String id = user.getObjectId();
                     user.setDirty();
 
@@ -130,10 +134,11 @@ public class AddDriverController {
                       System.out.println(pointer);
                      */
 
-                    addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], pointer);
+                    addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], pointer, car);
 
                     addDriverView.clearTextFields();
                     addUserView.clearTextFields();
+                    addCarView.clearTextFields();
                 }else{
                     JFrame frame = new JFrame();
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
