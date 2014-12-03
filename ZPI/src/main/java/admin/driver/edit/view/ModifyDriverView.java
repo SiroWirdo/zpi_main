@@ -21,7 +21,7 @@ public class ModifyDriverView extends JFrame{
 	private JLabel jlLicenseNumber;
 	private JLabel jlPesel;
 	private JLabel jlStatus;
-	private JLabel jlCarId;
+	//private JLabel jlCarId;
 	private JLabel jlMail;
 	private JTextField tfName;
 	private JTextField tfSurname;
@@ -31,6 +31,7 @@ public class ModifyDriverView extends JFrame{
 	private JTextField tfStatus;
 	private JTextField tfCarId;
 	private JTextField tfMail;
+	private JButton editCar;
 	private JButton resetPassword;
 	private JButton edit;
 	private JButton cancel;
@@ -102,13 +103,13 @@ public class ModifyDriverView extends JFrame{
 		tfStatus = new JTextField();
 		tfStatus.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfStatus);
-
+/*
 		jlCarId = new JLabel("Id samochodu: ");
 		jlCarId.setBounds(x, y=y+30, 120, 20);
 		mainPanel.add(jlCarId);
-
+*/
 		tfCarId = new JTextField();
-		tfCarId.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		//tfCarId.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfCarId);
 
 		jlMail = new JLabel("E-mail: ");
@@ -121,6 +122,12 @@ public class ModifyDriverView extends JFrame{
 
 		jlMail.setVisible(false);
 		tfMail.setVisible(false);
+		tfCarId.setVisible(false);
+		
+		editCar = new JButton("Edytuj samochód");
+		editCar.setBounds(x, y=y+30, 255, 25);
+		editCar.addActionListener(modifyDriverController.getEditCarButtonListener());
+		mainPanel.add(editCar);
 
 		resetPassword = new JButton("Zresetuj has³o");
 		resetPassword.setBounds(x, y=y+30, 255, 25);
@@ -173,6 +180,10 @@ public class ModifyDriverView extends JFrame{
 		String[] values = {tfName.getText(), tfSurname.getText(), tfPhoneNumber.getText(), tfLicenseNumber.getText(),
 				tfPesel.getText(), tfStatus.getText(), tfCarId.getText(), tfMail.getText()};
 		return values;
+	}
+	
+	public String getCarId(){
+		return tfCarId.getText();
 	}
 
 }

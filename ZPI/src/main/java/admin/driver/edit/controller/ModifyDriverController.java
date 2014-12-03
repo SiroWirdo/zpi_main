@@ -12,6 +12,7 @@ import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
 
 import validation.DriverDispatcherValidation;
+import admin.driver.edit.model.EditCarModel;
 import admin.driver.edit.model.ModifyDriverModel;
 import admin.driver.edit.view.ModifyDriverView;
 
@@ -41,6 +42,13 @@ public class ModifyDriverController {
 		return new EditButtonListener();
 	}
 
+	public RestartPasswordButtonListener getRestartPasswordButtonListener(){
+		return new RestartPasswordButtonListener();
+	}
+	
+	public EditCarButtonListener getEditCarButtonListener(){
+		return new EditCarButtonListener();
+	}
 
 	private class CancelButtonListener implements ActionListener{
 
@@ -52,9 +60,18 @@ public class ModifyDriverController {
 
 	}
 	
-	public RestartPasswordButtonListener getRestartPasswordButtonListener(){
-		return new RestartPasswordButtonListener();
+
+	private class EditCarButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			EditCarModel editCarModel = new EditCarModel();
+			EditCarController editCarController = new EditCarController(editCarModel, modifyDriverView.getCarId());
+		}
+		
 	}
+	
 	
 	private class RestartPasswordButtonListener implements ActionListener{
 
