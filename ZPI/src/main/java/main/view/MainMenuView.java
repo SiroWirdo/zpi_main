@@ -27,14 +27,19 @@ import order.controller.OrderController;
 import order.model.OrderModel;
 import ordersdisplay.controller.OrdersController;
 import ordersdisplay.model.OrdersModel;
+import other.DataBaseConnection;
 
 
 public class MainMenuView extends JFrame{
-	MapModel menuModel;
-	MainMenuController menuController;
-	JTabbedPane tabbedPane;
+	
+	private MapModel menuModel;
+	private MainMenuController menuController;
+	private JTabbedPane tabbedPane;
+	private final String title = "ZPI TAXI";
+	
 
-	MapController mapController;
+	private MapController mapController;
+	private StatisticController statisticController;
 
 	/**
 	 * Create the application.
@@ -43,7 +48,7 @@ public class MainMenuView extends JFrame{
 		this.menuController = menuController;
 		this.menuModel = menuModel;
 		//initialize();
-		LoginController.turnOffLogBackLogger();
+		//LoginController.turnOffLogBackLogger();
 
 	}
 
@@ -54,11 +59,12 @@ public class MainMenuView extends JFrame{
 		this.setBounds(100, 100, 1280, 800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		DataBaseConnection.initialize();
 		addTabbedPane();
-		//addMainPagePanels();
+//		addMainPagePanels();
 		addOrderPanel();
-		addDriverPanel();
-		addOrdersDisplayPanel();
+//		addDriverPanel();
+//		addOrdersDisplayPanel();
 		//this.setDefaultLookAndFeelDecorated(false);
 //		try {
 //			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
@@ -67,6 +73,8 @@ public class MainMenuView extends JFrame{
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
+		this.setTitle(title);
 		this.setVisible(true);
 	}
 
@@ -78,10 +86,13 @@ public class MainMenuView extends JFrame{
 	public void addMainPagePanels(){
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(null);
-		mainPanel.add(getMapPanel());
-		mainPanel.add(getStatisticPanel());
-		mainPanel.add(getFilterPanel());
+//		mainPanel.add(getMapPanel());
+		mainPanel.add(getMap());
+//		mainPanel.add(getStatisticPanel());
+//		mainPanel.add(getFilterPanel());
 		mainPanel.setVisible(true);
+		
+//		statisticController.run();
 
 		tabbedPane.addTab("Mapa", null, mainPanel, null); //TODO ustawic ikony?
 	}
@@ -103,7 +114,8 @@ public class MainMenuView extends JFrame{
 		GridBagLayout gridBagLayout = (GridBagLayout) view.getMainMap().getLayout();
 		gridBagLayout.rowWeights = new double[]{1.0};
 		gridBagLayout.columnWeights = new double[]{1.0};
-		view.setBounds(0, 0, 2000, 2000);
+//		view.setBounds(0, 0, 2000, 2000);
+		view.setBounds(10, 10, 1000, 700);
 //		mapController.drawAllWaypoints();
 		//mapPanel.add(map);
 		//map.setBounds(0, 0, 5000, 3500);
@@ -113,11 +125,12 @@ public class MainMenuView extends JFrame{
 
 	public JPanel getStatisticPanel(){
 		StatisticModel statisticModel = new StatisticModel();
-		StatisticController statisticController = new StatisticController(statisticModel);
+		statisticController = new StatisticController(statisticModel);
 
 		JPanel statisticPanel = statisticController.getView();
 		//statisticPanel.setBounds(0, 0, 220, 300);
 		statisticPanel.setBounds(1000, 0, 300, 300);
+//		statisticController.run();
 		return statisticPanel;
 	}
 

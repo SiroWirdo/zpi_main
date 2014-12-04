@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import model.Car;
 import model.Driver;
@@ -17,6 +18,13 @@ import org.parse4j.ParseObject;
 import org.parse4j.ParsePointer;
 import org.parse4j.ParsePush;
 import org.parse4j.ParseQuery;
+
+import com.graphhopper.GHRequest;
+import com.graphhopper.GHResponse;
+import com.graphhopper.GraphHopper;
+import com.graphhopper.routing.util.EncodingManager;
+import com.graphhopper.util.InstructionList;
+import com.graphhopper.util.PointList;
 
 public class Algorithm implements Runnable {
     List<Driver> drivers;
@@ -113,6 +121,5 @@ public class Algorithm implements Runnable {
             // co jeœli nikt nie odpowie
         }
     }
-
 
 }
