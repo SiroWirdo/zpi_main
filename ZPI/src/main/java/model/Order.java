@@ -1,5 +1,7 @@
 package model;
 
+import geocoding.ConverterGeoPosition;
+
 import java.util.Date;
 
 import org.jdesktop.swingx.mapviewer.Waypoint;
@@ -9,8 +11,6 @@ import org.parse4j.ParseException;
 import org.parse4j.ParseGeoPoint;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
-
-import other.ConverterGeoPosition;
 
 @ParseClassName("Order")
 public class Order extends ParseObject {

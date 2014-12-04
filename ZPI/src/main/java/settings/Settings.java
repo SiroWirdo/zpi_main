@@ -9,6 +9,9 @@ import xml.reader.XMLReader;
 import model.Dispatcher;
 
 public class Settings {
+	
+	public final static String GOOGLE_API_KEY = "AIzaSyCwdqY0myu5bBafDf3r7WyhU_THfd_Q3lI";
+	public final static String DEFAULT_CITY = "Wroc³aw";
 
 	public static Dispatcher USER_OBJECT;
 	public static final int FREE_CAR_STATUS = 0;

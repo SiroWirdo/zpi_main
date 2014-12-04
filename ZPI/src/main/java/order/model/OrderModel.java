@@ -1,5 +1,7 @@
 package order.model;
 
+import geocoding.AddressInfo;
+import geocoding.ConverterGeoPosition;
 import model.Customer;
 import model.Order;
 
@@ -27,8 +29,11 @@ public class OrderModel {
 		DataBaseConnection.initialize();
 	}
 	
-	public void addOrder(String surname, Number phoneNumber , String pickUpAddress, String customerRemarks, Number passangerCount){
-		//create the order
+	/*
+	 * Create the order
+	 */
+	public void addOrder(String surname, Number phoneNumber , String pickUpAddress,
+			String customerRemarks, Number passangerCount){
 		Order order = new Order();
 		
 		Customer customer = new Customer();
@@ -37,17 +42,18 @@ public class OrderModel {
 		try {
 			customer.save();
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		order.put("customerId", customer);
+//		TODO naprawiæ dodawanie dispatchera
 //		ParseUser dispatherObj = Settings.USER_OBJECT;
-		
-		order.put("dispatcher", new ParsePointer("Dispatcher", Settings.USER_OBJECT.getObjectId()));
-		order.put("pickupAddress", pickUpAddress);
+//		order.put("dispatcher", new ParsePointer("Dispatcher", Settings.USER_OBJECT.getObjectId()));
 		order.put("customerRemarks", customerRemarks);
-		order.put("passangerCount", passangerCount);
+		order.put("passengerCount", passangerCount);
 		order.put("status", 0); //"oczekuj¹ce"
+		AddressInfo addressInfo = ConverterGeoPosition.addressToAdressInfo(pickUpAddress);
+		order.put("pickupAddress", addressInfo.getFullAddress());
+		order.put("pickupAddressGeo", ConverterGeoPosition.addressInfoToParseGeoPoint(addressInfo));
 		order.saveInBackground();		
 	
 //		try {
@@ -57,11 +63,8 @@ public class OrderModel {
 //			e.printStackTrace();
 //		}
 		
-//		ParseRelation<ParseObject> relation = order.getRelation("customerId");
-//		relation.add(customer);
 //		order.saveInBackground();
-//		order.setPickupAddressGeo(value); <- wyliczenie adresu Geo przez system
-//		setDriverId(); <--- algorytm
+//		setDriverId(); <--- TODO algorytm
 		//create the customer
 	}
 	
@@ -87,18 +90,5 @@ public class OrderModel {
 		 * Algorytm do przydzielania kierowcy do zleceniA!
 		 */
 	}
-	/*KIEROWCA TO ROBI Z POZIOMU KODU APKI
-	public void addDestinationAddress(String destinationAddress){
-		order.setDestinationAddress(destinationAddress);
-		//order.setDestinationAddressGeo(value); //<-- wyliczenie adresu Geo przez system
-	}
-	
-	public void addCost(Double cost){
-		order.setCost(cost);
-	}
-	
-	public void addDriverRemarks(String driverRemarks){
-		order.setDriverRemarks(driverRemarks);
-	}*/
 	
 }

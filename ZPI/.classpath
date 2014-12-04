@@ -19,5 +19,20 @@
 	<classpathentry kind="lib" path="lib/Parse/logback-classic/0.9.28/logback-classic-0.9.28.jar"/>
 	<classpathentry kind="lib" path="lib/Parse/logback-core/0.9.28/logback-core-0.9.28.jar"/>
 	<classpathentry kind="lib" path="lib/Parse/parse4j-1.3.3.jar" sourcepath="lib/Parse/parse4j-1.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/mapsforge-core-0.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/mapsforge-map-0.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/mapsforge-map-android-0.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/mapsforge-map-reader-0.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/graphhopper-0.1.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/geocoding/google-maps-apis.jar"/>
+	<classpathentry kind="lib" path="lib/geocoding/joda-time-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/geocoding/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="lib/geocoding/okhttp-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/geocoding/okio-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/geocoding/graphhopper-0.3.jar" sourcepath="lib/Routing/graphhopper-0.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/trove-3.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/osmosis-pbf-0.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/protobuf-java-2.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/Routing/osmosis-osm-binary-0.43.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

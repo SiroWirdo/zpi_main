@@ -1,12 +1,12 @@
 package model;
 
+import geocoding.ConverterGeoPosition;
+
 import org.jdesktop.swingx.mapviewer.Waypoint;
 import org.parse4j.ParseClassName;
 import org.parse4j.ParseGeoPoint;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
-
-import other.ConverterGeoPosition;
 
 @ParseClassName("Car")
 public class Car extends ParseObject{
