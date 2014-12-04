@@ -102,6 +102,10 @@ public class Driver extends ParseObject {
 		put("carId", car);
 	}
 
+	public void setCar(Car car) {
+		put("carId", car);
+	}
+
 	public static ParseQuery<Driver> getQuery() {
 		return ParseQuery.getQuery(Driver.class);
 	}

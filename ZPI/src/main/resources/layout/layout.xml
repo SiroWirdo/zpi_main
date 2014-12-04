@@ -2,15 +2,15 @@
 <start>
 	<button>
 		<width>100</width>
-		<height>20</height>
+		<height>25</height>
 		<background>yellow</background>
 		<font>Dialog.bold</font>
 	</button>
 	<frame>
-		<background>yellow</background>
+		<background>gold</background>
 	</frame>
 	<label>
 		<font> </font>
-		<background> </background>
+		<color> </color>
 	</label>
 </start>

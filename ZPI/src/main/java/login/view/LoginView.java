@@ -32,7 +32,7 @@ public class LoginView extends JFrame {
 	}
 
 	public void initialize(){
-		try {
+		/*try {
 			 UIManager.setLookAndFeel(
 			            UIManager.getSystemLookAndFeelClassName());
 			 
@@ -41,7 +41,7 @@ public class LoginView extends JFrame {
 				| IllegalAccessException | UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		this.setTitle("Logowanie");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 351, 267);
@@ -78,6 +78,7 @@ public class LoginView extends JFrame {
 		okButton.addActionListener(loginController.getLoginListener());
 		panel.add(okButton);
 		getRootPane().setDefaultButton(okButton);
+		// TODO coœ nie tak z kolorem tego buttona
 		
 
 		cancelButton = new JButton("Anuluj");

@@ -23,9 +23,12 @@ import order.controller.OrderController;
 import order.model.OrderModel;
 import ordersdisplay.controller.OrdersController;
 import ordersdisplay.model.OrdersModel;
+<<<<<<< HEAD
+import other.DataBaseConnection;
+=======
 import drivers.controller.DriversController;
 import drivers.model.DriversModel;
-import drivers.controller.DriversController;
+>>>>>>> a3a1b3d69be1aa8e58a3c19cd9086bad34b1467b
 
 
 public class MainMenuView extends JFrame{
@@ -61,8 +64,22 @@ public class MainMenuView extends JFrame{
 		addTabbedPane();
 //		addMainPagePanels();
 		addOrderPanel();
+<<<<<<< HEAD
 //		addDriverPanel();
 //		addOrdersDisplayPanel();
+		//this.setDefaultLookAndFeelDecorated(false);
+//		try {
+//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+//		} catch (ClassNotFoundException | InstantiationException
+//				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		this.setTitle(title);
+=======
+		addDriverPanel();
+		addOrdersDisplayPanel();
 		addMessagePanel();
 		//this.setDefaultLookAndFeelDecorated(false);
 		/*try {
@@ -74,8 +91,7 @@ public class MainMenuView extends JFrame{
 		}*/
 
 
-		
-		this.setTitle(title);
+>>>>>>> a3a1b3d69be1aa8e58a3c19cd9086bad34b1467b
 		this.setVisible(true);
 	}
 

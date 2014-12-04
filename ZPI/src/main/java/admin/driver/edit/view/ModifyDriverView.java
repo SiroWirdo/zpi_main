@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import settings.Settings;
 import model.Driver;
 import admin.driver.edit.controller.ModifyDriverController;
 import admin.driver.edit.model.ModifyDriverModel;
@@ -20,8 +21,8 @@ public class ModifyDriverView extends JFrame{
 	private JLabel jlLicenseNumber;
 	private JLabel jlPesel;
 	private JLabel jlStatus;
-	private JLabel jlCarId;
-	private JLabel jlUserId;
+	//private JLabel jlCarId;
+	private JLabel jlMail;
 	private JTextField tfName;
 	private JTextField tfSurname;
 	private JTextField tfPhoneNumber;
@@ -29,7 +30,9 @@ public class ModifyDriverView extends JFrame{
 	private JTextField tfPesel;
 	private JTextField tfStatus;
 	private JTextField tfCarId;
-	private JTextField tfUserId;
+	private JTextField tfMail;
+	private JButton editCar;
+	private JButton resetPassword;
 	private JButton edit;
 	private JButton cancel;
 	private JPanel mainPanel;
@@ -58,7 +61,7 @@ public class ModifyDriverView extends JFrame{
 		mainPanel.add(jlName);
 
 		tfName = new JTextField();
-		tfName.setBounds(x + 130, y, 100, 20);
+		tfName.setBounds(x + 130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfName);
 
 		jlSurname = new JLabel("Nazwisko: ");
@@ -66,7 +69,7 @@ public class ModifyDriverView extends JFrame{
 		mainPanel.add(jlSurname);
 
 		tfSurname = new JTextField();
-		tfSurname.setBounds(x + 130, y, 100, 20);
+		tfSurname.setBounds(x + 130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfSurname);
 
 		jlPhoneNumber = new JLabel("Telefon: ");
@@ -74,7 +77,7 @@ public class ModifyDriverView extends JFrame{
 		mainPanel.add(jlPhoneNumber);
 
 		tfPhoneNumber = new JTextField();
-		tfPhoneNumber.setBounds(x+130, y, 100, 20);
+		tfPhoneNumber.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfPhoneNumber);
 
 		jlLicenseNumber = new JLabel("Licencja: ");
@@ -82,7 +85,7 @@ public class ModifyDriverView extends JFrame{
 		mainPanel.add(jlLicenseNumber);
 
 		tfLicenseNumber = new JTextField();
-		tfLicenseNumber.setBounds(x+130, y, 100, 20);
+		tfLicenseNumber.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfLicenseNumber);
 
 		jlPesel = new JLabel("PESEL: ");
@@ -90,7 +93,7 @@ public class ModifyDriverView extends JFrame{
 		mainPanel.add(jlPesel);
 
 		tfPesel = new JTextField();
-		tfPesel.setBounds(x+130, y, 100, 20);
+		tfPesel.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfPesel);
 
 		jlStatus = new JLabel("Status: ");
@@ -98,32 +101,46 @@ public class ModifyDriverView extends JFrame{
 		mainPanel.add(jlStatus);
 
 		tfStatus = new JTextField();
-		tfStatus.setBounds(x+130, y, 100, 20);
+		tfStatus.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfStatus);
-
+/*
 		jlCarId = new JLabel("Id samochodu: ");
 		jlCarId.setBounds(x, y=y+30, 120, 20);
 		mainPanel.add(jlCarId);
-
+*/
 		tfCarId = new JTextField();
-		tfCarId.setBounds(x+130, y, 100, 20);
+		//tfCarId.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfCarId);
 
-		jlUserId = new JLabel("Id u¿ytkownika: ");
-		jlUserId.setBounds(x, y=y+30, 120, 20);
-		mainPanel.add(jlUserId);
+		jlMail = new JLabel("E-mail: ");
+		//jlMail.setBounds(x, y=y+30, 60, 20);
+		mainPanel.add(jlMail);
 
-		tfUserId = new JTextField();
-		tfUserId.setBounds(x+130, y, 100, 20);
-		mainPanel.add(tfUserId);
+		tfMail = new JTextField();
+		//tfMail.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		mainPanel.add(tfMail);
+
+		jlMail.setVisible(false);
+		tfMail.setVisible(false);
+		tfCarId.setVisible(false);
+		
+		editCar = new JButton("Edytuj samochód");
+		editCar.setBounds(x, y=y+30, 255, 25);
+		editCar.addActionListener(modifyDriverController.getEditCarButtonListener());
+		mainPanel.add(editCar);
+
+		resetPassword = new JButton("Zresetuj has³o");
+		resetPassword.setBounds(x, y=y+30, 255, 25);
+		resetPassword.addActionListener(modifyDriverController.getRestartPasswordButtonListener());
+		mainPanel.add(resetPassword);
 
 		cancel = new JButton("Anuluj");
-		cancel.setBounds(x, y=y+40, 100, 20);
+		cancel.setBounds(x, y=y+40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		cancel.addActionListener(modifyDriverController.getCancelButtonListener());
 		mainPanel.add(cancel);
 
 		edit = new JButton("Edytuj");
-		edit.setBounds(x+130, y, 100, 20);
+		edit.setBounds(x+130, y, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		edit.addActionListener(modifyDriverController.getEditButtonListener());
 		mainPanel.add(edit);
 		//TODO Dodac edycje hasla. Zmiana u¿ytkownika po username a nie po id
@@ -145,10 +162,13 @@ public class ModifyDriverView extends JFrame{
 		}
 		tfCarId.setText(carId);
 		String userId = "";
+		String email = "";
 		if(driver.getUser() != null){
 			userId = driver.getUser().getObjectId();
+			email = modifyDriverModel.getUserMail(userId);
+
 		}
-		tfUserId.setText(userId);
+		tfMail.setText(email);
 		this.repaint();
 	}
 
@@ -158,8 +178,12 @@ public class ModifyDriverView extends JFrame{
 
 	public String[] getValues(){
 		String[] values = {tfName.getText(), tfSurname.getText(), tfPhoneNumber.getText(), tfLicenseNumber.getText(),
-				tfPesel.getText(), tfStatus.getText(), tfCarId.getText(), tfUserId.getText()};
+				tfPesel.getText(), tfStatus.getText(), tfCarId.getText(), tfMail.getText()};
 		return values;
+	}
+	
+	public String getCarId(){
+		return tfCarId.getText();
 	}
 
 }

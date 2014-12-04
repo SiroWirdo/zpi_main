@@ -6,11 +6,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import model.Car;
+
 import org.parse4j.ParsePointer;
 import org.parse4j.ParseUser;
 
 import validation.DriverDispatcherValidation;
 import validation.UserValidation;
+import admin.car.add.controller.AddCarController;
+import admin.car.add.model.AddCarModel;
+import admin.car.add.view.AddCarView;
 import admin.driver.add.model.AddDriverModel;
 import admin.driver.add.view.AddDriverView;
 import admin.user.add.controller.AddUserController;
@@ -18,154 +23,167 @@ import admin.user.add.model.AddUserModel;
 import admin.user.add.view.AddUserView;
 
 public class AddDriverController {
-	private AddDriverView addDriverView;
-	private AddDriverModel addDriverModel;
-	private AddUserView addUserView;
-	private AddUserModel addUserModel;
-	private AddUserController addUserController;
+    private AddDriverView addDriverView;
+    private AddDriverModel addDriverModel;
+    private AddUserView addUserView;
+    private AddUserModel addUserModel;
+    private AddUserController addUserController;
+    private AddCarView addCarView;
+    private AddCarModel addCarModel;
+    private AddCarController addCarController;
 
-	public AddDriverController(AddDriverModel addDriverModel){
-		this.addDriverModel = addDriverModel;
-		this.addDriverView = new AddDriverView(this, addDriverModel);
+    public AddDriverController(AddDriverModel addDriverModel){
+        this.addDriverModel = addDriverModel;
+        this.addDriverView = new AddDriverView(this, addDriverModel);
 
-		this.addDriverModel.initialize();
-		this.addDriverView.initialize();
+        this.addDriverModel.initialize();
+        this.addDriverView.initialize();
+    }
+
+    public AddUserView getUserView(){
+        addUserModel = new AddUserModel();
+        addUserView = new AddUserView(addUserModel);
+        addUserController = new AddUserController(addUserModel, addUserView);
+        return addUserView;
+
+    }
+
+	public AddCarView getAddCarView(){
+		addCarModel = new AddCarModel();
+		addCarController = new AddCarController(addCarModel);
+		addCarView = addCarController.getAddCarView();
+		return this.addCarView;
 	}
 
-	public AddUserView getUserView(){
-		addUserModel = new AddUserModel();
-		addUserView = new AddUserView(addUserModel);
-		addUserController = new AddUserController(addUserModel, addUserView);
-		return addUserView;
+    public AddButtonListener getAddButtonListener(){
+        return new AddButtonListener();
+    }
 
-	}
+    public CancelButtonListener getCancelButtonListener(){
+        return new CancelButtonListener();
+    }
 
-	public AddButtonListener getAddButtonListener(){
-		return new AddButtonListener();
-	}
+    private class AddButtonListener implements ActionListener{
 
-	public CancelButtonListener getCancelButtonListener(){
-		return new CancelButtonListener();
-	}
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            // TODO Auto-generated method stub
+            String[] values = addDriverView.getValues();
+            String[] userValues = addUserView.getValues();
+            String[] carValues = addCarView.getValues();
+            boolean valid = true;
+            boolean password = false;
 
-	private class AddButtonListener implements ActionListener{
+            for(String value : values){
+                if(value.equals("")){
+                    valid = false;
+                }
+            }
 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			String[] values = addDriverView.getValues();
-			String[] userValues = addUserView.getValues();
-			boolean valid = true;
-			boolean password = false;
+            for(String value : userValues){
+                if(value.equals("")){
+                    valid = false;
+                }
+            }
 
-			for(String value : values){
-				if(value.equals("")){
-					valid = false;
-				}
-			}
+            boolean validPesel = true;
+            if(values[2].length() != 11){
+                validPesel = false;
+            }
 
-			for(String value : userValues){
-				if(value.equals("")){
-					valid = false;
-				}
-			}
+            if(userValues[1].equals(userValues[2])){
+                password = true;
+            }
 
-			boolean validPesel = true;
-			if(values[2].length() != 11){
-				validPesel = false;
-			}
+            boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
+            boolean uniqueLicense = DriverDispatcherValidation.isLicenseUnique(values[4]);
+            boolean uniqueUsername = UserValidation.isUserNameUnique(userValues[0]);
+            // TODO walidacja smochodu
+            // TODO walidacja poprawnoœci wpisywanych danych
+            // TODO jeœli wywala ¿e nie jest unikalny to proces nie umiera...
+            // TODO wyœwietlac w jednym komunikacie wszystkie errory, zrobic stringa ktory bedzie je przetrzymywal
 
-			if(userValues[1].equals(userValues[2])){
-				password = true;
-			}
+            if(valid && uniquePesel && uniqueLicense && uniqueUsername && validPesel){
+                if(password){
+                    System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST");
+                    boolean admin = addUserView.isAdminSelected();
+                    ParseUser user = addUserModel.addUser(userValues[0], userValues[1], userValues[3], admin);
+                    ParsePointer pointer = new ParsePointer("_User", user.getObjectId());
+                    Car car = addCarModel.addCar(carValues[0], new Integer(carValues[1]), new Integer(carValues[2]));
+                    /*String id = user.getObjectId();
+                    user.setDirty();
 
-			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
-			boolean uniqueLicense = DriverDispatcherValidation.isLicenseUnique(values[4]);
-			boolean uniqueUsername = UserValidation.isUserNameUnique(userValues[0]);
-			// TODO walidacja smochodu
-			// TODO walidacja poprawnoœci wpisywanych danych
-			// TODO jeœli wywala ¿e nie jest unikalny to proces nie umiera...
+                    ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
+                    query.whereEqualTo("objectId", id);
+                    ParseUser us = null;
+                    try {
+                        us = query.find().get(0);
+                    } catch (ParseException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
 
+                    /*JSONObject pointer = new JSONObject();
+                    System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST22222222222222222");
+                      if (user.getObjectId() != null) {
+                          pointer.put("__type", "Pointer");
+                          pointer.put("className", user.getClassName());
+                          pointer.put("objectId", user.getObjectId());
+                      }
 
-			if(valid && uniquePesel && uniqueLicense && uniqueUsername && validPesel){
-				if(password){
-					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST");
-					boolean admin = addUserView.isAdminSelected();
-					ParseUser user = addUserModel.addUser(userValues[0], userValues[1], userValues[3], admin);
-					ParsePointer pointer = new ParsePointer("_User", user.getObjectId());
-					/*String id = user.getObjectId();
-					user.setDirty();
+                      System.out.println(pointer);
+                     */
 
-					ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
-					query.whereEqualTo("objectId", id);
-					ParseUser us = null;
-					try {
-						us = query.find().get(0);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+                    addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], pointer, car);
 
-					/*JSONObject pointer = new JSONObject();
-					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST22222222222222222");
-				      if (user.getObjectId() != null) {
-				    	  pointer.put("__type", "Pointer");
-				    	  pointer.put("className", user.getClassName());
-				    	  pointer.put("objectId", user.getObjectId());
-				      }
+                    addDriverView.clearTextFields();
+                    addUserView.clearTextFields();
+                    addCarView.clearTextFields();
+                }else{
+                    JFrame frame = new JFrame();
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    JOptionPane.showMessageDialog(frame, "Has³a nie zgadzaj¹ siê");
+                }
+            }else{
+                if(!uniquePesel){
+                        printError("Taki PESEL jest ju¿ przypisany do innej osoby");
+                    }
+                if(!uniqueLicense){
+                    printError("Taka licencja jest ju¿ przypisana do innego kierowcy");
+                }
+                if(!uniqueUsername){
+                    printError("Taki u¿ytkownik ju¿ istnieje");
+                }
 
-				      System.out.println(pointer);
-					 */
+                if(!validPesel){
+                    printError("PESEL powinien mieæ 11 znaków");
+                }
 
-					addDriverModel.addDriver(values[0], values[1], new Long(values[2]), new Long(values[3]), values[4], pointer);
+                if(!valid){
+                    printError("WprowadŸ wszystkie dane");
 
-					addDriverView.clearTextFields();
-					addUserView.clearTextFields();
-				}else{
-					JFrame frame = new JFrame();
-					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					JOptionPane.showMessageDialog(frame, "Has³a nie zgadzaj¹ siê");
-				}
-			}else{
-				if(!uniquePesel){
-						printError("Taki PESEL jest ju¿ przypisany do innej osoby");
-					}
-				if(!uniqueLicense){
-					printError("Taka licencja jest ju¿ przypisana do innego kierowcy");
-				}
-				if(!uniqueUsername){
-					printError("Taki u¿ytkownik ju¿ istnieje");
-				}
+                }
 
-				if(!validPesel){
-					printError("PESEL powinien mieæ 11 znaków");
-				}
+            }
 
-				if(!valid){
-					printError("WprowadŸ wszystkie dane");
+        }
+    }
 
-				}
+    public void printError(String text){
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JOptionPane.showMessageDialog(frame, text);
+    }
 
-			}
+    private class CancelButtonListener implements ActionListener{
 
-		}
-	}
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            // TODO Auto-generated method stub
+            addDriverView.dispose();
 
-	public void printError(String text){
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JOptionPane.showMessageDialog(frame, text);
-	}
+        }
 
-	private class CancelButtonListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			addDriverView.dispose();
-
-		}
-
-	}
+    }
 
 }

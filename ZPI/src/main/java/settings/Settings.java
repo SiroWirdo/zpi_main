@@ -19,6 +19,11 @@ public class Settings {
 	public static final int PAUSE_CAR_STATUS = 2;
 	public static final int BLOCK_CAR_STATUS = 3;
 	public static final int UNAVALAIBLE_CAR_STATUS = 4;
+	public static final int TEXT_FIELD_WIDTH = 125;
+	public static final int TEXT_FIELD_HEIGHT = 30;
+	public static final int BUTTON_WIDTH = 125;
+	public static final int BUTTON_HEIGHT = 25;
+
 
 	public static String[] driverStatus = {"wolny", "kurs", "przerwa", "zablokowany", "niedostêpny"};
 	public static String[] orderStatus = {"oczekuj¹ce", "w trakcie realizacji", "zrealizowane", "anulowane", "zaakceptowane"};

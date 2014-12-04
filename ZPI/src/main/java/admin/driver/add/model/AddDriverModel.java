@@ -1,5 +1,6 @@
 package admin.driver.add.model;
 
+import model.Car;
 import model.Driver;
 
 import org.parse4j.ParseException;
@@ -13,7 +14,7 @@ public class AddDriverModel {
 		DataBaseConnection.initialize();
 	}
 
-	public void addDriver(String name, String surname, long pesel, long phone, String license, ParsePointer user){
+	public void addDriver(String name, String surname, long pesel, long phone, String license, ParsePointer user, Car car){
 		Driver driver = new Driver();
 		driver.setName(name);
 		driver.setSurname(surname);
@@ -22,6 +23,7 @@ public class AddDriverModel {
 		driver.setLicenseNumber(license);
 		driver.setStatus(4);
 		driver.put("userId", user);
+		driver.setCar(car);
 		try {
 			driver.save();
 		} catch (ParseException e) {

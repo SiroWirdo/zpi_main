@@ -1,4 +1,4 @@
-package ordersdiplay.view;
+package ordersdisplay.view;
 
 import java.awt.Font;
 
@@ -30,6 +30,7 @@ public class OrdersView extends JPanel {
 	private JCheckBox realizing;
 	private JCheckBox realized;
 	private JCheckBox cancelled;
+	private JCheckBox accepted;
 	private JButton filtr;
 
 	public OrdersView(OrdersController ordersController, OrdersModel ordersModel){
@@ -68,7 +69,7 @@ public class OrdersView extends JPanel {
 		this.add(scrollPane);
 
 		editOrder = new JButton("Edytuj");
-		editOrder.setBounds(300, 30, 100, 20);
+		editOrder.setBounds(430, 30, 100, 20);
 		add(editOrder);
 
 		jlStatus = new JLabel("Status:");
@@ -94,9 +95,14 @@ public class OrdersView extends JPanel {
 		cancelled.setBounds(170, 60, 100, 30);
 		cancelled.setSelected(true);
 		add(cancelled);
+		
+		accepted = new JCheckBox(Settings.orderStatus[4]);
+		accepted.setBounds(300, 60, 130, 30);
+		accepted.setSelected(true);
+		add(accepted);
 
 		filtr = new JButton("Filtruj");
-		filtr.setBounds(300, 65, 100, 20);
+		filtr.setBounds(430, 65, 100, 20);
 		filtr.addActionListener(ordersController.getFiltrListener());
 		add(filtr);
 	}
@@ -143,6 +149,10 @@ public class OrdersView extends JPanel {
 
 		if(status.equals(Settings.orderStatus[3])){
 			return cancelled.isSelected();
+		}
+		
+		if(status.equals(Settings.orderStatus[4])){
+			return accepted.isSelected();
 		}
 
 		return true;

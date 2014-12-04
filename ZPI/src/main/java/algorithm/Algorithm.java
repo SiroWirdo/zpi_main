@@ -84,6 +84,7 @@ public class Algorithm implements Runnable {
         String channel = "user_" + userId;
         push.setOrderMessage(order.getObjectId());
         push.setChannel(channel);
+        // nie wiem czy nie lepiej sendInBackground
         try {
             push.send();
         } catch (ParseException e) {

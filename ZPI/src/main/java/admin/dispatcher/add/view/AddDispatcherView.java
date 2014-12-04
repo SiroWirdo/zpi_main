@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import settings.Settings;
 import admin.dispatcher.add.controller.AddDispatcherController;
 import admin.dispatcher.add.model.AddDispatcherModel;
 import admin.user.add.controller.AddUserController;
@@ -69,7 +70,7 @@ public class AddDispatcherView extends JFrame{
 		mainPanel.add(name);
 
 		nameTF = new JTextField("kowal");
-		nameTF.setBounds(x+80, y, 100, 20);
+		nameTF.setBounds(x+80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(nameTF);
 
 		surname = new JLabel("Nazwisko: ");
@@ -77,17 +78,17 @@ public class AddDispatcherView extends JFrame{
 		mainPanel.add(surname);
 
 		surnameTF = new JTextField("iui");
-		surnameTF.setBounds(x + 80, y, 100, 20);
+		surnameTF.setBounds(x + 80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(surnameTF);
-		
+
 		pesel = new JLabel("PESEL: ");
 		pesel.setBounds(x, y=y+30, 70, 20);
 		mainPanel.add(pesel);
-		
+
 		peselTF = new JTextField();
-		peselTF.setBounds(x+80, y, 100, 20);
+		peselTF.setBounds(x+80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(peselTF);
-		
+
 /*
 		userId = new JLabel("U¿ytkownik: ");
 		userId.setBounds(x, y=y+30, 80, 20);
@@ -98,12 +99,12 @@ public class AddDispatcherView extends JFrame{
 		mainPanel.add(userIdTF);
 */
 		addDriver = new JButton("Dodaj");
-		addDriver.setBounds(370, 10, 100, 30);
+		addDriver.setBounds(370, 10, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		addDriver.addActionListener(addDispatcherController.getAddButtonListener());
 		optionPanel.add(addDriver);
 
 		cancel = new JButton("Anuluj");
-		cancel.setBounds(10, 10, 100, 30);
+		cancel.setBounds(10, 10, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		cancel.addActionListener(addDispatcherController.getCancelButtonListener());
 		optionPanel.add(cancel);
 

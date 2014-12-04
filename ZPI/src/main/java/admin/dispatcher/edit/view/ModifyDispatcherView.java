@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import settings.Settings;
 import model.Dispatcher;
 import admin.dispatcher.edit.controller.ModifyDispatcherController;
 import admin.dispatcher.edit.model.ModifyDispatcherModel;
@@ -16,11 +17,12 @@ public class ModifyDispatcherView extends JFrame{
 	private JLabel jlName;
 	private JLabel jlSurname;
 	private JLabel jlPesel;
-	private JLabel jlUserId;
+	private JLabel jlMail;
 	private JTextField tfName;
 	private JTextField tfSurname;
 	private JTextField tfPesel;
-	private JTextField tfUserId;
+	private JTextField tfMail;
+	private JButton resetPassword;
 	private JButton edit;
 	private JButton cancel;
 	private JPanel mainPanel;
@@ -49,7 +51,7 @@ public class ModifyDispatcherView extends JFrame{
 		mainPanel.add(jlName);
 
 		tfName = new JTextField();
-		tfName.setBounds(x + 130, y, 100, 20);
+		tfName.setBounds(x + 130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfName);
 
 		jlSurname = new JLabel("Nazwisko: ");
@@ -57,7 +59,7 @@ public class ModifyDispatcherView extends JFrame{
 		mainPanel.add(jlSurname);
 
 		tfSurname = new JTextField();
-		tfSurname.setBounds(x + 130, y, 100, 20);
+		tfSurname.setBounds(x + 130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfSurname);
 
 		jlPesel = new JLabel("PESEL: ");
@@ -65,24 +67,32 @@ public class ModifyDispatcherView extends JFrame{
 		mainPanel.add(jlPesel);
 
 		tfPesel = new JTextField();
-		tfPesel.setBounds(x+130, y, 100, 20);
+		tfPesel.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfPesel);
 
-		jlUserId = new JLabel("Id u¿ytkownika: ");
-		jlUserId.setBounds(x, y=y+30, 120, 20);
-		mainPanel.add(jlUserId);
+		jlMail = new JLabel("E-mail: ");
+		//jlMail.setBounds(x, y=y+30, 60, 20);
+		mainPanel.add(jlMail);
 
-		tfUserId = new JTextField();
-		tfUserId.setBounds(x+130, y, 100, 20);
-		mainPanel.add(tfUserId);
+		tfMail = new JTextField();
+		//tfMail.setBounds(x+130, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		mainPanel.add(tfMail);
+
+		jlMail.setVisible(false);
+		tfMail.setVisible(false);
+
+		resetPassword = new JButton("Zresetuj has³o");
+		resetPassword.setBounds(x, y=y+30, 255, 25);
+		resetPassword.addActionListener(modifyDispatcherController.getRestartPasswordButtonListener());
+		mainPanel.add(resetPassword);
 
 		cancel = new JButton("Anuluj");
-		cancel.setBounds(x, y=y+40, 100, 20);
+		cancel.setBounds(x, y=y+40, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		cancel.addActionListener(modifyDispatcherController.getCancelButtonListener());
 		mainPanel.add(cancel);
 
 		edit = new JButton("Edytuj");
-		edit.setBounds(x+130, y, 100, 20);
+		edit.setBounds(x+130, y, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		edit.addActionListener(modifyDispatcherController.getEditButtonListener());
 		mainPanel.add(edit);
 		//TODO Dodac edycje hasla. Zmiana u¿ytkownika po username a nie po id
@@ -97,10 +107,12 @@ public class ModifyDispatcherView extends JFrame{
 		tfPesel.setText(new Long(dispatcher.getPESEL()).toString());
 
 		String userId = "";
+		String email = "";
 		if(dispatcher.getUser() != null){
 			userId = dispatcher.getUser().getObjectId();
+			email = modifyDispatcherModel.getUserMail(userId);
 		}
-		tfUserId.setText(userId);
+		tfMail.setText(email);
 		this.repaint();
 	}
 
@@ -109,7 +121,7 @@ public class ModifyDispatcherView extends JFrame{
 	}
 
 	public String[] getValues(){
-		String[] values = {tfName.getText(), tfSurname.getText(), tfPesel.getText(), tfUserId.getText()};
+		String[] values = {tfName.getText(), tfSurname.getText(), tfPesel.getText(), tfMail.getText()};
 		return values;
 	}
 }

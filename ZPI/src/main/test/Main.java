@@ -17,6 +17,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.jdesktop.swingx.JXMapKit;
 import org.jdesktop.swingx.JXMapViewer;
@@ -29,6 +31,17 @@ import org.jdesktop.swingx.mapviewer.WaypointRenderer;
 public class Main {
 
 	public static final void main(String args[]) {
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		}
+
 		JFrame frame = new JFrame("JXMapViewer with swingwaypoints");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

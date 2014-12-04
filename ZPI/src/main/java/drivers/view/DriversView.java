@@ -36,6 +36,7 @@ public class DriversView extends JPanel {
 	private JTextField tfName;
 	private JTextField tfSurname;
 	private TableRowSorter sorter;
+	
 	public DriversView(DriversController driversController, DriversModel driversModel){
 		this.driversController = driversController;
 		this.driversModel = driversModel;
@@ -45,11 +46,17 @@ public class DriversView extends JPanel {
 	public void initialize(){
 		setLayout(null);
 
-		Color backgroundColor = Settings.getColor("frame", "background");
-		this.setBackground(backgroundColor);
+		/*Color backgroundColor = Settings.getColor("frame", "background");
+		this.setBackground(backgroundColor);*/
 
 		String[] columns = {"Imiê", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
-		tableModel = new DefaultTableModel(0, 0);
+		tableModel = new DefaultTableModel(0, 0){
+
+			   @Override
+			   public boolean isCellEditable(int row, int column) {
+			       return false;
+			   }
+			};
 		tableModel.setColumnIdentifiers(columns);
 		table = new JTable();
 		//table.setBounds(0, 0, 1100, 700);
@@ -64,10 +71,12 @@ public class DriversView extends JPanel {
 		//table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		table.setModel(tableModel);
 
-		table.setRowSelectionAllowed(false);
+		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setCellSelectionEnabled(false);
 		table.setFillsViewportHeight(true);
+		table.setCellSelectionEnabled(false);
+		
 		table.setVisible(true);
 
 		this.add(scrollPane);
@@ -79,31 +88,31 @@ public class DriversView extends JPanel {
 		free = new JCheckBox(Settings.driverStatus[0]);
 		free.setBounds(10, 30, 100, 30);
 		free.setSelected(true);
-		free.setBackground(backgroundColor);
+		//free.setBackground(backgroundColor);
 		add(free);
 
 		course = new JCheckBox(Settings.driverStatus[1]);
 		course.setBounds(10, 60, 100, 30);
 		course.setSelected(true);
-		course.setBackground(backgroundColor);
+		//course.setBackground(backgroundColor);
 		add(course);
 
 		pause = new JCheckBox(Settings.driverStatus[2]);
 		pause.setBounds(130, 30, 100, 30);
 		pause.setSelected(true);
-		pause.setBackground(backgroundColor);
+		//pause.setBackground(backgroundColor);
 		add(pause);
 
 		blocked = new JCheckBox(Settings.driverStatus[3]);
 		blocked.setBounds(130, 60, 100, 30);
 		blocked.setSelected(true);
-		blocked.setBackground(backgroundColor);
+		//blocked.setBackground(backgroundColor);
 		add(blocked);
 
 		unavailable = new JCheckBox(Settings.driverStatus[4]);
 		unavailable.setBounds(250, 30, 100, 30);
 		unavailable.setSelected(true);
-		unavailable.setBackground(backgroundColor);
+		//unavailable.setBackground(backgroundColor);
 		add(unavailable);
 
 		jlName = new JLabel("Imiê:");
@@ -111,7 +120,7 @@ public class DriversView extends JPanel {
 		add(jlName);
 
 		tfName = new JTextField();
-		tfName.setBounds(480, 35, 100, 20);
+		tfName.setBounds(480, 35, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(tfName);
 
 		jlSurname = new JLabel("Nazwisko:");
@@ -119,11 +128,11 @@ public class DriversView extends JPanel {
 		add(jlSurname);
 
 		tfSurname = new JTextField();
-		tfSurname.setBounds(480, 65, 100, 20);
+		tfSurname.setBounds(480, 65, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(tfSurname);
 
 		filtr = new JButton("Filtruj");
-		filtr.setBounds(600, 65, 100, 20);
+		filtr.setBounds(625, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(driversController.getFiltrListener());
 		add(filtr);
 		//	tableModel.addRow(new Object[]{"test", "test", "test", "test", "test", "test"});
@@ -181,7 +190,7 @@ public class DriversView extends JPanel {
 		return true;
 	}
 
-	public String getName(){
+	public String getDriverName(){
 		System.out.println(tfName.getText());
 		return tfName.getText();
 	}
