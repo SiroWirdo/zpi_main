@@ -4,28 +4,24 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Set;
 
+import javax.swing.JButton;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-
-import org.jdesktop.swingx.mapviewer.Waypoint;
 
 import settings.Settings;
 import main.model.MapModel;
 import main.view.MapComponent;
 import main.view.MapPanel;
-import main.view.MapWaypoint;
 import model.Driver;
 import model.Order;
 
+/*
+ * Zarz¹dza tworzeniem mapy, odœwie¿aniem jej, rysowaniem waypointów i komponentów na mapie
+ */
 public class MapController{
 	private MapModel mapModel;
 	private MapPanel mapView;
-	
-	ActionListener taskPerformer;
 	
 	public MapController(MapModel mapModel) {
 		this.mapModel = mapModel;
@@ -41,39 +37,11 @@ public class MapController{
 		return mapView;
 	}
 	
-	public void addCarWaypoints(){
-		Set<MapComponent> positions = getCarWaypoints();
-		mapModel.addCarsWaypoints(positions);
+	public ButtonListener getButtonListener(){
+		return new ButtonListener();
 	}
 	
-	public Set<MapComponent> getCarWaypoints(){
-		List<Driver> drivers = mapModel.getAvalaibleDrivers();
-		Set<MapComponent> positions = mapModel.getCarsPositions(drivers);
-		return positions;
-	}	
-	
-	public void addCustomersWaypoints(){
-		Set<MapComponent> positions = getCustomerWaypoints();
-		mapModel.addCustomersWaypoints(positions);
-	}
-	
-	public Set<MapComponent> getCustomerWaypoints(){
-		List<Order> orders = mapModel.getWaitingOrders();
-		Set<MapComponent> positions = new HashSet<MapComponent>();
-		if(orders != null){
-			positions = mapModel.getWaitingCustomersPosition(orders);
-		}
-		return positions;
-	}
-	
-	public void drawAllWaypoints(){
-		addCustomersWaypoints();
-		addCarWaypoints();
-		final Set<MapComponent> allWaypoints = mapModel.getAllWaypoints();
-		mapView.drawWaypointsComponent(allWaypoints);
-	}
-	
-	public void refreshMapWithDelay(final long millis){
+	private void refreshMapWithDelay(final long millis){
 		Thread refreshThread = new Thread() {
 	        public void run() {
 	        	while(true){
@@ -105,6 +73,38 @@ public class MapController{
 		  });
 	}
 	
+	private Set<MapComponent> getCarWaypoints(){
+		List<Driver> drivers = mapModel.getAvalaibleDrivers();
+		Set<MapComponent> positions = mapModel.getCarsPositions(drivers);
+		return positions;
+	}	
+	
+	private void addCustomersWaypoints(){
+		Set<MapComponent> positions = getCustomerWaypoints();
+		mapModel.addCustomersWaypoints(positions);
+	}
+	
+	private Set<MapComponent> getCustomerWaypoints(){
+		List<Order> orders = mapModel.getWaitingOrders();
+		Set<MapComponent> positions = new HashSet<MapComponent>();
+		if(orders != null){
+			positions = mapModel.getWaitingCustomersPosition(orders);
+		}
+		return positions;
+	}
+	
+	public void drawAllWaypoints(){
+		addCustomersWaypoints();
+		addCarWaypoints();
+		final Set<MapComponent> allWaypoints = mapModel.getAllWaypoints();
+		mapView.drawWaypointsComponent(allWaypoints);
+	}
+	
+	private void addCarWaypoints(){
+		Set<MapComponent> positions = getCarWaypoints();
+		mapModel.addCarsWaypoints(positions);
+	}
+	
 	public void setQueryDriverStatusArray(ArrayList<Integer> queryDriverStatusArray) {
 		mapModel.setQueryDriverStatusArray(queryDriverStatusArray);
 	}
@@ -113,5 +113,15 @@ public class MapController{
 		mapModel.setQueryOrderStatusArray(queryOrderStatusArray);
 	}
 
+	private class ButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(((JButton)e.getSource()).getName().equals("defaultPosition")){
+				mapView.setDefaultPosition();
+			}
+		}
+		
+	}
 	
 }

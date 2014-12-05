@@ -28,6 +28,17 @@ public class Settings {
 	public final static String DEFAULT_CITY = "Wroc³aw";
 
 	public static Dispatcher USER_OBJECT;
+	/*
+	 * Ustawienie wartoœæi dotycz¹cych mapy
+	 */
+	public static final int MAX_ZOOM_MAP = 7;
+	public static final int MIN_ZOOM_MAP = 1;
+	public static final int DEFAULT_ZOOM = 3;
+	//Default localization: Wroc³aw
+	public static final double DEFAULT_LATITUDE = 51.107885200000000000;
+	public static final double DEFAULT_LONGITUDE = 17.038537600000040000;
+	public static final String CONTRIBUTORS_TEXT = "\u00a9 Open StreetMap contributors";
+
 	
 	/*
 	 * Ustawienie wartoœci pó³ dotycz¹cych odœwie¿ania poszczególnych paneli
@@ -125,7 +136,11 @@ public class Settings {
 		}));
 	}
 	
+	/*
+	 * Ustawienie domyœlnych stylów
+	 */
 	public static void setLookAndFeel(){
+		
 		UIManager.put("nimbusBase", new Color(0,68,102));
 		UIManager.put("nimbusBlueGrey", new Color(60,145,144));
 		UIManager.put("control", new Color(43,82,102));
@@ -136,6 +151,26 @@ public class Settings {
 		UIManager.put("PasswordField.foreground", new Color(0,0,0));
 		UIManager.put("TextArea.foreground", new Color(0,0,0));
 		UIManager.put("FormattedTextField.foreground", new Color(0,0,0));
+		
+		//TODO nie chca dzia³aæ tooltipy na mapie
+//		Border border = BorderFactory.createLineBorder(new Color(0,0,0));    //#4c4f53
+//		UIManager.put("ToolTip.border", border);
+//
+//		UIManager.put("ToolTip.foregroundInactive", new Color(255, 255, 255));
+//		UIManager.put("backgroundInactive", new Color(255, 255, 255));
+//		UIManager.put("ToolTip.background", new Color(255, 255, 255)); //#fff7c8
+//		UIManager.put("ToolTip.foreground", new Color(255, 255, 255));
+//		
+//		UIManager.getLookAndFeelDefaults().put("ToolTip.foregroundInactive", new Color(255, 255, 255));
+//		UIManager.getLookAndFeelDefaults().put("backgroundInactive", new Color(255, 255, 255));
+//		UIManager.getLookAndFeelDefaults().put("ToolTip.background", new Color(255, 255, 255)); //#fff7c8
+//		UIManager.getLookAndFeelDefaults().put("ToolTip.foreground", new Color(255, 255, 255));
+//		
+//		UIManager.getLookAndFeelDefaults().put("ToolTip.foregroundInactive",new ColorUIResource(new Color(255, 255, 255)));
+//		UIManager.getLookAndFeelDefaults().put("backgroundInactive", new ColorUIResource((new Color(255, 255, 255))));
+//		UIManager.getLookAndFeelDefaults().put("ToolTip.background", new ColorUIResource(new Color(255, 255, 255))); //#fff7c8
+//		UIManager.getLookAndFeelDefaults().put("ToolTip.foreground", new ColorUIResource(new Color(255, 255, 255)));
+		
 	     
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -150,12 +185,7 @@ public class Settings {
 
 		UIManager.getLookAndFeelDefaults().put("Table:\"Table.cellRenderer\".background", new ColorUIResource(new Color(74,144,178)));
 		UIManager.getLookAndFeelDefaults().put("Table.background", new ColorUIResource(new Color(74,144,178)));
-		//TODO nie chca dzia³aæ tooltipy na mapie
-		UIManager.getLookAndFeelDefaults().put("ToolTip.background", new ColorUIResource(0, 0, 0)); //#fff7c8
-		Border border = BorderFactory.createLineBorder(new Color(0,0,0));    //#4c4f53
-		UIManager.getLookAndFeelDefaults().put("ToolTip.border", border);
-		UIManager.getLookAndFeelDefaults().put("ToolTip.foreground", new Color(0, 0, 0));
-	
+		
 
 	}
 

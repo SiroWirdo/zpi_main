@@ -88,28 +88,21 @@ public class MainMenuView extends JFrame{
 		tabbedPane.addTab("Mapa", null, mainPanel, null); //TODO ustawic ikony?
 	}
 
-	public JScrollPane getMapPanel(){
-		JScrollPane scrollPane = new JScrollPane(getMap());
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(10, 10, 1000, 700);
-
-		return scrollPane;
-	}
+//	public JScrollPane getMapPanel(){
+//		JScrollPane scrollPane = new JScrollPane(getMap());
+//		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+//		scrollPane.setBounds(10, 10, 1000, 700);
+//
+//		return scrollPane;
+//	}
 
 	public JPanel getMap(){
 		MapModel mapModel = new MapModel();
 		mapController = new MapController(mapModel);
 
 		MapPanel view = mapController.getMapView();
-		GridBagLayout gridBagLayout = (GridBagLayout) view.getMainMap().getLayout();
-		gridBagLayout.rowWeights = new double[]{1.0};
-		gridBagLayout.columnWeights = new double[]{1.0};
-//		view.setBounds(0, 0, 2000, 2000);
-		view.setBounds(10, 10, 1000, 700);
-//		mapController.drawAllWaypoints();
-		//mapPanel.add(map);
-		//map.setBounds(0, 0, 5000, 3500);
+		view.setBounds(10, 10, 1025, 700);
 
 		return view;
 	}
@@ -120,7 +113,7 @@ public class MainMenuView extends JFrame{
 
 		JPanel statisticPanel = statisticController.getView();
 		//statisticPanel.setBounds(0, 0, 220, 300);
-		statisticPanel.setBounds(1000, 0, 300, 300);
+		statisticPanel.setBounds(1025, 0, 300, 300);
 	
 		return statisticPanel;
 	}
@@ -133,7 +126,7 @@ public class MainMenuView extends JFrame{
 			filterModel = new FilterMapModel();
 			filterController = new FilterMapController(filterModel, mapController);
 			filterPanel = filterController.getView();
-			filterPanel.setBounds(1000, 300, 400, 500);
+			filterPanel.setBounds(1025, 300, 400, 500);
 //		}
 		return filterPanel;
 	}
