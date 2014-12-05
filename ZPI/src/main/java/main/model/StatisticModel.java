@@ -11,7 +11,50 @@ import settings.Settings;
 
 public class StatisticModel {
 
+	private boolean stop;
+	private int[] statistic;
+
+	private final int numberOfStatistic = 6;
+	
 	public StatisticModel(){	
+		stop = false;
+	}
+	
+	public int[] getStatistic(){
+		return statistic;
+	}
+	
+	public void setStop(){
+		stop = true;
+	}
+	
+	/*
+	 * Aktualizuje dane statusów kierowcy co okreœlony czas
+	 */
+
+//	public void run() {
+//		while(!stop){
+//			System.out.println("Model: Uaktualniam statystyki");
+//			synchronized(statistic){
+//				statistic = updateStatistic();
+//			}
+//			this.notifyAll();
+//			try {
+//				Thread.sleep(Settings.STATISTIC_PANEL_REFRESH_TIME);
+//			} catch (InterruptedException e1) {
+//				e1.printStackTrace();
+//			}
+//		}
+//	}
+	
+	public void updateStatistic(){
+		statistic = new int[]{countAllTaxi(),
+					countFreeTaxi(),
+					countDriverTaxi(),
+					countPauseTaxi(),
+					countBlockTaxi(),
+					countUnavailableTaxi()
+					};
 	}
 	
 	public int countAllTaxi(){
@@ -59,4 +102,5 @@ public class StatisticModel {
 	public int countUnavailableTaxi(){
 		return countTaxiByStatus(Settings.UNAVALAIBLE_CAR_STATUS);
 	}
+
 }

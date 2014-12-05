@@ -8,10 +8,12 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import org.jdesktop.swingx.mapviewer.Waypoint;
 
+import settings.Settings;
 import main.model.MapModel;
 import main.view.MapComponent;
 import main.view.MapPanel;
@@ -32,7 +34,7 @@ public class MapController{
 		mapView.initialize();
 		
 		refreshMap();
-//		refreshMapWithDelay();
+		refreshMapWithDelay(Settings.MAP_REFRESH_TIME);
 	}
 	
 	public MapPanel getMapView(){
@@ -71,15 +73,21 @@ public class MapController{
 		mapView.drawWaypointsComponent(allWaypoints);
 	}
 	
-	public void refreshMapWithDelay(){
-		int delay = 10000; //milliseconds
-		  taskPerformer = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				refreshMap();	
-			}
-		  };
-		  new Timer(delay, taskPerformer).start();
+	public void refreshMapWithDelay(final long millis){
+		Thread refreshThread = new Thread() {
+	        public void run() {
+	        	while(true){
+	        		refreshMap();
+	        		try {
+						Thread.sleep(millis);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	        	}
+	        }
+	      };
+	      refreshThread.start();
 	}
 	
 	public void refreshMap(){
@@ -87,10 +95,14 @@ public class MapController{
 		updateWaypoints.addAll(getCustomerWaypoints());
 		updateWaypoints.addAll(getCarWaypoints());
 		mapModel.setAllWaypoints(updateWaypoints);
-		mapView.cleanMap();
-		mapView.drawWaypointsComponent(mapModel.getAllWaypoints());
-		mapView.repaint();
 		
+		SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+				mapView.cleanMap();
+				mapView.drawWaypointsComponent(mapModel.getAllWaypoints());
+				mapView.repaint();
+		    }
+		  });
 	}
 	
 	public void setQueryDriverStatusArray(ArrayList<Integer> queryDriverStatusArray) {

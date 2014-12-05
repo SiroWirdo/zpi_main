@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 
 import login.controller.LoginController;
 import main.controller.FilterMapController;
@@ -23,6 +24,8 @@ import order.controller.OrderController;
 import order.model.OrderModel;
 import ordersdisplay.controller.OrdersController;
 import ordersdisplay.model.OrdersModel;
+import other.DataBaseConnection;
+import settings.Settings;
 import drivers.controller.DriversController;
 import drivers.model.DriversModel;
 import drivers.controller.DriversController;
@@ -46,8 +49,7 @@ public class MainMenuView extends JFrame{
 		this.menuController = menuController;
 		this.menuModel = menuModel;
 		//initialize();
-		//LoginController.turnOffLogBackLogger();
-
+		Settings.turnOffLogBackLogger();
 	}
 
 	/**
@@ -59,21 +61,11 @@ public class MainMenuView extends JFrame{
 
 		DataBaseConnection.initialize();
 		addTabbedPane();
-//		addMainPagePanels();
+		addMainPagePanels();
 		addOrderPanel();
-//		addDriverPanel();
-//		addOrdersDisplayPanel();
+		addDriverPanel();
+		addOrdersDisplayPanel();
 		addMessagePanel();
-		//this.setDefaultLookAndFeelDecorated(false);
-		/*try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException | UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-
 		
 		this.setTitle(title);
 		this.setVisible(true);
@@ -89,11 +81,9 @@ public class MainMenuView extends JFrame{
 		mainPanel.setLayout(null);
 //		mainPanel.add(getMapPanel());
 		mainPanel.add(getMap());
-//		mainPanel.add(getStatisticPanel());
-//		mainPanel.add(getFilterPanel());
+		mainPanel.add(getStatisticPanel());
+		mainPanel.add(getFilterPanel());
 		mainPanel.setVisible(true);
-		
-//		statisticController.run();
 
 		tabbedPane.addTab("Mapa", null, mainPanel, null); //TODO ustawic ikony?
 	}
@@ -131,7 +121,7 @@ public class MainMenuView extends JFrame{
 		JPanel statisticPanel = statisticController.getView();
 		//statisticPanel.setBounds(0, 0, 220, 300);
 		statisticPanel.setBounds(1000, 0, 300, 300);
-//		statisticController.run();
+	
 		return statisticPanel;
 	}
 
@@ -139,12 +129,12 @@ public class MainMenuView extends JFrame{
 		FilterMapModel filterModel;
 		FilterMapController filterController;
 		JPanel filterPanel = null;
-		if(mapController != null){
+//		if(mapController != null){
 			filterModel = new FilterMapModel();
 			filterController = new FilterMapController(filterModel, mapController);
 			filterPanel = filterController.getView();
 			filterPanel.setBounds(1000, 300, 400, 500);
-		}
+//		}
 		return filterPanel;
 	}
 

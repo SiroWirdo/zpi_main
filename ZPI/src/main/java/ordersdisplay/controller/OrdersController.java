@@ -17,6 +17,7 @@ import ordersdisplay.view.OrdersView;
 import settings.Settings;
 
 public class OrdersController implements Observer  {
+	
 	private OrdersView ordersView;
 	private OrdersModel ordersModel;
 
@@ -25,9 +26,8 @@ public class OrdersController implements Observer  {
 		this.ordersView = new OrdersView(this, ordersModel);
 		ordersModel.addObserver(this);
 
-		this.ordersView.initialize();
 		this.ordersModel.initialize();
-		
+		this.ordersView.initialize();
 		//TODO dorobiæ edycjê zamówienia
 
 	}

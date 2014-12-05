@@ -34,9 +34,31 @@ public class Order extends ParseObject {
 		return dispatcher;
 	}
 
+	
 	public void setDispatcher(ParseObject value) {
-		put("dispatcherId", value);
+		put("dispatcher", value);
 	}
+	
+	public Driver getDriver() {
+		Driver driver = null;
+		ParseObject d = getParseObject("driver");
+		if(d != null){
+			String driverId = d.getObjectId();
+			ParseQuery<Driver> query = ParseQuery.getQuery("Driver");
+			try {
+				driver = query.get(driverId);
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return driver;
+	}
+
+	
+	public void setDriver(ParseObject value) {
+		put("driver", value);
+	}
+
 
 	public String getPickupAddress() {
 		return getString("pickupAddress");
@@ -105,7 +127,6 @@ public class Order extends ParseObject {
 	public void setCost(double value) {
 		put("cost", value);
 	}
-
 
 	public String getCustomerRemarks() {
 		return getString("customerRemarks");

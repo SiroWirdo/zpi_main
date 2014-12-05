@@ -26,8 +26,6 @@ public class OrdersModel extends Observable implements Runnable{
 	public void initialize(){
 		final OrdersModel model = this;
 
-		DataBaseConnection.initialize();
-
 		ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
 		query.orderByDescending("updatedAt");
 		query.findInBackground(new FindCallback<Order>() {

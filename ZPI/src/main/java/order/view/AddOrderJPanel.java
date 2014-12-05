@@ -11,11 +11,13 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SpinnerNumberModel;
 
 import order.controller.OrderController;
 import order.model.OrderModel;
@@ -31,10 +33,13 @@ import javax.swing.JCheckBox;
 
 import settings.Settings;
 
+/*
+ * Buduje widok dla okna dodawania ordera, zarzπdza walidacjπ pÛl
+ */
 public class AddOrderJPanel extends JPanel{
 	
-	OrderModel orderModel;
-	OrderController orderController;
+	private OrderModel orderModel;
+	private OrderController orderController;
 	private JTextField surnameTextField;
 	private JTextField phoneNumberTextField;
 	private JTextField pickUpAddressTextField;
@@ -60,7 +65,6 @@ public class AddOrderJPanel extends JPanel{
 											+ "Liczba pasaøerÛw musi byÊ liczbπ z przedzia≥u &lt;1, 4&gt;";
 	
 	
-
 	/**
 	 * Create the panel.
 	 */
@@ -170,7 +174,7 @@ public class AddOrderJPanel extends JPanel{
 		
 		
 		/*
-		 * ERROR LABEL
+		 * ERRORS LABEL
 		 */
 		surnameErrors = new JLabel("surname error");
 		surnameErrors.setName("surnameError");
@@ -211,66 +215,19 @@ public class AddOrderJPanel extends JPanel{
 		add(cleanAfterAddCheckBox);
 		
 		setDefaultBorderField();
-		
+//		TODO spiner
+//		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 6, 1);
+//		jsCarCapacity = new JSpinner(spinnerModel);
+//		jsCarCapacity.setBounds(x+160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+//		add(jsCarCapacity);
+//		
 		this.setVisible(true);
 //		surnameTextField.requestFocusInWindow();
 	}
 	
-	public boolean isEmptyField(JTextField validateField){
-		return validateField.getText() == null || validateField.getText().equals("");
-	}
-	
-	public boolean isOnlyTextField(JTextField validateField){
-		return validateField.getText().matches("[A-Z][a-zøüÊÒÛ≥ÍπúØè∆•å £”—][\\w-]*");
-	}
-	
-	public boolean isOnlyNumberField(JTextField validateField){
-		return validateField.getText().matches("^[0-9]+$");
-	}
-	
-	public void setValidationError(JTextField validateField, JLabel errorLabel, String errorMessage){
-		errorLabel.setText(errorMessage);
-		validateField.setBorder(redBorder);
-		//validateField.setBackground(new Color(255, 0, 0, 50));
-		errorLabel.setVisible(true);
-		isValidate = false; 
-		//this.repaint();
-//		countValidateErrors++;
-	}
-	
-	public void cleanAll(){
-		cleanFields();
-		cleanAllErrors();
-	}
-	
-	public void cleanFields(){
-		surnameTextField.setText(null);
-		phoneNumberTextField.setText(null);
-		pickUpAddressTextField.setText(null);
-		passangerCountTextField.setText(null);
-		customerRemarksTextArea.setText(null);
-	}
-	
-	public void cleanAllErrors(){
-		setDefaultBorderField();
-		hideAllErrorsLabel();
-	}
-	
-	public void setDefaultBorderField(){
-		surnameTextField.setBorder(defaultBorder);
-		phoneNumberTextField.setBorder(defaultBorder);
-		pickUpAddressTextField.setBorder(defaultBorder);
-		passangerCountTextField.setBorder(defaultBorder);
-		scrollPane.setBorder(defaultBorder);
-	}
-	
-	public void hideAllErrorsLabel(){
-		surnameErrors.setVisible(false);
-		phoneErrors.setVisible(false);
-		addresErrors.setVisible(false);
-		passangerCountErrors.setVisible(false);
-	}
-	
+	/*
+	 * Sprawdza i ustawia walidacje pÛl
+	 */
 	public boolean validateFields(){
 		isValidate = true; 
 		if(isEmptyField(surnameTextField)){
@@ -310,6 +267,62 @@ public class AddOrderJPanel extends JPanel{
 			}
 		}
 		return isValidate;
+	}
+	
+	public boolean isEmptyField(JTextField validateField){
+		return validateField.getText() == null || validateField.getText().equals("");
+	}
+	
+	public boolean isOnlyTextField(JTextField validateField){
+		return validateField.getText().matches("[A-Z][a-zøüÊÒÛ≥ÍπúØè∆•å £”—][\\w-]*");
+	}
+	
+	public boolean isOnlyNumberField(JTextField validateField){
+		return validateField.getText().matches("^[0-9]+$");
+	}
+	
+	/*
+	 * Ustawia labelke errora, podúwietla pole, ktÛre nie przesz≥o walidacji
+	 */
+	public void setValidationError(JTextField validateField, JLabel errorLabel, String errorMessage){
+		errorLabel.setText(errorMessage);
+		validateField.setBorder(redBorder);
+		errorLabel.setVisible(true);
+		isValidate = false; 
+		//this.repaint();
+	}
+	
+	public void cleanAll(){
+		cleanFields();
+		cleanAllErrors();
+	}
+	
+	public void cleanFields(){
+		surnameTextField.setText(null);
+		phoneNumberTextField.setText(null);
+		pickUpAddressTextField.setText(null);
+		passangerCountTextField.setText(null);
+		customerRemarksTextArea.setText(null);
+	}
+	
+	public void cleanAllErrors(){
+		setDefaultBorderField();
+		hideAllErrorsLabel();
+	}
+	
+	public void setDefaultBorderField(){
+		surnameTextField.setBorder(defaultBorder);
+		phoneNumberTextField.setBorder(defaultBorder);
+		pickUpAddressTextField.setBorder(defaultBorder);
+		passangerCountTextField.setBorder(defaultBorder);
+		scrollPane.setBorder(defaultBorder);
+	}
+	
+	public void hideAllErrorsLabel(){
+		surnameErrors.setVisible(false);
+		phoneErrors.setVisible(false);
+		addresErrors.setVisible(false);
+		passangerCountErrors.setVisible(false);
 	}
 	
 	public JTextField getSurnameTextField() {

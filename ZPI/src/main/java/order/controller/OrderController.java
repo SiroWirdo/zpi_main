@@ -7,6 +7,7 @@ import java.awt.event.FocusListener;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -77,30 +78,14 @@ public class OrderController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// if(e.getSource() == addOrderBtn){
 			if (e.getActionCommand().equals("Dodaj")) {
-				addOrderView.cleanAllErrors();
-				addOrderView.validateFields();
-				if (addOrderView.isFormValidate()) {
-					String defaultCity = "";
-					if(addOrderView.isDefaultCityChecked()){
-						defaultCity = Settings.DEFAULT_CITY;
-					}
-					addOrder(
-							addOrderView.getSurnameTextField().getText().trim(),
-							new Long(addOrderView.getPhoneNumberTextField()
-									.getText().trim()),
-							addOrderView.getPickUpAddressTextField().getText() + defaultCity,
-							addOrderView.getCustomerRemarksTextArea().getText(),
-							new Integer(addOrderView
-									.getPassangerCountTextField().getText().trim()));
-					if(addOrderView.isCleanAfterAddChecked()){
-						//addOrderView.cleanAll();
-						System.out.println("clean all!");
-					}
-				} else {
-					System.out.println("Formularz nie przeszed³ walidacji");
-				}
+				
+			    Thread queryThread = new Thread() {
+			        public void run() {
+			          checkViewAndAddOrder();
+			        }
+			      };
+			      queryThread.start();
 			}
 			else if(e.getActionCommand().equals("Wyczyœæ")){
 				 addOrderView.cleanFields();
@@ -108,6 +93,34 @@ public class OrderController {
 			}
 		}
 	}
+	
+	public void checkViewAndAddOrder(){
+		addOrderView.cleanAllErrors();
+		addOrderView.validateFields();
+		if (addOrderView.isFormValidate()) {
+			String defaultCity = "";
+			if(addOrderView.isDefaultCityChecked()){
+				defaultCity = Settings.DEFAULT_CITY;
+			}
+			addOrder(
+					addOrderView.getSurnameTextField().getText().trim(),
+					new Long(addOrderView.getPhoneNumberTextField()
+							.getText().trim()),
+					addOrderView.getPickUpAddressTextField().getText() + defaultCity,
+					addOrderView.getCustomerRemarksTextArea().getText(),
+					new Integer(addOrderView
+							.getPassangerCountTextField().getText().trim()));
+			if(addOrderView.isCleanAfterAddChecked()){
+				SwingUtilities.invokeLater(new Runnable() {
+				    public void run() {
+				    	addOrderView.cleanAll();
+				    }
+				  });	
+			}
+		} else {
+			System.out.println("Formularz nie przeszed³ walidacji");
+		}
+	};
 	
 	public class ValidateTextFieldListener implements FocusListener{
 

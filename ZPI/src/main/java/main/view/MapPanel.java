@@ -2,6 +2,7 @@ package main.view;
 
 
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -39,6 +40,8 @@ import org.jdesktop.swingx.mapviewer.Waypoint;
 import org.jdesktop.swingx.mapviewer.WaypointPainter;
 import org.jdesktop.swingx.mapviewer.WaypointRenderer;
 
+import settings.Settings;
+
 import java.awt.GridBagConstraints;
 
 import javax.swing.SwingConstants;
@@ -68,7 +71,7 @@ public class MapPanel extends JXMapKit {
 		map = getMainMap();
 		
 		drawContributorsLabel();
-		//initialize();
+		initialize();
 	}
 
 	public void drawContributorsLabel(){
@@ -77,11 +80,18 @@ public class MapPanel extends JXMapKit {
 		contLabel.setBounds(0, 300, 10, 20);
 
 		GridBagConstraints gbc_contLabel = new GridBagConstraints();
-		gbc_contLabel.anchor = GridBagConstraints.SOUTHEAST;
-		getMainMap().add(contLabel, gbc_contLabel);
+		//gbc_contLabel.anchor = GridBagConstraints.SOUTHEAST;
+		getMainMap().add(contLabel);
 	}
 	
 	public void initialize() {
+		Button defaultPosition = new Button(Settings.DEFAULT_CITY + "\ncentrum");
+		defaultPosition.setBounds(20, 20, 50, 200);
+//		GridBagConstraints gbc_defaultPosition = new GridBagConstraints();
+//
+//		gbc_defaultPosition.gridx = 0;
+//		gbc_defaultPosition.gridy = 0;
+		getMainMap().add(defaultPosition);
 		this.setCenterPosition(new GeoPosition(DEFAULT_LATITUDE,
 				DEFAULT_LONGITUDE));
 		/*final int max = 5;
@@ -97,7 +107,7 @@ public class MapPanel extends JXMapKit {
         info.setDefaultZoomLevel(DEFAULT_ZOOM);
         TileFactory tf = new DefaultTileFactory(info);
 		map.setTileFactory(tf);*/
-		this.setZoomButtonsVisible(false);
+		this.setZoomButtonsVisible(true);
 		this.setZoomSliderVisible(false);
 		this.setMiniMapVisible(false);
 		this.setDefaultProvider(DefaultProviders.OpenStreetMaps);

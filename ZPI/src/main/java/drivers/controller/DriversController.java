@@ -28,8 +28,9 @@ public class DriversController implements Observer {
 		this.driversView = new DriversView(this, driversModel);
 		driversModel.addObserver(this);
 
-		this.driversView.initialize();
 		this.driversModel.initialize();
+		this.driversView.initialize();
+		
 
 	}
 

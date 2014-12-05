@@ -1,7 +1,16 @@
 package login.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,14 +25,16 @@ import login.model.UserModel;
 
 public class LoginView extends JFrame {
 
+	private static final String LOGO_ICON_PATH = "src/main/resources/taxi_waypoint_logo.png";
 	private static final long serialVersionUID = 1L;
-	UserModel userModel;
-	LoginController loginController;
+	private UserModel userModel;
+	private LoginController loginController;
 
 	private JTextField loginTextField;
 	private JPasswordField passwordField;
-	JButton okButton;
-	JButton cancelButton;
+	private JButton okButton;
+	private JButton cancelButton;
+	private JPanel logo_icon;
 	
 	public LoginView(LoginController loginController, UserModel userModel) {
 		this.loginController = loginController;
@@ -44,10 +55,10 @@ public class LoginView extends JFrame {
 		}*/
 		this.setTitle("Logowanie");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100, 100, 351, 267);
+		this.setBounds(100, 100, 354, 385);
 		getContentPane().setLayout(null);
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 335, 227);
+		panel.setBounds(0, 0, 335, 346);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -55,7 +66,7 @@ public class LoginView extends JFrame {
 		loginTextField.setName("login");
 		loginTextField.setFont(new Font("Verdana", Font.PLAIN, 14));
 		loginTextField.setText("login");
-		loginTextField.setBounds(59, 75, 218, 31);
+		loginTextField.setBounds(59, 181, 218, 31);
 		loginTextField.setHorizontalAlignment(JTextField.CENTER);
 		loginTextField.setForeground(Color.GRAY);
 		loginTextField.addFocusListener(loginController.getTextFieldFocusListener());
@@ -65,7 +76,7 @@ public class LoginView extends JFrame {
 		passwordField.setName("haslo");
 		passwordField.setFont(new Font("Verdana", Font.PLAIN, 14));
 		passwordField.setToolTipText("");
-		passwordField.setBounds(59, 117, 216, 31);
+		passwordField.setBounds(59, 223, 216, 31);
 		passwordField.setText("has³o");
 		passwordField.setEchoChar((char) 0);
 		passwordField.setHorizontalAlignment(JTextField.CENTER);
@@ -74,17 +85,30 @@ public class LoginView extends JFrame {
 		panel.add(passwordField);
 
 		okButton = new JButton("Zaloguj");
-		okButton.setBounds(59, 177, 94, 31);
+		okButton.setBounds(183, 283, 94, 31);
 		okButton.addActionListener(loginController.getLoginListener());
 		panel.add(okButton);
-		getRootPane().setDefaultButton(okButton);
-		// TODO coœ nie tak z kolorem tego buttona
 		
 
 		cancelButton = new JButton("Anuluj");
-		cancelButton.setBounds(183, 177, 94, 31);
+		cancelButton.setBounds(59, 283, 94, 31);
 		cancelButton.addActionListener(loginController.getCancelListener());
 		panel.add(cancelButton);
+//		
+//		logo_icon = new JPanel();
+//		logo_icon.setBounds(78, 11, 500, 500);
+//		
+//		BufferedImage myPicture = null;
+//		try {
+//			myPicture = ImageIO.read(new File(LOGO_ICON_PATH));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		logo_icon.setMaximumSize(new Dimension(50, 50));;
+//		logo_icon.setIcon(new ImageIcon(myPicture));
+//		
+//		panel.add(logo_icon);
 		
 //		JLabel lblNewLabel = new JLabel();
 //		lblNewLabel.setBounds(60, 22, 218, 155);

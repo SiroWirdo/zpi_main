@@ -144,12 +144,23 @@ public class FilterMapController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(((JButton)e.getSource()).getName().equals("filterDrivers")){
-				mapController.setQueryDriverStatusArray(queryStatusDriverArray);
-				mapController.refreshMap();	
+				Thread filerThread = new Thread() {
+			        public void run() {
+						mapController.setQueryDriverStatusArray(queryStatusDriverArray);
+						mapController.refreshMap();
+			        }
+			      };
+			      filerThread.start();
+
 			}
 			else if(((JButton)e.getSource()).getName().equals("filterCustomers")){
-				mapController.setQueryOrderStatusArray(queryStatusOrderArray);
-				mapController.refreshMap();
+				Thread filterThread = new Thread() {
+			        public void run() {
+						mapController.setQueryOrderStatusArray(queryStatusOrderArray);
+						mapController.refreshMap();
+			        }
+			      };
+			      filterThread.start();
 			}
 		}
 	}
