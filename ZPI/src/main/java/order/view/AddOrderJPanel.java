@@ -24,6 +24,7 @@ import order.model.OrderModel;
 
 import javax.swing.border.Border;
 import javax.swing.text.AbstractDocument;
+import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.NumberFormatter;
 
@@ -31,6 +32,7 @@ import com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache;
 
 import javax.swing.JCheckBox;
 
+import settings.DocumentSizeFilter;
 import settings.Settings;
 
 /*
@@ -58,6 +60,7 @@ public class AddOrderJPanel extends JPanel{
 	private JCheckBox defaultCityCheckBox;
 	private JCheckBox cleanAfterAddCheckBox;
 	
+	private final int maxSizeText = 200;
 	private final String requiredFieldErrorMsg = "Pole wymagane!";
 	private final String onlyTextErrorMsg = "To pole moøe zawieraÊ tylko litery!";
 	private final String onlyNumbersErrorMsg = "To pole moøe zawieraÊ tylko liczby!";
@@ -152,9 +155,10 @@ public class AddOrderJPanel extends JPanel{
 		customerRemarksTextArea.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
 		customerRemarksTextArea.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
 		customerRemarksTextArea.setNextFocusableComponent(addOrderBtn);
-//		int maxChars = 3;
-//		AbstractDocument pDoc = (AbstractDocument)customerRemarksTextArea.getDocument();
-//		pDoc.setDocumentFilter(new DocumentCache(maxChars));
+		
+		DefaultStyledDocument doc = new DefaultStyledDocument();
+		doc.setDocumentFilter(new DocumentSizeFilter(maxSizeText));
+		customerRemarksTextArea.setDocument(doc);
 		
 		scrollPane = new JScrollPane(customerRemarksTextArea);
 		scrollPane.setBounds(187, 210, 177, 73);
@@ -274,7 +278,7 @@ public class AddOrderJPanel extends JPanel{
 	}
 	
 	public boolean isOnlyTextField(JTextField validateField){
-		return validateField.getText().matches("[A-Z][a-zøüÊÒÛ≥ÍπúØè∆•å £”—][\\w-]*");
+		return validateField.getText().matches("[A-Z][a-zøüÊÒÛ≥ÍπúØè∆•å £”—]*[\\w-]*");
 	}
 	
 	public boolean isOnlyNumberField(JTextField validateField){

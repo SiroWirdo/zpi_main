@@ -48,6 +48,8 @@ import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MapPanel extends JXMapKit {
 
@@ -80,18 +82,27 @@ public class MapPanel extends JXMapKit {
 		contLabel.setBounds(0, 300, 10, 20);
 
 		GridBagConstraints gbc_contLabel = new GridBagConstraints();
+		Button defaultPosition = new Button("Pozycja domyœlna");
+		defaultPosition.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		defaultPosition.setBounds(20, 20, 50, 200);
+
+				GridBagConstraints gbc_defaultPosition = new GridBagConstraints();
+				gbc_defaultPosition.gridheight = 5;
+				gbc_defaultPosition.gridwidth = 2;
+				gbc_defaultPosition.anchor = GridBagConstraints.SOUTHEAST;
+			//	gbc_defaultPosition.
+//				gbc_defaultPosition.insets = new Insets(0, 0, 0, 5);
+				gbc_defaultPosition.gridx = 0;
+				gbc_defaultPosition.gridy = 0;
+				getMainMap().add(defaultPosition, gbc_defaultPosition);
 		//gbc_contLabel.anchor = GridBagConstraints.SOUTHEAST;
-		getMainMap().add(contLabel);
+		getMainMap().add(contLabel, gbc_contLabel);
 	}
 	
 	public void initialize() {
-		Button defaultPosition = new Button(Settings.DEFAULT_CITY + "\ncentrum");
-		defaultPosition.setBounds(20, 20, 50, 200);
-//		GridBagConstraints gbc_defaultPosition = new GridBagConstraints();
-//
-//		gbc_defaultPosition.gridx = 0;
-//		gbc_defaultPosition.gridy = 0;
-		getMainMap().add(defaultPosition);
 		this.setCenterPosition(new GeoPosition(DEFAULT_LATITUDE,
 				DEFAULT_LONGITUDE));
 		/*final int max = 5;

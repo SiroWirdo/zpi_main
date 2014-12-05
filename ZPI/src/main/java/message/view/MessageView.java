@@ -18,6 +18,8 @@ public class MessageView extends JPanel {
 	private JLabel message;
 	private JTextArea messageArea;
 	private JButton send;
+	
+	private final int maxSizeText = 200;
 
 	public MessageView(MessageController messageController, MessageModel messageModel){
 		this.messageController = messageController;
@@ -32,7 +34,7 @@ public class MessageView extends JPanel {
 		add(message);
 
 		DefaultStyledDocument doc = new DefaultStyledDocument();
-		doc.setDocumentFilter(new DocumentSizeFilter(200));
+		doc.setDocumentFilter(new DocumentSizeFilter(maxSizeText));
 		messageArea = new JTextArea();
 		messageArea.setBounds(10, 40, 200, 185);
 		messageArea.setLineWrap(true);

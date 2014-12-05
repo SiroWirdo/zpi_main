@@ -31,10 +31,8 @@ public class MapComponent extends JLabel{
 	/*
 	 *Paths icons resources 
 	 */
-//	private final String CAR_ICON_RESOURCE_PATCH = "src/main/resources/car_waypoints/";
-//	private final String CUSTOMER_ICON_RESOURCE_PATCH = "src/main/resources/customer_waypoints/";
-	private final String CAR_ICON_RESOURCE_PATCH = "src/main/java/images/";
-	private final String CUSTOMER_ICON_RESOURCE_PATCH = "src/main/java/images/";
+	private final String CAR_ICON_RESOURCE_PATCH = "/map_images/";
+	private final String CUSTOMER_ICON_RESOURCE_PATCH = "/map_images/";
 	/*
 	 * In DB Car.status = 0
 	 */
@@ -72,12 +70,6 @@ public class MapComponent extends JLabel{
 	     this.waypoint = waypoint;
 	     
 	     this.setIcon(chooseCustomerIcon());
-//	     TODO
-//	     UIManager.put("ToolTip.background", new ColorUIResource(255, 247, 200)); //#fff7c8
-//	     Border border = BorderFactory.createLineBorder(new Color(76,79,83));    //#4c4f53
-//	     UIManager.put("ToolTip.border", border);
-//	     UIManager.put("ToolTip.font", );
-//	     
 	     this.setToolTipText(Settings.orderStatus[order.getStatus()]);
 	     this.addMouseListener(new WaypointMouseListener());
 		}
@@ -143,7 +135,7 @@ public class MapComponent extends JLabel{
 	}
 
 	public ImageIcon chooseCarIcon(){
-		String imageIconPatch = "/map_images/";//CAR_ICON_RESOURCE_PATCH;
+		String imageIconPatch = CAR_ICON_RESOURCE_PATCH;
 		int driverStatus = driver.getStatus();
 		
 		StringBuilder sb = new StringBuilder(imageIconPatch);
@@ -168,7 +160,7 @@ public class MapComponent extends JLabel{
 	}
 
 	public ImageIcon chooseCustomerIcon(){
-		String imageIconPatch = "/map_images/";//CUSTOMER_ICON_RESOURCE_PATCH;
+		String imageIconPatch = CUSTOMER_ICON_RESOURCE_PATCH;
 		int orderStatus = order.getStatus();
 		
 		StringBuilder sb = new StringBuilder(imageIconPatch);

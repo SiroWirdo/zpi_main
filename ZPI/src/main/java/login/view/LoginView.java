@@ -75,7 +75,6 @@ public class LoginView extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setName("haslo");
 		passwordField.setFont(new Font("Verdana", Font.PLAIN, 14));
-		passwordField.setToolTipText("");
 		passwordField.setBounds(59, 223, 216, 31);
 		passwordField.setText("has³o");
 		passwordField.setEchoChar((char) 0);

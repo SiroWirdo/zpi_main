@@ -81,7 +81,7 @@ public class MapModel{
 				if(car != null && car.getCurrentPosition() != null){
 					MapComponent locationWaypoint = new MapComponent(car.getCurrentPositionWayPoint(), d);
 					driversWaypoints.add(locationWaypoint);
-					System.out.println("DODANIE NOWEGO AUTA DO ZBIORU");
+//					System.out.println("DODANIE NOWEGO AUTA DO ZBIORU");
 				}				
 			}
 		}
