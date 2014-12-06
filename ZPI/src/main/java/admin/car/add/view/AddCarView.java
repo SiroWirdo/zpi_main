@@ -19,6 +19,7 @@ public class AddCarView extends JPanel{
 	private JTextField tfRegistrationNumber;
 	private JTextField tfSideNumber;
 	private JSpinner jsCarCapacity;
+	private JLabel jlCar;
 
 	public AddCarView(AddCarController addCarController, AddCarModel addCarModel){
 		this.addCarController = addCarController;
@@ -31,12 +32,16 @@ public class AddCarView extends JPanel{
 		int x = 10;
 		int y = 10;
 
+		jlCar = new JLabel("Dane samochodu: ");
+		jlCar.setBounds(x, y, 150, 20);
+		add(jlCar);
+		
 		jlRegistrationNumber = new JLabel("Nr rejestracyjny: ");
-		jlRegistrationNumber.setBounds(x, y, 150, 20);
+		jlRegistrationNumber.setBounds(x, y=y+30, 150, 20);
 		add(jlRegistrationNumber);
 
 		tfRegistrationNumber = new JTextField();
-		tfRegistrationNumber.setBounds(x + 160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		tfRegistrationNumber.setBounds(x + 110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(tfRegistrationNumber);
 
 		jlSideNumber = new JLabel("Nr boczny: ");
@@ -44,7 +49,7 @@ public class AddCarView extends JPanel{
 		add(jlSideNumber);
 
 		tfSideNumber = new JTextField();
-		tfSideNumber.setBounds(x+160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		tfSideNumber.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(tfSideNumber);
 
 		jlCarCapacity = new JLabel("Pojemnoœæ: ");
@@ -53,7 +58,7 @@ public class AddCarView extends JPanel{
 
 		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 6, 1);
 		jsCarCapacity = new JSpinner(spinnerModel);
-		jsCarCapacity.setBounds(x+160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		jsCarCapacity.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(jsCarCapacity);
 	}
 

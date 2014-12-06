@@ -50,10 +50,11 @@ public class AddDispatcherController {
 	}
 
 	private class AddButtonListener implements ActionListener{
-
+		private String error = "";
+		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
+			
 			String[] values = addDispatcherView.getValues();
 			String[] userValues = addUserView.getValues();
 			boolean valid = true;
@@ -80,38 +81,19 @@ public class AddDispatcherController {
 				password = true;
 			}
 			
-			boolean uniqueUsername = UserValidation.isUserNameUnique(userValues[0]);
-			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
+			boolean uniqueUsername = true;
+			boolean uniquePesel = true;
+			if(validPesel){
+				uniqueUsername = UserValidation.isUserNameUnique(userValues[0]);
+				uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
+			}
 
 			if(valid && uniqueUsername && validPesel && uniquePesel){
 				if(password){
 					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST");
 					boolean admin = addUserView.isAdminSelected();
 					ParseUser user = addUserModel.addUser(userValues[0], userValues[1], userValues[3], admin);
-					ParsePointer pointer = new ParsePointer("_User", user.getObjectId());
-					/*String id = user.getObjectId();
-					user.setDirty();
-					
-					ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
-					query.whereEqualTo("objectId", id);
-					ParseUser us = null;
-					try {
-						us = query.find().get(0);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					/*JSONObject pointer = new JSONObject();
-					System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST22222222222222222");
-				      if (user.getObjectId() != null) {
-				    	  pointer.put("__type", "Pointer");
-				    	  pointer.put("className", user.getClassName());
-				    	  pointer.put("objectId", user.getObjectId());
-				      }
-
-				      System.out.println(pointer);
-				      */
+					ParsePointer pointer = new ParsePointer("_User", user.getObjectId());		
 
 					addDispatcherModel.addDispatcher(values[0], values[1], values[2], pointer);
 
@@ -124,20 +106,23 @@ public class AddDispatcherController {
 				}
 			}else{
 				if(!uniqueUsername){
-					printError("U¿ytkownik o takiej nazwie ju¿ istnieje");
+					error += "- U¿ytkownik o takiej nazwie ju¿ istnieje. \n";
 				}
 				
 				if(!validPesel){
-					printError("PESEL powinien zawieraæ 11 znaków");
+					error += "- PESEL powinien zawieraæ 11 znaków. \n";
 				}
 				
 				if(!uniquePesel){
-					printError("Taki PESEL jest ju¿ przypisany do innej osoby");
+					error += "- Taki PESEL jest ju¿ przypisany do innej osoby. \n";
 				}
 				
 				if(!valid){
-					printError("WprowadŸ wszystkie dane");
+					error += "- WprowadŸ wszystkie dane. \n";
 				}
+				
+				printError(error);
+				error = "";
 			}
 
 		}

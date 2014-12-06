@@ -25,7 +25,6 @@ public class ModifyDispatcherController {
 
 		this.modifyDispatcherView = new ModifyDispatcherView(this, this.modifyDispatcherModel);
 
-		//this.modifyDriverModel.initialize();
 		this.modifyDispatcherView.initialize();
 
 		this.modifyDispatcherView.setValues(dispatcher);
@@ -45,7 +44,6 @@ public class ModifyDispatcherController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			modifyDispatcherView.dispose();
 		}
 
@@ -59,12 +57,10 @@ public class ModifyDispatcherController {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			String[] values = modifyDispatcherView.getValues();
 			try {
 				ParseUser.requestPasswordReset(values[3]);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -73,10 +69,9 @@ public class ModifyDispatcherController {
 	}
 
 	private class EditButtonListener implements ActionListener{
-
+		private String error = "";
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Dodac walidacje usera
 			Dispatcher dispatcher = modifyDispatcherView.getDispatcher();
 			String[] values = modifyDispatcherView.getValues();
 			boolean valid = true;
@@ -90,9 +85,13 @@ public class ModifyDispatcherController {
 			if(values[2].length() != 11){
 				validPesel = false;
 			}
+			
+			boolean uniquePesel = true;
 
-			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
-
+			if(validPesel){
+				uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
+			}
+			
 			if(values[2].equals(new Long(dispatcherOld.getPESEL()).toString())){
 				uniquePesel = true;
 			}
@@ -102,16 +101,18 @@ public class ModifyDispatcherController {
 				modifyDispatcherView.dispose();
 			}else{
 				if(!uniquePesel){
-					printError("Taki PESEL jest ju¿ przypisany do innego kierowcy");
+					error += "- Taki PESEL jest ju¿ przypisany do innego kierowcy \n";
 				}
 				if(!validPesel){
-					printError("PESEL powinien mieæ 11 znaków");
+					error += "- PESEL powinien mieæ 11 znaków \n";
 				}
 
 				if(!valid){
-					printError("WprowadŸ wszystkie dane");
+					error += "- WprowadŸ wszystkie dane \n";
 
 				}
+				printError(error);
+				error = "";
 			}
 		}
 

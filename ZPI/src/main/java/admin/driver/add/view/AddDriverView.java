@@ -30,13 +30,11 @@ public class AddDriverView extends JFrame{
 	private JLabel pesel;
 	private JLabel phone;
 	private JLabel license;
-//	private JLabel userId;
 	private JTextField nameTF;
 	private JTextField surnameTF;
 	private JTextField peselTF;
 	private JTextField phoneTF;
 	private JTextField licenseTF;
-//	private JTextField userIdTF;
 	private JButton addDriver;
 	private JButton cancel;
 	private JLabel driverLB;
@@ -77,7 +75,7 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(name);
 
 		nameTF = new JTextField("kowal");
-		nameTF.setBounds(x+80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		nameTF.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(nameTF);
 
 		surname = new JLabel("Nazwisko: ");
@@ -85,7 +83,7 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(surname);
 
 		surnameTF = new JTextField("iui");
-		surnameTF.setBounds(x + 80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		surnameTF.setBounds(x + 110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(surnameTF);
 
 		pesel = new JLabel("PESEL: ");
@@ -93,7 +91,7 @@ public class AddDriverView extends JFrame{
 		mainPanel.add(pesel);
 
 		peselTF = new JTextField("3939292");
-		peselTF.setBounds(x+80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		peselTF.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(peselTF);
 
 		phone = new JLabel("Telefon: ");
@@ -111,15 +109,7 @@ public class AddDriverView extends JFrame{
 		licenseTF = new JTextField("339d3");
 		licenseTF.setBounds(x + 80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(licenseTF);
-/*
-		userId = new JLabel("U¿ytkownik: ");
-		userId.setBounds(x, y=y+30, 80, 20);
-		mainPanel.add(userId);
-
-		userIdTF = new JTextField();
-		userIdTF.setBounds(x+80, y, 100, 20);
-		mainPanel.add(userIdTF);
-*/
+		
 		addDriver = new JButton("Dodaj");
 		addDriver.setBounds(370, 10, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		addDriver.addActionListener(addDriverController.getAddButtonListener());
@@ -130,7 +120,6 @@ public class AddDriverView extends JFrame{
 		cancel.addActionListener(addDriverController.getCancelButtonListener());
 		optionPanel.add(cancel);
 
-		// TODO dorobiæ dodawanie samochodu dla kierowcy
 		this.setVisible(true);
 
 	}
@@ -146,6 +135,5 @@ public class AddDriverView extends JFrame{
 		peselTF.setText("");
 		phoneTF.setText("");
 		licenseTF.setText("");
-		//userIdTF.setText("");
 	}
 }

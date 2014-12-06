@@ -70,7 +70,7 @@ public class AddDispatcherView extends JFrame{
 		mainPanel.add(name);
 
 		nameTF = new JTextField("kowal");
-		nameTF.setBounds(x+80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		nameTF.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(nameTF);
 
 		surname = new JLabel("Nazwisko: ");
@@ -78,7 +78,7 @@ public class AddDispatcherView extends JFrame{
 		mainPanel.add(surname);
 
 		surnameTF = new JTextField("iui");
-		surnameTF.setBounds(x + 80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		surnameTF.setBounds(x + 110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(surnameTF);
 
 		pesel = new JLabel("PESEL: ");
@@ -86,7 +86,7 @@ public class AddDispatcherView extends JFrame{
 		mainPanel.add(pesel);
 
 		peselTF = new JTextField();
-		peselTF.setBounds(x+80, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		peselTF.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(peselTF);
 
 /*

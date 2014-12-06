@@ -91,11 +91,9 @@ public class ModifyDriverController {
 	}
 
 	private class EditButtonListener implements ActionListener{
-
+		private String error = "";
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//TODO zmienic edycje tak zeby jakos dodawac ten samochod i user
-			// TODO Dodac walidacje usera i samochodu(sprawdzac czy nie jest juz do kogos przypisany
 			Driver driver = modifyDriverView.getDriver();
 			String[] values = modifyDriverView.getValues();
 			boolean valid = true;
@@ -110,15 +108,19 @@ public class ModifyDriverController {
 				validPesel = false;
 			}
 
-			boolean uniquePesel = DriverDispatcherValidation.isPeselUnique(values[2]);
-			boolean uniqueLicense = DriverDispatcherValidation.isLicenseUnique(values[4]);
+			boolean uniquePesel = true;
+			boolean uniqueLicense = DriverDispatcherValidation.isLicenseUnique(values[3]);
+			
+			if(validPesel){
+				uniquePesel = DriverDispatcherValidation.isPeselUnique(values[4]);
+			}
 
 			if(values[4].equals(new Long(driverOld.getPESEL()).toString())){
 				uniquePesel = true;
 			}
 
 			if(values[3].equals(driverOld.getLicenseNumber())){
-				uniquePesel = true;
+				uniqueLicense = true;
 			}
 
 			if(valid && validPesel && uniqueLicense && uniquePesel){
@@ -126,21 +128,23 @@ public class ModifyDriverController {
 				modifyDriverView.dispose();
 			}else{
 				if(!uniquePesel){
-					printError("Taki PESEL jest ju¿ przypisany do innej osoby");
+					error += "- Taki PESEL jest ju¿ przypisany do innej osoby \n";
 				}
 
 				if(!uniqueLicense){
-					printError("Taka licencja jest ju¿ przypisana do innego kierowcy");
+					error += "- Taka licencja jest ju¿ przypisana do innego kierowcy \n";
 				}
 
 				if(!validPesel){
-					printError("PESEL powinien mieæ 11 znaków");
+					error += "- PESEL powinien mieæ 11 znaków \n";
 				}
 
 				if(!valid){
-					printError("WprowadŸ wszystkie dane");
+					error += "WprowadŸ wszystkie dane \n";
 
 				}
+				printError(error);
+				error = "";
 			}
 		}
 
