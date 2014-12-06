@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -18,17 +17,23 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SpinnerNumberModel;
 
 import order.controller.OrderController;
 import order.model.OrderModel;
 
 import javax.swing.border.Border;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.NumberFormatter;
+
+import com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache;
+
 import javax.swing.JCheckBox;
 
 import settings.DocumentSizeFilter;
 import settings.Settings;
-
 import java.awt.Font;
 
 /*
@@ -41,7 +46,7 @@ public class AddOrderJPanel extends JPanel{
 	private JTextField surnameTextField;
 	private JTextField phoneNumberTextField;
 	private JTextField pickUpAddressTextField;
-	private JComboBox<Integer> passengerCountComboBox;
+	private JTextField passangerCountTextField;
 	private JButton addOrderBtn;
 	private JTextArea customerRemarksTextArea;
 	private JScrollPane scrollPane;
@@ -49,7 +54,7 @@ public class AddOrderJPanel extends JPanel{
 	private JLabel surnameErrors;
 	private JLabel phoneErrors;
 	private JLabel addresErrors;
-	private JLabel passengerCountErrors;
+	private JLabel passangerCountErrors;
 	private Border defaultBorder;
 	private Border redBorder;
 	private boolean isValidate = true;
@@ -60,7 +65,7 @@ public class AddOrderJPanel extends JPanel{
 	private final String requiredFieldErrorMsg = "Pole wymagane!";
 	private final String onlyTextErrorMsg = "To pole mo¿e zawieraæ tylko litery!";
 	private final String onlyNumbersErrorMsg = "To pole mo¿e zawieraæ tylko liczby!";
-	private final String rangePassengerCountErrorMsg = "<html><body style='width: 150px'>"
+	private final String rangePassangerCountErrorMsg = "<html><body style='width: 150px'>"
 											+ "Liczba pasa¿erów musi byæ liczb¹ z przedzia³u &lt;1, 4&gt;";
 	
 	
@@ -144,17 +149,11 @@ public class AddOrderJPanel extends JPanel{
 		*/
 		add(pickUpAddressTextField);
 		
-		passengerCountComboBox = new JComboBox();
-		for(int i = 1; i < Settings.MAX_PASSENGER_IN_SINGLE_ORDER ; i++){
-			JLabel label = new JLabel(""+i);
-			passengerCountComboBox.add(label);
-		}
-		passengerCountComboBox.setEditable(false);
-		passengerCountComboBox.setBounds(10, 180, 177, 20);
-		passengerCountComboBox.setName("passengerCount");
-		passengerCountComboBox.getComponent(2).setForeground(new Color(244,22,22));
-		passengerCountComboBox.addFocusListener(orderController.getTrimTextFieldListener());
-		add(passengerCountComboBox);
+		passangerCountTextField = new JTextField();
+		passangerCountTextField.setBounds(10, 180, 177, 20);
+		passangerCountTextField.setName("passangerCount");
+		passangerCountTextField.addFocusListener(orderController.getTrimTextFieldListener());
+		add(passangerCountTextField);
 		
 		DefaultStyledDocument doc = new DefaultStyledDocument();
 		doc.setDocumentFilter(new DocumentSizeFilter(maxSizeText));
@@ -209,12 +208,12 @@ public class AddOrderJPanel extends JPanel{
 		addresErrors.setVisible(false);
 		add(addresErrors);
 		
-		passengerCountErrors = new JLabel("passanger count error");
-		passengerCountErrors.setName("passengerCountError");
-		passengerCountErrors.setBounds(197, 170, 211, 41);
-		passengerCountErrors.setForeground(Color.RED);
-		passengerCountErrors.setVisible(false);
-		add(passengerCountErrors);
+		passangerCountErrors = new JLabel("passanger count error");
+		passangerCountErrors.setName("passangerCountError");
+		passangerCountErrors.setBounds(197, 170, 211, 41);
+		passangerCountErrors.setForeground(Color.RED);
+		passangerCountErrors.setVisible(false);
+		add(passangerCountErrors);
 		
 		defaultCityCheckBox = new JCheckBox(Settings.DEFAULT_CITY);
 		defaultCityCheckBox.setSelected(true);
@@ -264,13 +263,20 @@ public class AddOrderJPanel extends JPanel{
 			setValidationError(pickUpAddressTextField, addresErrors, requiredFieldErrorMsg); 
 		}
 
-//		if(isOnlyNumberField(passengerCountTextField)){
-//			int number = Integer.parseInt(passengerCountTextField.getText());
-//			if(number < 1 || number > Settings.MAX_PASSENGER_IN_SINGLE_ORDER){
-//				setValidationError(passengerCountTextField, passengerCountErrors, rangePassengerCountErrorMsg);
-//			}
-//		}
-
+		if(isEmptyField(passangerCountTextField)){
+			setValidationError(passangerCountTextField, passangerCountErrors, requiredFieldErrorMsg);
+		}
+		else{
+			if(isOnlyNumberField(passangerCountTextField)){
+				int number = Integer.parseInt(passangerCountTextField.getText());
+				if(number < 1 || number > 5){
+					setValidationError(passangerCountTextField, passangerCountErrors, rangePassangerCountErrorMsg);
+				}
+			}
+			else{
+				setValidationError(passangerCountTextField, passangerCountErrors, onlyNumbersErrorMsg);
+			}
+		}
 		return isValidate;
 	}
 	
@@ -306,7 +312,7 @@ public class AddOrderJPanel extends JPanel{
 		surnameTextField.setText(null);
 		phoneNumberTextField.setText(null);
 		pickUpAddressTextField.setText(null);
-		passengerCountComboBox.setSelectedIndex(0);
+		passangerCountTextField.setText(null);
 		customerRemarksTextArea.setText(null);
 	}
 	
@@ -319,7 +325,7 @@ public class AddOrderJPanel extends JPanel{
 		surnameTextField.setBorder(defaultBorder);
 		phoneNumberTextField.setBorder(defaultBorder);
 		pickUpAddressTextField.setBorder(defaultBorder);
-		passengerCountComboBox.setBorder(defaultBorder);
+		passangerCountTextField.setBorder(defaultBorder);
 		scrollPane.setBorder(defaultBorder);
 	}
 	
@@ -327,7 +333,7 @@ public class AddOrderJPanel extends JPanel{
 		surnameErrors.setVisible(false);
 		phoneErrors.setVisible(false);
 		addresErrors.setVisible(false);
-		passengerCountErrors.setVisible(false);
+		passangerCountErrors.setVisible(false);
 	}
 	
 	public JTextField getSurnameTextField() {
@@ -354,13 +360,13 @@ public class AddOrderJPanel extends JPanel{
 		this.pickUpAddressTextField = pickUpAddressTextField;
 	}
 
-	public JComboBox getPassengerCountComboBox() {
-		return passengerCountComboBox;
+	public JTextField getPassangerCountTextField() {
+		return passangerCountTextField;
 	}
 
-	public void setPassengerCountComboBox(
-			JComboBox passengerCountComboBox) {
-		this.passengerCountComboBox = passengerCountComboBox;
+	public void setPassangerCountTextField(
+			JFormattedTextField passangerCountTextField) {
+		this.passangerCountTextField = passangerCountTextField;
 	}
 
 	public JTextArea getCustomerRemarksTextArea() {

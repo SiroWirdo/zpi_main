@@ -58,10 +58,10 @@ public class OrderController {
 	}
 	
 	public Order addOrder(String surname, Number phoneNumber,
-			String pickUpAddress, String customerRemarks, Number passengerCount) {
+			String pickUpAddress, String customerRemarks, Number passangerCount) {
 		// String customerId = orderModel.addCustomer(surname, phoneNumber);
 		return orderModel.addOrder(surname, phoneNumber, pickUpAddress,
-				customerRemarks, passengerCount);
+				customerRemarks, passangerCount);
 	}
 
 	public void setOrderDetails() {
@@ -114,8 +114,8 @@ public class OrderController {
 							.getText().trim()),
 					addOrderView.getPickUpAddressTextField().getText() + defaultCity,
 					addOrderView.getCustomerRemarksTextArea().getText(),
-					(int)addOrderView
-							.getPassengerCountComboBox().getSelectedItem());
+					new Integer(addOrderView
+							.getPassangerCountTextField().getText().trim()));
 		    Thread changePositionThread = new Thread() {
 		        public void run() {
 		        	setPositionOnNewOrder(o);
