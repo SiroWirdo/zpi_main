@@ -35,7 +35,7 @@ public class AddNewOrderTest {
 		UIManager.getLookAndFeelDefaults().put("Table.background", new ColorUIResource(new Color(74,144,178)));
 
 		OrderModel model = new OrderModel();
-		OrderController controller = new OrderController(model);
+		OrderController controller = new OrderController(model, null);
 	}
 
 }

@@ -165,5 +165,17 @@ public class Order extends ParseObject {
 	public static ParseQuery<Order> getQuery() {
 		return ParseQuery.getQuery(Order.class);
 	}
+	
+	public static Order getOrderById(String orderId){
+		Order o = null;
+
+		ParseQuery<Order> queryOrder = ParseQuery.getQuery("Order");
+		try {
+			o = queryOrder.get(orderId);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return o;
+	}
 }
 

@@ -22,6 +22,8 @@ import message.controller.MessageController;
 import message.model.MessageModel;
 import order.controller.OrderController;
 import order.model.OrderModel;
+import order_info.controller.OrderInfoController;
+import order_info.model.OrderInfoModel;
 import ordersdisplay.controller.OrdersController;
 import ordersdisplay.model.OrdersModel;
 import other.DataBaseConnection;
@@ -63,9 +65,9 @@ public class MainMenuView extends JFrame{
 		addTabbedPane();
 		addMainPagePanels();
 		addOrderPanel();
-		addDriverPanel();
-		addOrdersDisplayPanel();
-		addMessagePanel();
+//		addDriverPanel();
+//		addOrdersDisplayPanel();
+//		addMessagePanel();
 		
 		this.setTitle(title);
 		this.setVisible(true);
@@ -79,23 +81,14 @@ public class MainMenuView extends JFrame{
 	public void addMainPagePanels(){
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(null);
-//		mainPanel.add(getMapPanel());
 		mainPanel.add(getMap());
-		mainPanel.add(getStatisticPanel());
+//		mainPanel.add(getStatisticPanel());
+		mainPanel.add(getInfoPanel());
 		mainPanel.add(getFilterPanel());
 		mainPanel.setVisible(true);
 
 		tabbedPane.addTab("Mapa", null, mainPanel, null); //TODO ustawic ikony?
 	}
-
-//	public JScrollPane getMapPanel(){
-//		JScrollPane scrollPane = new JScrollPane(getMap());
-//		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-//		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-//		scrollPane.setBounds(10, 10, 1000, 700);
-//
-//		return scrollPane;
-//	}
 
 	public JPanel getMap(){
 		MapModel mapModel = new MapModel();
@@ -118,6 +111,14 @@ public class MainMenuView extends JFrame{
 		return statisticPanel;
 	}
 
+	public JPanel getInfoPanel(){
+		OrderInfoModel oim = new OrderInfoModel();
+		OrderInfoController oic = new OrderInfoController(oim);
+		
+		JPanel infoView = oic.getInfoView();
+		infoView.setBounds(1025, 0, 300, 300);
+		return infoView;
+	}
 	public JPanel getFilterPanel(){
 		FilterMapModel filterModel;
 		FilterMapController filterController;
@@ -133,7 +134,7 @@ public class MainMenuView extends JFrame{
 
 	public void addOrderPanel(){
 		OrderModel orderModel = new OrderModel();
-		OrderController orderController = new OrderController(orderModel);
+		OrderController orderController = new OrderController(orderModel, mapController);
 		tabbedPane.addTab("Dodaj zlecenie", null, orderController.getAddOrderView(), null);
 	}
 

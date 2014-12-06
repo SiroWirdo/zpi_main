@@ -3,6 +3,8 @@ package algorithm;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -70,6 +72,17 @@ public class AlgorithmResultDialog extends JDialog {
 		driverLabel.setBounds(187, 42, 114, 30);
 		getContentPane().add(driverLabel);
 		setBounds(400, 400, 374, 172);
+		
+		this.removeWindowListener(getWindowListeners()[0]);
+		this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+				alg.setIsGiveUp(true);
+				isDispatcherResponse = true;
+            	closeDialog();
+            }
+        });
 	}
 	
 	
@@ -82,6 +95,7 @@ public class AlgorithmResultDialog extends JDialog {
 		sb.append(d.getSurname());
 		sb.append(" ");
 		sb.append(d.getName());
+		sb.append("?");
 		
 		driverLabel.setText(sb.toString());
 	}

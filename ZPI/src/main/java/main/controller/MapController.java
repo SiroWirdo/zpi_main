@@ -100,6 +100,10 @@ public class MapController{
 		mapView.drawWaypointsComponent(allWaypoints);
 	}
 	
+	public void setPosition(double latitude, double longitude){
+		mapView.setPosition(latitude, longitude);
+	}
+	
 	private void addCarWaypoints(){
 		Set<MapComponent> positions = getCarWaypoints();
 		mapModel.addCarsWaypoints(positions);

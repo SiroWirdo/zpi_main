@@ -70,12 +70,12 @@ public class MapPanel extends JXMapKit {
 		defaultPositionBtn = new JButton();
 		defaultPositionBtn.setLayout(null);
 			JLabel line1 = new JLabel("Pozycja");
-				Font font = new Font(line1.getFont().getFontName(), Font.PLAIN, 10);
+				Font font = new Font(line1.getFont().getFontName(), Font.PLAIN, 9);
 				line1.setFont(font);
-				line1.setBounds(5, 10, 60, 15);
+				line1.setBounds(7, 10, 60, 15);
 			JLabel line2 = new JLabel("domyœlna");
 				line2.setFont(font);
-				line2.setBounds(2, 27, 60, 15);
+				line2.setBounds(4, 27, 60, 15);
 		defaultPositionBtn.add(line1);
 		defaultPositionBtn.add(line2);
 		defaultPositionBtn.setName("defaultPosition");
@@ -157,6 +157,11 @@ public class MapPanel extends JXMapKit {
 	
 	public void setDefaultPosition(){
 		this.setAddressLocation(new GeoPosition(Settings.DEFAULT_LATITUDE, Settings.DEFAULT_LONGITUDE));
+		this.setZoom(Settings.DEFAULT_ZOOM);
+	}
+	
+	public void setPosition(double latitude, double longitude){
+		this.setAddressLocation(new GeoPosition(latitude, longitude));
 		this.setZoom(Settings.DEFAULT_ZOOM);
 	}
 }

@@ -7,17 +7,23 @@ import java.awt.event.FocusListener;
 
 import javax.swing.JTextField;
 
+import org.parse4j.ParseGeoPoint;
+
 import algorithm.Algorithm;
 import order.model.OrderModel;
 import order.view.AddOrderJPanel;
 import order.view.OrderDetailsView;
 import settings.Settings;
+import main.controller.MapController;
 import model.Order;
 
 public class OrderController {
 	
 	private OrderModel orderModel;
 	private AddOrderJPanel addOrderView;
+	
+	private MapController mapController;
+	
 	private ButtonListener buttonListener;
 	private ValidateTextFieldListener validateTextFieldListener;
 	private TrimTextFieldListener trimTextFieldListener;
@@ -27,8 +33,9 @@ public class OrderController {
 	private Order orderDetailsModel;
 	private OrderDetailsView orderView;
 
-	public OrderController(OrderModel orderModel) {
+	public OrderController(OrderModel orderModel, MapController mapController) {
 		this.orderModel = orderModel;
+		this.mapController = mapController;
 		buttonListener = new ButtonListener();
 		validateTextFieldListener = new ValidateTextFieldListener();
 		trimTextFieldListener = new TrimTextFieldListener();
@@ -97,7 +104,7 @@ public class OrderController {
 			if(addOrderView.isDefaultCityChecked()){
 				defaultCity = Settings.DEFAULT_CITY;
 			}
-			Order o = addOrder(
+			final Order o = addOrder(
 					addOrderView.getSurnameTextField().getText().trim(),
 					new Long(addOrderView.getPhoneNumberTextField()
 							.getText().trim()),
@@ -105,6 +112,13 @@ public class OrderController {
 					addOrderView.getCustomerRemarksTextArea().getText(),
 					new Integer(addOrderView
 							.getPassangerCountTextField().getText().trim()));
+		    Thread changePositionThread = new Thread() {
+		        public void run() {
+		        	setPositionOnNewOrder(o);
+		        }
+		      };
+		      changePositionThread.start();
+		      
 			assignDriver(o);
 			if(addOrderView.isCleanAfterAddChecked()){
 				addOrderView.cleanAll();	
@@ -121,6 +135,11 @@ public class OrderController {
 		Algorithm.initializeGraphHopper();
 		Algorithm a = new Algorithm(order);
 		a.run();
+	}
+	
+	private void setPositionOnNewOrder(Order newOrder){
+		ParseGeoPoint geoPoint = newOrder.getPickupAddressGeo();
+		mapController.setPosition(geoPoint.getLatitude(), geoPoint.getLongitude());
 	}
 	
 	public class ValidateTextFieldListener implements FocusListener{

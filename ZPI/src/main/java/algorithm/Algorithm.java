@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.JDialog;
-import javax.swing.SwingUtilities;
-
 import model.Car;
 import model.Driver;
 import model.Order;
@@ -43,10 +40,10 @@ public class Algorithm implements Runnable {
 	private long expectingWaitingTimeInMillisec;
 
 	private final int NUMBER_CHOOSED_DRIVERS = 6;
-	private final long WAITING_TIME_RSP_DRIVER = 30000;
+	private final long WAITING_TIME_RSP_DRIVER = 60000;
 
 	private final int COUNTED_TIMES = 3;
-	private final long EXPECTING_TIME_TO_RESPONSE = WAITING_TIME_RSP_DRIVER * 2;
+	private final long EXPECTING_TIME_TO_RESPONSE = WAITING_TIME_RSP_DRIVER * 3;
 
 	public Algorithm(Order order) {
 		this.order = order;
@@ -217,7 +214,7 @@ public class Algorithm implements Runnable {
 			/*
 			 * Pobieramy z bazy aktualne dane zamówienia
 			 */
-			order = updateOrderData();
+			order = Order.getOrderById(order.getId());//updateOrderData();
 			System.out.println("Po aktualizacji status ordera:"
 					+ order.getStatus());
 
@@ -229,8 +226,7 @@ public class Algorithm implements Runnable {
 
 				/*
 				 * TODO wyœwietl komunikat dla dispatchera, ze zosta³
-				 * przydzielony do konkretnego kierowcy i jego odleg³oœc i czas
-				 * oczekiwania
+				 * przydzielony do konkretnego kierowcy 
 				 */
 
 			} else { // Powiadom kolejnego kierowce z listy
@@ -285,10 +281,14 @@ public class Algorithm implements Runnable {
 	private long getExpectedWaitingTime(List<Long> times) {
 		long expectedTime = -1;
 		long sum = 0;
-		for (int i = 0; i < times.size() && i < COUNTED_TIMES; i++) {
+		int divider = COUNTED_TIMES;
+		if( times.size() < COUNTED_TIMES){
+			divider = times.size();
+		}
+		for (int i = 0; i < divider; i++) {
 			sum += times.get(i);
 		}
-		expectedTime = sum / COUNTED_TIMES;
+		expectedTime = sum / divider;
 		expectedTime += EXPECTING_TIME_TO_RESPONSE;
 
 		return expectedTime;
