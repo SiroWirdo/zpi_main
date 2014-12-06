@@ -79,17 +79,17 @@ public class MainMenuView extends JFrame{
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		tabbedPane.addTab("Mapa", null, getMainPanel(), null);
-		tabbedPane.addTab("Kierowcy", null, getDriverPanel(), null);
-		tabbedPane.addTab("Wyœwietl zlecenia", null, getOrdersDisplayPanel(), null);
+//		tabbedPane.addTab("Kierowcy", null, getDriverPanel(), null);
+//		tabbedPane.addTab("Wyœwietl zlecenia", null, getOrdersDisplayPanel(), null);
 	}
 	
 	private JTabbedPane getSecondTabbedPane(){
 		smallTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 //		smallTabbedPane.setBorder((new LineBorder(Color.black, 5)));
-		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
+//		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
 		smallTabbedPane.addTab("Dodaj zlecenie", null, getOrderPanel(), null);
-		smallTabbedPane.addTab("Statystyka", null, getStatisticPanel(), null);
-		smallTabbedPane.addTab("Wyœlij wiadomoœæ", null, getMessagePanel(), null);
+//		smallTabbedPane.addTab("Statystyka", null, getStatisticPanel(), null);
+//		smallTabbedPane.addTab("Wyœlij wiadomoœæ", null, getMessagePanel(), null);
 		smallTabbedPane.setBounds(0, 0, 300, 400);
 		return smallTabbedPane;
 	}
