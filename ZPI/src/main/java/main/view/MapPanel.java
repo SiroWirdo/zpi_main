@@ -46,7 +46,7 @@ public class MapPanel extends JXMapKit {
 		this.mapModel = mapModel;
 		map = getMainMap();
 		painter = map.getOverlayPainter();
-//		initialize();
+		initialize();
 	}
 	
 	public void initialize() {

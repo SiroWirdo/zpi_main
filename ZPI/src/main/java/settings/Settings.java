@@ -80,13 +80,7 @@ public class Settings {
 	public static String[] orderStatus = { "oczekuj¹ce",
 			"w trakcie realizacji", "zrealizowane", "anulowane",
 			"zaakceptowane" };
-	
-	/*
-	 * Inne
-	 */
-	public static final int MAX_PASSENGER_IN_SINGLE_ORDER = 4;
-	
-	
+
 	private Settings() {
 
 	}
@@ -157,8 +151,7 @@ public class Settings {
 		UIManager.put("PasswordField.foreground", new Color(0,0,0));
 		UIManager.put("TextArea.foreground", new Color(0,0,0));
 		UIManager.put("FormattedTextField.foreground", new Color(0,0,0));
-		//TODO poprawiæ comboboxa
-		UIManager.put("ComboBox:\"ComboBox.listRenderer\"[Disabled].textForeground", new Color(0,243,0));
+		
 		//TODO nie chca dzia³aæ tooltipy na mapie
 		Border border = BorderFactory.createLineBorder(new Color(0,0,0));    //#4c4f53
 		UIManager.put("ToolTip.border", border);

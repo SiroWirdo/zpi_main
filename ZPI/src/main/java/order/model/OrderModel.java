@@ -28,14 +28,14 @@ public class OrderModel {
 	 * Utworzenie nowego zamówienia
 	 */
 	public Order addOrder(String surname, Number phoneNumber , String pickUpAddress,
-			String customerRemarks, Number passengerCount){
+			String customerRemarks, Number passangerCount){
 		
 		Order order = new Order();
 		
 		Customer customer = addCustomer(surname, phoneNumber);
 		order.setCustomer(customer);
 		order.setCustomerRemarks(customerRemarks);
-		order.setPassengerCount(passengerCount);
+		order.setPassengerCount(passangerCount);
 		order.setStatus(Settings.WAITING_ORDER_STATUS);
 		
 		AddressInfo addressInfo = ConverterGeoPosition.addressToAdressInfo(pickUpAddress);
