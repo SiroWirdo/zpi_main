@@ -31,7 +31,6 @@ public class DriversController implements Observer {
 		this.driversModel.initialize();
 		this.driversView.initialize();
 		
-
 	}
 
 	public DriversController(Driver driverDetailsModel){
@@ -48,12 +47,11 @@ public class DriversController implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
 		if(arg0 == driversModel){
 			if(driversModel.getChanges().getFlag() == 0){
 				List<Driver> drivers = driversModel.getChanges().getDrivers();
 				for(Driver driver : drivers){
-
+					System.out.println(driver.getSurname());
 					addRow(driver);
 				}
 			}else{
@@ -84,23 +82,6 @@ public class DriversController implements Observer {
 		}
 
 	}
-/*
-	public List<Driver> filtr(List<Driver> drivers){
-		List<Driver> newDrivers = new ArrayList<Driver>();
-		for(Driver driver : drivers){
-			String driverName = driver.getName();
-			String driverSurname = driver.getSurname();
-			String driverStatus = Settings.driverStatus[driver.getStatus()];
-			if((driverName.equals(driversView.getName()) || driversView.getName().equals(""))
-					&& (driverSurname.equals(driversView.getSurname()) || driversView.getSurname().equals(""))
-					&& driversView.isChecked(driverStatus)){
-				newDrivers.add(driver);
-			}
-		}
-
-		return newDrivers;
-	}
-*/
 
 	public FiltrListener getFiltrListener(){
 		return new FiltrListener();
@@ -110,7 +91,6 @@ public class DriversController implements Observer {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 
 			ArrayList<RowFilter<DefaultTableModel, Object>> statusFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
 			ArrayList<RowFilter<DefaultTableModel, Object>> nameFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
@@ -151,25 +131,6 @@ public class DriversController implements Observer {
 			driversView.setFilters(mainFilter);
 			driversView.repaint();
 
-
-			/*driversView.clearTable();
-			List<Driver> actualDrivers = driversModel.getActualData();
-
-			if(actualDrivers == null){
-				try {
-					throw new DriverNotFoundException("Brak aktualnych kierowców");
-				} catch (DriverNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-			actualDrivers = filtr(actualDrivers);
-			for(Driver driver : actualDrivers){
-				addRow(driver);
-			}
-
-			driversView.repaint();*/
 		}
 
 	}

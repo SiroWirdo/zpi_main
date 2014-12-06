@@ -89,6 +89,7 @@ public class MainMenuView extends JFrame{
 		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
 		smallTabbedPane.addTab("Dodaj zlecenie", null, getOrderPanel(), null);
 		smallTabbedPane.addTab("Statystyka", null, getStatisticPanel(), null);
+		smallTabbedPane.addTab("Wyœlij wiadomoœæ", null, getMessagePanel(), null);
 		smallTabbedPane.setBounds(0, 0, 300, 400);
 		return smallTabbedPane;
 	}
@@ -161,10 +162,10 @@ public class MainMenuView extends JFrame{
 		return ordersController.getOrdersView();
 	}
 	
-	public void addMessagePanel(){
+	public JPanel getMessagePanel(){
 		MessageModel messageModel = new MessageModel();
 		MessageController messageController = new MessageController(messageModel);
-		tabbedPane.addTab("Wyœlij wiadomoœæ", null, messageController.getMessageView(), null);
+		return messageController.getMessageView();
 	}
 
 }
