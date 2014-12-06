@@ -28,7 +28,6 @@ public class OrdersController implements Observer  {
 
 		this.ordersModel.initialize();
 		this.ordersView.initialize();
-		//TODO dorobiæ edycjê zamówienia
 
 	}
 
@@ -38,7 +37,6 @@ public class OrdersController implements Observer  {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
 		if(arg0 == ordersModel){
 			if(ordersModel.getChanges().getFlag() == 0){
 				List<Order> orders = ordersModel.getChanges().getOrders();

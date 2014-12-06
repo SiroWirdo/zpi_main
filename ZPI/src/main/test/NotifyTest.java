@@ -13,7 +13,7 @@ public class NotifyTest {
 	public static void main(String[] args){
 		DataBaseConnection.initialize();
 		ParseQuery<Driver> query = new ParseQuery<Driver>(Driver.class);
-		query.whereEqualTo("objectId", "oKRQw3yyuv");
+		query.whereEqualTo("objectId", "gYvqcZalEh");
 		Driver driver = null;
 		try {
 			driver = query.find().get(0);

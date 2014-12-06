@@ -51,7 +51,9 @@ public class DriversController implements Observer {
 			if(driversModel.getChanges().getFlag() == 0){
 				List<Driver> drivers = driversModel.getChanges().getDrivers();
 				for(Driver driver : drivers){
-					System.out.println(driver.getSurname());
+					
+					System.out.println("Driver Controller: " + driver.getSurname());
+					
 					addRow(driver);
 				}
 			}else{

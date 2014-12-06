@@ -8,6 +8,7 @@ import java.util.Observable;
 import model.Driver;
 
 import org.parse4j.ParseException;
+import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 import org.parse4j.callback.FindCallback;
 
@@ -33,10 +34,11 @@ public class DriversModel extends Observable implements Runnable {
 			public void done(List<Driver> scoreList, ParseException e) {
 				if (e == null) {
 					if(scoreList != null && scoreList.size() > 0){
+						System.out.println("baza: " + scoreList.get(0).get("surname"));
 						driverChanges = new DriverChanges(scoreList, 0);
 						model.setChanged();
 						model.notifyObservers();
-						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
+						System.out.println("Znaleziono: " + scoreList.size() + " obiektï¿½w");
 						
 					}else{
 						System.out.println("Pusta baza");
@@ -45,6 +47,19 @@ public class DriversModel extends Observable implements Runnable {
 
 				}
 			}
+		});
+		
+
+		ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Driver");
+		query2.whereEqualTo("objectId", "0n4mCIRXVO");
+		query2.findInBackground(new FindCallback<ParseObject>() {
+		    public void done(List<ParseObject> scoreList, ParseException e) {
+		        if (e == null) {
+		        	System.out.println("Baza z backgroundem: " + (String)scoreList.get(0).get("surname"));
+		        } else {
+		        	
+		        }
+		    }
 		});
 		
 		model.start();
@@ -62,9 +77,9 @@ public class DriversModel extends Observable implements Runnable {
 		stop = true;
 	}
 
-	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usuniêcie wiersza najlepiej szukaæ po PESELu) **/
+	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usuniï¿½cie wiersza najlepiej szukaï¿½ po PESELu) **/
 	public DriverChanges getChanges(){
-		// na koñcu musi byæ flaga czy tylko edycja statusu, czy nowy kierowca online
+		// na koï¿½cu musi byï¿½ flaga czy tylko edycja statusu, czy nowy kierowca online
 		DriverChanges changes = driverChanges;
 		if(changes != null){
 			lastUpdated = changes.getDrivers().get(0).getUpdatedAt();
@@ -97,7 +112,7 @@ public class DriversModel extends Observable implements Runnable {
 							driverChanges = new DriverChanges(scoreList, 1);
 							model.setChanged();
 							model.notifyObservers();
-							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");							
+							System.out.println("Zmieniono: " + scoreList.size() + " obiektï¿½w");							
 						}else{
 							System.out.println("Pusta baza");
 						}

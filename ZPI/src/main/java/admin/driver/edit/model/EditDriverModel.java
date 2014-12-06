@@ -21,8 +21,6 @@ public class EditDriverModel extends Observable implements Runnable {
 	public void initialize(){
 		final EditDriverModel model = this;
 
-		DataBaseConnection.initialize();
-
 		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
 		query.orderByDescending("updatedAt");
 		query.findInBackground(new FindCallback<Driver>() {

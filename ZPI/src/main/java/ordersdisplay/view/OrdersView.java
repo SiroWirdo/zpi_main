@@ -24,7 +24,6 @@ public class OrdersView extends JPanel {
 	private DefaultTableModel tableModel;
 	private JTable table;
 	private TableRowSorter<DefaultTableModel> sorter;
-	private JButton editOrder;
 	private JLabel jlStatus;
 	private JCheckBox waiting;
 	private JCheckBox realizing;
@@ -44,10 +43,15 @@ public class OrdersView extends JPanel {
 
 
 		String[] columns = {"Id", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "Liczba pasa¿erów", "Status"};
-		tableModel = new DefaultTableModel(0, 0);
+		tableModel = new DefaultTableModel(0, 0){
+
+			   @Override
+			   public boolean isCellEditable(int row, int column) {
+			       return false;
+			   }
+			};
 		tableModel.setColumnIdentifiers(columns);
 		table = new JTable();
-		//table.setBounds(0, 0, 1100, 700);
 
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
@@ -56,7 +60,6 @@ public class OrdersView extends JPanel {
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }
-		//table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		table.setModel(tableModel);
 
 		table.setRowSelectionAllowed(false);
@@ -64,13 +67,8 @@ public class OrdersView extends JPanel {
 		table.setCellSelectionEnabled(false);
 		table.setFillsViewportHeight(true);
 		table.setVisible(true);
-		//Font font = new Font("Calibri", Font.PLAIN, 12);
-		//table.setFont(font);
+		
 		this.add(scrollPane);
-
-		editOrder = new JButton("Edytuj");
-		editOrder.setBounds(430, 30, 100, 20);
-		add(editOrder);
 
 		jlStatus = new JLabel("Status:");
 		jlStatus.setBounds(10, 5, 100, 20);
@@ -102,7 +100,7 @@ public class OrdersView extends JPanel {
 		add(accepted);
 
 		filtr = new JButton("Filtruj");
-		filtr.setBounds(430, 65, 100, 20);
+		filtr.setBounds(430, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(ordersController.getFiltrListener());
 		add(filtr);
 	}

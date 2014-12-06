@@ -33,10 +33,6 @@ public class AdminController {
 	public EditDriverListener getEditDriverListener(){
 		return new EditDriverListener();
 	}
-
-	/*public AddUserListener getAddUserListener(){
-		return new AddUserListener();
-	}*/
 	
 	public AddDispatcherListener getAddDispatcherListener(){
 		return new AddDispatcherListener();
@@ -55,7 +51,6 @@ public class AdminController {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			AddDriverModel addDriverModel = new AddDriverModel();
 			AddDriverController addDriverController = new AddDriverController(addDriverModel);
 		}
@@ -66,7 +61,6 @@ public class AdminController {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			EditDriverModel editDriverModel = new EditDriverModel();
 			EditDriverController editDriverController = new EditDriverController(editDriverModel);
 			editDriverModel.addObserver(editDriverController);
@@ -79,7 +73,6 @@ public class AdminController {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			AddDispatcherModel addDispatcherModel = new AddDispatcherModel();
 			AddDispatcherController addDispatcherController = new AddDispatcherController(addDispatcherModel);
 		}
@@ -90,7 +83,6 @@ public class AdminController {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			EditDispatcherModel editDispatcherModel = new EditDispatcherModel();
 			EditDispatcherController editDispatcherController = new EditDispatcherController(editDispatcherModel);
 			editDispatcherModel.addObserver(editDispatcherController);
@@ -98,24 +90,12 @@ public class AdminController {
 		
 	}
 
-/*	private class AddUserListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			AddUserModel addUserModel = new AddUserModel();
-			AddUserController addUserController = new AddUserController(addUserModel);
-
-		}
-
-	}*/
-
 	private class CloseButtonListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			adminView.dispose();
+			System.exit(0);
 		}
 
 	}
