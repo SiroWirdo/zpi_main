@@ -153,14 +153,14 @@ public class Settings {
 		UIManager.put("FormattedTextField.foreground", new Color(0,0,0));
 		
 		//TODO nie chca dzia³aæ tooltipy na mapie
-//		Border border = BorderFactory.createLineBorder(new Color(0,0,0));    //#4c4f53
-//		UIManager.put("ToolTip.border", border);
-//
-//		UIManager.put("ToolTip.foregroundInactive", new Color(255, 255, 255));
-//		UIManager.put("backgroundInactive", new Color(255, 255, 255));
-//		UIManager.put("ToolTip.background", new Color(255, 255, 255)); //#fff7c8
-//		UIManager.put("ToolTip.foreground", new Color(255, 255, 255));
-//		
+		Border border = BorderFactory.createLineBorder(new Color(0,0,0));    //#4c4f53
+		UIManager.put("ToolTip.border", border);
+
+		UIManager.put("ToolTip.foregroundInactive", new Color(255, 255, 255));
+		UIManager.put("backgroundInactive", new Color(255, 255, 255));
+		UIManager.put("ToolTip.background", new Color(255, 255, 255)); //#fff7c8
+		UIManager.put("ToolTip.foreground", new Color(255, 255, 255));
+		
 //		UIManager.getLookAndFeelDefaults().put("ToolTip.foregroundInactive", new Color(255, 255, 255));
 //		UIManager.getLookAndFeelDefaults().put("backgroundInactive", new Color(255, 255, 255));
 //		UIManager.getLookAndFeelDefaults().put("ToolTip.background", new Color(255, 255, 255)); //#fff7c8

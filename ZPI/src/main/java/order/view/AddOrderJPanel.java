@@ -278,7 +278,7 @@ public class AddOrderJPanel extends JPanel{
 	}
 	
 	public boolean isOnlyTextField(JTextField validateField){
-		return validateField.getText().matches("[A-Z][a-z¿Ÿæñó³ê¹œ¯Æ¥ŒÊ£ÓÑ]*[\\w-]*");
+		return validateField.getText().matches("[A-Z¯Æ¥ŒÊ£ÓÑ][a-z¿Ÿæñó³ê¹œ]*[\\w-]*");
 	}
 	
 	public boolean isOnlyNumberField(JTextField validateField){

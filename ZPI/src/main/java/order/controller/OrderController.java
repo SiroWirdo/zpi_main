@@ -5,14 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
-import org.parse4j.ParseObject;
-
+import algorithm.Algorithm;
 import order.model.OrderModel;
 import order.view.AddOrderJPanel;
 import order.view.OrderDetailsView;
@@ -51,10 +46,10 @@ public class OrderController {
 		return addOrderView;
 	}
 
-	public void addOrder(String surname, Number phoneNumber,
+	public Order addOrder(String surname, Number phoneNumber,
 			String pickUpAddress, String customerRemarks, Number passangerCount) {
 		// String customerId = orderModel.addCustomer(surname, phoneNumber);
-		orderModel.addOrder(surname, phoneNumber, pickUpAddress,
+		return orderModel.addOrder(surname, phoneNumber, pickUpAddress,
 				customerRemarks, passangerCount);
 	}
 
@@ -102,7 +97,7 @@ public class OrderController {
 			if(addOrderView.isDefaultCityChecked()){
 				defaultCity = Settings.DEFAULT_CITY;
 			}
-			addOrder(
+			Order o = addOrder(
 					addOrderView.getSurnameTextField().getText().trim(),
 					new Long(addOrderView.getPhoneNumberTextField()
 							.getText().trim()),
@@ -110,17 +105,23 @@ public class OrderController {
 					addOrderView.getCustomerRemarksTextArea().getText(),
 					new Integer(addOrderView
 							.getPassangerCountTextField().getText().trim()));
+			assignDriver(o);
 			if(addOrderView.isCleanAfterAddChecked()){
-				SwingUtilities.invokeLater(new Runnable() {
-				    public void run() {
-				    	addOrderView.cleanAll();
-				    }
-				  });	
+				addOrderView.cleanAll();	
 			}
 		} else {
 			System.out.println("Formularz nie przeszed³ walidacji");
 		}
 	};
+	
+	/*
+	 * Podpiêcie algorytmu przydzielania kierowcy do zlecenia!
+	 */
+	public void assignDriver(Order order){
+		Algorithm.initializeGraphHopper();
+		Algorithm a = new Algorithm(order);
+		a.run();
+	}
 	
 	public class ValidateTextFieldListener implements FocusListener{
 

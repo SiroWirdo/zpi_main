@@ -1,6 +1,7 @@
 package main.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,6 +9,7 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JToolTip;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.ColorUIResource;
@@ -27,7 +29,6 @@ public class MapComponent extends JLabel{
 	private Driver driver;
 	private Order order;
 	private Waypoint waypoint;
-	
 	/*
 	 *Paths icons resources 
 	 */
@@ -70,7 +71,10 @@ public class MapComponent extends JLabel{
 	     this.waypoint = waypoint;
 	     
 	     this.setIcon(chooseCustomerIcon());
+	     
+	     super.createToolTip().updateUI();
 	     this.setToolTipText(Settings.orderStatus[order.getStatus()]);
+	     
 	     this.addMouseListener(new WaypointMouseListener());
 		}
 		else{
@@ -133,7 +137,13 @@ public class MapComponent extends JLabel{
 	public void setWaypoint(Waypoint waypoint) {
 		this.waypoint = waypoint;
 	}
-
+//	TODO do usuniêcia?
+//	private void overrideToolTip(){
+//		super.createToolTip().setBackground(Color.gray);
+//		super.createToolTip().setForeground(Color.BLACK);
+//		super.createToolTip().setFont(new Font(super.createToolTip().getFont().getFontName(), Font.PLAIN, 20));
+//	}
+	
 	public ImageIcon chooseCarIcon(){
 		String imageIconPatch = CAR_ICON_RESOURCE_PATCH;
 		int driverStatus = driver.getStatus();

@@ -16,8 +16,6 @@ import other.DataBaseConnection;
 import settings.Settings;
 
 public class OrderModel {
-
-	private Algorithm a;
 	
 	public OrderModel(){
 	}
@@ -29,7 +27,7 @@ public class OrderModel {
 	/*
 	 * Utworzenie nowego zamówienia
 	 */
-	public void addOrder(String surname, Number phoneNumber , String pickUpAddress,
+	public Order addOrder(String surname, Number phoneNumber , String pickUpAddress,
 			String customerRemarks, Number passangerCount){
 		
 		Order order = new Order();
@@ -47,13 +45,13 @@ public class OrderModel {
 //		TODO naprawiæ dodawanie dispatchera
 //		ParseUser dispatherObj = Settings.USER_OBJECT;
 //		order.put("dispatcher", new ParsePointer("Dispatcher", Settings.USER_OBJECT.getObjectId()));
-		order.saveInBackground();		
-		
-		/*
-		 * Uruchomienie algorytmu przydzia³u
-		 */
-		assignDriver(order);
-
+		try {
+			order.save();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return order;
 	}
 	
 	/*
@@ -70,15 +68,6 @@ public class OrderModel {
 		}
 		System.out.println(customer.getId());
 		return customer;
-	}
-	
-	/*
-	 * Podpiêcie algorytmu przydzielania kierowcy do zlecenia!
-	 */
-	public void assignDriver(Order order){
-		Algorithm.initializeGraphHopper();
-		Algorithm a = new Algorithm(order);
-		a.run();
 	}
 	
 }
