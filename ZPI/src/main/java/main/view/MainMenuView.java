@@ -1,14 +1,17 @@
 package main.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
 
 import login.controller.LoginController;
 import main.controller.FilterMapController;
@@ -38,6 +41,7 @@ public class MainMenuView extends JFrame{
 	private MapModel menuModel;
 	private MainMenuController menuController;
 	private JTabbedPane tabbedPane;
+	private JTabbedPane smallTabbedPane;
 	private final String title = "ZPI TAXI";
 	
 
@@ -58,36 +62,41 @@ public class MainMenuView extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
-		this.setBounds(100, 100, 1280, 800);
+		this.setBounds(0, 0, 1300, 1300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		DataBaseConnection.initialize();
-		addTabbedPane();
-		addMainPagePanels();
-		addOrderPanel();
-//		addDriverPanel();
-//		addOrdersDisplayPanel();
-//		addMessagePanel();
-		
+		DataBaseConnection.initialize();		
+		addMainTabbedPane();
+
 		this.setTitle(title);
 		this.setVisible(true);
 	}
 
-	public void addTabbedPane(){
+	private void addMainTabbedPane(){
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(0, 0, 1025, 800);
+//		tabbedPane.setBorder((new LineBorder(Color.black, 5)));
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		
+		tabbedPane.addTab("Mapa", null, getMainPanel(), null);
+		tabbedPane.addTab("Kierowcy", null, getDriverPanel(), null);
+		tabbedPane.addTab("Wyœwietl zlecenia", null, getOrdersDisplayPanel(), null);
+	}
+	
+	private JTabbedPane getSecondTabbedPane(){
+		smallTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+//		smallTabbedPane.setBorder((new LineBorder(Color.black, 5)));
+		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
+		smallTabbedPane.addTab("Dodaj zlecenie", null, getOrderPanel(), null);
+		smallTabbedPane.addTab("Statystyka", null, getStatisticPanel(), null);
+		smallTabbedPane.setBounds(0, 0, 300, 400);
+		return smallTabbedPane;
 	}
 
-	public void addMainPagePanels(){
-		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(null);
-		mainPanel.add(getMap());
-//		mainPanel.add(getStatisticPanel());
-		mainPanel.add(getInfoPanel());
-		mainPanel.add(getFilterPanel());
-		mainPanel.setVisible(true);
-
-		tabbedPane.addTab("Mapa", null, mainPanel, null); //TODO ustawic ikony?
+	public JSplitPane getMainPanel(){
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getMap(), getSecondTabbedPane());	
+		splitPane.setResizeWeight(0.85);
+		return splitPane;
 	}
 
 	public JPanel getMap(){
@@ -105,20 +114,19 @@ public class MainMenuView extends JFrame{
 		statisticController = new StatisticController(statisticModel);
 
 		JPanel statisticPanel = statisticController.getView();
-		//statisticPanel.setBounds(0, 0, 220, 300);
-		statisticPanel.setBounds(1025, 0, 300, 300);
+//		statisticPanel.setBounds(1025, 0, 300, 300);
 	
 		return statisticPanel;
 	}
 
-	public JPanel getInfoPanel(){
-		OrderInfoModel oim = new OrderInfoModel();
-		OrderInfoController oic = new OrderInfoController(oim);
-		
-		JPanel infoView = oic.getInfoView();
-		infoView.setBounds(1025, 0, 300, 300);
-		return infoView;
-	}
+//	public JPanel getInfoPanel(){
+//		OrderInfoModel oim = new OrderInfoModel();
+//		OrderInfoController oic = new OrderInfoController(oim);
+//		
+//		JPanel infoView = oic.getInfoView();
+//		infoView.setBounds(1025, 300, 400, 500);
+//		return infoView;
+//	}
 	public JPanel getFilterPanel(){
 		FilterMapModel filterModel;
 		FilterMapController filterController;
@@ -127,30 +135,30 @@ public class MainMenuView extends JFrame{
 			filterModel = new FilterMapModel();
 			filterController = new FilterMapController(filterModel, mapController);
 			filterPanel = filterController.getView();
-			filterPanel.setBounds(1025, 300, 400, 500);
+//			filterPanel.setBounds(1025, 300, 400, 500);
 //		}
 		return filterPanel;
 	}
 
-	public void addOrderPanel(){
+	public JPanel getOrderPanel(){
 		OrderModel orderModel = new OrderModel();
 		OrderController orderController = new OrderController(orderModel, mapController);
-		tabbedPane.addTab("Dodaj zlecenie", null, orderController.getAddOrderView(), null);
+		return orderController.getAddOrderJPanel();
 	}
 
-	public void addDriverPanel(){
+	public JPanel getDriverPanel(){
 		DriversModel driversModel = new DriversModel();
 		DriversController driversController = new DriversController(driversModel);
 
 		driversModel.addObserver(driversController);
-		tabbedPane.addTab("Kierowcy", null, driversController.getDriversView(), null);
-//		this.repaint();
+		
+		return driversController.getDriversView();
 	}
 
-	public void addOrdersDisplayPanel(){
+	public JPanel getOrdersDisplayPanel(){
 		OrdersModel ordersModel = new OrdersModel();
 		OrdersController ordersController = new OrdersController(ordersModel);
-		tabbedPane.addTab("Wyœwietl zlecenia", null, ordersController.getOrdersView(), null);
+		return ordersController.getOrdersView();
 	}
 	
 	public void addMessagePanel(){

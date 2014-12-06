@@ -34,6 +34,7 @@ import javax.swing.JCheckBox;
 
 import settings.DocumentSizeFilter;
 import settings.Settings;
+import java.awt.Font;
 
 /*
  * Buduje widok dla okna dodawania ordera, zarz¹dza walidacj¹ pól
@@ -84,39 +85,44 @@ public class AddOrderJPanel extends JPanel{
 	public void initialize(){
 		this.setVisible(true);
 		JLabel lblNazwisko = new JLabel("Nazwisko:");
-		lblNazwisko.setBounds(42, 45, 135, 14);
+		lblNazwisko.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNazwisko.setBounds(10, 26, 101, 14);
 		add(lblNazwisko);
 		
 		JLabel lblNumerTelefonu = new JLabel("Nr telefonu:");
-		lblNumerTelefonu.setBounds(42, 87, 135, 14);
+		lblNumerTelefonu.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumerTelefonu.setBounds(10, 73, 101, 14);
 		add(lblNumerTelefonu);
 		
 		JLabel lblAdresOdbioru = new JLabel("Adres odbioru:");
-		lblAdresOdbioru.setBounds(42, 129, 135, 14);
+		lblAdresOdbioru.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAdresOdbioru.setBounds(10, 119, 101, 14);
 		add(lblAdresOdbioru);
 		
 		JLabel lblLiczbaPasaerw = new JLabel("Liczba pasa\u017Cer\u00F3w:");
-		lblLiczbaPasaerw.setBounds(42, 172, 135, 14);
+		lblLiczbaPasaerw.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblLiczbaPasaerw.setBounds(10, 165, 135, 14);
 		add(lblLiczbaPasaerw);
 		
 		JLabel lblUwagi = new JLabel("Uwagi:");
-		lblUwagi.setBounds(42, 210, 135, 14);
+		lblUwagi.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblUwagi.setBounds(10, 211, 101, 14);
 		add(lblUwagi);
 		
 		surnameTextField = new JTextField();
-		surnameTextField.setBounds(187, 42, 177, 20);
+		surnameTextField.setBounds(10, 42, 177, 20);
 		surnameTextField.setName("surname");
 		surnameTextField.addFocusListener(orderController.getValidateTextFieldListener());
 		surnameTextField.addFocusListener(orderController.getTrimTextFieldListener());
 		add(this.surnameTextField);
 		
 		phoneNumberTextField = new JTextField();
-		phoneNumberTextField.setBounds(188, 84, 176, 20);
+		phoneNumberTextField.setBounds(10, 88, 176, 20);
 		phoneNumberTextField.setName("phone");
 		add(phoneNumberTextField);
 		
 		pickUpAddressTextField = new JTextField();
-		pickUpAddressTextField.setBounds(187, 126, 177, 20);
+		pickUpAddressTextField.setBounds(10, 135, 177, 20);
 		pickUpAddressTextField.setName("address");
 		
 		//TODO autocomplete adresu!
@@ -144,35 +150,36 @@ public class AddOrderJPanel extends JPanel{
 		add(pickUpAddressTextField);
 		
 		passangerCountTextField = new JTextField();
-		passangerCountTextField.setBounds(187, 169, 177, 20);
+		passangerCountTextField.setBounds(10, 180, 177, 20);
 		passangerCountTextField.setName("passangerCount");
 		passangerCountTextField.addFocusListener(orderController.getTrimTextFieldListener());
 		add(passangerCountTextField);
 		
-
-		customerRemarksTextArea = new JTextArea(3, 50);
-		customerRemarksTextArea.setLineWrap(true);
-		customerRemarksTextArea.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
-		customerRemarksTextArea.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
-		customerRemarksTextArea.setNextFocusableComponent(addOrderBtn);
-		
 		DefaultStyledDocument doc = new DefaultStyledDocument();
 		doc.setDocumentFilter(new DocumentSizeFilter(maxSizeText));
-		customerRemarksTextArea.setDocument(doc);
 		
-		scrollPane = new JScrollPane(customerRemarksTextArea);
-		scrollPane.setBounds(187, 210, 177, 73);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 226, 177, 49);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollPane);
 		
+
+		customerRemarksTextArea = new JTextArea(3, 50);
+		scrollPane.setViewportView(customerRemarksTextArea);
+		customerRemarksTextArea.setLineWrap(true);
+		customerRemarksTextArea.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
+		customerRemarksTextArea.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
+		customerRemarksTextArea.setNextFocusableComponent(addOrderBtn);
+		customerRemarksTextArea.setDocument(doc);
+		
 		addOrderBtn = new JButton("Dodaj");
 		addOrderBtn.addActionListener(orderController.getButtonListener());
-		addOrderBtn.setBounds(244, 314, 120, 33);
+		addOrderBtn.setBounds(104, 296, 83, 33);
 		add(addOrderBtn);
 		
 		JButton cleanBtn = new JButton("Wyczy\u015B\u0107");
-		cleanBtn.setBounds(78, 314, 120, 33);
+		cleanBtn.setBounds(10, 296, 83, 33);
 		cleanBtn.addActionListener(orderController.getButtonListener());
 		add(cleanBtn);
 		
@@ -182,40 +189,40 @@ public class AddOrderJPanel extends JPanel{
 		 */
 		surnameErrors = new JLabel("surname error");
 		surnameErrors.setName("surnameError");
-		surnameErrors.setBounds(374, 45, 211, 14);
+		surnameErrors.setBounds(197, 45, 211, 14);
 		surnameErrors.setForeground(Color.RED);
 		surnameErrors.setVisible(false);
 		add(surnameErrors);
 		
 		phoneErrors = new JLabel("phone error");
 		phoneErrors.setName("phoneError");
-		phoneErrors.setBounds(374, 87, 211, 14);
+		phoneErrors.setBounds(196, 91, 211, 14);
 		phoneErrors.setForeground(Color.RED);
 		phoneErrors.setVisible(false);
 		add(phoneErrors);
 		
 		addresErrors = new JLabel("address error");
 		addresErrors.setName("addressError");
-		addresErrors.setBounds(484, 129, 211, 14);
+		addresErrors.setBounds(260, 138, 211, 14);
 		addresErrors.setForeground(Color.RED);
 		addresErrors.setVisible(false);
 		add(addresErrors);
 		
 		passangerCountErrors = new JLabel("passanger count error");
 		passangerCountErrors.setName("passangerCountError");
-		passangerCountErrors.setBounds(374, 159, 211, 41);
+		passangerCountErrors.setBounds(197, 170, 211, 41);
 		passangerCountErrors.setForeground(Color.RED);
 		passangerCountErrors.setVisible(false);
 		add(passangerCountErrors);
 		
 		defaultCityCheckBox = new JCheckBox(Settings.DEFAULT_CITY);
 		defaultCityCheckBox.setSelected(true);
-		defaultCityCheckBox.setBounds(374, 125, 90, 23);
+		defaultCityCheckBox.setBounds(193, 134, 72, 23);
 		add(defaultCityCheckBox);
 		
 		cleanAfterAddCheckBox = new JCheckBox("<html><body>wyczy\u015B\u0107<p>po dodaniu");
 		cleanAfterAddCheckBox.setSelected(true);
-		cleanAfterAddCheckBox.setBounds(375, 310, 135, 41);
+		cleanAfterAddCheckBox.setBounds(193, 292, 135, 41);
 		add(cleanAfterAddCheckBox);
 		
 		setDefaultBorderField();

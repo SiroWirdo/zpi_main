@@ -53,6 +53,10 @@ public class OrderController {
 		return addOrderView;
 	}
 
+	public AddOrderJPanel getAddOrderJPanel(){
+		return addOrderView;
+	}
+	
 	public Order addOrder(String surname, Number phoneNumber,
 			String pickUpAddress, String customerRemarks, Number passangerCount) {
 		// String customerId = orderModel.addCustomer(surname, phoneNumber);

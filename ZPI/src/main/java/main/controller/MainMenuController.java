@@ -11,10 +11,6 @@ public class MainMenuController {
 		this.menuModel = menuModel;
 		menuView = new MainMenuView(this, menuModel);
 		menuView.initialize();
-		menuView.addTabbedPane();
-		//menuView.addTab(,null, ,null);
-		//menuView.addOrderPanel();
-		//menuView.addDriverPanel();
 	}
 
 }
