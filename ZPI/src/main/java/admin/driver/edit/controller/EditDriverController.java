@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -131,13 +133,19 @@ public class EditDriverController implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			long pesel = editDriverView.getPeselFromSelectedRow();
-			Driver driver = editDriverModel.getDriverByPesel(pesel);
-			if(driver != null){
-				ModifyDriverModel modifyDriverModel = new ModifyDriverModel();
-				ModifyDriverController modifyDriverController = new ModifyDriverController(modifyDriverModel, driver);
-				
-			}else{
+			if(pesel >=0 ){
+				Driver driver = editDriverModel.getDriverByPesel(pesel);
+				if(driver != null){
+					ModifyDriverModel modifyDriverModel = new ModifyDriverModel();
+					ModifyDriverController modifyDriverController = new ModifyDriverController(modifyDriverModel, driver);
 
+				}else{
+					//TODO nie wiem czy taka sytuacja w ogóle wystąpi
+				}
+			}else{
+				JFrame frame = new JFrame();
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				JOptionPane.showMessageDialog(frame, "Nie wybrano kierowcy");
 			}
 		}
 
