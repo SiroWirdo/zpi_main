@@ -36,8 +36,8 @@ public class Algorithm implements Runnable {
 	private ParseGeoPoint customerPosition;
 	private boolean stop;
 	private boolean isGiveUp;
-	private long timeDoingAlg;
-	private double toStartAlg;
+	private double duration;
+	private double startTime;
 	private long expectingWaitingTimeInMillisec;
 
 	private final int NUMBER_CHOOSED_DRIVERS = 6;
@@ -56,12 +56,17 @@ public class Algorithm implements Runnable {
 		customerPosition = order.getPickupAddressGeo();
 		expectingWaitingTimeInMillisec = -1;
 		stop = false;
-		toStartAlg = System.currentTimeMillis();
+		startTime = System.currentTimeMillis();
 	}
 
 	public Order getOrder(){
 		return order;
 	}
+	
+	public double getDuration(){
+		return duration;
+	}
+	
 	public void setIsGiveUp(boolean isGiveUp) {
 		this.isGiveUp = isGiveUp;
 	}
@@ -344,6 +349,8 @@ public class Algorithm implements Runnable {
 	public void checkOrderAssigned() {
 		if (!isOrderAssigned) {
 			stop = true;
+			double time = System.currentTimeMillis();
+			duration = time - startTime;
 			NotAssignedOrderJDialog notAssignedOrderJDialog = new NotAssignedOrderJDialog(this);
 			System.out
 					.println("Żaden z przydzielonych kierowców nie zaakceptował ordera");
