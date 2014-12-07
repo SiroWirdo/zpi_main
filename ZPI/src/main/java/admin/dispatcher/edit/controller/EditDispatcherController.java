@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -84,13 +86,20 @@ public class EditDispatcherController  implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			long pesel = editDispatcherView.getPeselFromSelectedRow();
-			Dispatcher dispatcher = editDispatcherModel.getDispatcherByPesel(pesel);
-			if(dispatcher != null){
-				ModifyDispatcherModel modifyDispatcherModel = new ModifyDispatcherModel();
-				ModifyDispatcherController modifyDispatcherController = new ModifyDispatcherController(modifyDispatcherModel, dispatcher);
+			
+			if(pesel >=0 ){
+				Dispatcher dispatcher = editDispatcherModel.getDispatcherByPesel(pesel);			
+				if(dispatcher != null){
+					ModifyDispatcherModel modifyDispatcherModel = new ModifyDispatcherModel();
+					ModifyDispatcherController modifyDispatcherController = new ModifyDispatcherController(modifyDispatcherModel, dispatcher);
 
+				}else{
+
+				}
 			}else{
-
+				JFrame frame = new JFrame();
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				JOptionPane.showMessageDialog(frame, "Nie wybrano dyspozytora");
 			}
 		}
 

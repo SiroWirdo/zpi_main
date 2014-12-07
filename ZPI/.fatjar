@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Sun Dec 07 17:33:27 CET 2014
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=ZPI_fat.jar
+manifest.mergeall=true
+manifest.mainclass=MainMenuTest
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

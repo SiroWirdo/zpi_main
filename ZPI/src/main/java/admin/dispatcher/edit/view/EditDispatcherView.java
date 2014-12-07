@@ -164,7 +164,10 @@ public class EditDispatcherView extends JFrame{
 
 	public long getPeselFromSelectedRow(){
 		int row = table.getSelectedRow();
-		long pesel = (Long)table.getValueAt(row, 2);
+		long pesel = -1;
+		if(row >= 0){
+			pesel = (Long)table.getValueAt(row, 2);
+		}
 		return pesel;
 	}
 

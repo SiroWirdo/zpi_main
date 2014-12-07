@@ -46,9 +46,7 @@ public class DriversView extends JPanel {
 	public void initialize(){
 		setLayout(null);
 
-		/*Color backgroundColor = Settings.getColor("frame", "background");
-		this.setBackground(backgroundColor);*/
-
+		System.out.println("wielkosc: " + this.getSize().getWidth());
 		String[] columns = {"Imię", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
 		tableModel = new DefaultTableModel(0, 0){
 
@@ -59,7 +57,6 @@ public class DriversView extends JPanel {
 			};
 		tableModel.setColumnIdentifiers(columns);
 		table = new JTable();
-		//table.setBounds(0, 0, 1100, 700);
 
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
@@ -68,9 +65,8 @@ public class DriversView extends JPanel {
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }
-		//table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		table.setModel(tableModel);
-
+		
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setCellSelectionEnabled(false);

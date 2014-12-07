@@ -1,9 +1,8 @@
 package ordersdisplay.view;
 
-import java.awt.Font;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,13 +49,15 @@ public class OrdersView extends JPanel {
 			       return false;
 			   }
 			};
-		tableModel.setColumnIdentifiers(columns);
+		tableModel.setColumnIdentifiers(columns);		
+		
 		table = new JTable();
+		table.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
 
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 100, 1100, 600);
+		scrollPane.setBounds(0, 100, 1300, 700);
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }
@@ -67,6 +68,15 @@ public class OrdersView extends JPanel {
 		table.setCellSelectionEnabled(false);
 		table.setFillsViewportHeight(true);
 		table.setVisible(true);
+		
+		table.getColumn("Id").setMinWidth(100);
+		table.getColumn("Adres odbioru").setMinWidth(330);
+		table.getColumn("Adres docelowy").setMinWidth(300);
+		table.getColumn("Koszt").setMinWidth(50);
+		table.getColumn("Uwagi").setMinWidth(250);
+		table.getColumn("Liczba pasażerów").setMinWidth(120);
+		table.getColumn("Status").setMinWidth(100);
+		
 		
 		this.add(scrollPane);
 
@@ -103,6 +113,13 @@ public class OrdersView extends JPanel {
 		filtr.setBounds(430, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(ordersController.getFiltrListener());
 		add(filtr);
+		
+	/*	
+	   	String [] lol = {"lol", "lol2"};
+		JComboBox combo = new JComboBox(lol);
+		combo.setBounds(630, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		add(combo);
+	*/
 	}
 
 	public int getRowById(String id) throws OrderNotFoundException{
