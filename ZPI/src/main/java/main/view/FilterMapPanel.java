@@ -91,7 +91,7 @@ public class FilterMapPanel extends JPanel{
 		lblKlienciWgStatusu.setBounds(19, 219, 137, 29);
 		add(lblKlienciWgStatusu);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("oczekuj¹ce");
+		JCheckBox chckbxNewCheckBox = new JCheckBox("oczekujÄ…ce");
 		chckbxNewCheckBox.setName("waitingCheckBox");
 		chckbxNewCheckBox.addItemListener(filterController.getCheckboxOrdersItemListener());
 		chckbxNewCheckBox.setSelected(true);

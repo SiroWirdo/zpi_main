@@ -46,25 +46,25 @@ public class Settings {
 
 	public static Dispatcher USER_OBJECT;
 	/*
-	 * Ustawienie warto��i dotycz�cych mapy
+	 * Ustawienie wartości dotyczących mapy
 	 */
 	public static final int MAX_ZOOM_MAP = 7;
 	public static final int MIN_ZOOM_MAP = 1;
 	public static final int DEFAULT_ZOOM = 3;
-	//Default localization: Wroc�aw
+	//Default localization: Wrocław
 	public static final double DEFAULT_LATITUDE = 51.107885200000000000;
 	public static final double DEFAULT_LONGITUDE = 17.038537600000040000;
 	public static final String CONTRIBUTORS_TEXT = "\u00a9 Open StreetMap contributors";
 
 	
 	/*
-	 * Ustawienie warto�ci p� dotycz�cych od�wie�ania poszczeg�lnych paneli
+	 * Ustawienie wartości pól dotyczących odświeżania poszczególnych paneli
 	 */
 	public static final long STATISTIC_PANEL_REFRESH_TIME = 10000;
 	public static final long MAP_REFRESH_TIME = 10000;
 	
 	/*
-	 * Ustawienie warto�ci p�l dla danych status�w kierowcy
+	 * Ustawienie wartosci pol dla danych status�w kierowcy
 	 */
 	public static final int FREE_CAR_STATUS = 0;
 	public static final int DRIVER_CAR_STATUS = 1;
@@ -73,7 +73,7 @@ public class Settings {
 	public static final int UNAVALAIBLE_CAR_STATUS = 4;
 
 	/*
-	 * Ustawienie warto�ci p�l dla danych status�w zam�wienia
+	 * Ustawienie wartosci pol dla danych statusow zamowienia
 	 */
 	public static final int WAITING_ORDER_STATUS = 0;
 	public static final int IN_PROGRESS_ORDER_STATUS = 1;
@@ -82,7 +82,7 @@ public class Settings {
 	public static final int ACCEPTED_ORDER_STATUS = 4;
 
 	/*
-	 * Domy�lne wielko�ci p�l
+	 * Domyslne wielkosci pol
 	 */
 	public static final int TEXT_FIELD_WIDTH = 125;
 	public static final int TEXT_FIELD_HEIGHT = 30;
@@ -133,7 +133,7 @@ public class Settings {
 	}
 
 	/*
-	 * Metoda wy��czaj�ca wypisywanie log�w w konsoli
+	 * Metoda wylaczajaca wypisywanie logow w konsoli
 	 */
 	public static void turnOffLogBackLogger() {
 		Logger orgHibernateLogger = (Logger) LoggerFactory.getLogger("ROOT");
@@ -143,7 +143,7 @@ public class Settings {
 	}
 
 	/*
-	 * Metoda wy��czaj�ca wypisywanie sysout�w w konsoli
+	 * Metoda wylaczajaca wypisywanie sysoutow w konsoli
 	 */
 	public static void turnOffSysoutLog() {
 		System.setOut(new PrintStream(new OutputStream() {
@@ -154,7 +154,7 @@ public class Settings {
 	}
 	
 	/*
-	 * Ustawienie domy�lnych styl�w
+	 * Ustawienie domslnych stylow
 	 */
 	public static void setLookAndFeel(){
 		
@@ -169,7 +169,7 @@ public class Settings {
 		UIManager.put("TextArea.foreground", new Color(0,0,0));
 		UIManager.put("FormattedTextField.foreground", new Color(0,0,0));
 		
-		//TODO nie chca dzia�a� tooltipy na mapie
+		//TODO nie chca dzialac tooltipy na mapie
 		Border border = BorderFactory.createLineBorder(new Color(0,0,0));    //#4c4f53
 		UIManager.put("ToolTip.border", border);
 

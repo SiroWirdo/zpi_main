@@ -20,7 +20,7 @@ public class MessageModel {
 		//Nie wiem czy trzeba tu doda inicjalizacj bazy
 		ParsePush push = new ParsePush();
 		//ArrayList<String> channels = new ArrayList<String>();
-		//sprawdziæ jakie potrzebne s¹ do listy rzeczy czy: ["",id] czy [id] czy inaczej
+		//sprawdziÄ‡ jakie potrzebne sÄ… do listy rzeczy czy: ["",id] czy [id] czy inaczej
 		ParseQuery<Driver> query = ParseQuery.getQuery("Driver");
 		List<Driver> drivers;
 		/*try {

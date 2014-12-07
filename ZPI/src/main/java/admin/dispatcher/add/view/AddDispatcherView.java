@@ -65,7 +65,7 @@ public class AddDispatcherView extends JFrame{
 		driverLB.setBounds(x, y, 200, 20);
 		mainPanel.add(driverLB);
 
-		name = new JLabel("Imiê: ");
+		name = new JLabel("ImiÄ™: ");
 		name.setBounds(x, y = y + 30, 60, 20);
 		mainPanel.add(name);
 
@@ -90,7 +90,7 @@ public class AddDispatcherView extends JFrame{
 		mainPanel.add(peselTF);
 
 /*
-		userId = new JLabel("U¿ytkownik: ");
+		userId = new JLabel("UÅ¼ytkownik: ");
 		userId.setBounds(x, y=y+30, 80, 20);
 		mainPanel.add(userId);
 

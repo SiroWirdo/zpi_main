@@ -41,7 +41,7 @@ public class UserModel {
 		} catch (ParseException e) {
 			JFrame frame = new JFrame();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			JOptionPane.showMessageDialog(frame, "Z≥y login lub has≥o");
+			JOptionPane.showMessageDialog(frame, "Z≈Çy login lub has≈Ço");
 			return false;
 		}
 	}

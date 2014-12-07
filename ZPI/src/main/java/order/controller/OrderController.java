@@ -104,7 +104,7 @@ public class OrderController {
 			      };
 			      queryThread.start();
 			}
-			else if(e.getActionCommand().equals("Wyczy��")){
+			else if(e.getActionCommand().equals("Wyczyść")){
 				 addOrderView.cleanFields();
 				 addOrderView.cleanAllErrors();
 			}
@@ -123,7 +123,8 @@ public class OrderController {
 					addOrderView.getSurnameTextField().getText().trim(),
 					new Long(addOrderView.getPhoneNumberTextField()
 							.getText().trim()),
-					addOrderView.getPickUpAddressTextField().getText()+ defaultCity,
+					addOrderView.getPickUpAddressTextField().getText() + defaultCity,
+
 					addOrderView.getCustomerRemarksTextArea().getText(),
 					new Integer(addOrderView
 							.getPassangerCountTextField().getText().trim()));
@@ -139,12 +140,12 @@ public class OrderController {
 				addOrderView.cleanAll();	
 			}
 		} else {
-			System.out.println("Formularz nie przeszed� walidacji");
+			System.out.println("Formularz nie przeszedł walidacji");
 		}
 	};
 	
 	/*
-	 * Podpi�cie algorytmu przydzielania kierowcy do zlecenia!
+	 * Podpięcie algorytmu przydzielania kierowcy do zlecenia!
 	 */
 	public void assignDriver(Order order){
 		Algorithm.initializeGraphHopper();

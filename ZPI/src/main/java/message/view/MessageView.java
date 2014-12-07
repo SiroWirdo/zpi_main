@@ -29,7 +29,7 @@ public class MessageView extends JPanel {
 	public void initialize(){
 		setLayout(null);
 
-		message = new JLabel("Wiadomoœæ: ");
+		message = new JLabel("WiadomoÅ›Ä‡: ");
 		message.setBounds(10, 10, 100, 20);
 		add(message);
 
@@ -42,7 +42,7 @@ public class MessageView extends JPanel {
 		messageArea.setDocument(doc);
 		add(messageArea);
 
-		send = new JButton("Wyœlij");
+		send = new JButton("WyÅ›lij");
 		send.setBounds(10, 250, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		send.addActionListener(messageController.getSendButtonListener());
 		add(send);

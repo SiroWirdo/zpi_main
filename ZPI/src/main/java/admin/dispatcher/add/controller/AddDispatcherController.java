@@ -102,23 +102,23 @@ public class AddDispatcherController {
 				}else{
 					JFrame frame = new JFrame();
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					JOptionPane.showMessageDialog(frame, "Has³a nie zgadzaj¹ siê");
+					JOptionPane.showMessageDialog(frame, "HasÅ‚a nie zgadzajÄ… siÄ™");
 				}
 			}else{
 				if(!uniqueUsername){
-					error += "- U¿ytkownik o takiej nazwie ju¿ istnieje. \n";
+					error += "- UÅ¼ytkownik o takiej nazwie juÅ¼ istnieje. \n";
 				}
 				
 				if(!validPesel){
-					error += "- PESEL powinien zawieraæ 11 znaków. \n";
+					error += "- PESEL powinien zawieraÄ‡ 11 znakÃ³w. \n";
 				}
 				
 				if(!uniquePesel){
-					error += "- Taki PESEL jest ju¿ przypisany do innej osoby. \n";
+					error += "- Taki PESEL jest juÅ¼ przypisany do innej osoby. \n";
 				}
 				
 				if(!valid){
-					error += "- WprowadŸ wszystkie dane. \n";
+					error += "- WprowadÅº wszystkie dane. \n";
 				}
 				
 				printError(error);

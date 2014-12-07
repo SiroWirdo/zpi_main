@@ -52,7 +52,7 @@ public class AddCarView extends JPanel{
 		tfSideNumber.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(tfSideNumber);
 
-		jlCarCapacity = new JLabel("Pojemnoœæ: ");
+		jlCarCapacity = new JLabel("PojemnoÅ›Ä‡: ");
 		jlCarCapacity.setBounds(x, y=y+30, 150, 20);
 		add(jlCarCapacity);
 

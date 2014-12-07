@@ -75,16 +75,16 @@ public class EditCarController {
 			}else{
 
 				if(!valid){
-					error += "- Wprowadü wszystkie dane \n";
+					error += "- Wprowad≈∫ wszystkie dane \n";
 
 				}
 				
 				if(!uniqueRegistrationNumber){
-					error += "- SamochÛd o takim numerze rejestracyjnym juø istnieje \n";
+					error += "- Samoch√≥d o takim numerze rejestracyjnym ju≈º istnieje \n";
 				}
 				
 				if(!uniqueSideNumber){
-					error += "- SamochÛd o takim numerze bocznym juø istnieje \n";
+					error += "- Samoch√≥d o takim numerze bocznym ju≈º istnieje \n";
 				}
 
 				printError(error);                

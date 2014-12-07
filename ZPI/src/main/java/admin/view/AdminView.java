@@ -35,15 +35,15 @@ public class AdminView extends JFrame{
 		mainPanel.setLayout(new GridLayout(5,1));
 		add(mainPanel);
 
-		addDriver = new JButton("Dodaj kierowcê");
+		addDriver = new JButton("Dodaj kierowcÄ™");
 		addDriver.addActionListener(adminController.getAddDriverListener());
 		mainPanel.add(addDriver);
 
-		editDriver = new JButton("Edytuj kierowcê");
+		editDriver = new JButton("Edytuj kierowcÄ™");
 		editDriver.addActionListener(adminController.getEditDriverListener());
 		mainPanel.add(editDriver);
 
-		/*addUser = new JButton("Dodaj u¿ytkownika");
+		/*addUser = new JButton("Dodaj uÅ¼ytkownika");
 		addUser.addActionListener(adminController.getAddUserListener());
 		mainPanel.add(addUser);*/
 
@@ -55,7 +55,7 @@ public class AdminView extends JFrame{
 		editDispatcher.addActionListener(adminController.getEditDispatcherListener());
 		mainPanel.add(editDispatcher);
 
-		exit = new JButton("WyjdŸ");
+		exit = new JButton("WyjdÅº");
 		exit.addActionListener(adminController.getCloseButtonListener());
 		mainPanel.add(exit);
 

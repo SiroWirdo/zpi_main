@@ -56,7 +56,7 @@ public class EditDriverView extends JFrame{
 		getContentPane().add(mainPanel);
 
 
-		String[] columns = {"Imiê", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
+		String[] columns = {"ImiÄ™", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
 		tableModel = new DefaultTableModel(0, 0){
 
 			   @Override
@@ -111,7 +111,7 @@ public class EditDriverView extends JFrame{
 		unavailable.setSelected(true);
 		mainPanel.add(unavailable);
 
-		jlName = new JLabel("Imiê:");
+		jlName = new JLabel("ImiÄ™:");
 		jlName.setBounds(410, 30, 60, 30);
 		mainPanel.add(jlName);
 

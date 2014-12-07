@@ -6,7 +6,7 @@ import java.util.List;
 import model.Order;
 
 public class OrderInfoModel {
-	//wa¿ne: na pocz¹tku listy s¹ najstarsze zlecenia
+	//waÅ¼ne: na poczÄ…tku listy sÄ… najstarsze zlecenia
 	private List<Order> lastOrders;
 	
 	public OrderInfoModel(){

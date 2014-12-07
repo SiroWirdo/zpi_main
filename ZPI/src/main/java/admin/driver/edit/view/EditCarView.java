@@ -59,7 +59,7 @@ public class EditCarView extends JFrame {
 		tfSideNumber.setBounds(x+160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		mainPanel.add(tfSideNumber);
 
-		jlCarCapacity = new JLabel("Pojemnoœæ: ");
+		jlCarCapacity = new JLabel("PojemnoÅ›Ä‡: ");
 		jlCarCapacity.setBounds(x, y=y+30, 150, 20);
 		mainPanel.add(jlCarCapacity);
 

@@ -37,7 +37,7 @@ import settings.Settings;
 import java.awt.Font;
 
 /*
- * Buduje widok dla okna dodawania ordera, zarz¹dza walidacj¹ pól
+ * Buduje widok dla okna dodawania ordera, zarzÄ…dza walidacjÄ… pÃ³l
  */
 public class AddOrderJPanel extends JPanel{
 	
@@ -63,10 +63,10 @@ public class AddOrderJPanel extends JPanel{
 	
 	private final int maxSizeText = 200;
 	private final String requiredFieldErrorMsg = "Pole wymagane!";
-	private final String onlyTextErrorMsg = "To pole mo¿e zawieraæ tylko litery!";
-	private final String onlyNumbersErrorMsg = "To pole mo¿e zawieraæ tylko liczby!";
+	private final String onlyTextErrorMsg = "To pole moÅ¼e zawieraÄ‡ tylko litery!";
+	private final String onlyNumbersErrorMsg = "To pole moÅ¼e zawieraÄ‡ tylko liczby!";
 	private final String rangePassangerCountErrorMsg = "<html><body style='width: 150px'>"
-											+ "Liczba pasa¿erów musi byæ liczb¹ z przedzia³u &lt;1, 4&gt;";
+											+ "Liczba pasaÅ¼erÃ³w musi byÄ‡ liczbÄ… z przedziaÅ‚u &lt;1, 4&gt;";
 	
 	
 	/**
@@ -237,7 +237,7 @@ public class AddOrderJPanel extends JPanel{
 	}
 	
 	/*
-	 * Sprawdza i ustawia walidacje pól
+	 * Sprawdza i ustawia walidacje pÃ³l
 	 */
 	public boolean validateFields(){
 		isValidate = true; 
@@ -285,7 +285,7 @@ public class AddOrderJPanel extends JPanel{
 	}
 	
 	public boolean isOnlyTextField(JTextField validateField){
-		return validateField.getText().matches("[A-Z¯Æ¥ŒÊ£ÓÑ][a-z¿Ÿæñó³ê¹œ]*[\\w-]*");
+		return validateField.getText().matches("[A-ZÅ»Å¹Ä†Ä„ÅšÄ˜ÅÃ“Åƒ][a-zÅ¼ÅºÄ‡Å„Ã³Å‚Ä™Ä…Å›]*[\\w-]*");
 	}
 	
 	public boolean isOnlyNumberField(JTextField validateField){
@@ -293,7 +293,7 @@ public class AddOrderJPanel extends JPanel{
 	}
 	
 	/*
-	 * Ustawia labelke errora, podœwietla pole, które nie przesz³o walidacji
+	 * Ustawia labelke errora, podÅ›wietla pole, ktÃ³re nie przeszÅ‚o walidacji
 	 */
 	public void setValidationError(JTextField validateField, JLabel errorLabel, String errorMessage){
 		errorLabel.setText(errorMessage);

@@ -23,7 +23,7 @@ public class NotifyTest {
 		}
 		ParsePush push = new ParsePush();
 		//ArrayList<String> channels = new ArrayList<String>();
-		//sprawdziæ jakie potrzebne s¹ do listy rzeczy czy: ["",id] czy [id] czy inaczej
+		//sprawdziÄ‡ jakie potrzebne sÄ… do listy rzeczy czy: ["",id] czy [id] czy inaczej
 		ParseQuery<Order> query_two = new ParseQuery<Order>(Order.class);
 		query_two.whereEqualTo("objectId", "so1ioAD8Za");
 		Order order = null;

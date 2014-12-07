@@ -66,7 +66,7 @@ public class AddDriverController {
 
 	private class AddButtonListener implements ActionListener{
 		private String error = "";
-//TODO przechwytywanie erroru øe mail juø uøyty
+//TODO przechwytywanie erroru ≈ºe mail ju≈º u≈ºyty
 		//TODO pola numeryczne
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -119,7 +119,7 @@ public class AddDriverController {
 
 			}
 
-			// TODO jeúli wywala øe nie jest unikalny to proces nie umiera...
+			// TODO je≈ºli wywala ≈ºe nie jest unikalny to proces nie umiera...
 
 			if(valid && uniquePesel && uniqueLicense && uniqueUsername && validPesel && password && uniqueRegistrationNumber && uniqueSideNumber){
 				System.out.println("TEEEEEEEEEEEEEEEEEEEEEEEEST");
@@ -135,34 +135,34 @@ public class AddDriverController {
 				addCarView.clearTextFields();
 			}else{
 				if(!uniquePesel){
-					error += "- Taki PESEL jest juø przypisany do innej osoby \n";
+					error += "- Taki PESEL jest ju≈º przypisany do innej osoby \n";
 				}
 				if(!uniqueLicense){
-					error += "- Taka licencja jest juø przypisana do innego kierowcy \n";
+					error += "- Taka licencja jest ju≈º przypisana do innego kierowcy \n";
 				}
 				if(!uniqueUsername){
-					error += "- Taki uøytkownik juø istnieje \n";
+					error += "- Taki u≈ºdytkownik ju≈º istnieje \n";
 				}
 
 				if(!validPesel){
-					error += "- PESEL powinien mieÊ 11 znakÛw \n";
+					error += "- PESEL powinien mieƒá 11 znak√≥w \n";
 				}
 
 				if(!valid){
-					error += "- Wprowadü wszystkie dane \n";
+					error += "- Wprowad≈∫ wszystkie dane \n";
 
 				}
 
 				if(!password){
-					error += "- Has≥a nie zgadzajπ siÍ \n";
+					error += "- Has≈Ça nie zgadzaj≈õ siƒô \n";
 				}
 				
 				if(!uniqueRegistrationNumber){
-					error += "- SamochÛd o takim numerze rejestracyjnym juø istnieje \n";
+					error += "- Samoch√≥d o takim numerze rejestracyjnym ju≈∫ istnieje \n";
 				}
 				
 				if(!uniqueSideNumber){
-					error += "- SamochÛd o takim numerze bocznym juø istnieje \n";
+					error += "- Samoch√≥d o takim numerze bocznym ju≈º istnieje \n";
 				}
 
 				printError(error);                

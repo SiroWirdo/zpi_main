@@ -24,7 +24,7 @@ public class AlgorithmResultDialog extends JDialog {
 		this.alg = alg;
 		isDispatcherResponse = false;
 		getContentPane().setLayout(null);
-		setTitle("Poprawnie dodano zamówienie!");
+		setTitle("Poprawnie dodano zamÃ³wienie!");
 		JLabel expectedTimeLabel = new JLabel("Szacowany czas dojazdu:");
 		expectedTimeLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		expectedTimeLabel.setBounds(23, 11, 154, 34);

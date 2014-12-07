@@ -11,7 +11,7 @@ import login.model.UserModel;
 import login.view.LoginView;
 
 /*
- * Zarzπdza ekranem logowania i autoryzacjπ uøytkownika
+ * ZarzƒÖdza ekranem logowania i autoryzacjƒÖ u≈ºytkownika
  */
 public class LoginController {
 	private UserModel userModel;
@@ -19,7 +19,7 @@ public class LoginController {
 	private boolean isPasswordPrivate = false;
 
 	public LoginController(UserModel userModel) {
-//		TODO odkomentowaÊ na samym koÒcu!
+//		TODO odkomentowa≈Ç na samym ko≈Ñcu!
 //		Settings.turnOffLogBackLogger();
 //		Settings.turnOffSysoutLog();
 		this.userModel = userModel;
@@ -77,7 +77,7 @@ public class LoginController {
 			if((e.getSource().getClass()).equals(JPasswordField.class)){
 				comp = (JPasswordField) e.getSource();
 				if(comp.getName().equals("haslo")){
-					displayText = "has≥o";
+					displayText = "has≈Ço";
 				}
 				
 				if(comp.getText().equals(displayText) && !isPasswordPrivate){
@@ -122,7 +122,7 @@ public class LoginController {
 				comp = (JPasswordField) e.getSource();
 				
 				if(comp.getName().equals("haslo")){
-					displayText = "has≥o";
+					displayText = "has≈Ço";
 				}
 				
 				if(comp.getText().replaceAll("\\s+","").equals("")){

@@ -35,7 +35,7 @@ public class OrdersModel extends Observable implements Runnable{
 						orderChanges = new OrderChanges(scoreList, 0);
 						model.setChanged();
 						model.notifyObservers();
-						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
+						System.out.println("Znaleziono: " + scoreList.size() + " obiektÃ³w");
 						
 					}else{
 						System.out.println("Pusta baza");
@@ -61,9 +61,9 @@ public class OrdersModel extends Observable implements Runnable{
 		stop = true;
 	}
 
-	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usuniêcie wiersza najlepiej szukaæ po PESELu) **/
+	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usuniÄ™cie wiersza najlepiej szukaÄ‡ po PESELu) **/
 	public OrderChanges getChanges(){
-		// na koñcu musi byæ flaga czy tylko edycja statusu, czy nowy kierowca online
+		// na koÅ„cu musi byÄ‡ flaga czy tylko edycja statusu, czy nowy kierowca online
 		OrderChanges changes = orderChanges;
 		if(changes != null){
 			lastUpdated = changes.getOrders().get(0).getUpdatedAt();
@@ -96,7 +96,7 @@ public class OrdersModel extends Observable implements Runnable{
 							orderChanges = new OrderChanges(scoreList, 1);
 							model.setChanged();
 							model.notifyObservers();
-							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");							
+							System.out.println("Zmieniono: " + scoreList.size() + " obiektÃ³w");							
 						}else{
 							System.out.println("Pusta baza");
 						}
