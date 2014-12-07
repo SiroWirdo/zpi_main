@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -24,8 +25,6 @@ import javax.swing.plaf.ColorUIResource;
 import model.Dispatcher;
 
 import org.slf4j.LoggerFactory;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import xml.reader.XMLReader;
 import ch.qos.logback.classic.Level;
@@ -169,6 +168,9 @@ public class Settings {
 		UIManager.put("TextArea.foreground", new Color(0,0,0));
 		UIManager.put("FormattedTextField.foreground", new Color(0,0,0));
 		
+		UIManager.put("ComboBox:\"ComboBox.listRenderer\".background", new Color(0,68,102));
+		UIManager.put("ComboBox:\"ComboBox.listRenderer\"[Selected].background", new Color(0,0,0));
+		
 		//TODO nie chca dzialac tooltipy na mapie
 		Border border = BorderFactory.createLineBorder(new Color(0,0,0));    //#4c4f53
 		UIManager.put("ToolTip.border", border);
@@ -185,7 +187,7 @@ public class Settings {
 		 };
 		 
 		UIManager.put("ToolTip[Enabled].backgroundPainter", p);
-		
+
 //		UIManager.getLookAndFeelDefaults().put("ToolTip.foregroundInactive", new Color(255, 255, 255));
 //		UIManager.getLookAndFeelDefaults().put("backgroundInactive", new Color(255, 255, 255));
 //		UIManager.getLookAndFeelDefaults().put("ToolTip.background", new Color(255, 255, 255)); //#fff7c8

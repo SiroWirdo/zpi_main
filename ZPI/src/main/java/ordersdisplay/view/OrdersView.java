@@ -1,9 +1,8 @@
 package ordersdisplay.view;
 
-import java.awt.Font;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -114,6 +113,13 @@ public class OrdersView extends JPanel {
 		filtr.setBounds(430, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(ordersController.getFiltrListener());
 		add(filtr);
+		
+	/*	
+	   	String [] lol = {"lol", "lol2"};
+		JComboBox combo = new JComboBox(lol);
+		combo.setBounds(630, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		add(combo);
+	*/
 	}
 
 	public int getRowById(String id) throws OrderNotFoundException{
