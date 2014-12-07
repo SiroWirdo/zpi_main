@@ -137,7 +137,7 @@ public class MapComponent extends JLabel{
 	public void setWaypoint(Waypoint waypoint) {
 		this.waypoint = waypoint;
 	}
-//	TODO do usuniêcia?
+//	TODO do usuniÄ™cia?
 //	private void overrideToolTip(){
 //		super.createToolTip().setBackground(Color.gray);
 //		super.createToolTip().setForeground(Color.BLACK);

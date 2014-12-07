@@ -43,7 +43,7 @@ public class AddUserView extends JPanel{
 		int x = 10;
 		int y = 0;
 
-		jlUser = new JLabel("Dane uøytkownika: ");
+		jlUser = new JLabel("Dane u≈ºytkownika: ");
 		jlUser.setBounds(x, y, 120, 20);
 		add(jlUser);
 		
@@ -55,7 +55,7 @@ public class AddUserView extends JPanel{
 		userNameTF.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(userNameTF);
 
-		password = new JLabel("Has≥o: ");
+		password = new JLabel("Has≈Ço: ");
 		password.setBounds(x, y = y+30, 120, 20);
 		add(password);
 
@@ -63,7 +63,7 @@ public class AddUserView extends JPanel{
 		passwordTF.setBounds(x+110, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
 		add(passwordTF);
 
-		confirmPassword = new JLabel("Potwierdü has≥o: ");
+		confirmPassword = new JLabel("Potwierd≈∫ has≈Ço: ");
 		confirmPassword.setBounds(x, y=y+30, 120, 20);
 		add(confirmPassword);
 

@@ -42,7 +42,7 @@ public class OrdersView extends JPanel {
 		setLayout(null);
 
 
-		String[] columns = {"Id", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "Liczba pasaøerÛw", "Status"};
+		String[] columns = {"Id", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "Liczba pasa≈ºer√≥w", "Status"};
 		tableModel = new DefaultTableModel(0, 0){
 
 			   @Override

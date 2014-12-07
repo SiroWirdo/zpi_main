@@ -57,12 +57,12 @@ public class AddUserController {
 				}else{
 					JFrame frame = new JFrame();
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					JOptionPane.showMessageDialog(frame, "Has³a nie zgadzaj¹ siê");
+					JOptionPane.showMessageDialog(frame, "HasÅ‚a nie zgadzajÄ… siÄ™");
 				}
 			}else{
 				JFrame frame = new JFrame();
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				JOptionPane.showMessageDialog(frame, "WprowadŸ wszystkie dane");
+				JOptionPane.showMessageDialog(frame, "WprowadÅº wszystkie dane");
 			}
 
 		}

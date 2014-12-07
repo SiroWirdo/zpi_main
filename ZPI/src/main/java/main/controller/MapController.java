@@ -17,7 +17,7 @@ import model.Driver;
 import model.Order;
 
 /*
- * Zarzπdza tworzeniem mapy, odúwieøaniem jej, rysowaniem waypointÛw i komponentÛw na mapie
+ * ZarzƒÖdza tworzeniem mapy, od≈õwie≈ºaniem jej, rysowaniem waypoint√≥w i komponent√≥w na mapie
  */
 public class MapController{
 	private MapModel mapModel;

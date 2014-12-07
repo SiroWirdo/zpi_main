@@ -85,7 +85,7 @@ public class MapModel{
 				}				
 			}
 		}
-		System.out.println("Znaleziono kierowców: " + driversWaypoints.size());
+		System.out.println("Znaleziono kierowcÃ³w: " + driversWaypoints.size());
 		
 		return driversWaypoints;
 	}
@@ -100,10 +100,10 @@ public class MapModel{
 					customersWaypoints.add(new MapComponent(locationWaypoint, o));
 				}
 			}
-			System.out.println("Znaleziono klientów: " + customersWaypoints.size());
+			System.out.println("Znaleziono klientÃ³w: " + customersWaypoints.size());
 		}
 		else{
-			System.out.println("Nie ma oczekuj¹cych klientów.");
+			System.out.println("Nie ma oczekujÄ…cych klientÃ³w.");
 		}
 		
 		/*for(MapComponent w: customersWaypoints){

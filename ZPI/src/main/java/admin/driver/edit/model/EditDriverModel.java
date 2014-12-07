@@ -30,7 +30,7 @@ public class EditDriverModel extends Observable implements Runnable {
 						editDriverChanges = new EditDriverChanges(scoreList, 0);
 						model.setChanged();
 						model.notifyObservers();
-						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
+						System.out.println("Znaleziono: " + scoreList.size() + " obiektÃ³w");
 
 					}else{
 						System.out.println("Pusta baza");
@@ -56,9 +56,9 @@ public class EditDriverModel extends Observable implements Runnable {
 		stop = true;
 	}
 
-	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usuniêcie wiersza najlepiej szukaæ po PESELu) **/
+	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usuniÄ™cie wiersza najlepiej szukaÄ‡ po PESELu) **/
 	public EditDriverChanges getChanges(){
-		// na koñcu musi byæ flaga czy tylko edycja statusu, czy nowy kierowca online
+		// na koÅ„cu musi byÄ‡ flaga czy tylko edycja statusu, czy nowy kierowca online
 		EditDriverChanges changes = editDriverChanges;
 		if(changes != null){
 			lastUpdated = changes.getDrivers().get(0).getUpdatedAt();
@@ -91,7 +91,7 @@ public class EditDriverModel extends Observable implements Runnable {
 							editDriverChanges = new EditDriverChanges(scoreList, 1);
 							model.setChanged();
 							model.notifyObservers();
-							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");
+							System.out.println("Zmieniono: " + scoreList.size() + " obiektÃ³w");
 						}else{
 							System.out.println("Pusta baza");
 						}

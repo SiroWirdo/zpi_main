@@ -23,7 +23,7 @@ public class OrderInfoController {
 		infoView = new InformationPanel(this, infoModel);
 //		infoModel.initialize();
 //		infoView.initialize();
-		refreshListInfo(15000); //TODO wrzuciæ do settingsów
+		refreshListInfo(15000); //TODO wrzuciÄ‡ do settingsÃ³w
 	}
 	
 	public InformationPanel getInfoView(){

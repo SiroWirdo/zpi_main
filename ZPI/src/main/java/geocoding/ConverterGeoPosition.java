@@ -47,7 +47,7 @@ public class ConverterGeoPosition {
 		}
 		return addressInfo;
 //		
-//		GeocodingApiRequest req = GeocodingApi.newRequest(context).address("Wroc≥aw");
+//		GeocodingApiRequest req = GeocodingApi.newRequest(context).address("Wroc≈Çaw");
 //		req.awaitIgnoreError(); // No checked exception.
 //
 //		// Async

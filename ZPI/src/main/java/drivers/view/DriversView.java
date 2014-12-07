@@ -49,7 +49,7 @@ public class DriversView extends JPanel {
 		/*Color backgroundColor = Settings.getColor("frame", "background");
 		this.setBackground(backgroundColor);*/
 
-		String[] columns = {"Imiê", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
+		String[] columns = {"ImiÄ™", "Nazwisko", "Telefon", "Licencja", "PESEL", "Status"};
 		tableModel = new DefaultTableModel(0, 0){
 
 			   @Override
@@ -115,7 +115,7 @@ public class DriversView extends JPanel {
 		//unavailable.setBackground(backgroundColor);
 		add(unavailable);
 
-		jlName = new JLabel("Imiê:");
+		jlName = new JLabel("ImiÄ™:");
 		jlName.setBounds(410, 30, 60, 30);
 		add(jlName);
 

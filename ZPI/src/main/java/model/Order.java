@@ -152,12 +152,12 @@ public class Order extends ParseObject {
 		put("passengerCount", value);
 	}
 
-	/** 0 - oczekuj¹ce, 1 - w trakcie realizacji, 2 - zrealizowane, 3 - anulowane, 4-zaakceptowane**/
+	/** 0 - oczekujÄ…ce, 1 - w trakcie realizacji, 2 - zrealizowane, 3 - anulowane, 4-zaakceptowane**/
 	public int getStatus() {
 		return getInt("status");
 	}
 
-	/** 0 - oczekuj¹ce, 1 - w trakcie realizacji, 2 - zrealizowane, 3 - anulowane, 4-zaakceptowane **/
+	/** 0 - oczekujÄ…ce, 1 - w trakcie realizacji, 2 - zrealizowane, 3 - anulowane, 4-zaakceptowane **/
 	public void setStatus(int value) {
 		put("status", value);
 	}

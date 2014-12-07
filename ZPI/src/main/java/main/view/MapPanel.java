@@ -25,7 +25,7 @@ import settings.Settings;
 import java.awt.Font;
 
 /*
- * Tworzy i ustawia mapê, rysuje waypointy i komponenty na mapie
+ * Tworzy i ustawia mapÄ™, rysuje waypointy i komponenty na mapie
  */
 public class MapPanel extends JXMapKit {
 
@@ -73,7 +73,7 @@ public class MapPanel extends JXMapKit {
 				Font font = new Font(line1.getFont().getFontName(), Font.PLAIN, 9);
 				line1.setFont(font);
 				line1.setBounds(7, 10, 60, 15);
-			JLabel line2 = new JLabel("domyœlna");
+			JLabel line2 = new JLabel("domyÅ›lna");
 				line2.setFont(font);
 				line2.setBounds(4, 27, 60, 15);
 		defaultPositionBtn.add(line1);
@@ -117,7 +117,7 @@ public class MapPanel extends JXMapKit {
 					int height) {
 				
 				/*
-				 * Rysowanie waypointów
+				 * Rysowanie waypointÃ³w
 				 */
 				for (MapComponent wp : allWaypoints) {
 					Point2D gp_pt = map.getTileFactory().geoToPixel(
@@ -133,7 +133,7 @@ public class MapPanel extends JXMapKit {
 							- heightComponent, widthComponent, heightComponent);
 				}
 				/*
-				 * Rysowanie komponentów na mapie
+				 * Rysowanie komponentÃ³w na mapie
 				 */
 				addComponentToOverlay(map);
 			}

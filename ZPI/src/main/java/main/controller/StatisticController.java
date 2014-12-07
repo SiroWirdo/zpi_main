@@ -7,7 +7,7 @@ import main.model.StatisticModel;
 import main.view.StatisticJPanel;
 
 /*
- * Odpowiada za zarz¹dzanie panelem statystyk kierowców
+ * Odpowiada za zarzÄ…dzanie panelem statystyk kierowcÃ³w
  */
 public class StatisticController {
 

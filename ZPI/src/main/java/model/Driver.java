@@ -55,12 +55,12 @@ public class Driver extends ParseObject {
 		put("PESEL", value);
 	}
 
-	/** 0 - wolny, 1 - kurs, 2 - przerwa, 3 - zablokowany, 4 - niedostêpny**/
+	/** 0 - wolny, 1 - kurs, 2 - przerwa, 3 - zablokowany, 4 - niedostÄ™pny**/
 	public int getStatus() {
 		return getInt("status");
 	}
 
-	/** 0 - wolny, 1 - kurs, 2 - przerwa, 3 - zablokowany, 4 - niedostêpny**/
+	/** 0 - wolny, 1 - kurs, 2 - przerwa, 3 - zablokowany, 4 - niedostÄ™pny**/
 	public void setStatus(int value) {
 		put("status", value);
 	}

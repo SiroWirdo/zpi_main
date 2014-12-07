@@ -70,7 +70,7 @@ public class AddDriverView extends JFrame{
 		driverLB.setBounds(x, y, 200, 20);
 		mainPanel.add(driverLB);
 
-		name = new JLabel("Imiê: ");
+		name = new JLabel("ImiÄ™: ");
 		name.setBounds(x, y = y + 30, 60, 20);
 		mainPanel.add(name);
 

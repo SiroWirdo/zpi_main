@@ -25,7 +25,7 @@ public class OrderModel {
 	}
 	
 	/*
-	 * Utworzenie nowego zamówienia
+	 * Utworzenie nowego zamÃ³wienia
 	 */
 	public Order addOrder(String surname, Number phoneNumber , String pickUpAddress,
 			String customerRemarks, Number passangerCount){
@@ -42,7 +42,7 @@ public class OrderModel {
 		order.setPickupAddress(addressInfo.getFullAddress());
 		order.setPickupAddressGeo(ConverterGeoPosition.addressInfoToParseGeoPoint(addressInfo));
 		
-//		TODO naprawiæ dodawanie dispatchera
+//		TODO naprawiÄ‡ dodawanie dispatchera
 //		ParseUser dispatherObj = Settings.USER_OBJECT;
 //		order.put("dispatcher", new ParsePointer("Dispatcher", Settings.USER_OBJECT.getObjectId()));
 		try {

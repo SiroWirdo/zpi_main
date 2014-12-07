@@ -22,7 +22,7 @@ public class RoutingTest {
 		Algorithm.initializeGraphHopper();
 		Order o = null;
 
-		String id = "C7YlvUUcff"; //ID istniej¹cego ordera
+		String id = "C7YlvUUcff"; //ID istniejÄ…cego ordera
 		ParseQuery<Order> queryOrder = ParseQuery.getQuery("Order");
 		try {
 			o = queryOrder.get(id);

@@ -93,7 +93,7 @@ public class OrderController {
 			      };
 			      queryThread.start();
 			}
-			else if(e.getActionCommand().equals("Wyczyœæ")){
+			else if(e.getActionCommand().equals("WyczyÅ›Ä‡")){
 				 addOrderView.cleanFields();
 				 addOrderView.cleanAllErrors();
 			}
@@ -128,12 +128,12 @@ public class OrderController {
 				addOrderView.cleanAll();	
 			}
 		} else {
-			System.out.println("Formularz nie przeszed³ walidacji");
+			System.out.println("Formularz nie przeszedÅ‚ walidacji");
 		}
 	};
 	
 	/*
-	 * Podpiêcie algorytmu przydzielania kierowcy do zlecenia!
+	 * PodpiÄ™cie algorytmu przydzielania kierowcy do zlecenia!
 	 */
 	public void assignDriver(Order order){
 		Algorithm.initializeGraphHopper();

@@ -29,7 +29,7 @@ public class StatisticModel {
 	}
 	
 	/*
-	 * Aktualizuje dane statusÛw kierowcy co okreúlony czas
+	 * Aktualizuje dane status√≥w kierowcy co okre≈õlony czas
 	 */
 
 //	public void run() {

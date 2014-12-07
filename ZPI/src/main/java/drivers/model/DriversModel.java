@@ -38,7 +38,7 @@ public class DriversModel extends Observable implements Runnable {
 						driverChanges = new DriverChanges(scoreList, 0);
 						model.setChanged();
 						model.notifyObservers();
-						System.out.println("Znaleziono: " + scoreList.size() + " obiekt�w");
+						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
 						
 					}else{
 						System.out.println("Pusta baza");
@@ -77,9 +77,9 @@ public class DriversModel extends Observable implements Runnable {
 		stop = true;
 	}
 
-	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usuni�cie wiersza najlepiej szuka� po PESELu) **/
+	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usunięcie wiersza najlepiej szukać po PESELu) **/
 	public DriverChanges getChanges(){
-		// na ko�cu musi by� flaga czy tylko edycja statusu, czy nowy kierowca online
+		// na końcu musi być flaga czy tylko edycja statusu, czy nowy kierowca online
 		DriverChanges changes = driverChanges;
 		if(changes != null){
 			lastUpdated = changes.getDrivers().get(0).getUpdatedAt();
@@ -112,7 +112,7 @@ public class DriversModel extends Observable implements Runnable {
 							driverChanges = new DriverChanges(scoreList, 1);
 							model.setChanged();
 							model.notifyObservers();
-							System.out.println("Zmieniono: " + scoreList.size() + " obiekt�w");							
+							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");							
 						}else{
 							System.out.println("Pusta baza");
 						}

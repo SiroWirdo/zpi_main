@@ -51,7 +51,7 @@ public class EditDispatcherView extends JFrame{
 		getContentPane().add(mainPanel);
 
 
-		String[] columns = {"Imiê", "Nazwisko", "PESEL"};
+		String[] columns = {"ImiÄ™", "Nazwisko", "PESEL"};
 		tableModel = new DefaultTableModel(0, 0){
 
 			   @Override
@@ -77,7 +77,7 @@ public class EditDispatcherView extends JFrame{
 
 		mainPanel.add(scrollPane);
 
-		jlName = new JLabel("Imiê:");
+		jlName = new JLabel("ImiÄ™:");
 		jlName.setBounds(10, 30, 60, 30);
 		mainPanel.add(jlName);
 
@@ -103,7 +103,7 @@ public class EditDispatcherView extends JFrame{
 		filtr.addActionListener(editDispatcherController.getFiltrListener());
 		mainPanel.add(filtr);
 
-		refresh = new JButton("Odœwie¿");
+		refresh = new JButton("OdÅ›wieÅ¼");
 		refresh.setBounds(330, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		refresh.addActionListener(editDispatcherController.getRefreshListener());
 		mainPanel.add(refresh);

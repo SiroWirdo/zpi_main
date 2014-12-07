@@ -77,29 +77,29 @@ public class Algorithm implements Runnable {
 	public void run() {
 		while (!stop) {
 			/*
-			 * Pobranie z bazy wszystkich kierowców o statusie wolnym i z
-			 * odpowiedni¹ "pojemnoœci¹" auta
+			 * Pobranie z bazy wszystkich kierowcÃ³w o statusie wolnym i z
+			 * odpowiedniÄ… "pojemnoÅ›ciÄ…" auta
 			 */
 			drivers = getAvailableDrivers();
 
 			if (drivers != null && drivers.size() > 0) {
-				System.out.println("Znaleziono dostêpnych driverów: "
+				System.out.println("Znaleziono dostÄ™pnych driverÃ³w: "
 						+ drivers.size());
 
 				/*
-				 * Sortowanie kierowców po odleg³oœci w linii prostej od klienta
+				 * Sortowanie kierowcÃ³w po odlegÅ‚oÅ›ci w linii prostej od klienta
 				 */
 				sortListByDistanceInStraightLine(drivers);
 
 				/*
-				 * Wybranie okreœlonej liczby kierowców, którzy s¹ najbli¿ej w
+				 * Wybranie okreÅ›lonej liczby kierowcÃ³w, ktÃ³rzy sÄ… najbliÅ¼ej w
 				 * linii prostej
 				 */
 				List<Driver> sortedDrivers = new ArrayList<Driver>(
 						restrictListToTheBestResults(drivers));
 
 				/*
-				 * Wylicznie odleg³oœci po trasie i sortowanie wg nich
+				 * Wylicznie odlegÅ‚oÅ›ci po trasie i sortowanie wg nich
 				 */
 				driversWithRouteData = routeDistance(sortedDrivers);
 
@@ -109,28 +109,28 @@ public class Algorithm implements Runnable {
 				expectingWaitingTimeInMillisec = countExpectedWaitingTime(driversWithRouteData);
 
 				/*
-				 * Wyœwietl dyspozytorowi komunikat z szacowanym czasem
+				 * WyÅ›wietl dyspozytorowi komunikat z szacowanym czasem
 				 * oczekiwania
 				 */
 				showInfoForDispatcherAndWaitForResponse();
 
 				/*
-				 * Powiadom kierowców o nowym zleceniu jeœli klient nie
-				 * zrezygnowa³
+				 * Powiadom kierowcÃ³w o nowym zleceniu jeÅ›li klient nie
+				 * zrezygnowaÅ‚
 				 */
 				if (!isGiveUp) {
 					doingNotifyDriver();
 				} else {
 					/*
-					 * Ustaw status zamówienia na anulowane i zakoñcz wykonywanie algorytmu
+					 * Ustaw status zamÃ³wienia na anulowane i zakoÅ„cz wykonywanie algorytmu
 					 */
 					order.setStatus(Settings.CANCEL_ORDER_STATUS);
 					order.saveInBackground();
 					stop = true;
 				}
 			} else {
-				// TODO wyœwietl komunikat, ze nie ma dostepnych kierowców!
-				System.out.println("Nie ma aktualnie dostêpnych kierowców!");
+				// TODO wyÅ›wietl komunikat, ze nie ma dostepnych kierowcÃ³w!
+				System.out.println("Nie ma aktualnie dostÄ™pnych kierowcÃ³w!");
 			}
 		}
 	}
@@ -139,7 +139,7 @@ public class Algorithm implements Runnable {
 		List<Driver> availableDrivers = new ArrayList<Driver>();
 		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
 		query.whereEqualTo("status", Settings.FREE_CAR_STATUS);
-		// TODO trzeba uwzglêdniæ pojemnoœæ danego auta!!!
+		// TODO trzeba uwzglÄ™dniÄ‡ pojemnoÅ›Ä‡ danego auta!!!
 		// query.whereGreaterThanOrEqualTo("carCapacity",
 		// order.getPassengerCount());
 		try {
@@ -156,14 +156,14 @@ public class Algorithm implements Runnable {
 		Collections.sort(driverList, new Comparator<Driver>() {
 			@Override
 			public int compare(Driver arg0, Driver arg1) {
-				// nie jestem pewien czy to zadzia³a ale chyba tak
+				// nie jestem pewien czy to zadziaÅ‚a ale chyba tak
 				Car car0 = arg0.getCar();
 				Car car1 = arg1.getCar();
 				if (car0 != null && car1 != null) {
 					return Double.compare(countDistanceInStraightLine(car0),
 							countDistanceInStraightLine(car1));
 				}
-				return 2; // TODO trzeba to jakoœ ³adniej obs³u¿yæ
+				return 2; // TODO trzeba to jakoÅ› Å‚adniej obsÅ‚uÅ¼yÄ‡
 			}
 
 		});
@@ -206,26 +206,26 @@ public class Algorithm implements Runnable {
 			notifyDriver(assignedDriver);
 
 			/*
-			 * Czekamy okreœlon¹ liczbê czasu na jego odpowiedŸ
+			 * Czekamy okreÅ›lonÄ… liczbÄ™ czasu na jego odpowiedÅº
 			 */
 			waitingForDriverResponse(WAITING_TIME_RSP_DRIVER);
 
 			System.out.println("Status ordera: " + order.getStatus());
 			/*
-			 * Pobieramy z bazy aktualne dane zamówienia
+			 * Pobieramy z bazy aktualne dane zamÃ³wienia
 			 */
 			order = Order.getOrderById(order.getId());//updateOrderData();
 			System.out.println("Po aktualizacji status ordera:"
 					+ order.getStatus());
 
 			/*
-			 * Sprawdzamy czy status zamówienia zosta³ zmieniony przez
+			 * Sprawdzamy czy status zamÃ³wienia zostaÅ‚ zmieniony przez
 			 * powiadomionego kierowce
 			 */
 			if (isDriverResponse()) {
 
 				/*
-				 * TODO wyœwietl komunikat dla dispatchera, ze zosta³
+				 * TODO wyÅ›wietl komunikat dla dispatchera, ze zostaÅ‚
 				 * przydzielony do konkretnego kierowcy 
 				 */
 
@@ -234,7 +234,7 @@ public class Algorithm implements Runnable {
 			}
 		}
 		/*
-		 * Jeœli ¿aden z zapytanych kierowców nie podejmie siê ordera to
+		 * JeÅ›li Å¼aden z zapytanych kierowcÃ³w nie podejmie siÄ™ ordera to
 		 * powiadom dyspozytora komunikatem
 		 */
 		checkOrderAssigned();
@@ -243,7 +243,7 @@ public class Algorithm implements Runnable {
 	public void notifyDriver(Driver driver) {
 		ParsePush push = new ParsePush();
 		// ArrayList<String> channels = new ArrayList<String>();
-		// sprawdziæ jakie potrzebne s¹ do listy rzeczy czy: ["",id] czy [id]
+		// sprawdziÅ‚ jakie potrzebne sÄ… do listy rzeczy czy: ["",id] czy [id]
 		// czy inaczej
 		ParseObject pointer = (ParseObject) driver.getParseObject("userId");
 		String userId = (String) pointer.getObjectId();
@@ -275,8 +275,8 @@ public class Algorithm implements Runnable {
 	}
 
 	/*
-	 * Liczymy œredni¹ z takiej iloœci czasów jakia jest w NUMBER_COUNTED_TIMES
-	 * a potem uwzglêdnia jeszcze szacowany czas odpowiedzi kierowcy
+	 * Liczymy Å›redniÄ… z takiej iloÅ›ci czasÃ³w jakia jest w NUMBER_COUNTED_TIMES
+	 * a potem uwzglÄ™dnia jeszcze szacowany czas odpowiedzi kierowcy
 	 */
 	private long getExpectedWaitingTime(List<Long> times) {
 		long expectedTime = -1;
@@ -315,7 +315,7 @@ public class Algorithm implements Runnable {
 
 	public void waitingForDriverResponse(long milliseconds) {
 		try {
-			System.out.println("Oczekujê na decyzjê drivera...");
+			System.out.println("OczekujÄ™ na decyzjÄ™ drivera...");
 			Thread.sleep(milliseconds);
 
 		} catch (InterruptedException e) {
@@ -339,9 +339,9 @@ public class Algorithm implements Runnable {
 	public void checkOrderAssigned() {
 		if (!isOrderAssigned) {
 			stop = true;
-			// TODO co jeœli nikt nie odpowie - wyrzuæ komunikat
+			// TODO co jeÅ›li nikt nie odpowie - wyrzuÄ‡ komunikat
 			System.out
-					.println("¯aden z przydzielonych kierowców nie zaakceptowa³ ordera");
+					.println("Å»aden z przydzielonych kierowcÃ³w nie zaakceptowaÅ‚ ordera");
 		}
 	}
 
@@ -364,7 +364,7 @@ public class Algorithm implements Runnable {
 	}
 
 	/*
-	 * Liczy d³ugoœæ rzeczywistej drogi
+	 * Liczy dÅ‚ugoÅ›Ä‡ rzeczywistej drogi
 	 */
 	public List<DriverResponse> routeDistance(List<Driver> chooseDrivers) {
 		List<DriverResponse> driverRspList = new ArrayList<DriverResponse>();
@@ -439,7 +439,7 @@ public class Algorithm implements Runnable {
 					.getDistanceInMeters();
 			double compareTime = driverResponse.getTimeInMillis();
 
-			// TODO poprawiæ porównywanie, dodaæ porównywanie po czasie
+			// TODO poprawiÄ‡ porÃ³wnywanie, dodaÄ‡ porÃ³wnywanie po czasie
 			return (int) (this.getDistanceInMeters() - compareDistance);
 		}
 

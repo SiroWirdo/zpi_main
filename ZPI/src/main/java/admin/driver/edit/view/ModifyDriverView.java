@@ -56,7 +56,7 @@ public class ModifyDriverView extends JFrame{
 		mainPanel.setLayout(null);
 		this.add(mainPanel);
 
-		jlName = new JLabel("Imiê: ");
+		jlName = new JLabel("ImiÄ™: ");
 		jlName.setBounds(x, y, 60, 20);
 		mainPanel.add(jlName);
 
@@ -124,12 +124,12 @@ public class ModifyDriverView extends JFrame{
 		tfMail.setVisible(false);
 		tfCarId.setVisible(false);
 		
-		editCar = new JButton("Edytuj samochód");
+		editCar = new JButton("Edytuj samochÃ³d");
 		editCar.setBounds(x, y=y+30, 255, 25);
 		editCar.addActionListener(modifyDriverController.getEditCarButtonListener());
 		mainPanel.add(editCar);
 
-		resetPassword = new JButton("Zresetuj has³o");
+		resetPassword = new JButton("Zresetuj hasÅ‚o");
 		resetPassword.setBounds(x, y=y+30, 255, 25);
 		resetPassword.addActionListener(modifyDriverController.getRestartPasswordButtonListener());
 		mainPanel.add(resetPassword);
@@ -143,7 +143,7 @@ public class ModifyDriverView extends JFrame{
 		edit.setBounds(x+130, y, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		edit.addActionListener(modifyDriverController.getEditButtonListener());
 		mainPanel.add(edit);
-		//TODO Dodac edycje hasla. Zmiana u¿ytkownika po username a nie po id
+		//TODO Dodac edycje hasla. Zmiana uÅ¼ytkownika po username a nie po id
 
 		this.setVisible(true);
 	}

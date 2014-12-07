@@ -128,19 +128,19 @@ public class ModifyDriverController {
 				modifyDriverView.dispose();
 			}else{
 				if(!uniquePesel){
-					error += "- Taki PESEL jest juø przypisany do innej osoby \n";
+					error += "- Taki PESEL jest ju≈º przypisany do innej osoby \n";
 				}
 
 				if(!uniqueLicense){
-					error += "- Taka licencja jest juø przypisana do innego kierowcy \n";
+					error += "- Taka licencja jest ju≈º przypisana do innego kierowcy \n";
 				}
 
 				if(!validPesel){
-					error += "- PESEL powinien mieÊ 11 znakÛw \n";
+					error += "- PESEL powinien mieƒá 11 znak√≥w \n";
 				}
 
 				if(!valid){
-					error += "Wprowadü wszystkie dane \n";
+					error += "Wprowad≈∫ wszystkie dane \n";
 
 				}
 				printError(error);
