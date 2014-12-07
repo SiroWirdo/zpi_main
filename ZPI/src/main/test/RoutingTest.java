@@ -30,7 +30,7 @@ public class RoutingTest {
 			e.printStackTrace();
 		}
 		if(o != null){
-			Algorithm a = new Algorithm(o);
+			Algorithm a = new Algorithm(o, 0);
 			a.run();
 		}
 		else{

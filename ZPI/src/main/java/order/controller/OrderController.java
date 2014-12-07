@@ -115,6 +115,7 @@ public class OrderController {
 		addOrderView.cleanAllErrors();
 		addOrderView.validateFields();
 		if (addOrderView.isFormValidate()) {
+			
 			String defaultCity = "";
 			if(addOrderView.isDefaultCityChecked()){
 				defaultCity = Settings.DEFAULT_CITY;
@@ -135,9 +136,7 @@ public class OrderController {
 			        	setPositionOnNewOrder(o);   
 		            }
 		        });
-
-
-		      
+     
 			assignDriver(o);
 			if(addOrderView.isCleanAfterAddChecked()){
 				addOrderView.cleanAll();	
@@ -150,10 +149,17 @@ public class OrderController {
 	/*
 	 * Podpięcie algorytmu przydzielania kierowcy do zlecenia!
 	 */
-	public void assignDriver(Order order){
-		Algorithm.initializeGraphHopper();
-		Algorithm a = new Algorithm(order);
-		a.run();
+	public void assignDriver(final Order order){
+		
+	    Thread queryThread = new Thread() {
+	        public void run() {
+	    		Algorithm.initializeGraphHopper();
+	    		Algorithm a = new Algorithm(order, 0);
+	    		a.run();
+	        }
+	      };
+	      queryThread.start();
+
 	}
 	
 	private void setPositionOnNewOrder(Order newOrder){

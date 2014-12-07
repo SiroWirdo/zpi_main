@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import model.Car;
 import model.Driver;
 import model.Order;
@@ -46,7 +48,7 @@ public class Algorithm implements Runnable {
 	private final int COUNTED_TIMES = 3;
 	private final long EXPECTING_TIME_TO_RESPONSE = WAITING_TIME_RSP_DRIVER * 3;
 
-	public Algorithm(Order order) {
+	public Algorithm(Order order, double durationStart) {
 		this.order = order;
 		drivers = new ArrayList<Driver>();
 		driversWithRouteData = new ArrayList<DriverResponse>();
@@ -56,6 +58,7 @@ public class Algorithm implements Runnable {
 		customerPosition = order.getPickupAddressGeo();
 		expectingWaitingTimeInMillisec = -1;
 		stop = false;
+		duration = durationStart;
 		startTime = System.currentTimeMillis();
 	}
 
@@ -305,15 +308,19 @@ public class Algorithm implements Runnable {
 	}
 
 	private void showInfoForDispatcherAndWaitForResponse() {
-		AlgorithmResultDialog infoForDispatcher = new AlgorithmResultDialog(this);
+		
+		final AlgorithmResultDialog infoForDispatcher = new AlgorithmResultDialog(this);
 		infoForDispatcher.setExpectingTime(expectingWaitingTimeInMillisec);
-		
 		assignedDriver = driversWithRouteData.get(0).getDriver();
-		System.out.println(assignedDriver.getName() + " " +  assignedDriver.getSurname());
-		infoForDispatcher.setDriverLabel(assignedDriver);
-		infoForDispatcher.setAlwaysOnTop(true);
 		
-		infoForDispatcher.setVisible(true);
+		SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+				System.out.println(assignedDriver.getName() + " " +  assignedDriver.getSurname());
+		    	infoForDispatcher.setDriverLabel(assignedDriver);
+		    	infoForDispatcher.setVisible(true);
+		    }
+		  });
+		
 		while (!infoForDispatcher.isDispatcherResponse()) {
 			try {
 				Thread.sleep(1000);

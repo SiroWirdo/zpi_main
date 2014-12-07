@@ -77,18 +77,15 @@ public class NotAssignedOrderJDialog extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				final Algorithm retryAlgorytm = new Algorithm(alg.getOrder());
-				Thread filerThread = new Thread() {
+				closeDialog();
+				Thread runNewAlg = new Thread() {
 			        public void run() {
-						retryAlgorytm.run();
-						SwingUtilities.invokeLater(new Runnable() {
-						    public void run() {
-						    	closeDialog();
-						    }
-						  });
+						Algorithm retryAlgorytm = new Algorithm(alg.getOrder(), alg.getDuration());
+						retryAlgorytm.run(); 
 			        }
 			      };
-			      filerThread.start();
+			      runNewAlg.start();
+			  
 			}
 		});
 		getContentPane().add(retryBTn);
@@ -96,6 +93,9 @@ public class NotAssignedOrderJDialog extends JDialog{
 		JButton endBtn = new JButton("Zakończ");
 		endBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Order o = alg.getOrder();
+				o.setStatus(Settings.CANCEL_ORDER_STATUS);
+				o.saveInBackground();
 				closeDialog();
 			}
 		});
@@ -107,7 +107,7 @@ public class NotAssignedOrderJDialog extends JDialog{
 		getContentPane().add(lblPonwPrzydziaLub);
 		
 		setFields(alg.getOrder(), alg.getDuration());
-		setBounds(1000, 300, 396, 291);
+		setBounds(500, 300, 396, 291);
 		setAlwaysOnTop(true);
 		setVisible(true);
 	}
