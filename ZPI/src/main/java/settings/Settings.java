@@ -1,7 +1,9 @@
 package settings;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -10,44 +12,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.Painter;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.Border;
 import javax.swing.plaf.ColorUIResource;
 
+import model.Dispatcher;
+
 import org.slf4j.LoggerFactory;
 
+import xml.reader.XMLReader;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
-import xml.reader.XMLReader;
-import model.Dispatcher;
 
 public class Settings {
 
 	public final static String GOOGLE_API_KEY = "AIzaSyCwdqY0myu5bBafDf3r7WyhU_THfd_Q3lI";
-	public final static String DEFAULT_CITY = "Wroc³aw";
+	public final static String DEFAULT_CITY = "WrocÅ‚aw";
 
 	public static Dispatcher USER_OBJECT;
 	/*
-	 * Ustawienie wartoœæi dotycz¹cych mapy
+	 * Ustawienie wartoï¿½ï¿½i dotyczï¿½cych mapy
 	 */
 	public static final int MAX_ZOOM_MAP = 7;
 	public static final int MIN_ZOOM_MAP = 1;
 	public static final int DEFAULT_ZOOM = 3;
-	//Default localization: Wroc³aw
+	//Default localization: Wrocï¿½aw
 	public static final double DEFAULT_LATITUDE = 51.107885200000000000;
 	public static final double DEFAULT_LONGITUDE = 17.038537600000040000;
 	public static final String CONTRIBUTORS_TEXT = "\u00a9 Open StreetMap contributors";
 
 	
 	/*
-	 * Ustawienie wartoœci pó³ dotycz¹cych odœwie¿ania poszczególnych paneli
+	 * Ustawienie wartoï¿½ci pï¿½ dotyczï¿½cych odï¿½wieï¿½ania poszczegï¿½lnych paneli
 	 */
 	public static final long STATISTIC_PANEL_REFRESH_TIME = 10000;
 	public static final long MAP_REFRESH_TIME = 10000;
 	
 	/*
-	 * Ustawienie wartoœci pól dla danych statusów kierowcy
+	 * Ustawienie wartoï¿½ci pï¿½l dla danych statusï¿½w kierowcy
 	 */
 	public static final int FREE_CAR_STATUS = 0;
 	public static final int DRIVER_CAR_STATUS = 1;
@@ -56,7 +60,7 @@ public class Settings {
 	public static final int UNAVALAIBLE_CAR_STATUS = 4;
 
 	/*
-	 * Ustawienie wartoœci pól dla danych statusów zamówienia
+	 * Ustawienie wartoï¿½ci pï¿½l dla danych statusï¿½w zamï¿½wienia
 	 */
 	public static final int WAITING_ORDER_STATUS = 0;
 	public static final int IN_PROGRESS_ORDER_STATUS = 1;
@@ -65,7 +69,7 @@ public class Settings {
 	public static final int ACCEPTED_ORDER_STATUS = 4;
 
 	/*
-	 * Domyœlne wielkoœci pól
+	 * Domyï¿½lne wielkoï¿½ci pï¿½l
 	 */
 	public static final int TEXT_FIELD_WIDTH = 125;
 	public static final int TEXT_FIELD_HEIGHT = 30;
@@ -73,11 +77,11 @@ public class Settings {
 	public static final int BUTTON_HEIGHT = 25;
 
 	/*
-	 * Inicjalizacja tablic przydatnych do wypisywania statusów
+	 * Inicjalizacja tablic przydatnych do wypisywania statusï¿½w
 	 */
 	public static String[] driverStatus = { "wolny", "kurs", "przerwa",
-			"zablokowany", "niedostêpny" };
-	public static String[] orderStatus = { "oczekuj¹ce",
+			"zablokowany", "niedostï¿½pny" };
+	public static String[] orderStatus = { "oczekujÄ…ce",
 			"w trakcie realizacji", "zrealizowane", "anulowane",
 			"zaakceptowane" };
 
@@ -116,7 +120,7 @@ public class Settings {
 	}
 
 	/*
-	 * Metoda wy³¹czaj¹ca wypisywanie logów w konsoli
+	 * Metoda wyï¿½ï¿½czajï¿½ca wypisywanie logï¿½w w konsoli
 	 */
 	public static void turnOffLogBackLogger() {
 		Logger orgHibernateLogger = (Logger) LoggerFactory.getLogger("ROOT");
@@ -126,7 +130,7 @@ public class Settings {
 	}
 
 	/*
-	 * Metoda wy³¹czaj¹ca wypisywanie sysoutów w konsoli
+	 * Metoda wyï¿½ï¿½czajï¿½ca wypisywanie sysoutï¿½w w konsoli
 	 */
 	public static void turnOffSysoutLog() {
 		System.setOut(new PrintStream(new OutputStream() {
@@ -137,7 +141,7 @@ public class Settings {
 	}
 	
 	/*
-	 * Ustawienie domyœlnych stylów
+	 * Ustawienie domyï¿½lnych stylï¿½w
 	 */
 	public static void setLookAndFeel(){
 		
@@ -152,14 +156,22 @@ public class Settings {
 		UIManager.put("TextArea.foreground", new Color(0,0,0));
 		UIManager.put("FormattedTextField.foreground", new Color(0,0,0));
 		
-		//TODO nie chca dzia³aæ tooltipy na mapie
+		//TODO nie chca dziaï¿½aï¿½ tooltipy na mapie
 		Border border = BorderFactory.createLineBorder(new Color(0,0,0));    //#4c4f53
 		UIManager.put("ToolTip.border", border);
 
-		UIManager.put("ToolTip.foregroundInactive", new Color(255, 255, 255));
-		UIManager.put("backgroundInactive", new Color(255, 255, 255));
-		UIManager.put("ToolTip.background", new Color(255, 255, 255)); //#fff7c8
-		UIManager.put("ToolTip.foreground", new Color(255, 255, 255));
+		//UIManager.put("ToolTip.foregroundInactive", new Color(0,0,0));
+		//UIManager.put("ToolTip.backgroundInactive", new Color(0,0,0));
+		//UIManager.put("ToolTip.background", new Color(0,0,0)); //#fff7c8
+		//UIManager.put("ToolTip.foreground", new Color(0,0,0));
+		 Painter<Component> p = new Painter<Component>() {
+		     public void paint(Graphics2D g, Component c, int width, int height) {
+		         g.setColor(new Color(20,36,122));
+		         //and so forth
+		     }
+		 };
+		 
+		UIManager.put("ToolTip[Enabled].backgroundPainter", p);
 		
 //		UIManager.getLookAndFeelDefaults().put("ToolTip.foregroundInactive", new Color(255, 255, 255));
 //		UIManager.getLookAndFeelDefaults().put("backgroundInactive", new Color(255, 255, 255));
