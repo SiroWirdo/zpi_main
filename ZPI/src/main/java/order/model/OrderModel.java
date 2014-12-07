@@ -34,7 +34,9 @@ public class OrderModel {
 		
 		Customer customer = addCustomer(surname, phoneNumber);
 		order.setCustomer(customer);
-		order.setCustomerRemarks(customerRemarks);
+		if(!customerRemarks.equals("") && customerRemarks != null){
+			order.setCustomerRemarks(customerRemarks);
+		}
 		order.setPassengerCount(passangerCount);
 		order.setStatus(Settings.WAITING_ORDER_STATUS);
 		

@@ -128,12 +128,15 @@ public class OrderController {
 					addOrderView.getCustomerRemarksTextArea().getText(),
 					new Integer(addOrderView
 							.getPassangerCountTextField().getText().trim()));
-		    Thread changePositionThread = new Thread() {
-		        public void run() {
-		        	setPositionOnNewOrder(o);
-		        }
-		      };
-		      changePositionThread.start();
+			  SwingUtilities.invokeLater(new Runnable() {
+		            @Override
+		            public void run() {
+			        	mapController.refreshMap();
+			        	setPositionOnNewOrder(o);   
+		            }
+		        });
+
+
 		      
 			assignDriver(o);
 			if(addOrderView.isCleanAfterAddChecked()){

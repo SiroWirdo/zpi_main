@@ -61,7 +61,7 @@ public class AddOrderJPanel extends JPanel{
 	private JCheckBox defaultCityCheckBox;
 	private JCheckBox cleanAfterAddCheckBox;
 	
-	private final int maxSizeText = 200;
+	private final int maxSizeText = 65;
 	private final String requiredFieldErrorMsg = "Pole wymagane!";
 	private final String onlyTextErrorMsg = "To pole może zawierać tylko litery!";
 	private final String onlyNumbersErrorMsg = "To pole może zawierać tylko liczby!";
@@ -119,6 +119,9 @@ public class AddOrderJPanel extends JPanel{
 		phoneNumberTextField = new JTextField();
 		phoneNumberTextField.setBounds(10, 88, 176, 20);
 		phoneNumberTextField.setName("phone");
+		DefaultStyledDocument phoneDoc = new DefaultStyledDocument();
+		phoneDoc.setDocumentFilter(new DocumentSizeFilter(13));
+		phoneNumberTextField.setDocument(phoneDoc);
 		add(phoneNumberTextField);
 		
 		pickUpAddressTextField = new JTextField();
@@ -164,7 +167,6 @@ public class AddOrderJPanel extends JPanel{
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollPane);
 		
-
 		customerRemarksTextArea = new JTextArea(3, 50);
 		scrollPane.setViewportView(customerRemarksTextArea);
 		customerRemarksTextArea.setLineWrap(true);
@@ -310,7 +312,7 @@ public class AddOrderJPanel extends JPanel{
 	
 	public void cleanFields(){
 		surnameTextField.setText(null);
-		phoneNumberTextField.setText(null);
+		phoneNumberTextField.setText("");
 		pickUpAddressTextField.setText(null);
 		passangerCountTextField.setText(null);
 		customerRemarksTextArea.setText(null);

@@ -117,7 +117,7 @@ public class Order extends ParseObject {
 	}
 
 	public Date getCreatedAt() {
-		return getDate("createdAt");
+		return getCreatedAt();
 	}
 
 	public double getCost() {
