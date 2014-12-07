@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -22,12 +25,22 @@ import model.Dispatcher;
 
 import org.slf4j.LoggerFactory;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import xml.reader.XMLReader;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
 public class Settings {
 
+	/*
+	 * Kod polskich znaków na klwiaturze
+	 */
+	private static char[] polishCodeKey = {
+			379, 380, 377, 378, 262, 263, 260, 261, 346, 347, 280, 281, 321, 322, 211, 243, 323, 324,
+	};
+	
+	public static List POLISH_KEY_CODE = new ArrayList(Arrays.asList(polishCodeKey));
 	public final static String GOOGLE_API_KEY = "AIzaSyCwdqY0myu5bBafDf3r7WyhU_THfd_Q3lI";
 	public final static String DEFAULT_CITY = "Wrocław";
 

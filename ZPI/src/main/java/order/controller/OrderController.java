@@ -1,17 +1,28 @@
 package order.controller;
 
+import geocoding.ConverterGeoPosition;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.parse4j.ParseGeoPoint;
+
+import com.google.maps.model.GeocodingResult;
 
 import algorithm.Algorithm;
 import order.model.OrderModel;
 import order.view.AddOrderJPanel;
+import order.view.Java2sAutoComboBox;
 import order.view.OrderDetailsView;
 import settings.Settings;
 import main.controller.MapController;
@@ -93,7 +104,7 @@ public class OrderController {
 			      };
 			      queryThread.start();
 			}
-			else if(e.getActionCommand().equals("Wyczyœæ")){
+			else if(e.getActionCommand().equals("Wyczyï¿½ï¿½")){
 				 addOrderView.cleanFields();
 				 addOrderView.cleanAllErrors();
 			}
@@ -112,7 +123,7 @@ public class OrderController {
 					addOrderView.getSurnameTextField().getText().trim(),
 					new Long(addOrderView.getPhoneNumberTextField()
 							.getText().trim()),
-					addOrderView.getPickUpAddressTextField().getText() + defaultCity,
+					addOrderView.getPickUpAddressTextField().getText()+ defaultCity,
 					addOrderView.getCustomerRemarksTextArea().getText(),
 					new Integer(addOrderView
 							.getPassangerCountTextField().getText().trim()));
@@ -128,12 +139,12 @@ public class OrderController {
 				addOrderView.cleanAll();	
 			}
 		} else {
-			System.out.println("Formularz nie przeszed³ walidacji");
+			System.out.println("Formularz nie przeszedï¿½ walidacji");
 		}
 	};
 	
 	/*
-	 * Podpiêcie algorytmu przydzielania kierowcy do zlecenia!
+	 * Podpiï¿½cie algorytmu przydzielania kierowcy do zlecenia!
 	 */
 	public void assignDriver(Order order){
 		Algorithm.initializeGraphHopper();
@@ -145,6 +156,168 @@ public class OrderController {
 		ParseGeoPoint geoPoint = newOrder.getPickupAddressGeo();
 		mapController.setPosition(geoPoint.getLatitude(), geoPoint.getLongitude());
 	}
+	
+//	private void setPropListInCombobox(GeocodingResult[] results){
+//		addOrderView.setPickUpAddressTextFieldList(results);
+//	}
+	
+//	public ComboBoxChangeValueListener getComboBoxChangeValueListener(){
+//		return new ComboBoxChangeValueListener();
+//	}
+	
+//	public class ComboBoxChangeValueListener implements ActionListener{
+//
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			String text = addOrderView.getComboValue();
+//			GeocodingResult[] results = ConverterGeoPosition.getPropositionForRsp(text);
+//			addOrderView.setPickUpAddressTextFieldList(results);		
+//		}
+//	
+//	}
+	
+	/*private JComboBox getJComboBox(){
+		return addOrderView.getComboBox();
+	}
+	
+	public TextFieldKeyListener getTextFieldKeyListener(){
+		return new TextFieldKeyListener();
+	}
+	
+	public class TextFieldKeyListener implements KeyListener{
+	      public void keyReleased(KeyEvent e) {
+	    	  int keyCode = e.getKeyChar();
+	    	  System.out.println("KEY CODE:" + keyCode);
+	    	  JComboBox combo = addOrderView.getComboBox();
+	    	  JTextField textField = (JTextField)e.getSource();
+//	    	  if( (keyCode >= 65 && keyCode <=95) || Settings.POLISH_KEY_CODE.contains(keyCode)){
+	    	  if( (keyCode >= 65 && keyCode <=122) || Settings.POLISH_KEY_CODE.contains(keyCode)){
+	    		
+				System.out.println("Szukam dla tekstu:" + textField.getText());
+				GeocodingResult[] result = ConverterGeoPosition.getPropositionForRsp(textField.getText());
+				combo.removeAllItems();
+				combo.hidePopup();
+				final JComboBox newCombo = combo;
+				for(int i = 0; i < result.length; i++){
+					combo.addItem(result[i].formattedAddress);
+				}
+				  SwingUtilities.invokeLater(new Runnable() {
+			            @Override
+			            public void run() {
+			    			newCombo.showPopup();       
+			            }
+			        });
+	    	  }
+	    	  //
+	    	  else if(e.getKeyCode() == KeyEvent.VK_UP){
+	    		  System.out.println("Up");
+	    	  }
+	    	  else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+	    		 int index =  combo.getSelectedIndex();
+	    		 if(index < combo.getComponentCount()){
+	    		  combo.setSelectedIndex(index++);
+	    		 // combo.setF
+	    		 }
+	    		  
+	    	  }
+	    	  else if(e.getKeyCode() == KeyEvent.VK_ENTER){
+	    		  System.out.println("Enter");
+	    	  }
+
+	      }
+
+	      public void keyTyped(KeyEvent e) {
+	      }
+
+	      public void keyPressed(KeyEvent e) {
+	      }
+	    }
+	
+	
+	public TextFieldDocListener getTextFieldDocListener(){
+		return new TextFieldDocListener();
+	}
+	public class TextFieldDocListener implements DocumentListener{
+
+		@Override
+		public void insertUpdate(DocumentEvent e) {
+			Thread filerThread = new Thread() {
+		        public void run() {
+		        	 JTextField textField = addOrderView.getEditedField();
+					  System.out.println("Szukam dla tekstu:" + textField.getText());
+					  final GeocodingResult[] result = ConverterGeoPosition.getPropositionForRsp(textField.getText());
+					  
+					  Java2sAutoComboBox combo = addOrderView.getComboBox();
+					  combo.removeAllItems();
+					  for(int i = 0; i < result.length; i++){
+							combo.addItem(result[i].formattedAddress);
+						}
+//					  combo.setC
+					  combo.showPopup();
+//					  final JComboBox newCombo = combo;
+//					  SwingUtilities.invokeLater(new Runnable() {
+//				            @Override
+//				            public void run() {
+//				            	combo.removeAll();	
+//				            	
+//				            }
+//					  }
+//					  );
+		        }
+		      };
+		      filerThread.start();
+			  
+//		
+			
+//			 Runnable doHighlight = new Runnable() {
+//			        @Override
+//			        public void run() {
+//			            final JComboBox combo = addOrderView.getComboBox();
+//				    	  JTextField textField = (JTextField) combo.getEditor().getEditorComponent();
+//					    	//  textField.setCursor(cursor);
+//							System.out.println("Szukam dla tekstu:" + textField.getText());
+//							GeocodingResult[] result = ConverterGeoPosition.getPropositionForRsp(textField.getText());
+//							combo.removeAllItems();
+//							  SwingUtilities.invokeLater(new Runnable() {
+//						            @Override
+//						            public void run() {
+//						            	combo.hidePopup();      
+//						            }
+//							  }
+//							  );
+//								
+//							for(int i = 0; i < result.length; i++){
+//								combo.addItem(result[i].formattedAddress);
+//							}
+//							
+//							final JComboBox newCombo = combo;
+//
+//							  SwingUtilities.invokeLater(new Runnable() {
+//						            @Override
+//						            public void run() {
+//						    			newCombo.showPopup();       
+//						            }
+//							  }
+//							  );
+//			        }
+//			    };       
+//			    SwingUtilities.invokeLater(doHighlight);
+//			
+    	  }
+		
+		@Override
+		public void removeUpdate(DocumentEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void changedUpdate(DocumentEvent e) {
+			// TODO Auto-generated method stub
+			
+		}			 
+	    }
+	 */
 	
 	public class ValidateTextFieldListener implements FocusListener{
 
