@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import settings.Settings;
 import model.Driver;
 
 public class AlgorithmResultDialog extends JDialog {
@@ -87,7 +88,7 @@ public class AlgorithmResultDialog extends JDialog {
 	
 	
 	public void setExpectingTime(long expectingTimeInMillisec){
-		timeLabel.setText(convertMillisToMinutes(expectingTimeInMillisec));
+		timeLabel.setText(Settings.convertMillisToMinutes(expectingTimeInMillisec));
 	}
 	
 	public void setDriverLabel(Driver d){
@@ -110,17 +111,7 @@ public class AlgorithmResultDialog extends JDialog {
 //		alg.setWaitingForResponse();
 //		return abort;
 //	}
-	
-	private String convertMillisToMinutes(long millisec){
-		StringBuilder sb = new StringBuilder();
-		
-		int minutes = (int)millisec/1000/60;
-		sb.append(minutes);
-		sb.append(" min.");
-		
-		return sb.toString();
-	}
-	
+
 	private void closeDialog(){
 		this.dispose();
 		this.setVisible(false);

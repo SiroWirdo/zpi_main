@@ -213,5 +213,16 @@ public class Settings {
 		
 
 	}
+	
+	public static String convertMillisToMinutes(long millisec){
+		StringBuilder sb = new StringBuilder();
+		
+		int minutes = (int)millisec/1000/60;
+		sb.append(minutes);
+		sb.append(" min.");
+		
+		return sb.toString();
+	}
+	
 
 }
