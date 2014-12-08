@@ -60,7 +60,7 @@ public class MainMenuView extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
-		this.setBounds(10, 10, 1400, 900);
+		this.setBounds(10, 10, 1450, 900);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 
@@ -108,7 +108,7 @@ public class MainMenuView extends JFrame{
 		panel.setVisible(true);
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getMap(), panel);	
-		splitPane.setResizeWeight(0.79);
+		splitPane.setResizeWeight(0.75);
 		return splitPane;
 	}
 
