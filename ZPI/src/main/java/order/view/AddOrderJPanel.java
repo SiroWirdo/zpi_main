@@ -185,28 +185,28 @@ public class AddOrderJPanel extends JPanel{
 		 */
 		surnameErrors = new JLabel("surname error");
 		surnameErrors.setName("surnameError");
-		surnameErrors.setBounds(197, 45, 211, 14);
+		surnameErrors.setBounds(197, 45, 274, 14);
 		surnameErrors.setForeground(Color.RED);
 		surnameErrors.setVisible(false);
 		add(surnameErrors);
 		
 		phoneErrors = new JLabel("phone error");
 		phoneErrors.setName("phoneError");
-		phoneErrors.setBounds(196, 91, 211, 14);
+		phoneErrors.setBounds(196, 91, 293, 14);
 		phoneErrors.setForeground(Color.RED);
 		phoneErrors.setVisible(false);
 		add(phoneErrors);
 		
 		addresErrors = new JLabel("address error");
 		addresErrors.setName("addressError");
-		addresErrors.setBounds(260, 138, 211, 14);
+		addresErrors.setBounds(271, 138, 211, 14);
 		addresErrors.setForeground(Color.RED);
 		addresErrors.setVisible(false);
 		add(addresErrors);
 		
 		passangerCountErrors = new JLabel("passanger count error");
 		passangerCountErrors.setName("passangerCountError");
-		passangerCountErrors.setBounds(197, 170, 211, 41);
+		passangerCountErrors.setBounds(197, 170, 274, 41);
 		passangerCountErrors.setForeground(Color.RED);
 		passangerCountErrors.setVisible(false);
 		add(passangerCountErrors);
