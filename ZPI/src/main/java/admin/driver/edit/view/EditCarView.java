@@ -36,6 +36,8 @@ public class EditCarView extends JFrame {
 		this.setBounds(500, 300, 350, 300);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Edycja samochodu");
+		this.setResizable(false);
+		
 		int x = 10;
 		int y = 10;
 		

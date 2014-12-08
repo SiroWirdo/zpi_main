@@ -31,6 +31,7 @@ public class AdminView extends JFrame{
 		this.setBounds(600, 300, 200, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Admin");
+		this.setResizable(false);
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(5,1));

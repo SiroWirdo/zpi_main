@@ -46,6 +46,7 @@ public class EditDispatcherView extends JFrame{
 		//przy EXIT_ON_CLOSE zabija wszystkie procesy, przy DISPOSE nie....
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Edycja dyspozytora");
+		this.setResizable(false);
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);

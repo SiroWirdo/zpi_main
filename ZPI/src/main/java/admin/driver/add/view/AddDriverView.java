@@ -50,6 +50,7 @@ public class AddDriverView extends JFrame{
 		this.setLayout(new GridLayout(4,1));
 		
 		this.setTitle("Dodawanie kierowcy");
+		this.setResizable(false);
 
 		int x = 10;
 		int y = 10;

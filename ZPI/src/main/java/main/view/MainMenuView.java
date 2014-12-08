@@ -60,8 +60,9 @@ public class MainMenuView extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
-		this.setBounds(0, 0, 1300, 1300);
+		this.setBounds(10, 10, 1400, 900);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
 
 		DataBaseConnection.initialize();		
 		addMainTabbedPane();

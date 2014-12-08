@@ -7,9 +7,13 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
+import admin.driver.edit.controller.ModifyDriverController;
+import admin.driver.edit.model.ModifyDriverModel;
 import model.Driver;
 import settings.Settings;
 import drivers.model.DriversModel;
@@ -30,7 +34,7 @@ public class DriversController implements Observer {
 
 		this.driversModel.initialize();
 		this.driversView.initialize();
-		
+
 	}
 
 	public DriversController(Driver driverDetailsModel){
@@ -51,9 +55,9 @@ public class DriversController implements Observer {
 			if(driversModel.getChanges().getFlag() == 0){
 				List<Driver> drivers = driversModel.getChanges().getDrivers();
 				for(Driver driver : drivers){
-					
+
 					System.out.println("Driver Controller: " + driver.getSurname());
-					
+
 					addRow(driver);
 				}
 			}else{
@@ -88,6 +92,78 @@ public class DriversController implements Observer {
 
 	public FiltrListener getFiltrListener(){
 		return new FiltrListener();
+	}
+
+	public BlockListener getBlockListener(){
+		return new BlockListener();
+	}
+
+	public UnblockListener getUnblockListener(){
+		return new UnblockListener();
+	}
+
+	private class BlockListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			long pesel = driversView.getPeselFromSelectedRow();
+			if(pesel >=0 ){
+				boolean blocked = driversModel.blockDriver(pesel);
+				if(blocked){
+					JFrame frame = new JFrame();
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					JOptionPane.showMessageDialog(frame, "Zablokowano kierowcę o PESEL: " + pesel);
+				}else{
+					JFrame frame = new JFrame();
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					JOptionPane.showMessageDialog(frame, "Wystąpił nieoczekiwany błąd");
+				}
+
+			}else{
+				JFrame frame = new JFrame();
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				JOptionPane.showMessageDialog(frame, "Nie wybrano kierowcy");
+			}
+		}
+
+
+	}
+
+	private class UnblockListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			String status = driversView.getStatusFromSelectedRow();
+			boolean blocked = false;
+			if(status.equals(Settings.driverStatus[Settings.BLOCK_CAR_STATUS])){
+				blocked = true;
+			}
+			if(blocked){
+				long pesel = driversView.getPeselFromSelectedRow();
+				if(pesel >=0 ){
+					boolean unblocked = driversModel.unblockDriver(pesel);
+					if(unblocked){
+						JFrame frame = new JFrame();
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						JOptionPane.showMessageDialog(frame, "Odblokowano kierowcę o PESEL: " + pesel);
+					}else{
+						JFrame frame = new JFrame();
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						JOptionPane.showMessageDialog(frame, "Wystąpił nieoczekiwany błąd");
+					}
+
+				}else{
+					JFrame frame = new JFrame();
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					JOptionPane.showMessageDialog(frame, "Nie wybrano kierowcy");
+				}
+			}else{
+				JFrame frame = new JFrame();
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				JOptionPane.showMessageDialog(frame, "Kierowca nie jest zablokowany");
+			}
+		}
+
 	}
 
 	private class FiltrListener implements ActionListener{

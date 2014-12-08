@@ -13,6 +13,7 @@ import org.parse4j.ParseQuery;
 import org.parse4j.callback.FindCallback;
 
 import other.DataBaseConnection;
+import settings.Settings;
 
 public class DriversModel extends Observable implements Runnable {
 	DriverChanges driverChanges;
@@ -125,5 +126,35 @@ public class DriversModel extends Observable implements Runnable {
 		}	
 		
 		return actualDrivers;
+	}
+	
+	public boolean blockDriver(long pesel){
+		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
+		query.whereEqualTo("PESEL", pesel);
+		try {
+			Driver driver = query.find().get(0);
+			driver.setStatus(Settings.BLOCK_CAR_STATUS);
+			driver.save();
+			return true;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean unblockDriver(long pesel){
+		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
+		query.whereEqualTo("PESEL", pesel);
+		try {
+			Driver driver = query.find().get(0);
+			driver.setStatus(Settings.UNAVALAIBLE_CAR_STATUS);
+			driver.save();
+			return true;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
