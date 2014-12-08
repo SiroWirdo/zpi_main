@@ -256,8 +256,9 @@ public class Algorithm implements Runnable {
 		int i = 0;
 		while (!isOrderAssigned && driversWithRouteData != null
 				&& i < driversWithRouteData.size()) {
-			//Sprawdzamy czy w między czasie driver nie zmienil statusu
-			if (driversWithRouteData.get(i).getDriver().getStatus() == Settings.FREE_CAR_STATUS) {
+			//Sprawdzamy czy w między czasie driver nie zmienil statusu		
+			Driver updateDriver = Driver.getDriverById(driversWithRouteData.get(i).getDriver().getObjectId());
+			if (updateDriver.getStatus() == Settings.FREE_CAR_STATUS) {
 				/*
 				 * Powiadamiamy kolejnego kierowce z listy
 				 */
