@@ -108,7 +108,7 @@ public class MainMenuView extends JFrame{
 		panel.setVisible(true);
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getMap(), panel);	
-		splitPane.setResizeWeight(0.82);
+		splitPane.setResizeWeight(0.79);
 		return splitPane;
 	}
 

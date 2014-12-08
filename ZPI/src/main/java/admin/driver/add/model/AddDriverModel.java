@@ -7,6 +7,7 @@ import org.parse4j.ParseException;
 import org.parse4j.ParsePointer;
 
 import other.DataBaseConnection;
+import settings.Settings;
 
 public class AddDriverModel {
 
@@ -21,7 +22,7 @@ public class AddDriverModel {
 		driver.setPESEL(pesel);
 		driver.setPhoneNumber(phone);
 		driver.setLicenseNumber(license);
-		driver.setStatus(4);
+		driver.setStatus(Settings.UNAVALAIBLE_CAR_STATUS);
 		driver.put("userId", user);
 		driver.setCar(car);
 		try {
