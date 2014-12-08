@@ -135,12 +135,12 @@ public class DriversView extends JPanel {
 		add(filtr);
 		
 		unblock = new JButton("Odblokuj");
-		unblock.setBounds(1100-Settings.BUTTON_WIDTH, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		unblock.setBounds(1300-Settings.BUTTON_WIDTH, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		unblock.addActionListener(driversController.getUnblockListener());
 		add(unblock);
 		
 		block = new JButton("Zablokuj");
-		block.setBounds(1100-Settings.BUTTON_WIDTH, 30, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		block.setBounds(1300-Settings.BUTTON_WIDTH, 30, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		block.addActionListener(driversController.getBlockListener());
 		add(block);
 		//	tableModel.addRow(new Object[]{"test", "test", "test", "test", "test", "test"});
