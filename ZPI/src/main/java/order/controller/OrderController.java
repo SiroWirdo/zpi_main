@@ -129,13 +129,10 @@ public class OrderController {
 					addOrderView.getCustomerRemarksTextArea().getText(),
 					(int) addOrderView
 							.getPassangerCountTextField().getValue());
-			  SwingUtilities.invokeLater(new Runnable() {
-		            @Override
-		            public void run() {
+
 			        	mapController.refreshMap();
 			        	setPositionOnNewOrder(o);   
-		            }
-		        });
+
      
 			assignDriver(o);
 			if(addOrderView.isCleanAfterAddChecked()){

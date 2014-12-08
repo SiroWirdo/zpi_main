@@ -72,7 +72,7 @@ public class AddOrderJPanel extends JPanel{
 		this.orderController = orderController;
 		redBorder = BorderFactory.createLineBorder(Color.RED, 2);
 		defaultBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
-		initialize();
+//		initialize();
 	}
 	
 	public void initialize(){

@@ -35,7 +35,7 @@ public class FilterMapPanel extends JPanel{
 	
 	public void initialize(){
 		
-		JLabel lblFiltruj = new JLabel("Filtruj");
+		JLabel lblFiltruj = new JLabel("Filtruj mapę");
 		lblFiltruj.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblFiltruj.setBounds(19, 25, 97, 23);
 		add(lblFiltruj);
