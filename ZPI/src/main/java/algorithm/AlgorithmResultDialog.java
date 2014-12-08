@@ -47,11 +47,11 @@ public class AlgorithmResultDialog extends JDialog {
 				closeDialog();
 			}
 		});
-		btnOk.setBounds(197, 92, 131, 30);
+		btnOk.setBounds(237, 92, 131, 30);
 		getContentPane().add(btnOk);
 		
 		JButton giveUpOrderBtn = new JButton("Rezygnacja");
-		giveUpOrderBtn.setBounds(23, 92, 131, 30);
+		giveUpOrderBtn.setBounds(46, 92, 131, 30);
 		giveUpOrderBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -70,9 +70,9 @@ public class AlgorithmResultDialog extends JDialog {
 		
 		driverLabel = new JLabel("kierowca?");
 		driverLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		driverLabel.setBounds(187, 42, 114, 30);
+		driverLabel.setBounds(187, 43, 216, 30);
 		getContentPane().add(driverLabel);
-		setBounds(600, 400, 374, 172);
+		setBounds(600, 400, 432, 177);
 		
 		this.removeWindowListener(getWindowListeners()[0]);
 		this.addWindowListener(new WindowAdapter() {

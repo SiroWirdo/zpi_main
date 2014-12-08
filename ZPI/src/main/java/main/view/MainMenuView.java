@@ -64,6 +64,9 @@ public class MainMenuView extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 
+		MapModel mapModel = new MapModel();
+		mapController = new MapController(mapModel);
+		
 		DataBaseConnection.initialize();		
 		addMainTabbedPane();
 
@@ -110,8 +113,6 @@ public class MainMenuView extends JFrame{
 	}
 
 	public JPanel getMap(){
-		MapModel mapModel = new MapModel();
-		mapController = new MapController(mapModel);
 
 		MapPanel view = mapController.getMapView();
 		view.setBounds(10, 10, 1025, 700);

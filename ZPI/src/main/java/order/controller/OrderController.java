@@ -129,7 +129,7 @@ public class OrderController {
 					addOrderView.getCustomerRemarksTextArea().getText(),
 					(int) addOrderView
 							.getPassangerCountTextField().getValue());
-
+	
 			        	mapController.refreshMap();
 			        	setPositionOnNewOrder(o);   
 

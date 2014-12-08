@@ -102,7 +102,9 @@ public class Algorithm implements Runnable {
 				if (drivers != null && drivers.size() > 0) {
 					System.out.println("Znaleziono dostępnych driverów: "
 							+ drivers.size());
-
+					for(Driver d: drivers){
+						System.out.println("Będe wysyłał do: " + d.getSurname() + " " +  d.getName());
+					}
 					/*
 					 * Sortowanie kierowców po odległości w linii prostej od
 					 * klienta
