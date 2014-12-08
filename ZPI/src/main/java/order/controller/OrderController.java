@@ -127,8 +127,8 @@ public class OrderController {
 					addOrderView.getPickUpAddressTextField().getText() + defaultCity,
 
 					addOrderView.getCustomerRemarksTextArea().getText(),
-					new Integer(addOrderView
-							.getPassangerCountTextField().getText().trim()));
+					(int) addOrderView
+							.getPassangerCountTextField().getValue());
 			  SwingUtilities.invokeLater(new Runnable() {
 		            @Override
 		            public void run() {

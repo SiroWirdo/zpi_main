@@ -2,9 +2,6 @@ package order.view;
 
 import java.awt.Color;
 import java.awt.KeyboardFocusManager;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
@@ -23,18 +20,15 @@ import order.controller.OrderController;
 import order.model.OrderModel;
 
 import javax.swing.border.Border;
-import javax.swing.text.AbstractDocument;
 import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.DocumentFilter;
-import javax.swing.text.NumberFormatter;
-
-import com.sun.org.apache.xalan.internal.xsltc.dom.DocumentCache;
-
 import javax.swing.JCheckBox;
 
 import settings.DocumentSizeFilter;
 import settings.Settings;
+
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Buduje widok dla okna dodawania ordera, zarządza walidacją pól
@@ -46,7 +40,7 @@ public class AddOrderJPanel extends JPanel{
 	private JTextField surnameTextField;
 	private JTextField phoneNumberTextField;
 	private JTextField pickUpAddressTextField;
-	private JTextField passangerCountTextField;
+	private JSpinner passangerCountSpinner;
 	private JButton addOrderBtn;
 	private JTextArea customerRemarksTextArea;
 	private JScrollPane scrollPane;
@@ -78,8 +72,7 @@ public class AddOrderJPanel extends JPanel{
 		this.orderController = orderController;
 		redBorder = BorderFactory.createLineBorder(Color.RED, 2);
 		defaultBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
-//		initialize();
-
+		initialize();
 	}
 	
 	public void initialize(){
@@ -129,9 +122,8 @@ public class AddOrderJPanel extends JPanel{
 		pickUpAddressTextField.setName("address");
 		
 		//TODO autocomplete adresu!
-	///	Java2sAutoComboBox autoComplete = new
 		
-	/*	String COMMIT_ACTION = "commit";
+		String COMMIT_ACTION = "commit";
 
 		// Without this, cursor always leaves text field
 		pickUpAddressTextField.setFocusTraversalKeysEnabled(false);
@@ -149,14 +141,18 @@ public class AddOrderJPanel extends JPanel{
 		// when given a suggestion
 		pickUpAddressTextField.getInputMap().put(KeyStroke.getKeyStroke("TAB"), COMMIT_ACTION);
 		pickUpAddressTextField.getActionMap().put(COMMIT_ACTION, autoComplete.new CommitAction());
-		*/
+		
 		add(pickUpAddressTextField);
 		
-		passangerCountTextField = new JTextField();
-		passangerCountTextField.setBounds(10, 180, 177, 20);
-		passangerCountTextField.setName("passangerCount");
-		passangerCountTextField.addFocusListener(orderController.getTrimTextFieldListener());
-		add(passangerCountTextField);
+
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 4, 1);
+		passangerCountSpinner = new JSpinner(spinnerModel);
+		passangerCountSpinner.setBounds(10, 180, 177, 23);
+		passangerCountSpinner.setName("passangerCount");
+		JFormattedTextField ampmspin=((JSpinner.DefaultEditor)passangerCountSpinner.getEditor()).getTextField();
+		ampmspin.setEditable(false); 
+//		passangerCountTextField.addFocusListener(orderController.getTrimTextFieldListener());
+		add(passangerCountSpinner);
 		
 		DefaultStyledDocument doc = new DefaultStyledDocument();
 		doc.setDocumentFilter(new DocumentSizeFilter(maxSizeText));
@@ -172,7 +168,6 @@ public class AddOrderJPanel extends JPanel{
 		customerRemarksTextArea.setLineWrap(true);
 		customerRemarksTextArea.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
 		customerRemarksTextArea.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
-		customerRemarksTextArea.setNextFocusableComponent(addOrderBtn);
 		customerRemarksTextArea.setDocument(doc);
 		
 		addOrderBtn = new JButton("Dodaj");
@@ -184,7 +179,6 @@ public class AddOrderJPanel extends JPanel{
 		cleanBtn.setBounds(10, 296, 83, 33);
 		cleanBtn.addActionListener(orderController.getButtonListener());
 		add(cleanBtn);
-		
 		
 		/*
 		 * ERRORS LABEL
@@ -228,14 +222,7 @@ public class AddOrderJPanel extends JPanel{
 		add(cleanAfterAddCheckBox);
 		
 		setDefaultBorderField();
-//		TODO spiner
-//		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 1, 6, 1);
-//		jsCarCapacity = new JSpinner(spinnerModel);
-//		jsCarCapacity.setBounds(x+160, y, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
-//		add(jsCarCapacity);
-//		
 		this.setVisible(true);
-//		surnameTextField.requestFocusInWindow();
 	}
 	
 	/*
@@ -265,20 +252,20 @@ public class AddOrderJPanel extends JPanel{
 			setValidationError(pickUpAddressTextField, addresErrors, requiredFieldErrorMsg); 
 		}
 
-		if(isEmptyField(passangerCountTextField)){
-			setValidationError(passangerCountTextField, passangerCountErrors, requiredFieldErrorMsg);
-		}
-		else{
-			if(isOnlyNumberField(passangerCountTextField)){
-				int number = Integer.parseInt(passangerCountTextField.getText());
-				if(number < 1 || number > 5){
-					setValidationError(passangerCountTextField, passangerCountErrors, rangePassangerCountErrorMsg);
-				}
-			}
-			else{
-				setValidationError(passangerCountTextField, passangerCountErrors, onlyNumbersErrorMsg);
-			}
-		}
+//		if(isEmptyField(passangerCountTextField)){
+//			setValidationError(passangerCountTextField, passangerCountErrors, requiredFieldErrorMsg);
+//		}
+//		else{
+//			if(isOnlyNumberField(passangerCountTextField)){
+//				int number = Integer.parseInt(passangerCountTextField.getText());
+//				if(number < 1 || number > 5){
+//					setValidationError(passangerCountTextField, passangerCountErrors, rangePassangerCountErrorMsg);
+//				}
+//			}
+//			else{
+//				setValidationError(passangerCountTextField, passangerCountErrors, onlyNumbersErrorMsg);
+//			}
+//		}
 		return isValidate;
 	}
 	
@@ -314,7 +301,7 @@ public class AddOrderJPanel extends JPanel{
 		surnameTextField.setText(null);
 		phoneNumberTextField.setText("");
 		pickUpAddressTextField.setText(null);
-		passangerCountTextField.setText(null);
+		passangerCountSpinner.setValue(1);
 		customerRemarksTextArea.setText(null);
 	}
 	
@@ -327,7 +314,7 @@ public class AddOrderJPanel extends JPanel{
 		surnameTextField.setBorder(defaultBorder);
 		phoneNumberTextField.setBorder(defaultBorder);
 		pickUpAddressTextField.setBorder(defaultBorder);
-		passangerCountTextField.setBorder(defaultBorder);
+		passangerCountSpinner.setBorder(defaultBorder);
 		scrollPane.setBorder(defaultBorder);
 	}
 	
@@ -362,13 +349,13 @@ public class AddOrderJPanel extends JPanel{
 		this.pickUpAddressTextField = pickUpAddressTextField;
 	}
 
-	public JTextField getPassangerCountTextField() {
-		return passangerCountTextField;
+	public JSpinner getPassangerCountTextField() {
+		return passangerCountSpinner;
 	}
 
 	public void setPassangerCountTextField(
-			JFormattedTextField passangerCountTextField) {
-		this.passangerCountTextField = passangerCountTextField;
+			JSpinner passangerCountSpinner) {
+		this.passangerCountSpinner = passangerCountSpinner;
 	}
 
 	public JTextArea getCustomerRemarksTextArea() {

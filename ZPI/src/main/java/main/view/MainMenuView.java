@@ -25,8 +25,6 @@ import message.controller.MessageController;
 import message.model.MessageModel;
 import order.controller.OrderController;
 import order.model.OrderModel;
-import order_info.controller.OrderInfoController;
-import order_info.model.OrderInfoModel;
 import ordersdisplay.controller.OrdersController;
 import ordersdisplay.model.OrdersModel;
 import other.DataBaseConnection;
@@ -85,18 +83,28 @@ public class MainMenuView extends JFrame{
 	
 	private JTabbedPane getSecondTabbedPane(){
 		smallTabbedPane = new JTabbedPane(JTabbedPane.TOP);
-//		smallTabbedPane.setBorder((new LineBorder(Color.black, 5)));
+//		smallTabbedPane.setBorder((new LineBorder(Color.RED, 5)));
 		smallTabbedPane.addTab("Dodaj zlecenie", null, getOrderPanel(), null);
 		smallTabbedPane.addTab("Wyślij wiadomość", null, getMessagePanel(), null);
-		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
+//		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
 		smallTabbedPane.addTab("Statystyki", null, getStatisticPanel(), null);
-		smallTabbedPane.setBounds(0, 0, 300, 400);
+		smallTabbedPane.setBounds(0, 0, 300, 360);
 		return smallTabbedPane;
 	}
 
 	public JSplitPane getMainPanel(){
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getMap(), getSecondTabbedPane());	
-		splitPane.setResizeWeight(0.85);
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.add(getSecondTabbedPane());
+		
+		JPanel filter = getFilterPanel();
+		filter.setBounds(0, 360, 300, 700);
+		panel.add(filter);
+		panel.setBounds(0, 0, 350, 400);
+		panel.setVisible(true);
+		
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getMap(), panel);	
+		splitPane.setResizeWeight(0.75);
 		return splitPane;
 	}
 
@@ -110,6 +118,7 @@ public class MainMenuView extends JFrame{
 		return view;
 	}
 
+
 	public JPanel getStatisticPanel(){
 		StatisticModel statisticModel = new StatisticModel();
 		statisticController = new StatisticController(statisticModel);
@@ -120,14 +129,6 @@ public class MainMenuView extends JFrame{
 		return statisticPanel;
 	}
 
-//	public JPanel getInfoPanel(){
-//		OrderInfoModel oim = new OrderInfoModel();
-//		OrderInfoController oic = new OrderInfoController(oim);
-//		
-//		JPanel infoView = oic.getInfoView();
-//		infoView.setBounds(1025, 300, 400, 500);
-//		return infoView;
-//	}
 	public JPanel getFilterPanel(){
 		FilterMapModel filterModel;
 		FilterMapController filterController;

@@ -13,9 +13,9 @@ import login.model.UserModel;
 
 public class LogViewTest {
 	public static void main(String[] args) {
-	
-		Settings.setLookAndFeel();
+		Settings.turnOffSysoutLog();
 		Settings.turnOffLogBackLogger();
+		Settings.setLookAndFeel();
 		UserModel us = new UserModel();
 		LoginController lc = new LoginController(us);
 	}
