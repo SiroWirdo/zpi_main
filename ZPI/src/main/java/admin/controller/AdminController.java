@@ -3,6 +3,7 @@ package admin.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import settings.Settings;
 import admin.dispatcher.add.controller.AddDispatcherController;
 import admin.dispatcher.add.model.AddDispatcherModel;
 import admin.dispatcher.edit.controller.EditDispatcherController;
@@ -19,6 +20,8 @@ public class AdminController {
 	AdminView adminView;
 
 	public AdminController(AdminModel adminModel){
+		Settings.turnOffLogBackLogger();
+
 		this.adminModel = adminModel;
 		adminView = new AdminView(this, adminModel);
 

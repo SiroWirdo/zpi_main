@@ -39,6 +39,7 @@ public class ModifyDispatcherView extends JFrame{
 		this.setBounds(500, 300, 300, 350);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Edycja dyspozytora");
+		this.setResizable(false);
 
 		int x = 10;
 		int y = 10;
