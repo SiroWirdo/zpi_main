@@ -36,6 +36,8 @@ public class DriversView extends JPanel {
 	private JTextField tfName;
 	private JTextField tfSurname;
 	private TableRowSorter sorter;
+	private JButton block;
+	private JButton unblock;
 	
 	public DriversView(DriversController driversController, DriversModel driversModel){
 		this.driversController = driversController;
@@ -131,6 +133,16 @@ public class DriversView extends JPanel {
 		filtr.setBounds(625, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(driversController.getFiltrListener());
 		add(filtr);
+		
+		unblock = new JButton("Odblokuj");
+		unblock.setBounds(1100-Settings.BUTTON_WIDTH, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		unblock.addActionListener(driversController.getUnblockListener());
+		add(unblock);
+		
+		block = new JButton("Zablokuj");
+		block.setBounds(1100-Settings.BUTTON_WIDTH, 30, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		block.addActionListener(driversController.getBlockListener());
+		add(block);
 		//	tableModel.addRow(new Object[]{"test", "test", "test", "test", "test", "test"});
 	}
 
@@ -203,5 +215,23 @@ public class DriversView extends JPanel {
 	public void setFilters(RowFilter<DefaultTableModel, Object> filter){
 		sorter.setRowFilter(filter);
 		table.setRowSorter(sorter);
+	}
+	
+	public long getPeselFromSelectedRow(){
+		int row = table.getSelectedRow();
+		long pesel = -1;
+		if(row >= 0){
+			pesel = (Long)table.getValueAt(row, 4);
+		}
+		return pesel;
+	}
+	
+	public String getStatusFromSelectedRow(){
+		int row = table.getSelectedRow();
+		String status = "";
+		if(row >= 0){
+			status = (String)table.getValueAt(row, 5);
+		}
+		return status;		
 	}
 }
