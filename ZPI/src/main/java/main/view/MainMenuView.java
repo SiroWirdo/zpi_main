@@ -92,7 +92,7 @@ public class MainMenuView extends JFrame{
 		smallTabbedPane.addTab("Wyślij wiadomość", null, getMessagePanel(), null);
 //		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
 		smallTabbedPane.addTab("Statystyki", null, getStatisticPanel(), null);
-		smallTabbedPane.setBounds(0, 0, 300, 360);
+		smallTabbedPane.setBounds(0, 0, 400, 360);
 		return smallTabbedPane;
 	}
 
@@ -113,7 +113,6 @@ public class MainMenuView extends JFrame{
 	}
 
 	public JPanel getMap(){
-
 		MapPanel view = mapController.getMapView();
 		view.setBounds(10, 10, 1025, 700);
 

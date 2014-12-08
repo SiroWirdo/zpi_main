@@ -102,9 +102,7 @@ public class Algorithm implements Runnable {
 				if (drivers != null && drivers.size() > 0) {
 					System.out.println("Znaleziono dostępnych driverów: "
 							+ drivers.size());
-					for(Driver d: drivers){
-						System.out.println("Będe wysyłał do: " + d.getSurname() + " " +  d.getName());
-					}
+
 					/*
 					 * Sortowanie kierowców po odległości w linii prostej od
 					 * klienta
@@ -151,22 +149,22 @@ public class Algorithm implements Runnable {
 						stop = true;
 					}
 				} else {
-					System.out.println("Nie ma aktualnie dostępnych kierowców!");
+					System.out
+							.println("Nie ma aktualnie dostępnych kierowców!");
 					stop = true;
 					Thread filerThread = new Thread() {
-				        public void run() {
+						public void run() {
 							final NoAvailableDrivers noAvailableDriversDialog = new NoAvailableDrivers();
 							SwingUtilities.invokeLater(new Runnable() {
-							    public void run() {
-							    	noAvailableDriversDialog.setVisible(true);
-							    }
-							  });
+								public void run() {
+									noAvailableDriversDialog.setVisible(true);
+								}
+							});
 							order.setStatus(Settings.CANCEL_ORDER_STATUS);
 							order.saveInBackground();
-				        }
-				      };
-				      filerThread.start();
-
+						}
+					};
+					filerThread.start();
 
 				}
 			}
@@ -176,7 +174,7 @@ public class Algorithm implements Runnable {
 	public List<Driver> getAvailableDrivers() {
 		List<Car> carList = getCarByCapacity();
 		List<Driver> availableDrivers = new ArrayList<Driver>();
-		if(carList != null){
+		if (carList != null) {
 			carCapacityAvailable = true;
 			ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
 			query.whereEqualTo("status", Settings.FREE_CAR_STATUS);
@@ -186,8 +184,7 @@ public class Algorithm implements Runnable {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		}
-		else{
+		} else {
 			carCapacityAvailable = false;
 			stop = true;
 			order.setStatus(Settings.CANCEL_ORDER_STATUS);
@@ -197,16 +194,17 @@ public class Algorithm implements Runnable {
 		}
 		return availableDrivers;
 	}
-	
-	public List<Car> getCarByCapacity(){
+
+	public List<Car> getCarByCapacity() {
 		List<Car> carList = new ArrayList<Car>();
 		ParseQuery<Car> query = ParseQuery.getQuery(Car.class);
-		 query.whereGreaterThanOrEqualTo("carCapacity",order.getPassengerCount());
-		 try {
-			 carList = query.find();
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+		query.whereGreaterThanOrEqualTo("carCapacity",
+				order.getPassengerCount());
+		try {
+			carList = query.find();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return carList;
 	}
 
@@ -230,10 +228,13 @@ public class Algorithm implements Runnable {
 
 	public double countDistanceInStraightLine(Car car) {
 		ParseGeoPoint driverPosition = car.getCurrentPosition();
-
-		double distance = driverPosition
+		double distance = Double.MAX_VALUE;
+		if(driverPosition != null){
+			distance = driverPosition
 				.distanceInKilometersTo(customerPosition);
+		}
 		return distance;
+		
 	}
 
 	public ArrayList<Driver> restrictListToTheBestResults(List<Driver> drivers) {
@@ -255,40 +256,40 @@ public class Algorithm implements Runnable {
 		int i = 0;
 		while (!isOrderAssigned && driversWithRouteData != null
 				&& i < driversWithRouteData.size()) {
-			/*
-			 * Powiadamiamy kolejnego kierowce z listy
-			 */
-			assignedDriver = driversWithRouteData.get(i).getDriver();
-			System.out.println("Powiadamiam drivera: "
-					+ assignedDriver.getName() + " ID:"
-					+ assignedDriver.getId());
-			notifyDriver(assignedDriver);
-
-			/*
-			 * Czekamy określoną liczbę czasu na jego odpowiedź
-			 */
-			waitingForDriverResponse(WAITING_TIME_RSP_DRIVER);
-
-			System.out.println("Status ordera: " + order.getStatus());
-			/*
-			 * Pobieramy z bazy aktualne dane zamówienia
-			 */
-			order = Order.getOrderById(order.getId());//updateOrderData();
-			System.out.println("Po aktualizacji status ordera:"
-					+ order.getStatus());
-
-			/*
-			 * Sprawdzamy czy status zamówienia został zmieniony przez
-			 * powiadomionego kierowce
-			 */
-			if (isDriverResponse()) {
+			//Sprawdzamy czy w między czasie driver nie zmienil statusu		
+			Driver updateDriver = Driver.getDriverById(driversWithRouteData.get(i).getDriver().getObjectId());
+			if (updateDriver.getStatus() == Settings.FREE_CAR_STATUS) {
+				/*
+				 * Powiadamiamy kolejnego kierowce z listy
+				 */
+				assignedDriver = driversWithRouteData.get(i).getDriver();
+				System.out.println("Powiadamiam drivera: "
+						+ assignedDriver.getName() + " ID:"
+						+ assignedDriver.getId());
+				notifyDriver(assignedDriver);
 
 				/*
-				 * TODO wyświetl komunikat dla dispatchera, ze został
-				 * przydzielony do konkretnego kierowcy 
+				 * Czekamy określoną liczbę czasu na jego odpowiedź
 				 */
+				waitingForDriverResponse(WAITING_TIME_RSP_DRIVER);
 
-			} else { // Powiadom kolejnego kierowce z listy
+				System.out.println("Status ordera: " + order.getStatus());
+				/*
+				 * Pobieramy z bazy aktualne dane zamówienia
+				 */
+				order = Order.getOrderById(order.getId());// updateOrderData();
+				System.out.println("Po aktualizacji status ordera:"
+						+ order.getStatus());
+
+				/*
+				 * Sprawdzamy czy status zamówienia został zmieniony przez
+				 * powiadomionego kierowce
+				 */
+				if (!isDriverResponse()) {
+					// Powiadom kolejnego kierowce z listy
+					i++;
+				}
+			} else {
 				i++;
 			}
 		}
@@ -341,7 +342,7 @@ public class Algorithm implements Runnable {
 		long expectedTime = -1;
 		long sum = 0;
 		int divider = COUNTED_TIMES;
-		if( times.size() < COUNTED_TIMES){
+		if (times.size() < COUNTED_TIMES) {
 			divider = times.size();
 		}
 		for (int i = 0; i < divider; i++) {
@@ -354,19 +355,21 @@ public class Algorithm implements Runnable {
 	}
 
 	private void showInfoForDispatcherAndWaitForResponse() {
-		
-		final AlgorithmResultDialog infoForDispatcher = new AlgorithmResultDialog(this);
+
+		final AlgorithmResultDialog infoForDispatcher = new AlgorithmResultDialog(
+				this);
 		infoForDispatcher.setExpectingTime(expectingWaitingTimeInMillisec);
 		assignedDriver = driversWithRouteData.get(0).getDriver();
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
-		    public void run() {
-				System.out.println(assignedDriver.getName() + " " +  assignedDriver.getSurname());
-		    	infoForDispatcher.setDriverLabel(assignedDriver);
-		    	infoForDispatcher.setVisible(true);
-		    }
-		  });
-		
+			public void run() {
+				System.out.println(assignedDriver.getName() + " "
+						+ assignedDriver.getSurname());
+				infoForDispatcher.setDriverLabel(assignedDriver);
+				infoForDispatcher.setVisible(true);
+			}
+		});
+
 		while (!infoForDispatcher.isDispatcherResponse()) {
 			try {
 				Thread.sleep(1000);
@@ -404,7 +407,8 @@ public class Algorithm implements Runnable {
 			stop = true;
 			double time = System.currentTimeMillis();
 			duration += time - startTime;
-			NotAssignedOrderJDialog notAssignedOrderJDialog = new NotAssignedOrderJDialog(this);
+			NotAssignedOrderJDialog notAssignedOrderJDialog = new NotAssignedOrderJDialog(
+					this);
 			notAssignedOrderJDialog.setVisible(true);
 			System.out
 					.println("Żaden z przydzielonych kierowców nie zaakceptował ordera");
@@ -444,7 +448,10 @@ public class Algorithm implements Runnable {
 			driverRspList.add(driverRsp);
 		}
 		sortByDistance(driverRspList);
-
+		for (DriverResponse d : driverRspList) {
+			System.out.println("Będę wysyłał do: " + d.getDriver().getSurname()
+					+ " " + d.getDriver().getName());
+		}
 		return driverRspList;
 	}
 

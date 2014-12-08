@@ -75,6 +75,18 @@ public class Driver extends ParseObject {
 		ParsePointer pointer = new ParsePointer("_User", id);
 		put("userId", pointer);
 	}
+	
+	public static Driver getDriverById(String driverId){
+		Driver d = null;
+
+		ParseQuery<Driver> queryDriver = ParseQuery.getQuery("Driver");
+		try {
+			d = queryDriver.get(driverId);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return d;
+	}
 
 	public Car getCar() {
 		Car c = null;
