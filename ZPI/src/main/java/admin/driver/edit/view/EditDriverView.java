@@ -50,6 +50,7 @@ public class EditDriverView extends JFrame{
 		this.setBounds(100, 100, 1280, 800);
 		//przy EXIT_ON_CLOSE zabija wszystkie procesy, przy DISPOSE nie....
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setTitle("Edycja kierowcy");
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);

@@ -96,9 +96,9 @@ public class OrdersModel extends Observable implements Runnable{
 							orderChanges = new OrderChanges(scoreList, 1);
 							model.setChanged();
 							model.notifyObservers();
-							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");							
+							System.out.println("Zmieniono: " + scoreList.size() + " obiektów w ORDER");							
 						}else{
-							System.out.println("Pusta baza");
+							System.out.println("Pusta baza w order");
 						}
 					} else {
 

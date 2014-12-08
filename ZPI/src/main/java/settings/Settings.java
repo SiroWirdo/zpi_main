@@ -92,7 +92,7 @@ public class Settings {
 	 * Inicjalizacja tablic przydatnych do wypisywania status�w
 	 */
 	public static String[] driverStatus = { "wolny", "kurs", "przerwa",
-			"zablokowany", "niedost�pny" };
+			"zablokowany", "niedostępny" };
 	public static String[] orderStatus = { "oczekujące",
 			"w trakcie realizacji", "zrealizowane", "anulowane",
 			"zaakceptowane" };
