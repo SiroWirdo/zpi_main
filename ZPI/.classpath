@@ -32,6 +32,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/Routing/osmosis-pbf-0.43.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/Routing/protobuf-java-2.5.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/Routing/osmosis-osm-binary-0.43.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/Parse/parse4j-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/Parse/parse4j-1.3_test.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

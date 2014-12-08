@@ -5,6 +5,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.plaf.ColorUIResource;
 
+import settings.Settings;
 import admin.controller.AdminController;
 import admin.model.AdminModel;
 
@@ -12,7 +13,7 @@ import admin.model.AdminModel;
 public class AdminTest {
 
 	public static void main(String[] args){
-		UIManager.put("nimbusBase", new Color(0,68,102));
+	/*	UIManager.put("nimbusBase", new Color(0,68,102));
 		UIManager.put("nimbusBlueGrey", new Color(60,145,144));
 		UIManager.put("control", new Color(43,82,102));
 		UIManager.put("text", new Color(255,255,255));
@@ -35,7 +36,8 @@ public class AdminTest {
 		}
 
 		UIManager.getLookAndFeelDefaults().put("Table:\"Table.cellRenderer\".background", new ColorUIResource(new Color(74,144,178)));
-		UIManager.getLookAndFeelDefaults().put("Table.background", new ColorUIResource(new Color(74,144,178)));
+		UIManager.getLookAndFeelDefaults().put("Table.background", new ColorUIResource(new Color(74,144,178)));*/
+		Settings.setLookAndFeel();
 		AdminModel adminModel = new AdminModel();
 		AdminController adminController = new AdminController(adminModel);
 	}

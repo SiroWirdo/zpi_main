@@ -48,6 +48,7 @@ public class ModifyDriverView extends JFrame{
 	public void initialize(){
 		this.setBounds(500, 300, 300, 350);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setTitle("Edycja kierowcy");
 
 		int x = 10;
 		int y = 10;

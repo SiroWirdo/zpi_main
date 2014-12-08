@@ -49,19 +49,6 @@ public class DriversModel extends Observable implements Runnable {
 			}
 		});
 		
-
-		ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Driver");
-		query2.whereEqualTo("objectId", "0n4mCIRXVO");
-		query2.findInBackground(new FindCallback<ParseObject>() {
-		    public void done(List<ParseObject> scoreList, ParseException e) {
-		        if (e == null) {
-		        	System.out.println("Baza z backgroundem: " + (String)scoreList.get(0).get("surname"));
-		        } else {
-		        	
-		        }
-		    }
-		});
-		
 		model.start();
 	}
 

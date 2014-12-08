@@ -63,6 +63,7 @@ public class EditDispatcherController  implements Observer{
 			editDispatcherView.repaint();
 		}catch(DriverNotFoundException e){
 			System.out.println(e.getMessage());
+			addRow(dispatcher);
 		}
 
 	}

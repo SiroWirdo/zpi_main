@@ -30,6 +30,7 @@ public class AdminView extends JFrame{
 	public void initialize(){
 		this.setBounds(600, 300, 200, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle("Admin");
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new GridLayout(5,1));

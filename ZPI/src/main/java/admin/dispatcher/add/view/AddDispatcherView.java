@@ -46,6 +46,7 @@ public class AddDispatcherView extends JFrame{
 		this.setBounds(300, 200, 520, 600);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setLayout(new GridLayout(3,1));
+		this.setTitle("Dodawanie dyspozytora");
 
 		int x = 10;
 		int y = 10;
