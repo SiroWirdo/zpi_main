@@ -154,7 +154,7 @@ public class DriversView extends JPanel {
 				found = true;
 			}else{
 				row++;
-				if(row > tableModel.getRowCount()){
+				if(row >= tableModel.getRowCount()){
 					throw new DriverNotFoundException("Driver's not found in table");
 				}
 			}

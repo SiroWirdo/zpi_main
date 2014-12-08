@@ -70,6 +70,7 @@ public class OrdersController implements Observer  {
 			ordersView.repaint();
 		}catch(OrderNotFoundException e){
 			System.out.println(e.getMessage());
+			addRow(order);
 		}
 
 	}

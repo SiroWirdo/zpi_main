@@ -81,6 +81,7 @@ public class DriversController implements Observer {
 			driversView.repaint();
 		}catch(DriverNotFoundException e){
 			System.out.println(e.getMessage());
+			addRow(driver);
 		}
 
 	}

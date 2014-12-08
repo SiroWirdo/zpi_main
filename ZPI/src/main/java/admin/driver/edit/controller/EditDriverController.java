@@ -65,6 +65,7 @@ public class EditDriverController implements Observer{
 			editDriverView.repaint();
 		}catch(DriverNotFoundException e){
 			System.out.println(e.getMessage());
+			addRow(driver);
 		}
 
 	}
