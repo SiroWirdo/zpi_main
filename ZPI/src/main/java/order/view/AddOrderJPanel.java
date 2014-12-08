@@ -34,6 +34,7 @@ import settings.Settings;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.SwingConstants;
 
 /*
  * Buduje widok dla okna dodawania ordera, zarządza walidacją pól
@@ -70,7 +71,7 @@ public class AddOrderJPanel extends JPanel{
 	private final String onlyNumbersErrorMsg = "To pole może zawierać tylko liczby!";
 	private final String rangePassangerCountErrorMsg = "<html><body style='width: 150px'>"
 											+ "Liczba pasażerów musi być liczbą z przedziału &lt;1, 4&gt;";
-	private final String addressNotExistsErrorMsg = "Podany adres nie istnieje!";
+	private final String addressNotExistsErrorMsg = "<html><body>Podany adres<p>nie istnieje!";
 	
 	/**
 	 * Create the panel.
@@ -207,8 +208,9 @@ public class AddOrderJPanel extends JPanel{
 		add(phoneErrors);
 		
 		addresErrors = new JLabel("address error");
+		addresErrors.setVerticalAlignment(SwingConstants.TOP);
 		addresErrors.setName("addressError");
-		addresErrors.setBounds(271, 138, 211, 14);
+		addresErrors.setBounds(271, 135, 211, 36);
 		addresErrors.setForeground(Color.RED);
 		addresErrors.setVisible(false);
 		add(addresErrors);
