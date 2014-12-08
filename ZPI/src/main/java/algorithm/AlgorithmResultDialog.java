@@ -72,7 +72,7 @@ public class AlgorithmResultDialog extends JDialog {
 		driverLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		driverLabel.setBounds(187, 42, 114, 30);
 		getContentPane().add(driverLabel);
-		setBounds(400, 400, 374, 172);
+		setBounds(600, 400, 374, 172);
 		
 		this.removeWindowListener(getWindowListeners()[0]);
 		this.addWindowListener(new WindowAdapter() {

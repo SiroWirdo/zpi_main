@@ -23,9 +23,11 @@ public class NotAssignedOrderJDialog extends JDialog{
 	private JLabel customerName;
 	private JLabel phoneCustomer;
 	private JLabel waitingTime;
+	private double startTimeShowDialog;
 	
 	public NotAssignedOrderJDialog(Algorithm alg) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		startTimeShowDialog = System.currentTimeMillis();
 		this.alg = alg;
 		initialize();
 	}
@@ -80,7 +82,8 @@ public class NotAssignedOrderJDialog extends JDialog{
 				closeDialog();
 				Thread runNewAlg = new Thread() {
 			        public void run() {
-						Algorithm retryAlgorytm = new Algorithm(alg.getOrder(), alg.getDuration());
+			        	startTimeShowDialog = System.currentTimeMillis() - startTimeShowDialog;
+						Algorithm retryAlgorytm = new Algorithm(alg.getOrder(), alg.getDuration() + startTimeShowDialog);
 						retryAlgorytm.run(); 
 			        }
 			      };
