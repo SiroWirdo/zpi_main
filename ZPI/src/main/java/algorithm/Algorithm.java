@@ -359,6 +359,7 @@ public class Algorithm implements Runnable {
 			double time = System.currentTimeMillis();
 			duration = time - startTime;
 			NotAssignedOrderJDialog notAssignedOrderJDialog = new NotAssignedOrderJDialog(this);
+			notAssignedOrderJDialog.setVisible(true);
 			System.out
 					.println("Żaden z przydzielonych kierowców nie zaakceptował ordera");
 		}

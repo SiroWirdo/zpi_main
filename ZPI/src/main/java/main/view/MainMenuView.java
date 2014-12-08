@@ -86,10 +86,10 @@ public class MainMenuView extends JFrame{
 	private JTabbedPane getSecondTabbedPane(){
 		smallTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 //		smallTabbedPane.setBorder((new LineBorder(Color.black, 5)));
-		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
 		smallTabbedPane.addTab("Dodaj zlecenie", null, getOrderPanel(), null);
-		smallTabbedPane.addTab("Statystyka", null, getStatisticPanel(), null);
 		smallTabbedPane.addTab("Wyślij wiadomość", null, getMessagePanel(), null);
+		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
+		smallTabbedPane.addTab("Statystyki", null, getStatisticPanel(), null);
 		smallTabbedPane.setBounds(0, 0, 300, 400);
 		return smallTabbedPane;
 	}

@@ -109,7 +109,6 @@ public class NotAssignedOrderJDialog extends JDialog{
 		setFields(alg.getOrder(), alg.getDuration());
 		setBounds(500, 300, 396, 291);
 		setAlwaysOnTop(true);
-		setVisible(true);
 	}
 	
 	public void closeDialog(){
