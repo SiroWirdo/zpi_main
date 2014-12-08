@@ -6,6 +6,7 @@ import model.Customer;
 import model.Order;
 
 import org.parse4j.ParseException;
+import org.parse4j.ParseGeoPoint;
 import org.parse4j.ParseObject;
 import org.parse4j.ParsePointer;
 import org.parse4j.ParseRelation;
@@ -27,7 +28,7 @@ public class OrderModel {
 	/*
 	 * Utworzenie nowego zamówienia
 	 */
-	public Order addOrder(String surname, Number phoneNumber , String pickUpAddress,
+	public Order addOrder(String surname, Number phoneNumber , String fullAddress, ParseGeoPoint pickUpAddress,
 			String customerRemarks, Number passangerCount){
 		
 		Order order = new Order();
@@ -39,10 +40,9 @@ public class OrderModel {
 		}
 		order.setPassengerCount(passangerCount);
 		order.setStatus(Settings.WAITING_ORDER_STATUS);
-		
-		AddressInfo addressInfo = ConverterGeoPosition.addressToAdressInfo(pickUpAddress);
-		order.setPickupAddress(addressInfo.getFullAddress());
-		order.setPickupAddressGeo(ConverterGeoPosition.addressInfoToParseGeoPoint(addressInfo));
+	
+		order.setPickupAddress(fullAddress);
+		order.setPickupAddressGeo(pickUpAddress);
 		
 //		TODO naprawić dodawanie dispatchera
 //		ParseUser dispatherObj = Settings.USER_OBJECT;

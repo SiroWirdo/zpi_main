@@ -1,5 +1,6 @@
 package order.controller;
 
+import geocoding.AddressInfo;
 import geocoding.ConverterGeoPosition;
 
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ public class OrderController {
 	private ButtonListener buttonListener;
 	private ValidateTextFieldListener validateTextFieldListener;
 	private TrimTextFieldListener trimTextFieldListener;
+	
 	Thread customerThread;
 	Thread orderThread;
 
@@ -69,9 +71,9 @@ public class OrderController {
 	}
 	
 	public Order addOrder(String surname, Number phoneNumber,
-			String pickUpAddress, String customerRemarks, Number passangerCount) {
+			String pickUpAddress, ParseGeoPoint pickUpAddressGeo, String customerRemarks, Number passangerCount) {
 		// String customerId = orderModel.addCustomer(surname, phoneNumber);
-		return orderModel.addOrder(surname, phoneNumber, pickUpAddress,
+		return orderModel.addOrder(surname, phoneNumber, pickUpAddress, pickUpAddressGeo,
 				customerRemarks, passangerCount);
 	}
 
@@ -120,12 +122,13 @@ public class OrderController {
 			if(addOrderView.isDefaultCityChecked()){
 				defaultCity = Settings.DEFAULT_CITY;
 			}
+			
 			final Order o = addOrder(
 					addOrderView.getSurnameTextField().getText().trim(),
 					new Long(addOrderView.getPhoneNumberTextField()
 							.getText().trim()),
-					addOrderView.getPickUpAddressTextField().getText() + defaultCity,
-
+					addOrderView.getPickUpAddress(),
+					addOrderView.getPickUpAddressGeoPoint(),
 					addOrderView.getCustomerRemarksTextArea().getText(),
 					(int) addOrderView
 							.getPassangerCountTextField().getValue());

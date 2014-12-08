@@ -51,8 +51,8 @@ public class Settings {
 	public static final int MIN_ZOOM_MAP = 1;
 	public static final int DEFAULT_ZOOM = 3;
 	//Default localization: Wrocław
-	public static final double DEFAULT_LATITUDE = 51.107885200000000000;
-	public static final double DEFAULT_LONGITUDE = 17.038537600000040000;
+	public static final double DEFAULT_LATITUDE = 51.1078852;
+	public static final double DEFAULT_LONGITUDE = 17.0385376;
 	public static final String CONTRIBUTORS_TEXT = "\u00a9 Open StreetMap contributors";
 
 	

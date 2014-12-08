@@ -30,20 +30,15 @@ public class ConverterGeoPosition {
 		try {
 			results = GeocodingApi.geocode(context,
 			    address).await();
-			
+			if(results.length > 0){
 			addressInfo.setFullAddress(results[0].formattedAddress);
 			addressInfo.setLatLng(new LatLng(results[0].geometry.location.lat,
 					results[0].geometry.location.lng));
-
-//			System.out.println(results[0].formattedAddress);
-//			System.out.println(results[0].geometry.location.lat);
-//			System.out.println(results[0].geometry.location.lng);
-			
-//			geoPoint = new ParseGeoPoint(results[0].geometry.location.lat,
-//					results[0].geometry.location.lng);
-			
 			System.out.println(addressInfo);
-
+			}
+			else {
+				addressInfo = null;
+			}	
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

@@ -1,5 +1,8 @@
 package order.view;
 
+import geocoding.AddressInfo;
+import geocoding.ConverterGeoPosition;
+
 import java.awt.Color;
 import java.awt.KeyboardFocusManager;
 
@@ -23,6 +26,8 @@ import javax.swing.border.Border;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.JCheckBox;
 
+import org.parse4j.ParseGeoPoint;
+
 import settings.DocumentSizeFilter;
 import settings.Settings;
 
@@ -45,6 +50,10 @@ public class AddOrderJPanel extends JPanel{
 	private JTextArea customerRemarksTextArea;
 	private JScrollPane scrollPane;
 	
+	private String pickUpAddress;
+	private AddressInfo addressInfo;
+	private ParseGeoPoint pickUpAddressGeoPoint;
+	
 	private JLabel surnameErrors;
 	private JLabel phoneErrors;
 	private JLabel addresErrors;
@@ -61,7 +70,7 @@ public class AddOrderJPanel extends JPanel{
 	private final String onlyNumbersErrorMsg = "To pole może zawierać tylko liczby!";
 	private final String rangePassangerCountErrorMsg = "<html><body style='width: 150px'>"
 											+ "Liczba pasażerów musi być liczbą z przedziału &lt;1, 4&gt;";
-	
+	private final String addressNotExistsErrorMsg = "Podany adres nie istnieje!";
 	
 	/**
 	 * Create the panel.
@@ -122,7 +131,7 @@ public class AddOrderJPanel extends JPanel{
 		pickUpAddressTextField.setName("address");
 		
 		//TODO autocomplete adresu!
-		
+/*		
 		String COMMIT_ACTION = "commit";
 
 		// Without this, cursor always leaves text field
@@ -141,7 +150,7 @@ public class AddOrderJPanel extends JPanel{
 		// when given a suggestion
 		pickUpAddressTextField.getInputMap().put(KeyStroke.getKeyStroke("TAB"), COMMIT_ACTION);
 		pickUpAddressTextField.getActionMap().put(COMMIT_ACTION, autoComplete.new CommitAction());
-		
+		*/
 		add(pickUpAddressTextField);
 		
 
@@ -225,6 +234,38 @@ public class AddOrderJPanel extends JPanel{
 		this.setVisible(true);
 	}
 	
+	public String getPickUpAddress(){
+		return pickUpAddress;
+	}
+	
+	public ParseGeoPoint getPickUpAddressGeoPoint(){
+		return pickUpAddressGeoPoint;
+	}
+	
+	public boolean isAddressExists(){
+		boolean isExists = false;
+		
+		String address = pickUpAddressTextField.getText();
+		if(defaultCityCheckBox.isSelected()){
+			address += " " + Settings.DEFAULT_CITY;
+		}
+		
+		addressInfo = ConverterGeoPosition.addressToAdressInfo(address);
+		
+		int i = 1;
+		if(addressInfo != null){
+			if(!isDefaultCity()){
+				pickUpAddressGeoPoint = ConverterGeoPosition.addressInfoToParseGeoPoint(addressInfo);
+				pickUpAddress = addressInfo.getFullAddress();
+				isExists = true;
+			}
+		}
+		return isExists;
+	}
+	
+	public boolean isDefaultCity(){
+		return addressInfo.getLatitude() == Settings.DEFAULT_LATITUDE && addressInfo.getLongtitude() == Settings.DEFAULT_LONGITUDE;
+	}
 	/*
 	 * Sprawdza i ustawia walidacje pól
 	 */
@@ -251,21 +292,11 @@ public class AddOrderJPanel extends JPanel{
 		if(isEmptyField(pickUpAddressTextField)){
 			setValidationError(pickUpAddressTextField, addresErrors, requiredFieldErrorMsg); 
 		}
+		
+		else if(!isAddressExists()){
+			setValidationError(pickUpAddressTextField, addresErrors, addressNotExistsErrorMsg); 
+		}
 
-//		if(isEmptyField(passangerCountTextField)){
-//			setValidationError(passangerCountTextField, passangerCountErrors, requiredFieldErrorMsg);
-//		}
-//		else{
-//			if(isOnlyNumberField(passangerCountTextField)){
-//				int number = Integer.parseInt(passangerCountTextField.getText());
-//				if(number < 1 || number > 5){
-//					setValidationError(passangerCountTextField, passangerCountErrors, rangePassangerCountErrorMsg);
-//				}
-//			}
-//			else{
-//				setValidationError(passangerCountTextField, passangerCountErrors, onlyNumbersErrorMsg);
-//			}
-//		}
 		return isValidate;
 	}
 	

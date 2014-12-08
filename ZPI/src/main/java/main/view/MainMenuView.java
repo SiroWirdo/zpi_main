@@ -92,7 +92,7 @@ public class MainMenuView extends JFrame{
 		smallTabbedPane.addTab("Wyślij wiadomość", null, getMessagePanel(), null);
 //		smallTabbedPane.addTab("Filtruj", null, getFilterPanel(), null);
 		smallTabbedPane.addTab("Statystyki", null, getStatisticPanel(), null);
-		smallTabbedPane.setBounds(0, 0, 400, 360);
+		smallTabbedPane.setBounds(0, 0, 420, 360);
 		return smallTabbedPane;
 	}
 
