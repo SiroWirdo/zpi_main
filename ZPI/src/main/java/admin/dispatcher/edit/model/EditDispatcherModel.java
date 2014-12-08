@@ -35,7 +35,7 @@ public class EditDispatcherModel extends Observable {
 						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
 
 					}else{
-						System.out.println("Pusta baza");
+//						System.out.println("Pusta baza");
 					}
 				} else {
 
@@ -95,7 +95,7 @@ public class EditDispatcherModel extends Observable {
 							model.notifyObservers();
 							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");
 						}else{
-							System.out.println("Pusta baza");
+						System.out.println("Pusta baza");
 						}
 					} else {
 
@@ -150,7 +150,7 @@ public class EditDispatcherModel extends Observable {
 						model.notifyObservers();
 						System.out.println("Zmieniono: " + scoreList.size() + " obiektów");
 					}else{
-						System.out.println("Pusta baza");
+//						System.out.println("Pusta baza");
 					}
 				} else {
 

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
 
 import model.Car;
@@ -41,7 +42,7 @@ public class Algorithm implements Runnable {
 	private double duration;
 	private double startTime;
 	private long expectingWaitingTimeInMillisec;
-
+	private boolean carCapacityAvailable;
 	private final int NUMBER_CHOOSED_DRIVERS = 6;
 	private final long WAITING_TIME_RSP_DRIVER = 60000;
 
@@ -58,18 +59,20 @@ public class Algorithm implements Runnable {
 		customerPosition = order.getPickupAddressGeo();
 		expectingWaitingTimeInMillisec = -1;
 		stop = false;
+		carCapacityAvailable = false;
 		duration = durationStart;
+		System.out.println("Duration time: " + duration);
 		startTime = System.currentTimeMillis();
 	}
 
-	public Order getOrder(){
+	public Order getOrder() {
 		return order;
 	}
-	
-	public double getDuration(){
+
+	public double getDuration() {
 		return duration;
 	}
-	
+
 	public void setIsGiveUp(boolean isGiveUp) {
 		this.isGiveUp = isGiveUp;
 	}
@@ -95,73 +98,114 @@ public class Algorithm implements Runnable {
 			 */
 			drivers = getAvailableDrivers();
 
-			if (drivers != null && drivers.size() > 0) {
-				System.out.println("Znaleziono dostępnych driverów: "
-						+ drivers.size());
+			if (carCapacityAvailable) {
+				if (drivers != null && drivers.size() > 0) {
+					System.out.println("Znaleziono dostępnych driverów: "
+							+ drivers.size());
 
-				/*
-				 * Sortowanie kierowców po odległości w linii prostej od klienta
-				 */
-				sortListByDistanceInStraightLine(drivers);
-
-				/*
-				 * Wybranie określonej liczby kierowców, którzy są najbliżej w
-				 * linii prostej
-				 */
-				List<Driver> sortedDrivers = new ArrayList<Driver>(
-						restrictListToTheBestResults(drivers));
-
-				/*
-				 * Wylicznie odległości po trasie i sortowanie wg nich
-				 */
-				driversWithRouteData = routeDistance(sortedDrivers);
-
-				/*
-				 * Liczymy szacowany czas oczekiwania klienta na przyjazd taxi
-				 */
-				expectingWaitingTimeInMillisec = countExpectedWaitingTime(driversWithRouteData);
-
-				/*
-				 * Wyświetl dyspozytorowi komunikat z szacowanym czasem
-				 * oczekiwania
-				 */
-				showInfoForDispatcherAndWaitForResponse();
-
-				/*
-				 * Powiadom kierowców o nowym zleceniu jeśli klient nie
-				 * zrezygnował
-				 */
-				if (!isGiveUp) {
-					doingNotifyDriver();
-				} else {
 					/*
-					 * Ustaw status zamówienia na anulowane i zakończ wykonywanie algorytmu
+					 * Sortowanie kierowców po odległości w linii prostej od
+					 * klienta
 					 */
-					order.setStatus(Settings.CANCEL_ORDER_STATUS);
-					order.saveInBackground();
+					sortListByDistanceInStraightLine(drivers);
+
+					/*
+					 * Wybranie określonej liczby kierowców, którzy są najbliżej
+					 * w linii prostej
+					 */
+					List<Driver> sortedDrivers = new ArrayList<Driver>(
+							restrictListToTheBestResults(drivers));
+
+					/*
+					 * Wylicznie odległości po trasie i sortowanie wg nich
+					 */
+					driversWithRouteData = routeDistance(sortedDrivers);
+
+					/*
+					 * Liczymy szacowany czas oczekiwania klienta na przyjazd
+					 * taxi
+					 */
+					expectingWaitingTimeInMillisec = countExpectedWaitingTime(driversWithRouteData);
+
+					/*
+					 * Wyświetl dyspozytorowi komunikat z szacowanym czasem
+					 * oczekiwania
+					 */
+					showInfoForDispatcherAndWaitForResponse();
+
+					/*
+					 * Powiadom kierowców o nowym zleceniu jeśli klient nie
+					 * zrezygnował
+					 */
+					if (!isGiveUp) {
+						doingNotifyDriver();
+					} else {
+						/*
+						 * Ustaw status zamówienia na anulowane i zakończ
+						 * wykonywanie algorytmu
+						 */
+						order.setStatus(Settings.CANCEL_ORDER_STATUS);
+						order.saveInBackground();
+						stop = true;
+					}
+				} else {
+					System.out.println("Nie ma aktualnie dostępnych kierowców!");
 					stop = true;
+					Thread filerThread = new Thread() {
+				        public void run() {
+							final NoAvailableDrivers noAvailableDriversDialog = new NoAvailableDrivers();
+							SwingUtilities.invokeLater(new Runnable() {
+							    public void run() {
+							    	noAvailableDriversDialog.setVisible(true);
+							    }
+							  });
+							order.setStatus(Settings.CANCEL_ORDER_STATUS);
+							order.saveInBackground();
+				        }
+				      };
+				      filerThread.start();
+
+
 				}
-			} else {
-				// TODO wyświetl komunikat, ze nie ma dostepnych kierowców!
-				System.out.println("Nie ma aktualnie dostępnych kierowców!");
 			}
 		}
 	}
 
 	public List<Driver> getAvailableDrivers() {
+		List<Car> carList = getCarByCapacity();
 		List<Driver> availableDrivers = new ArrayList<Driver>();
-		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
-		query.whereEqualTo("status", Settings.FREE_CAR_STATUS);
-		// TODO trzeba uwzględnić pojemność danego auta!!!
-		// query.whereGreaterThanOrEqualTo("carCapacity",
-		// order.getPassengerCount());
-		try {
-			availableDrivers = query.find();
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if(carList != null){
+			carCapacityAvailable = true;
+			ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
+			query.whereEqualTo("status", Settings.FREE_CAR_STATUS);
+			query.whereContainedIn("carId", carList);
+			try {
+				availableDrivers = query.find();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		}
-
+		else{
+			carCapacityAvailable = false;
+			stop = true;
+			order.setStatus(Settings.CANCEL_ORDER_STATUS);
+			order.saveInBackground();
+			CarCapacityJDialogError carCapacityError = new CarCapacityJDialogError();
+			carCapacityError.setVisible(true);
+		}
 		return availableDrivers;
+	}
+	
+	public List<Car> getCarByCapacity(){
+		List<Car> carList = new ArrayList<Car>();
+		ParseQuery<Car> query = ParseQuery.getQuery(Car.class);
+		 query.whereGreaterThanOrEqualTo("carCapacity",order.getPassengerCount());
+		 try {
+			 carList = query.find();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		return carList;
 	}
 
 	public void sortListByDistanceInStraightLine(List<Driver> driverList) {
@@ -357,8 +401,9 @@ public class Algorithm implements Runnable {
 		if (!isOrderAssigned) {
 			stop = true;
 			double time = System.currentTimeMillis();
-			duration = time - startTime;
+			duration += time - startTime;
 			NotAssignedOrderJDialog notAssignedOrderJDialog = new NotAssignedOrderJDialog(this);
+			notAssignedOrderJDialog.setVisible(true);
 			System.out
 					.println("Żaden z przydzielonych kierowców nie zaakceptował ordera");
 		}

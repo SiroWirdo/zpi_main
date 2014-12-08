@@ -38,7 +38,7 @@ public class OrdersModel extends Observable implements Runnable{
 						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
 						
 					}else{
-						System.out.println("Pusta baza");
+//						System.out.println("Pusta baza");
 					}
 				} else {
 

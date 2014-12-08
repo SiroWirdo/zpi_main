@@ -1,41 +1,38 @@
-package drivers.model;
-
+package ordersdisplay.model;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
-import model.Driver;
-
 import org.parse4j.ParseException;
-import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
 import org.parse4j.callback.FindCallback;
 
 import other.DataBaseConnection;
+import model.Order;
 
-public class DriversModel extends Observable implements Runnable {
-	DriverChanges driverChanges;
+public class OrdersModel extends Observable implements Runnable{
+	
+	OrderChanges orderChanges;
 	boolean stop;
 	Thread t;
 	Date lastUpdated;
-	List<Driver> actualDrivers;
-
-	public DriversModel(){
+	List<Order> actualOrders;
+	
+	public OrdersModel(){
 
 	}
 
 	public void initialize(){
-		final DriversModel model = this;
+		final OrdersModel model = this;
 
-		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
+		ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
 		query.orderByDescending("updatedAt");
-		query.findInBackground(new FindCallback<Driver>() {
-			public void done(List<Driver> scoreList, ParseException e) {
+		query.findInBackground(new FindCallback<Order>() {
+			public void done(List<Order> scoreList, ParseException e) {
 				if (e == null) {
 					if(scoreList != null && scoreList.size() > 0){
-						System.out.println("baza: " + scoreList.get(0).get("surname"));
-						driverChanges = new DriverChanges(scoreList, 0);
+						orderChanges = new OrderChanges(scoreList, 0);
 						model.setChanged();
 						model.notifyObservers();
 						System.out.println("Znaleziono: " + scoreList.size() + " obiektów");
@@ -49,26 +46,13 @@ public class DriversModel extends Observable implements Runnable {
 			}
 		});
 		
-
-		ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Driver");
-		query2.whereEqualTo("objectId", "0n4mCIRXVO");
-		query2.findInBackground(new FindCallback<ParseObject>() {
-		    public void done(List<ParseObject> scoreList, ParseException e) {
-		        if (e == null) {
-		        	System.out.println("Baza z backgroundem: " + (String)scoreList.get(0).get("surname"));
-		        } else {
-		        	
-		        }
-		    }
-		});
-		
 		model.start();
 	}
 
 	public void start(){
 		stop = false;
 		if(t == null){
-			t = new Thread(this, "DriversModelThread");
+			t = new Thread(this, "OrdersModelThread");
 			t.start();
 		}
 	}
@@ -78,11 +62,11 @@ public class DriversModel extends Observable implements Runnable {
 	}
 
 	/**  flaga: 0 - nowe wiersze, 1 - edycja wiersza, 2 - i to i to, 3 - usunięcie wiersza najlepiej szukać po PESELu) **/
-	public DriverChanges getChanges(){
+	public OrderChanges getChanges(){
 		// na końcu musi być flaga czy tylko edycja statusu, czy nowy kierowca online
-		DriverChanges changes = driverChanges;
+		OrderChanges changes = orderChanges;
 		if(changes != null){
-			lastUpdated = changes.getDrivers().get(0).getUpdatedAt();
+			lastUpdated = changes.getOrders().get(0).getUpdatedAt();
 			System.out.println(lastUpdated);
 		}
 		//this.driverChanges = null;
@@ -101,20 +85,24 @@ public class DriversModel extends Observable implements Runnable {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			final DriversModel model = this;
+			final OrdersModel model = this;
 
-			ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);
+			ParseQuery<Order> query = ParseQuery.getQuery(Order.class);
 			query.whereGreaterThan("updatedAt", lastUpdated);			
-			query.findInBackground(new FindCallback<Driver>() {
-				public void done(List<Driver> scoreList, ParseException e) {
+			query.findInBackground(new FindCallback<Order>() {
+				public void done(List<Order> scoreList, ParseException e) {
 					if (e == null) {
 						if(scoreList != null && scoreList.size() > 0){							
-							driverChanges = new DriverChanges(scoreList, 1);
+							orderChanges = new OrderChanges(scoreList, 1);
 							model.setChanged();
 							model.notifyObservers();
-							System.out.println("Zmieniono: " + scoreList.size() + " obiektów");							
+							System.out.println("Zmieniono: " + scoreList.size() + " obiektów w ORDER");							
 						}else{
+<<<<<<< HEAD
+							System.out.println("Pusta baza w order");
+=======
 //							System.out.println("Pusta baza");
+>>>>>>> 51bbc23955542ad9eb2f7f8d90ab6a0ecc373bbe
 						}
 					} else {
 
@@ -124,19 +112,21 @@ public class DriversModel extends Observable implements Runnable {
 		}
 	}
 	
-	public List<Driver> getActualData(){
-		actualDrivers = null;		
+	public List<Order> getActualData(){
+		actualOrders = null;		
 		DataBaseConnection.initialize();
 		
-		ParseQuery<Driver> query = ParseQuery.getQuery(Driver.class);		
+		ParseQuery<Order> query = ParseQuery.getQuery(Order.class);		
 		query.orderByDescending("updatedAt");
 		try {
-			actualDrivers = query.find();
+			actualOrders = query.find();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		
-		return actualDrivers;
+		return actualOrders;
 	}
+
+
 }
