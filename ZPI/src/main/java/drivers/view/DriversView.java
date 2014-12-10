@@ -63,7 +63,7 @@ public class DriversView extends JPanel {
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 100, 1270, 510);
+		scrollPane.setBounds(0, 100, 1300, 510);
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }

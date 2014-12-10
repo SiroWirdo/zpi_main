@@ -60,7 +60,7 @@ public class MainMenuView extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
-		this.setBounds(10, 10, 1300, 700);
+		this.setBounds(10, 10, 1350, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(true);
 

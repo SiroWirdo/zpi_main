@@ -55,22 +55,22 @@ public class OrdersController implements Observer  {
 
 	public void addRow(Order order){
 		String status = Settings.orderStatus[order.getStatus()];
-		String phone = "Brak przypisanego kierowcy";
+		String phone = "Brak kierowcy";
 		if(order.getDriver() != null){
 			phone = new Long(order.getDriver().getPhoneNumber()).toString();
 		}
 
-		ordersView.addRow(new Object[]{order.getId(), Settings.changeEncoding(order.getPickupAddress()), Settings.changeEncoding(order.getDestinationAddress()), order.getCost(), Settings.changeEncoding(order.getCustomerRemarks()), order.getPassengerCount(), status, order.getCustomer().getSurname(), phone});
+		ordersView.addRow(new Object[]{order.getId(), order.getCustomer().getSurname(), status, Settings.changeEncoding(order.getPickupAddress()), Settings.changeEncoding(order.getDestinationAddress()), order.getCost(), Settings.changeEncoding(order.getCustomerRemarks()), order.getPassengerCount(), phone});
 		ordersView.repaint();
 	}
 
 	public void updateRow(Order order){
 		String status = Settings.orderStatus[order.getStatus()];
-		String phone = "Brak przypisanego kierowcy";
+		String phone = "Brak kierowcy";
 		if(order.getDriver() != null){
 			phone = new Long(order.getDriver().getPhoneNumber()).toString();
 		}
-		Object[] values = new Object[]{order.getId(), Settings.changeEncoding(order.getPickupAddress()), Settings.changeEncoding(order.getDestinationAddress()), order.getCost(), Settings.changeEncoding(order.getCustomerRemarks()), order.getPassengerCount(), status, order.getCustomer().getSurname(), phone};
+		Object[] values = new Object[]{order.getId(), order.getCustomer().getSurname(), status, Settings.changeEncoding(order.getPickupAddress()), Settings.changeEncoding(order.getDestinationAddress()), order.getCost(), Settings.changeEncoding(order.getCustomerRemarks()), order.getPassengerCount(), phone};
 		try{
 			int row = ordersView.getRowById(order.getId());
 			ordersView.updateRow(row, values);
@@ -93,6 +93,10 @@ public class OrdersController implements Observer  {
 			// TODO Auto-generated method stub
 
 			ArrayList<RowFilter<DefaultTableModel, Object>> statusFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
+			ArrayList<RowFilter<DefaultTableModel, Object>> nameFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
+
+			RowFilter<DefaultTableModel, Object> statusFilter;
+			RowFilter<DefaultTableModel, Object> nameFilter;
 			RowFilter<DefaultTableModel, Object> mainFilter;
 
 			for(String status : Settings.orderStatus){
@@ -102,11 +106,28 @@ public class OrdersController implements Observer  {
 				}
 			}
 
-			mainFilter = RowFilter.orFilter(statusFilters);
+			statusFilter = RowFilter.orFilter(statusFilters);
+
+			if(!ordersView.getSurname().equals("")){
+				RowFilter<DefaultTableModel, Object> filter = RowFilter.regexFilter(ordersView.getSurname());
+				nameFilters.add(filter);
+			}
+
+			if(nameFilters.size() > 0){
+				nameFilter = RowFilter.andFilter(nameFilters);
+				ArrayList<RowFilter<DefaultTableModel, Object>> combineFilters = new ArrayList<RowFilter<DefaultTableModel, Object>>();
+				combineFilters.add(statusFilter);
+				combineFilters.add(nameFilter);
+				mainFilter = RowFilter.andFilter(combineFilters);
+			}else{
+				mainFilter = statusFilter;
+			}
 
 			ordersView.setFilters(mainFilter);
 			ordersView.repaint();
+
 		}
+		
 
 	}
 

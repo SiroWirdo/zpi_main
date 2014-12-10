@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -32,6 +33,9 @@ public class OrdersView extends JPanel {
 	private JCheckBox cancelled;
 	private JCheckBox accepted;
 	private JButton filtr;
+	private JLabel jlSurname;
+	private JTextField tfSurname;
+
 
 	public OrdersView(OrdersController ordersController, OrdersModel ordersModel){
 		this.ordersController = ordersController;
@@ -43,7 +47,7 @@ public class OrdersView extends JPanel {
 		setLayout(null);
 
 
-		String[] columns = {"Id", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "<html><body>Liczba<p>pasażerów", "Status", "Nazwisko", "Telefon kier."};
+		String[] columns = {"Id", "Nazwisko", "Status", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "<html><body>Liczba<p>pasażerów", "Telefon kier."};
 		tableModel = new DefaultTableModel(0, 0){
 
 			   @Override
@@ -59,7 +63,7 @@ public class OrdersView extends JPanel {
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 100, 1270, 510);
+		scrollPane.setBounds(0, 100, 1300, 510);
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }
@@ -83,7 +87,7 @@ public class OrdersView extends JPanel {
 		table.getColumn("<html><body>Liczba<p>pasażerów").setMinWidth(80);
 		table.getColumn("Status").setMinWidth(100);
 		table.getColumn("Nazwisko").setMinWidth(100);
-		table.getColumn("Telefon kier.").setMinWidth(150);
+		table.getColumn("Telefon kier.").setMinWidth(200);
 
 
 		
@@ -115,14 +119,23 @@ public class OrdersView extends JPanel {
 		add(cancelled);
 		
 		accepted = new JCheckBox(Settings.orderStatus[4]);
-		accepted.setBounds(300, 60, 130, 30);
+		accepted.setBounds(300, 30, 130, 30);
 		accepted.setSelected(true);
 		add(accepted);
 
 		filtr = new JButton("Filtruj");
-		filtr.setBounds(430, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		filtr.setBounds(550, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		filtr.addActionListener(ordersController.getFiltrListener());
 		add(filtr);
+		
+		jlSurname = new JLabel("Nazwisko:");
+		jlSurname.setBounds(300, 60, 60, 30);
+		add(jlSurname);
+
+		tfSurname = new JTextField();
+		tfSurname.setBounds(370, 65, Settings.TEXT_FIELD_WIDTH, Settings.TEXT_FIELD_HEIGHT);
+		add(tfSurname);
+
 		
 	/*	
 	   	String [] lol = {"lol", "lol2"};
@@ -185,6 +198,10 @@ public class OrdersView extends JPanel {
 
 	public void clearTable(){
 		tableModel.setRowCount(0);
+	}
+	
+	public String getSurname(){
+		return tfSurname.getText();
 	}
 
 	public void setFilters(RowFilter<DefaultTableModel, Object> filter){
