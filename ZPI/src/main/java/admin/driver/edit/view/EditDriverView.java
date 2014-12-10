@@ -47,11 +47,11 @@ public class EditDriverView extends JFrame{
 	}
 
 	public void initialize(){
-		this.setBounds(100, 100, 1280, 800);
+		this.setBounds(50, 50, 1150, 700);
 		//przy EXIT_ON_CLOSE zabija wszystkie procesy, przy DISPOSE nie....
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Edycja kierowcy");
-		this.setResizable(false);
+		this.setResizable(true);
 
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
@@ -73,7 +73,7 @@ public class EditDriverView extends JFrame{
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 100, 1100, 600);
+		scrollPane.setBounds(0, 100, 1100, 550);
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }

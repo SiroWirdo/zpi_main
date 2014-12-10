@@ -60,9 +60,9 @@ public class MainMenuView extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
-		this.setBounds(10, 10, 1450, 900);
+		this.setBounds(10, 10, 1300, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		this.setResizable(true);
 
 		MapModel mapModel = new MapModel();
 		mapController = new MapController(mapModel);

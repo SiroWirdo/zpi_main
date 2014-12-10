@@ -2,7 +2,6 @@ package ordersdisplay.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -56,14 +55,22 @@ public class OrdersController implements Observer  {
 
 	public void addRow(Order order){
 		String status = Settings.orderStatus[order.getStatus()];
+		String phone = "Brak przypisanego kierowcy";
+		if(order.getDriver() != null){
+			phone = new Long(order.getDriver().getPhoneNumber()).toString();
+		}
 
-		ordersView.addRow(new Object[]{order.getId(), Settings.changeEncoding(order.getPickupAddress()), Settings.changeEncoding(order.getDestinationAddress()), order.getCost(), Settings.changeEncoding(order.getCustomerRemarks()), order.getPassengerCount(), status});
+		ordersView.addRow(new Object[]{order.getId(), Settings.changeEncoding(order.getPickupAddress()), Settings.changeEncoding(order.getDestinationAddress()), order.getCost(), Settings.changeEncoding(order.getCustomerRemarks()), order.getPassengerCount(), status, order.getCustomer().getSurname(), phone});
 		ordersView.repaint();
 	}
 
 	public void updateRow(Order order){
 		String status = Settings.orderStatus[order.getStatus()];
-		Object[] values = new Object[]{order.getId(), Settings.changeEncoding(order.getPickupAddress()), Settings.changeEncoding(order.getDestinationAddress()), order.getCost(), Settings.changeEncoding(order.getCustomerRemarks()), order.getPassengerCount(), status};
+		String phone = "Brak przypisanego kierowcy";
+		if(order.getDriver() != null){
+			phone = new Long(order.getDriver().getPhoneNumber()).toString();
+		}
+		Object[] values = new Object[]{order.getId(), Settings.changeEncoding(order.getPickupAddress()), Settings.changeEncoding(order.getDestinationAddress()), order.getCost(), Settings.changeEncoding(order.getCustomerRemarks()), order.getPassengerCount(), status, order.getCustomer().getSurname(), phone};
 		try{
 			int row = ordersView.getRowById(order.getId());
 			ordersView.updateRow(row, values);

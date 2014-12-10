@@ -41,7 +41,7 @@ public class OrdersView extends JPanel {
 		setLayout(null);
 
 
-		String[] columns = {"Id", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "Liczba pasażerów", "Status"};
+		String[] columns = {"Id", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "<html><body>liczba<p>pasażerów", "Status", "Nazwisko", "Telefon kier."};
 		tableModel = new DefaultTableModel(0, 0){
 
 			   @Override
@@ -57,7 +57,7 @@ public class OrdersView extends JPanel {
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 100, 1300, 700);
+		scrollPane.setBounds(0, 100, 1250, 510);
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }
@@ -69,13 +69,18 @@ public class OrdersView extends JPanel {
 		table.setFillsViewportHeight(true);
 		table.setVisible(true);
 		
-		table.getColumn("Id").setMinWidth(100);
+		table.getColumn("Id").setMinWidth(0);
+		table.getColumn("Id").setMaxWidth(0);
 		table.getColumn("Adres odbioru").setMinWidth(330);
 		table.getColumn("Adres docelowy").setMinWidth(300);
 		table.getColumn("Koszt").setMinWidth(50);
-		table.getColumn("Uwagi").setMinWidth(250);
-		table.getColumn("Liczba pasażerów").setMinWidth(120);
+		table.getColumn("Uwagi").setMinWidth(200);
+		table.getColumn("<html><body>liczba<p>pasażerów").setMinWidth(80);
 		table.getColumn("Status").setMinWidth(100);
+		table.getColumn("Nazwisko").setMinWidth(100);
+		table.getColumn("Telefon kier.").setMinWidth(100);
+
+
 		
 		
 		this.add(scrollPane);

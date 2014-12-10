@@ -45,7 +45,7 @@ public class AddDriverView extends JFrame{
 	}
 
 	public void initialize(){
-		this.setBounds(300, 200, 520, 700);
+		this.setBounds(50, 50, 520, 700);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setLayout(new GridLayout(4,1));
 		

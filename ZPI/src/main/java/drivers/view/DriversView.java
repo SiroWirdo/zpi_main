@@ -63,7 +63,7 @@ public class DriversView extends JPanel {
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 100, 1300, 700);
+		scrollPane.setBounds(0, 100, 1250, 510);
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }
@@ -135,12 +135,12 @@ public class DriversView extends JPanel {
 		add(filtr);
 		
 		unblock = new JButton("Odblokuj");
-		unblock.setBounds(1300-Settings.BUTTON_WIDTH, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		unblock.setBounds(1250-Settings.BUTTON_WIDTH, 65, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		unblock.addActionListener(driversController.getUnblockListener());
 		add(unblock);
 		
 		block = new JButton("Zablokuj");
-		block.setBounds(1300-Settings.BUTTON_WIDTH, 30, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
+		block.setBounds(1250-Settings.BUTTON_WIDTH, 30, Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT);
 		block.addActionListener(driversController.getBlockListener());
 		add(block);
 		//	tableModel.addRow(new Object[]{"test", "test", "test", "test", "test", "test"});
