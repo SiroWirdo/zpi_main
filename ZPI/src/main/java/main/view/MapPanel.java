@@ -85,7 +85,7 @@ public class MapPanel extends JXMapKit {
 		contLabel = new JLabel(Settings.CONTRIBUTORS_TEXT);
 		contLabel.setForeground(Color.BLACK);
 		contLabel.setFont(new Font(contLabel.getFont().getFontName(), Font.BOLD, 11));
-		contLabel.setBounds(5, 670, 180, 30);
+		contLabel.setBounds(5, 600, 180, 30);
 		
 		zoomIn = this.getZoomInButton();
 		zoomIn.setToolTipText("przybli\u017C");

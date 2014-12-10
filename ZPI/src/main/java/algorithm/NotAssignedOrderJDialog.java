@@ -35,7 +35,7 @@ public class NotAssignedOrderJDialog extends JDialog{
 	public void initialize(){
 		getContentPane().setLayout(null);
 		setTitle("Nieprzydzielone zlecenie");
-		JLabel lblNewLabel = new JLabel(notAssignedOrder);
+		JLabel lblNewLabel = new JLabel("<html><body>Żaden z kierowców nie podjął się zlecenia!");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setBounds(20, 11, 350, 60);
