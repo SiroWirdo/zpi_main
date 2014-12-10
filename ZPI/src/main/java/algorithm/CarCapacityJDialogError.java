@@ -16,7 +16,7 @@ public class CarCapacityJDialogError extends JDialog {
 		setTitle("Brak miejsc");
 		JLabel lblNieMaKierowcy = new JLabel("Nie ma kierowcy z autem o takiej liczbie miejsc.");
 		lblNieMaKierowcy.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNieMaKierowcy.setBounds(300, 300, 275, 53);
+		lblNieMaKierowcy.setBounds(23, 11, 284, 53);
 		getContentPane().add(lblNieMaKierowcy);
 		
 		JButton btnOk = new JButton("OK");
@@ -30,6 +30,7 @@ public class CarCapacityJDialogError extends JDialog {
 		
 		btnOk.setBounds(111, 60, 89, 23);
 		getContentPane().add(btnOk);
+		setBounds(600, 500, 337, 145);
 
 	}
 	

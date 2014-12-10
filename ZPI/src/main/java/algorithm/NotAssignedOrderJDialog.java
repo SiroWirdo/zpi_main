@@ -51,12 +51,12 @@ public class NotAssignedOrderJDialog extends JDialog{
 		lblKlient.setBounds(33, 97, 61, 14);
 		getContentPane().add(lblKlient);
 		
-		JLabel lblTelefon = new JLabel("telefon:");
+		JLabel lblTelefon = new JLabel("Telefon:");
 		lblTelefon.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTelefon.setBounds(33, 121, 61, 14);
 		getContentPane().add(lblTelefon);
 		
-		JLabel lblCzasOczekiwania = new JLabel("<html><body>czas<p>oczekiwania:");
+		JLabel lblCzasOczekiwania = new JLabel("<html><body>Czas<p>oczekiwania:");
 		lblCzasOczekiwania.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCzasOczekiwania.setBounds(33, 135, 72, 41);
 		getContentPane().add(lblCzasOczekiwania);
