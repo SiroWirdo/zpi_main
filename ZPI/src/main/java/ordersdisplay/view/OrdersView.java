@@ -1,14 +1,16 @@
 package ordersdisplay.view;
 
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableRowSorter;
 
 import ordersdisplay.controller.OrderNotFoundException;
@@ -41,7 +43,7 @@ public class OrdersView extends JPanel {
 		setLayout(null);
 
 
-		String[] columns = {"Id", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "<html><body>liczba<p>pasażerów", "Status", "Nazwisko", "Telefon kier."};
+		String[] columns = {"Id", "Adres odbioru", "Adres docelowy", "Koszt", "Uwagi", "<html><body>Liczba<p>pasażerów", "Status", "Nazwisko", "Telefon kier."};
 		tableModel = new DefaultTableModel(0, 0){
 
 			   @Override
@@ -57,11 +59,14 @@ public class OrdersView extends JPanel {
 		sorter = new TableRowSorter<DefaultTableModel>(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 100, 1250, 510);
+		scrollPane.setBounds(0, 100, 1270, 510);
 		for (int i = 0; i < (table.getColumnCount()); i++) {
             table.getColumn(i).setPreferredWidth(500);
         }
 		table.setModel(tableModel);
+		
+		JTableHeader tableHeader = table.getTableHeader();
+		tableHeader.setPreferredSize(new Dimension(100,50));
 
 		table.setRowSelectionAllowed(false);
 		table.setColumnSelectionAllowed(false);
@@ -75,10 +80,10 @@ public class OrdersView extends JPanel {
 		table.getColumn("Adres docelowy").setMinWidth(300);
 		table.getColumn("Koszt").setMinWidth(50);
 		table.getColumn("Uwagi").setMinWidth(200);
-		table.getColumn("<html><body>liczba<p>pasażerów").setMinWidth(80);
+		table.getColumn("<html><body>Liczba<p>pasażerów").setMinWidth(80);
 		table.getColumn("Status").setMinWidth(100);
 		table.getColumn("Nazwisko").setMinWidth(100);
-		table.getColumn("Telefon kier.").setMinWidth(100);
+		table.getColumn("Telefon kier.").setMinWidth(150);
 
 
 		

@@ -84,7 +84,7 @@ public class Algorithm implements Runnable {
 	public static void initializeGraphHopper() {
 		hopper = new GraphHopper().forDesktop();
 		hopper.setOSMFile("poland-latest.osm.pbf");
-		hopper.setGraphHopperLocation("route");
+		hopper.setGraphHopperLocation("src/main/resources");
 		hopper.setEncodingManager(new EncodingManager(EncodingManager.CAR));
 		hopper.importOrLoad();
 	}
