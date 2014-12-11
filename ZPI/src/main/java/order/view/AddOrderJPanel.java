@@ -335,7 +335,7 @@ public class AddOrderJPanel extends JPanel{
 		phoneNumberTextField.setText("");
 		pickUpAddressTextField.setText(null);
 		passangerCountSpinner.setValue(1);
-		customerRemarksTextArea.setText(null);
+		customerRemarksTextArea.setText("");
 	}
 	
 	public void cleanAllErrors(){

@@ -162,7 +162,7 @@ public class MapPanel extends JXMapKit {
 	
 	public void setPosition(double latitude, double longitude){
 		this.setAddressLocation(new GeoPosition(latitude, longitude));
-		this.setZoom(Settings.DEFAULT_ZOOM);
+//		this.setZoom(Settings.DEFAULT_ZOOM);
 	}
 }
 

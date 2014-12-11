@@ -7,6 +7,7 @@ public class MainMenuTest {
 	public static void main(String[] args) {
 		//TODO na końcu wyłączyć
 		Settings.setLookAndFeel();
+		Settings.turnOffLogBackLogger();
 		MapModel menuModel = new MapModel();
 		MainMenuController menuController = new MainMenuController(menuModel);
 	}

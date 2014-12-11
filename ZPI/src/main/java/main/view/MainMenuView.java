@@ -53,7 +53,6 @@ public class MainMenuView extends JFrame{
 		this.menuController = menuController;
 		this.menuModel = menuModel;
 		initialize();
-//		Settings.turnOffLogBackLogger();
 	}
 
 	/**

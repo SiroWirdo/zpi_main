@@ -40,11 +40,14 @@ public class DocumentSizeFilter extends DocumentFilter {
         //the contents too long. Another option would be
         //to truncate the replacement string so the contents
         //would be exactly maxCharacters in length.
+       
+        if(fb.getDocument() != null && str != null){
         if ((fb.getDocument().getLength() + str.length()
              - length) <= maxCharacters)
             super.replace(fb, offs, length, str, a);
         else
             Toolkit.getDefaultToolkit().beep();
+        }
     }
 
 }
