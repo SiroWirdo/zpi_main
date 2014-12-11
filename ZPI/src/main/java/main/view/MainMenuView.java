@@ -52,8 +52,8 @@ public class MainMenuView extends JFrame{
 	public MainMenuView(MainMenuController menuController, MapModel menuModel) {
 		this.menuController = menuController;
 		this.menuModel = menuModel;
-		//initialize();
-		Settings.turnOffLogBackLogger();
+		initialize();
+//		Settings.turnOffLogBackLogger();
 	}
 
 	/**

@@ -10,7 +10,7 @@ public class MainMenuController {
 	public MainMenuController(MapModel menuModel) {
 		this.menuModel = menuModel;
 		menuView = new MainMenuView(this, menuModel);
-		menuView.initialize();
+//		menuView.initialize();
 	}
 
 }

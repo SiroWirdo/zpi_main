@@ -33,8 +33,14 @@ public class UserModel {
 				return true;
 			}else{
 				setUserObject(user);
-				MapModel mapModel = new MapModel();
-				MainMenuController menuController = new MainMenuController(mapModel);
+				Thread loadViewThread = new Thread() {
+			        public void run() {
+			        	MapModel mapModel = new MapModel();
+						MainMenuController menuController = new MainMenuController(mapModel);
+			        }
+			      };
+			      loadViewThread.start();
+				
 				return true;
 			}
 
